@@ -1,0 +1,58 @@
+{
+  "name": "lizard-state-client",
+  "version": "0.2.2",
+  "description": "Library to store Lizard assets, rasters and timeseries.",
+  "main": "src/index.js",
+  "scripts": {
+    "compile": "babel --presets es2015,stage-0 -d lib/ src/",
+    "test": "mocha --require babel-polyfill --compilers js:babel-core/register ./test/*.spec.js",
+    "build": "webpack --mode=build",
+    "release": "buck-trap -a",
+    "prepublish": "npm run compile",
+    "start": "webpack-dev-server --progress --colors"
+  },
+  "devDependencies": [
+    "babel",
+    "babel-cli",
+    "babel-core",
+    "babel-eslint",
+    "babel-loader",
+    "babel-plugin-add-module-exports",
+    "babel-polyfill",
+    "babel-preset-es2015",
+    "babel-preset-stage-0",
+    "buck-trap",
+    "chai",
+    "concurrently",
+    "eslint",
+    "eslint-loader",
+    "mocha",
+    "nock",
+    "redux",
+    "redux-mock-store",
+    "webpack",
+    "webpack-dev-server",
+    "yargs"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nens/lizard-state-client.git"
+  },
+  "keywords": [
+    "lizard",
+    "api",
+    "water"
+  ],
+  "author": "Gijs Nijholt",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nens/lizard-state-client/issues"
+  },
+  "homepage": "https://github.com/nens/lizard-state-client",
+  "dependencies": {
+    "buck-trap": "^1.0.14",
+    "es6-promise": "^4.0.5",
+    "lodash": "^4.17.3",
+    "redux-thunk": "^2.1.0"
+  }
+}
