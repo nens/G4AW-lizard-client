@@ -46,6 +46,8 @@ the lizard-api-client code available in their local scope.
 
 6. `$ npm start` will launch a webpack-dev-server on [http://localhost:8080](http://localhost:8080)
 
+7. Open the development console of your browser and you may interact with the app.
+
 
 
 
