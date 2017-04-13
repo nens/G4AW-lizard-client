@@ -19,9 +19,8 @@ function configureStore(
   return createStoreWithMiddleware(rootReducer, initialState);
 }
 
-console.log('Grr');
 export const theStore = configureStore();
-console.log('theStore = ', theStore);
+
 /*
 State = {
   Rasters: {

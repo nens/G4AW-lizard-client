@@ -4,11 +4,6 @@
   "description": "Library to store Lizard assets, rasters and timeseries.",
   "main": "src/index.js",
   "scripts": {
-    "compile": "babel --presets es2015,stage-0 -d lib/ src/",
-    "test": "mocha --require babel-polyfill --compilers js:babel-core/register ./test/*.spec.js",
-    "build": "webpack --mode=build",
-    "release": "buck-trap -a",
-    "prepublish": "npm run compile",
     "start": "webpack-dev-server --progress --colors"
   },
   "devDependencies": [
@@ -18,6 +13,7 @@
     "babel-eslint",
     "babel-loader",
     "babel-plugin-add-module-exports",
+    "babel-plugin-transform-react-jsx",
     "babel-polyfill",
     "babel-preset-es2015",
     "babel-preset-stage-0",
@@ -53,6 +49,13 @@
     "buck-trap": "^1.0.14",
     "es6-promise": "^4.0.5",
     "lodash": "^4.17.3",
-    "redux-thunk": "^2.1.0"
+    "redux-thunk": "^2.1.0",
+    "react": "",
+    "react-dom": "",
+    "react-redux": "",
+    "react-router": "",
+    "react-router-dom": "",
+    "react-leaflet": "",
+    "leaflet": ""
   }
 }

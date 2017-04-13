@@ -14,6 +14,9 @@ var config = {
     libraryTarget: 'umd',
     umdNamedDefine: true
   },
+  resolve: {
+    extensions: ['.js', '.jsx']
+  },
   devServer: {
     // Redirect these to Lizard NXT running on port 8000,
     // for local development. Login through /admin.
@@ -33,7 +36,7 @@ var config = {
       {
         test: /(\.jsx|\.js)$/,
         loader: 'eslint-loader',
-        exclude: /node_modules/
+        exclude: /node_modules|LizardApiClient/
       }
     ]
   },
@@ -41,5 +44,3 @@ var config = {
 };
 
 module.exports = config;
-
-
