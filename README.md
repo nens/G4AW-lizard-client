@@ -28,25 +28,29 @@ you will need:
 After having cloned the two repos, the following steps are required to see code
 executed in your browsers' development console:
 
-1. Go to the root directory of the cloned
+* Go to the root directory of the cloned
 [lizard-api-client](https://github.com/nens/lizard-api-client);
 
-2. `$ npm start` will create the files within `.../lizard-api-client/lib/` that
+* `$ npm install`;
+
+* `$ npm start` will create the files within `.../lizard-api-client/lib/` that
 we will need;
 
-3. `$ npm link` will make those files available in arbitrary places in your
+* `$ npm link` will make those files available in arbitrary places in your
 filesystem (via the `/usr/local/lib/node_modules/` folder);
 
-4. Go to the root directory of the cloned G4AW-lizard-client repo;
+* Go to the root directory of the cloned G4AW-lizard-client repo;
 
-5. `$ npm link lizard-api-client` wil finish the linking step -- Javascript
+* `$ npm install`;
+
+* `$ npm link lizard-api-client` wil finish the linking step -- Javascript
 files in the actual client application (the G4AW-lizard-client repo) can now
 have the line `import { LizardApiClient } from 'lizard-api-client';` to make
 the lizard-api-client code available in their local scope.
 
-6. `$ npm start` will launch a webpack-dev-server on [http://localhost:8080](http://localhost:8080)
+* `$ npm start` will launch a webpack-dev-server on [http://localhost:8080](http://localhost:8080)
 
-7. Open the development console of your browser and you may interact with the app.
+* Open the development console of your browser and you may interact with the app.
 
 
 
