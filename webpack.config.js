@@ -27,7 +27,17 @@ var config = {
     }
   },
   module: {
+    rules: [
+      {
+        test: /\.css$/,
+        use: [ 'style-loader', 'css-loader?modules', 'postcss-loader']
+      }
+    ],
     loaders: [
+      {
+        test: /\.css$/,
+        use: [ 'style-loader', 'css-loader?modules', 'postcss-loader']
+      },
       {
         test: /(\.jsx|\.js)$/,
         loader: 'babel-loader',

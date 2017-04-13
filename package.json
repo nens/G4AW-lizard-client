@@ -1,7 +1,7 @@
 {
   "name": "lizard-state-client",
   "version": "0.2.2",
-  "description": "Library to store Lizard assets, rasters and timeseries.",
+  "description": "Library for client-side storage/exposure of Lizard assets, rasters and timeseries.",
   "main": "src/index.js",
   "scripts": {
     "start": "webpack-dev-server --progress --colors"
@@ -28,7 +28,12 @@
     "redux-mock-store",
     "webpack",
     "webpack-dev-server",
-    "yargs"
+    "yargs",
+    "css-loader",
+    "postcss-cssnext",
+    "postcss-import",
+    "postcss-loader",
+    "style-loader"
   ],
   "repository": {
     "type": "git",

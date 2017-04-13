@@ -16,10 +16,12 @@ class RastersMap extends React.Component {
 
     return (
       <div>
-        <Map center={[52.092876, 5.104480]} zoom={13} style={{width: "100%", height: 200}}>
+        <Map center={[52.092876, 5.104480]}
+             zoom={13}
+             style={{width: "100%", height: 200}}>
           <TileLayer
-              url='http://{s}.tile.osm.org/{z}/{x}/{y}.png'
-              attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+             url='http://{s}.tile.osm.org/{z}/{x}/{y}.png'
+             attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
           />
           {visibleRasters.map((raster) => (
              <WMSTileLayer url={raster.url} key={raster.uuid} />
@@ -33,7 +35,9 @@ class RastersMap extends React.Component {
 function mapStateToProps (state) {
   console.log(state.rasters);
   return {
-    'visibleRasters': Object.values(state.rasters).filter((raster) => !!raster.data).map((raster) => raster.data)
+    'visibleRasters': Object.values(state.rasters)
+      .filter((raster) => !!raster.data)
+      .map((raster) => raster.data)
   };
 }
 
@@ -44,4 +48,5 @@ function mapDispatchToProps (dispatch) {
 }
 
 
-export const ShowRastersMap = connect(mapStateToProps, mapDispatchToProps)(RastersMap);
+export const ShowRastersMap = connect(
+  mapStateToProps, mapDispatchToProps)(RastersMap);
