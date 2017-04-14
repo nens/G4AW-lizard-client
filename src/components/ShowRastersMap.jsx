@@ -1,9 +1,10 @@
 import { connect } from 'react-redux';
-import React, { propTypes } from 'react';
+import React from 'react';
 import { Map, TileLayer, WMSTileLayer } from 'react-leaflet';
 import ReactDOM from 'react-dom';
-import { fetchRasterAsync } from '../actions/RasterActions';
+
 import { VIEWPORT_PADDING } from './Constants';
+import { getRaster } from '../actions/RasterActions';
 
 const hoogteUuid = "10415ccb-ec31-4d43-bdb3-db597061527b";
 
@@ -34,7 +35,12 @@ class RastersMap extends React.Component {
              attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
           />
           {visibleRasters.map((raster) => (
-             <WMSTileLayer url={raster.url} key={raster.uuid} />
+            <WMSTileLayer
+              url={raster.wms_info.get('endpoint')}
+              key={raster.uuid}
+              layers={raster.wms_info.get('layer')}
+              styles={raster.options.get('styles')}
+            />
            ))}
         </Map>
       </div>
@@ -42,8 +48,7 @@ class RastersMap extends React.Component {
   }
 }
 
-function mapStateToProps (state) {
-  console.log(state.rasters);
+function mapStateToProps(state) {
   return {
     'visibleRasters': Object.values(state.rasters)
       .filter((raster) => !!raster.data)
@@ -51,12 +56,11 @@ function mapStateToProps (state) {
   };
 }
 
-function mapDispatchToProps (dispatch) {
+function mapDispatchToProps(dispatch) {
   return {
-    getRaster: (uuid) => fetchRasterAsync(uuid, dispatch)
+    getRaster: (uuid) => getRaster(uuid, dispatch)
   };
 }
-
 
 export const ShowRastersMap = connect(
   mapStateToProps, mapDispatchToProps)(RastersMap);

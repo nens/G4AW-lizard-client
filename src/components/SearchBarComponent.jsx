@@ -6,21 +6,24 @@ export default class SearchBarComponent extends Component {
   render () {
     return (
 
+     // HIER WAS IK.....
+     //<div className={`${styles.SearchbarContainer} ${styles.SearchbarButton}`}>
+
       <div className={styles["searchbar-container"]}>
         <input
-          className={styles['searchbar-btn-menu']}
+          className={styles['searchbar-btn']}
           type="button"
           value="0"
         />
         <input
-          className={styles['searchbar-btn-search']}
+          className={styles['searchbar-btn']}
           type="button"
           value="+"
         />
         <input
           type="text"
           defaultValue="Utrecht"
-          className={styles["searchbar"]}
+          className={styles["searchbar-input"]}
         />
       </div>
     );
