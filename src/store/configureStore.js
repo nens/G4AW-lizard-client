@@ -11,7 +11,9 @@ createStoreWithMiddleware = applyMiddleware(thunkMiddleware)(createStore);
  * create a store with Lizard state and application specific state.
  */
 function configureStore(
-  initialState = {},
+  initialState = {
+    'rasters': {}
+  },
   externalReducers = {}) {
 
   const rootReducer = combineReducers({ ...reducers, ...externalReducers });
@@ -20,6 +22,7 @@ function configureStore(
 }
 
 export const theStore = configureStore();
+console.log('Store: ', theStore.getState());
 
 /*
 State = {
