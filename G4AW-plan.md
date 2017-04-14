@@ -24,11 +24,19 @@ Doel van de applicatie
 ----------------------
 Doel van de app is *omgevingsinformatie* bieden aan de eindgebruiker, de zgn. 'Farmer friends' van [LT Group](http://loctroi.vn/en/). Verder in dit document *gebruiker* genoemd.
 
-Aannames bij deze eindgebruiker:
+Aannames bij deze eindgebruiker
+-------------------------------
 
 - Vaak laag opgeleid
 - Beperkte Internettoegang (niet altijd aanwezig/snel)
 - Beperkte mobiele telefoons, onvoorspelbare browsers
+
+
+Functionele beperkingen
+-----------------------
+
+- Eén rasterlaag tegelijk
+- Tijdselectie: Dag/uur niveau
 
 
 Scenarios
@@ -38,7 +46,7 @@ Een scenario is een beschrijving van de mogelijke ‘flow’ van de eindgebruike
 1) **Zoeken naar een asset**
 
 De gebruiker:
-- opent de G4AW Lizard Client
+- opent de app
 - tapt de search bar
 - typt een trefwoord in
 
@@ -57,7 +65,7 @@ De app:
 2) **Zoeken naar een asset**
 
 De gebruiker:
-- opent de G4AW Lizard Client
+- opent de app
 - tapt de search bar
 - typt een trefwoord in
 
@@ -87,13 +95,55 @@ De app:
 
 
 
+3) **Advisories bekijken voor huidige locatie**
+
+De gebruiker:
+- opent de app
+- tapt op de **View advisories** card onderin beeld
+
+De app:
+- voert geolocatie uit
+- als mislukt: toont melding in Snackbar component onder in beeld
+- als gelukt: zoomt naar gevonden locatie en highlight dit punt
+- laat Advisories modal voor 50% zien
+
+De gebruiker:
+- tapt op 50% modal
+
+De app:
+- toont Advisories modal in full height mode
 
 
+4) **Van advisory naar kaart**
+
+De gebruiker:
+- ziet al een advisory pagina
+- swiped naar de 'Flood mitigation advisory'
+- tapt op **View on map** button
+
+De app:
+- toont de kaart
+- toont het raster dat bij 'Flood mitigation advisory' hoort
 
 
+5) **Rasterbeeld van dag eerder zien**
 
-Storyboard
-----------
+De gebruiker:
+- ziet een raster dat hoort bij 'Pest and disease advisory'
+- tapt op de kalender button
+
+De app:
+- opent de date/time controller
+
+De gebruiker:
+- tapt op de button die de datum van gisteren op zich heeft afgebeeld
+
+De app:
+- laat de rasterlaag van gisteren zien
+
+
+Storyboards
+-----------
 
 - Zie voorlopig op [Figma.com](https://www.figma.com/file/HAjXQTy3KYKSVGRfo1kgKJ2p/lizard-mobile-g4aw-basic-v3---UI-Components).
 
@@ -118,10 +168,16 @@ State shape (datamodel)
 - Hoe ziet de Redux store eruit? Wat is de [minimale state shape](http://redux.js.org/docs/basics/Reducers.html#designing-the-state-shape)?
 
 
+API endpoints
+-------------
+
+Ook al wordt de API ontsloten door [lizard-api-client.js](https://github.com/nens/lizard-api-client)
+
+
 Visual Components
 -----------------
 
-- Overzicht alle UI components zoals de searchbar, omnibox, legenda, etc.
+- Overzicht alle UI components zoals de searchbar, map, omnibox, settings, legenda, etc.
 - Doel / functie van elk component beschrijven.
 - Per component de propTypes beschrijven.
 - Eventuele component state beschrijven. (zo min mogelijk)
