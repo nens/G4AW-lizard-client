@@ -13,8 +13,18 @@ Projectmatige randvoorwaarden
 - Interne deadline: 1 september 2017
 - Scope beperkt tot ontwikkeling front-end
 - Na goedkeuring wordt niet meer zonder overleg afgeweken van het FO/TO
-- Styling volgt zo veel mogelijk de Sketch ontwerpen
+- Styling van de app volgt zo veel mogelijk de Sketch ontwerpen
 - Budget: xxxxxxx
+
+
+Blind spots / risico's
+======================
+
+- Authenticatie en authorisatie: hoe gaan we de gebruiker identificeren en authenticeren. Opties zijn onze eigen SSO, social logins, QR of shortcodes uitdelen, etc.
+- Data: Er is nog geen data, maar we moeten hierop wel anticiperen - dat is een typische blind spot.
+- KoboCollect: Welk formaat etc. - tot er iets is is er niks.
+- Direct met de Lizard API praten of via een tussen-server zoals bij GGMN (suggestie van Reinout)
+- Offline support. Hoe sterk is de wens/eis? De [ServiceWorker API](https://developers.google.com/web/fundamentals/getting-started/codelabs/offline/) kan dit. KoboCollect gebruikt het ook. Gevalletje would-be-nice?
 
 
 Functioneel Ontwerp (FO)
@@ -44,7 +54,7 @@ Scenarios
 
 Een scenario is een beschrijving van de mogelijke ‘flow’ van de eindgebruiker door de applicatie. Met behulp van scenario's krijgt de lezer een duidelijker beeld van de eindgebruiker en diens behoefte. (Aka user-stories)
 
-**1 Zoeken naar een asset**
+**1. Zoeken naar een asset**
 ---------------------------
 
 De gebruiker:
@@ -64,7 +74,7 @@ De app:
 - toont een detail pagina (modal overlay, scrollable) met daarop gegroepeerd de beschikbare informatie voor dit asset
 
 
-**2 Zoeken naar een asset**
+**2. Zoeken naar een asset**
 ---------------------------
 
 De gebruiker:
@@ -98,7 +108,7 @@ De app:
 
 
 
-**3 Advisories bekijken voor huidige locatie**
+**3. Advisories bekijken voor huidige locatie**
 ----------------------------------------------
 
 De gebruiker:
@@ -118,7 +128,7 @@ De app:
 - toont Advisories modal in full height mode
 
 
-**4 Van advisory naar kaart**
+**4. Van advisory naar kaart**
 -----------------------------
 
 De gebruiker:
@@ -131,7 +141,7 @@ De app:
 - toont het raster dat bij 'Flood mitigation advisory' hoort
 
 
-**5 Rasterbeeld van dag eerder zien**
+**5. Rasterbeeld van dag eerder zien**
 -------------------------------------
 
 De gebruiker:
@@ -148,7 +158,7 @@ De app:
 - laat de rasterlaag van gisteren zien
 
 
-**6 Legenda toggle**
+**6. Legenda toggle**
 --------------------
 
 De gebruiker:
@@ -171,6 +181,19 @@ Storyboards en UI Components
 
 - [UI Components](https://www.figma.com/file/dMfbORPsTEeIljFDtxMxHb6L/lizard-mobile-g4aw-basic-v3-UI-Components)
 - [Storyboards](https://www.figma.com/file/Fq6siPQf61534WMcbHfSg8dt/lizard-mobile-g4aw-basic-v3-_Flows)
+
+Verder:
+
+- We houden zoveel mogelijk [Material Design](https://material.io/) aan
+- Font: [Roboto](https://fonts.google.com/specimen/Roboto)
+- Iconset: [Material Icons](https://material.io/icons/) en custom SVG icons waar nodig
+
+
+Nog te ontwerpen:
+
+- App Switcher
+- Login/logout
+- ...?
 
 
 Technisch Ontwerp (TO)
