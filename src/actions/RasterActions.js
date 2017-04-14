@@ -3,8 +3,6 @@ import { FETCH_RASTER, RECEIVE_RASTER, REMOVE_RASTER }
 
 import { LizardApiClient } from 'lizard-api-client';
 
-console.log("[dbg] LizardApiClient =", LizardApiClient);
-
 const lizardApiClient = new LizardApiClient();
 
 // TODO: substitute with correct imported function from the

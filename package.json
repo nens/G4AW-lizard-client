@@ -6,6 +6,35 @@
   "scripts": {
     "start": "webpack-dev-server --progress --colors"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nens/lizard-state-client.git"
+  },
+  "keywords": [
+    "lizard",
+    "api",
+    "water"
+  ],
+  "author": "Gijs Nijholt",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nens/lizard-state-client/issues"
+  },
+  "homepage": "https://github.com/nens/lizard-state-client",
+  "dependencies": {
+    "buck-trap": "^1.0.14",
+    "es6-promise": "^4.0.5",
+    "leaflet": "",
+    "lodash": "^4.17.3",
+    "react": "",
+    "react-autosuggest": "^9.0.0",
+    "react-dom": "",
+    "react-leaflet": "",
+    "react-redux": "",
+    "react-router": "",
+    "react-router-dom": "",
+    "redux-thunk": "^2.1.0"
+  },
   "devDependencies": [
     "babel",
     "babel-cli",
@@ -34,33 +63,5 @@
     "postcss-import",
     "postcss-loader",
     "style-loader"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/nens/lizard-state-client.git"
-  },
-  "keywords": [
-    "lizard",
-    "api",
-    "water"
-  ],
-  "author": "Gijs Nijholt",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/nens/lizard-state-client/issues"
-  },
-  "homepage": "https://github.com/nens/lizard-state-client",
-  "dependencies": {
-    "buck-trap": "^1.0.14",
-    "es6-promise": "^4.0.5",
-    "lodash": "^4.17.3",
-    "redux-thunk": "^2.1.0",
-    "react": "",
-    "react-dom": "",
-    "react-redux": "",
-    "react-router": "",
-    "react-router-dom": "",
-    "react-leaflet": "",
-    "leaflet": ""
-  }
+  ]
 }
