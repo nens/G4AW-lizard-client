@@ -40,10 +40,12 @@ Functionele beperkingen
 
 
 Scenarios
----------
+=========
+
 Een scenario is een beschrijving van de mogelijke ‘flow’ van de eindgebruiker door de applicatie. Met behulp van scenario's krijgt de lezer een duidelijker beeld van de eindgebruiker en diens behoefte. (Aka user-stories)
 
-1) **Zoeken naar een asset**
+**1 Zoeken naar een asset**
+---------------------------
 
 De gebruiker:
 - opent de app
@@ -62,7 +64,8 @@ De app:
 - toont een detail pagina (modal overlay, scrollable) met daarop gegroepeerd de beschikbare informatie voor dit asset
 
 
-2) **Zoeken naar een asset**
+**2 Zoeken naar een asset**
+---------------------------
 
 De gebruiker:
 - opent de app
@@ -95,7 +98,8 @@ De app:
 
 
 
-3) **Advisories bekijken voor huidige locatie**
+**3 Advisories bekijken voor huidige locatie**
+----------------------------------------------
 
 De gebruiker:
 - opent de app
@@ -114,7 +118,8 @@ De app:
 - toont Advisories modal in full height mode
 
 
-4) **Van advisory naar kaart**
+**4 Van advisory naar kaart**
+-----------------------------
 
 De gebruiker:
 - ziet al een advisory pagina
@@ -126,7 +131,8 @@ De app:
 - toont het raster dat bij 'Flood mitigation advisory' hoort
 
 
-5) **Rasterbeeld van dag eerder zien**
+**5 Rasterbeeld van dag eerder zien**
+-------------------------------------
 
 De gebruiker:
 - ziet een raster dat hoort bij 'Pest and disease advisory'
@@ -142,12 +148,29 @@ De app:
 - laat de rasterlaag van gisteren zien
 
 
-Storyboards
------------
+**6 Legenda toggle**
+--------------------
 
-- Zie voorlopig op [Figma.com](https://www.figma.com/file/HAjXQTy3KYKSVGRfo1kgKJ2p/lizard-mobile-g4aw-basic-v3---UI-Components).
+De gebruiker:
+- heeft een kaart in beeld
+- tapt op de legenda button rechtsonder
+
+De app:
+- haalt de legenda stappen op voor de actieve kaartlaag
+- toont de legenda in 1/3 modus onderin beeld
+
+De gebruiker:
+- tapt op het kruisje van het legenda component
+
+De app:
+- laat het legenda component weer verdwijnen
 
 
+Storyboards en UI Components
+----------------------------
+
+- [UI Components](https://www.figma.com/file/dMfbORPsTEeIljFDtxMxHb6L/lizard-mobile-g4aw-basic-v3-UI-Components)
+- [Storyboards](https://www.figma.com/file/Fq6siPQf61534WMcbHfSg8dt/lizard-mobile-g4aw-basic-v3-_Flows)
 
 
 Technisch Ontwerp (TO)
