@@ -22,7 +22,7 @@ Functioneel Ontwerp (FO)
 
 Doel van de applicatie
 ----------------------
-Doel van de app is *omgevingsinformatie* bieden aan de eindgebruiker, de zgn. 'Farmer friends' van [LT Group](http://loctroi.vn/en/).
+Doel van de app is *omgevingsinformatie* bieden aan de eindgebruiker, de zgn. 'Farmer friends' van [LT Group](http://loctroi.vn/en/). Verder in dit document *gebruiker* genoemd.
 
 Aannames bij deze eindgebruiker:
 
@@ -33,6 +33,60 @@ Aannames bij deze eindgebruiker:
 
 Scenarios
 ---------
+Een scenario is een beschrijving van de mogelijke ‘flow’ van de eindgebruiker door de applicatie. Met behulp van scenario's krijgt de lezer een duidelijker beeld van de eindgebruiker en diens behoefte. (Aka user-stories)
+
+1) **Zoeken naar een asset**
+
+De gebruiker:
+- opent de G4AW Lizard Client
+- tapt de search bar
+- typt een trefwoord in
+
+De app:
+- vraagt resultaten op
+- toont de resultaten als [cards](https://material.io/guidelines/components/cards.html) in het zoekresultatenoverzicht (modal overlay)
+- de resultaten worden gegroepeerd getoond en gesorteerd op relevantie (dichterbij is belangrijker dus hoger in de lijst)
+
+De gebruiker:
+- tapt op een *individuele asset card*
+
+De app:
+- toont een detail pagina (modal overlay, scrollable) met daarop gegroepeerd de beschikbare informatie voor dit asset
+
+
+2) **Zoeken naar een asset**
+
+De gebruiker:
+- opent de G4AW Lizard Client
+- tapt de search bar
+- typt een trefwoord in
+
+De app:
+- vraagt resultaten op
+- toont de resultaten als [cards](https://material.io/guidelines/components/cards.html) in het zoekresultatenoverzicht (modal overlay)
+- de resultaten worden gegroepeerd getoond en gesorteerd op relevantie (dichterbij is belangrijker dus hoger in de lijst)
+
+De gebruiker:
+- tapt op *explore on map*
+
+De app:
+- toont de resultaten op de kaart en zoomt naar de bounding box van deze selectie
+
+De gebruiker:
+- tapt op één resultaat waarin hij/zij interesse heeft
+
+De app:
+- opent de omnibox voor 50% met daarin de belangrijkste informatie van dit asset
+- toont een button *View details*
+
+De gebruiker:
+- tapt op deze *View details* button
+
+De app:
+- toont de omnibox in volledige hoogte met alle details in een scrollable view
+
+
+
 
 
 
@@ -83,12 +137,26 @@ Technische stack
 - Javascript variant: ES2015
 - Linter: ESLint met gedeelde .eslintrc voor consistente codestyle
 - Bestaande components/libraries: react-leaflet
-- Redux tests met chai
+- Libraries: react-router, react-intl/i18next, 
+- Redux tests met chai/jest
 - UI tests met Jest (snapshot testing)
 - CSS Modules / PostCSS
-- Build tool: Webpack
+- Build tools: Webpack, babel
 - Yarn ipv npm omdat Yarn's lockfile beter werkt voor locken van dependencies
+- Semantic releasing via buck-trap
 
+Opmerking over componenten
+--------------------------
+
+De componenten die we bouwen ontwerpen we met herbruikbaarheid in andere projecten in het achterhoofd.
+Als een component voldoende uitgecristalliseerd is kunnen we het in een module plaatsen en publiceren op npmjs.com.
+Daarbij is het wel belangrijk om componenten zo min mogelijk met elkaar te verweven.
+
+Dit zal niet altijd lukken, maar een voorbeeld is bijv. een Timeline component:
+```
+<Timeline data={data} onChange={this.handleTimelineChange} />
+```
+Dit heeft verder geen relatie met andere componenten in het project en kan dus op termijn worden losgetrokken.
 
 
 Inschatting
@@ -103,3 +171,5 @@ TODO
 
 Testfase en oplevering
 ======================
+
+TODO
