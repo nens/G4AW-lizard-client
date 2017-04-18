@@ -6,6 +6,37 @@
   "scripts": {
     "start": "webpack-dev-server --progress --colors"
   },
+  "devDependencies": {
+    "babel": "",
+    "babel-cli": "",
+    "babel-core": "",
+    "babel-eslint": "",
+    "babel-loader": "",
+    "babel-plugin-add-module-exports": "",
+    "babel-plugin-transform-react-jsx": "",
+    "babel-polyfill": "",
+    "babel-preset-es2015": "",
+    "babel-preset-stage-0": "",
+    "buck-trap": "",
+    "chai": "",
+    "concurrently": "",
+    "css-loader": "",
+    "eslint": "",
+    "eslint-loader": "",
+    "mocha": "",
+    "nock": "",
+    "redux": "",
+    "redux-mock-store": "",
+    "style-loader": "",
+    "webpack": "",
+    "webpack-dev-server": "",
+    "yargs": "",
+    "css-loader": "",
+    "postcss-cssnext": "",
+    "postcss-import": "",
+    "postcss-loader": "",
+    "style-loader": ""
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/nens/lizard-state-client.git"
@@ -33,34 +64,5 @@
     "react-router": "",
     "react-router-dom": "",
     "redux-thunk": "^2.1.0"
-  },
-  "devDependencies": [
-    "babel",
-    "babel-cli",
-    "babel-core",
-    "babel-eslint",
-    "babel-loader",
-    "babel-plugin-add-module-exports",
-    "babel-plugin-transform-react-jsx",
-    "babel-polyfill",
-    "babel-preset-es2015",
-    "babel-preset-stage-0",
-    "buck-trap",
-    "chai",
-    "concurrently",
-    "eslint",
-    "eslint-loader",
-    "mocha",
-    "nock",
-    "redux",
-    "redux-mock-store",
-    "webpack",
-    "webpack-dev-server",
-    "yargs",
-    "css-loader",
-    "postcss-cssnext",
-    "postcss-import",
-    "postcss-loader",
-    "style-loader"
-  ]
+  }
 }
