@@ -54,7 +54,7 @@ Scenarios
 
 Een scenario is een beschrijving van de mogelijke ‘flow’ van de eindgebruiker door de applicatie. Met behulp van scenario's krijgt de lezer een duidelijker beeld van de eindgebruiker en diens behoefte. (Aka user-stories)
 
-**1. Zoeken naar een asset**
+**1. Zoeken naar een asset - detail card**
 ---------------------------
 
 De gebruiker:
@@ -74,7 +74,7 @@ De app:
 - toont een detail pagina (modal overlay, scrollable) met daarop gegroepeerd de beschikbare informatie voor dit asset
 
 
-**2. Zoeken naar een asset**
+**2. Zoeken naar een asset - explore on map**
 ---------------------------
 
 De gebruiker:
