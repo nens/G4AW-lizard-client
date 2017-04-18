@@ -2,6 +2,8 @@ import { connect } from 'react-redux';
 import React from 'react';
 import { Map, TileLayer, WMSTileLayer } from 'react-leaflet';
 import ReactDOM from 'react-dom';
+
+import { VIEWPORT_PADDING } from './Constants';
 import { getRaster } from '../actions/RasterActions';
 
 const hoogteUuid = "10415ccb-ec31-4d43-bdb3-db597061527b";
@@ -11,12 +13,23 @@ class RastersMap extends React.Component {
     this.props.getRaster(hoogteUuid);
   }
 
+  getWidth() {
+    return ((this.props.width || window.innerWidth) - VIEWPORT_PADDING) + "px";
+  }
+
+  getHeight() {
+    return ((this.props.height || window.innerHeight) - VIEWPORT_PADDING) + "px";
+  }
+
   render() {
     const { visibleRasters } = this.props;
 
     return (
       <div>
-        <Map center={[52.092876, 5.104480]} zoom={13} style={{width: '100%', height: 600}}>
+        <Map center={[52.092876, 5.104480]}
+             zoom={13}
+             zoomControl={false}
+             style={{width: this.getWidth(), height: this.getHeight()}}>
           <TileLayer
              url='http://{s}.tile.osm.org/{z}/{x}/{y}.png'
              attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
