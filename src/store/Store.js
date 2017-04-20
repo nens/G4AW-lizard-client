@@ -21,7 +21,11 @@ function configureStore(
 
   const rootReducer = combineReducers({ ...reducers, ...externalReducers });
 
-  return createStoreWithMiddleware(rootReducer, initialState);
+  return createStoreWithMiddleware(
+    rootReducer,
+    initialState,
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  );
 }
 
 export const theStore = configureStore(initialState);
