@@ -4,9 +4,11 @@
   "description": "Library for client-side storage/exposure of Lizard assets, rasters and timeseries.",
   "main": "src/index.js",
   "scripts": {
-    "start": "webpack-dev-server --progress --colors"
+    "start": "webpack-dev-server --progress --colors",
+    "storybook": "start-storybook -p 9001 -c .storybook"
   },
   "devDependencies": {
+    "@kadira/storybook": "^2.35.3",
     "babel": "",
     "babel-cli": "",
     "babel-core": "",
