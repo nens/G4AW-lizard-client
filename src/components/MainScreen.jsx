@@ -6,7 +6,7 @@ import SearchBar from './SearchBar';
 import SearchResults from './SearchResults';
 
 
-export default class MapComponent extends Component {
+export default class MainScreen extends Component {
   constructor() {
     super();
     this.state = {
@@ -26,7 +26,7 @@ export default class MapComponent extends Component {
   render() {
     return (
       <div>
-        <ShowRastersMap
+        <RastersMap
             width={this.state.viewportWidth}
             height={this.state.viewportHeight} />
         <SearchBar />
