@@ -39,8 +39,23 @@ in the lifecycle of a key-value pair in the stores' raster section:
 
   This happens in-sync.
 
+5) START_SEARCH
+
+  Sets the search result to 'fetching', empties list of results.
+
+6) RECEIVE_SEARCH_RESULTS
+
+  Write the received search results to the store.
+
+7) CLEAR_SEARCH_RESULTS
+
+  Clear the search results list (e.g. when user begins typing a new query or clicks 'X').
+
 ******************************************************************************/
 
 export const FETCH_RASTER = 'FETCH_RASTER';
 export const RECEIVE_RASTER = 'RECEIVE_RASTER';
 export const REMOVE_RASTER = 'REMOVE_RASTER';
+export const START_SEARCH = 'START_SEARCH';
+export const RECEIVE_SEARCH_RESULTS = 'RECEIVE_SEARCH_RESULTS';
+export const CLEAR_SEARCH_RESULTS = 'CLEAR_SEARCH_RESULTS';

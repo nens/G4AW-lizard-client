@@ -32,7 +32,12 @@
     "style-loader": "",
     "webpack": "",
     "webpack-dev-server": "",
-    "yargs": ""
+    "yargs": "",
+    "css-loader": "",
+    "postcss-cssnext": "",
+    "postcss-import": "",
+    "postcss-loader": "",
+    "style-loader": ""
   },
   "repository": {
     "type": "git",
