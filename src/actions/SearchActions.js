@@ -1,6 +1,6 @@
 import { START_SEARCH, RECEIVE_SEARCH_RESULTS, CLEAR_SEARCH_RESULTS }
   from '../constants/ActionTypes';
-import { theStore } from '../store/configureStore';
+import { theStore } from '../store/Store';
 
 import { search } from 'lizard-api-client';
 
