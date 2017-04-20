@@ -10,10 +10,13 @@ createStoreWithMiddleware = applyMiddleware(thunkMiddleware)(createStore);
  * Consumer applications may call createStore({}initialState, {}ownReducers) to
  * create a store with Lizard state and application specific state.
  */
+const initialState = {
+  'rasters': {},
+  'search': {}
+};
+
 function configureStore(
-  initialState = {
-    'rasters': {}
-  },
+  initialState = {},
   externalReducers = {}) {
 
   const rootReducer = combineReducers({ ...reducers, ...externalReducers });
@@ -21,12 +24,11 @@ function configureStore(
   return createStoreWithMiddleware(rootReducer, initialState);
 }
 
-export const theStore = configureStore();
-console.log('Store: ', theStore.getState());
+export const theStore = configureStore(initialState);
 
 /*
 State = {
-  Rasters: {
+  rasters: {
     <Raster UUID 1>: {
       isFetching: <Boolean>,
       data: <RasterStoreObject 1>,  // "data" and "error" values are mutual
@@ -37,6 +39,10 @@ State = {
       data: <RasterStoreObject 2>,
       error: <String[]>
     },
+  },
+  search: {
+      isFetching: <Boolean>,
+      results: <SearchResult[]> if successfully requested, or null otherwise
   }
 }
 */

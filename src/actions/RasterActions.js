@@ -1,7 +1,6 @@
 import { FETCH_RASTER, RECEIVE_RASTER, REMOVE_RASTER }
   from '../constants/ActionTypes';
-import { theStore } from '../store/configureStore';
-
+import { theStore } from '../store/Store';
 import { getRasterDetail } from 'lizard-api-client';
 
 export const fetchRaster = (uuid) => {

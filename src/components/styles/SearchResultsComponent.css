@@ -1,0 +1,31 @@
+.searchresults-container {
+    z-index: 999;
+    background: red;
+    position: absolute;
+    bottom: 0px;
+
+    border-radius: 10px;
+    overflow-y: hidden;
+    background-color: white;
+
+    width: 90%;
+    margin: 5%;
+}
+
+.searchresults-container p {
+    font-weight: bold;
+    margin: 5px;
+}
+
+.searchresults-container ul {
+    list-style-type: none;
+}
+
+.searchresults-container ul li {
+    border-bottom: solid black 1px;
+}
+
+.searchresults-description {
+    font-size: small;
+    font-style: italic;
+}
