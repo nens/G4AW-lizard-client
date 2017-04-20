@@ -1,8 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 
-import { ShowRastersMap } from './ShowRastersMap';
-import SearchBar from './SearchBarComponent';
+import RastersMap from './RastersMap';
+import SearchBar from './SearchBar';
 import SearchResults from './SearchResults';
 
 

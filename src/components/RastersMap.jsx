@@ -8,7 +8,7 @@ import { getRaster } from '../actions/RasterActions';
 
 const hoogteUuid = "10415ccb-ec31-4d43-bdb3-db597061527b";
 
-class RastersMap extends React.Component {
+class RastersMapComponent extends React.Component {
   componentDidMount() {
     this.props.getRaster(hoogteUuid);
   }
@@ -62,5 +62,7 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export const ShowRastersMap = connect(
-  mapStateToProps, mapDispatchToProps)(RastersMap);
+const RastersMap = connect(
+  mapStateToProps, mapDispatchToProps)(RastersMapComponent);
+
+export default RastersMap;
