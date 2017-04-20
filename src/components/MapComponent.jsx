@@ -2,33 +2,35 @@ import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 
 import { ShowRastersMap } from './ShowRastersMap';
-import SearchBarComponent from './SearchBarComponent';
+import SearchBar from './SearchBarComponent';
+import SearchResults from './SearchResults';
 
 
 export default class MapComponent extends Component {
-  constructor () {
+  constructor() {
     super();
     this.state = {
       viewportWidth: window.innerWidth,
-      viewportHeight: window.innerHeigth,
+      viewportHeight: window.innerHeight
     };
   }
-  componentDidMount () {
+  componentDidMount() {
     window.addEventListener('resize', () => {
       this.setState({
         'viewportWidth': window.innerWidth,
         'viewportHeight': window.innerHeight
       });
-      console.log("resize detected; this.state =", this.state);
+      console.log('resize detected; this.state =', this.state);
     });
   }
-  render () {
+  render() {
     return (
       <div>
         <ShowRastersMap
-          width={this.state.viewportWidth}
-          height={this.state.viewportHeight} />
-        <SearchBarComponent />
+            width={this.state.viewportWidth}
+            height={this.state.viewportHeight} />
+        <SearchBar />
+        <SearchResults />
       </div>
     );
   }
