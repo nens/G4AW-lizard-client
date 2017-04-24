@@ -264,11 +264,17 @@ Dit heeft verder geen relatie met andere componenten in het project en kan dus o
 Inschatting
 ===========
 
-TODO
-
-
-
-
+|Onderdeel|Inschatting (dagen)|  
+|---------|----------:|
+|Mobiele variant|145|
+|Technisch inhoudelijke sessies (3), discussie en vastlegging|15|
+|Ontwerpen, leeg en interactief|10|
+|Toetsing ontwerpen|15|
+|Content bepalen|5|
+|Ontwikkeling frontend|60|
+|Stelpost ontwikkeling|15|
+|Projectleiding en overleg|25|
+|Back-end uitbreiding/aanpassing|??|
 
 
 Testfase en oplevering
