@@ -54,6 +54,12 @@ Scenarios
 
 Een scenario is een beschrijving van de mogelijke ‘flow’ van de eindgebruiker door de applicatie. Met behulp van scenario's krijgt de lezer een duidelijker beeld van de eindgebruiker en diens behoefte. (Aka user-stories)
 
+Waarom scenario's? Scenario's zijn goedkoper om te maken dan wireframes of schetsen.
+Als de opdrachtgever akkoord gaat met de scenario's kunnen deze worden uitgewerkt tot [storyboards](https://uxplanet.org/storyboarding-in-ux-design-b9d2e18e5fab).
+
+Daarna kan de applicatie worden gebouwd met de storyboards als leidraad.
+
+
 **1. Zoeken naar een asset - detail card**
 ---------------------------
 
