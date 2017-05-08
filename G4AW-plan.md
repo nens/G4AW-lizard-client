@@ -20,7 +20,8 @@ Projectmatige randvoorwaarden
 Blind spots / risico's
 ======================
 
-- Data: Er is nog geen data, maar we moeten hierop wel anticiperen - dat is een typische blind spot.
+- Data: Er is nog geen data, maar we moeten hierop wel anticiperen - dat is een typische blind spot
+- Ontwikkelen doen we met de bestaande Lizard en Lizard G4AW API's
 
 
 
