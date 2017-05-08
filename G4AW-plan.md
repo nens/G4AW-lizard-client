@@ -13,18 +13,15 @@ Projectmatige randvoorwaarden
 - Interne deadline: 1 september 2017
 - Scope beperkt tot ontwikkeling front-end
 - Na goedkeuring wordt niet meer zonder overleg afgeweken van het FO/TO
-- Styling van de app volgt zo veel mogelijk de Sketch ontwerpen
-- Budget: xxxxxxx
+- Styling van de webapp volgt zo veel mogelijk de Sketch ontwerpen
+- Budget: zie [inschatting](https://github.com/nens/G4AW-lizard-client/blob/master/G4AW-plan.md#inschatting)
 
 
 Blind spots / risico's
 ======================
 
-- Authenticatie en authorisatie: hoe gaan we de gebruiker identificeren en authenticeren. Opties zijn onze eigen SSO, social logins, QR of shortcodes uitdelen, etc.
 - Data: Er is nog geen data, maar we moeten hierop wel anticiperen - dat is een typische blind spot.
-- KoboCollect: Welk formaat etc. - tot er iets is is er niks.
-- Direct met de Lizard API praten of via een tussen-server zoals bij GGMN (suggestie van Reinout)
-- Offline support. Hoe sterk is de wens/eis? De [ServiceWorker API](https://developers.google.com/web/fundamentals/getting-started/codelabs/offline/) kan dit. KoboCollect gebruikt het ook. Gevalletje would-be-nice?
+
 
 
 Functioneel Ontwerp (FO)
@@ -32,7 +29,7 @@ Functioneel Ontwerp (FO)
 
 Doel van de applicatie
 ----------------------
-Doel van de app is *omgevingsinformatie* bieden aan de eindgebruiker, de zgn. 'Farmer friends' van [LT Group](http://loctroi.vn/en/). Verder in dit document *gebruiker* genoemd.
+Doel van deze webapp is *omgevingsinformatie* bieden aan de eindgebruiker, de zgn. 'Farmer friends' van [LT Group](http://loctroi.vn/en/). Verder in dit document *gebruiker* genoemd.
 
 Aannames bij deze eindgebruiker
 -------------------------------
@@ -50,7 +47,7 @@ Functionele beperkingen
 
 
 Scenarios
-=========
+---------
 
 Zie [scenarios](https://github.com/nens/G4AW-lizard-client/blob/master/G4AW-scenarios.md).
 
@@ -61,22 +58,34 @@ Storyboards en UI Components
 - [UI Components](https://www.figma.com/file/dMfbORPsTEeIljFDtxMxHb6L/lizard-mobile-g4aw-basic-v3-UI-Components)
 - [Storyboards](https://www.figma.com/file/Fq6siPQf61534WMcbHfSg8dt/lizard-mobile-g4aw-basic-v3-_Flows)
 
-Verder:
+
+Grafisch ontwerp
+----------------
 
 - We houden zoveel mogelijk [Material Design](https://material.io/) aan
-- Font: [Roboto](https://fonts.google.com/specimen/Roboto)
+- Lettertype: [Roboto](https://fonts.google.com/specimen/Roboto)
 - Iconset: [Material Icons](https://material.io/icons/) en custom SVG icons waar nodig
 
-
-Nog te ontwerpen:
-
-- App Switcher
-- Login/logout
-- ...?
 
 
 Technisch Ontwerp (TO)
 ======================
+
+API endpoints
+-------------
+
+De Lizard API wordt ontsloten door [lizard-api-client.js](https://github.com/nens/lizard-api-client).
+Deze API geeft via functies Immutable.js objecten terug waarmee in G4AW Lizard Client kan worden gewerkt.
+
+
+Visual Components
+-----------------
+
+- Overzicht alle UI components zoals de searchbar, map, omnibox, settings, legenda, etc.
+- Doel / functie van elk component beschrijven.
+- Per component de propTypes beschrijven.
+- Eventuele component state beschrijven. (zo min mogelijk)
+
 
 Actions
 -------
@@ -91,21 +100,6 @@ State shape (datamodel)
 -----------------------
 
 - Hoe ziet de Redux store eruit? Wat is de [minimale state shape](http://redux.js.org/docs/basics/Reducers.html#designing-the-state-shape)?
-
-
-API endpoints
--------------
-
-Ook al wordt de API ontsloten door [lizard-api-client.js](https://github.com/nens/lizard-api-client)
-
-
-Visual Components
------------------
-
-- Overzicht alle UI components zoals de searchbar, map, omnibox, settings, legenda, etc.
-- Doel / functie van elk component beschrijven.
-- Per component de propTypes beschrijven.
-- Eventuele component state beschrijven. (zo min mogelijk)
 
 
 Technische stack
@@ -145,7 +139,6 @@ Inschatting
 
 |Onderdeel|Inschatting (dagen)|  
 |---------|----------:|
-|Mobiele variant|145|
 |Technisch inhoudelijke sessies (3), discussie en vastlegging|15|
 |Ontwerpen, leeg en interactief|10|
 |Toetsing ontwerpen|15|
@@ -154,6 +147,7 @@ Inschatting
 |Stelpost ontwikkeling|15|
 |Projectleiding en overleg|25|
 |Back-end uitbreiding/aanpassing|??|
+|Mobiele variant totaal |145|
 
 
 Testfase en oplevering
