@@ -37,6 +37,7 @@ Aannames bij deze eindgebruiker
 - Vaak laag opgeleid
 - Beperkte Internettoegang (niet altijd aanwezig/snel)
 - Beperkte mobiele telefoons, onvoorspelbare browsers
+- **LET OP**: We bouwen deze webapp voor de mobiele browser/telefoons die we bij Nelen & Schuurmans ter beschikking hebben: de iPhone 6s en beter.
 
 
 Functionele beperkingen
@@ -44,6 +45,18 @@ Functionele beperkingen
 
 - Eén rasterlaag tegelijk
 - Tijdselectie: Dag/uur niveau
+- ALLEEN LEZEN, geen writes naar de API
+
+
+Hoofdcomponenten
+----------------
+
+- Kaart
+- Zoekbalk
+- Geolocation button
+- Datum/tijdselectie
+- Legenda
+- Omnibox
 
 
 Scenarios
