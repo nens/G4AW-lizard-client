@@ -69,6 +69,8 @@ Zie [scenarios](https://github.com/nens/G4AW-lizard-client/blob/master/G4AW-scen
 Storyboards en UI Components
 ----------------------------
 
+![alt](https://github.com/nens/G4AW-lizard-client/blob/master/ux-session.jpg?raw=true)	
+
 - [UI Components](https://www.figma.com/file/dMfbORPsTEeIljFDtxMxHb6L/lizard-mobile-g4aw-basic-v3-UI-Components)
 - [Storyboards](https://www.figma.com/file/Fq6siPQf61534WMcbHfSg8dt/lizard-mobile-g4aw-basic-v3-_Flows)
 
