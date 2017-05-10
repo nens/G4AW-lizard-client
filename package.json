@@ -55,7 +55,6 @@
   },
   "homepage": "https://github.com/nens/lizard-state-client",
   "dependencies": {
-    "buck-trap": "^1.0.14",
     "es6-promise": "^4.0.5",
     "leaflet": "",
     "lodash": "^4.17.3",
