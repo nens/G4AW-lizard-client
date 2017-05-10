@@ -69,9 +69,11 @@ Zie [scenarios](https://github.com/nens/G4AW-lizard-client/blob/master/G4AW-scen
 Storyboards en UI Components
 ----------------------------
 
-![alt](https://github.com/nens/G4AW-lizard-client/blob/master/ux-session.jpg?raw=true)	
+![alt](https://github.com/nens/G4AW-lizard-client/blob/master/ui/ux-session.jpg?raw=true)
 
-- [Storyboards / UI Components](https://github.com/nens/G4AW-lizard-client/blob/master/lizard-mobile-g4aw-final.pdf)
+- [Storyboards PDF](https://github.com/nens/G4AW-lizard-client/blob/master/ui/lizard-mobile-g4aw-final.pdf)
+
+- [UI States as SVG and PNG](https://github.com/nens/G4AW-lizard-client/blob/master/ui/ui-states/)
 
 
 Grafisch ontwerp
@@ -127,7 +129,7 @@ Technische stack
 - Javascript variant: ES2015
 - Linter: ESLint met gedeelde .eslintrc voor consistente codestyle
 - Bestaande components/libraries: react-leaflet
-- Libraries: react-router, react-intl/i18next, 
+- Libraries: react-router, react-intl/i18next,
 - Redux tests met chai/jest
 - UI tests met Jest (snapshot testing)
 - CSS Modules / PostCSS
