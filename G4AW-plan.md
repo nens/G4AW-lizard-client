@@ -84,11 +84,23 @@ Subcomponenten
 
 **Zoek input**
 
+Invoerveld, zichtbaar in kaart en omnibox modus. Als de gebruiker begint te typen, wordt het search endpoint bevraagd en wordt de searchresults state gevuld met resultaten. Deze worden in de kaart getoond als polygonen en in de omnibox als list-view.
+
 **Geolocation button**
+
+Button welke alleen verschijnt als de browser/telefoon geolocatie ondersteuning heeft. onTap wordt de locatie van de gebruiker bepaald en wordt de *spatial extent state* van de app hierop aangepast.
 
 **Datum/tijdselectie**
 
+Component waarmee de datum/tijd kan worden ingesteld op een ander moment. 
+
 **Legenda**
+
+Een apart element dat kan worden opgeroepen / weggetapt in kaartmodus. De inhoud hangt af van de op dat moment gekozen kaartlaag of kaartlagen. Dit element is scrollable in de Y richting.
+
+**Snackbar**
+
+Een notificatie systeem met eventuele dismiss functionaliteit en timeout instelling. O.a. gebruikt om de gebruiker te laten weten of asynchrone acties zijn gelukt of mislukt, zoals geolocatie en authenticatie.
 
 
 
