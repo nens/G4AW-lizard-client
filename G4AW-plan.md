@@ -52,12 +52,44 @@ Functionele beperkingen
 Hoofdcomponenten
 ----------------
 
-- Kaart
-- Zoekbalk
-- Geolocation button
-- Datum/tijdselectie
-- Legenda
-- Omnibox
+**Omnibox** 
+
+De Omnibox is het primaire user-interface element binnen deze webapp. Dit component wordt gebruikt voor het tonen van een 'list-view' met zoekresultaten en voor de 'detail-view' van percelen.
+
+![Omnibox blank state](https://github.com/nens/G4AW-lizard-client/blob/master/ui/ui-states/Initial%20view%20Omnibox.png?raw=true)
+
+Kenmerken/eigenschappen van de Omnibox:
+
+* Twee states: Schermvullend of [splitscreen in combinatie met de kaart](https://github.com/nens/G4AW-lizard-client/blob/master/ui/ui-states/Geolocation%20on%20map%202.png)
+* Inhoud is scrollable
+* Title bar onTap: maak schermvullend
+* Title bar kruisje onTap: omnibox weg
+* Title bar pijltje terug onTap: van schermvullend naar splitscreen
+
+
+**Kaart**
+
+De Kaart is het secundaire user-interface element van deze webapp. Het faciliteert ruimtelijke navigatie en orientatie en dient voor visualisatie van ruimtelijke gegevens over de percelen.
+
+![Map blank state](https://github.com/nens/G4AW-lizard-client/blob/master/ui/ui-states/Geolocation%20on%20map%201.png?raw=true)
+
+Kenmerken/eigenschappen van het Map component:
+
+* Twee states: Schermvullend of bovenin splitscreen modus in combinatie met het Omnibox component
+* Kan percelen visualiseren en onClick naar de detailpagina verwijzen in het Omnibox component
+
+
+Subcomponenten
+--------------
+
+**Zoek input**
+
+**Geolocation button**
+
+**Datum/tijdselectie**
+
+**Legenda**
+
 
 
 Scenarios
