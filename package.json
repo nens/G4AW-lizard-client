@@ -4,8 +4,22 @@
   "description": "Library for client-side storage/exposure of Lizard assets, rasters and timeseries.",
   "main": "src/index.js",
   "scripts": {
+    "build": "NODE_ENV=production webpack --config webpack.config.js -p",
+    "precommit": "lint-staged",
+    "release": "buck-trap -a",
+    "serve": "node server.js",
     "start": "webpack-dev-server --progress --colors",
     "storybook": "start-storybook -p 9001 -c .storybook"
+  },
+  "lint-staged": {
+    "*.js": [
+      "prettier --write",
+      "git add"
+    ],
+    "*.jsx": [
+      "prettier --write",
+      "git add"
+    ]
   },
   "devDependencies": {
     "@kadira/storybook": "^2.35.3",
@@ -16,6 +30,7 @@
     "babel-loader": "",
     "babel-plugin-add-module-exports": "",
     "babel-plugin-transform-react-jsx": "",
+    "babel-plugin-transform-object-rest-spread": "",
     "babel-polyfill": "",
     "babel-preset-es2015": "",
     "babel-preset-stage-0": "",
@@ -25,13 +40,24 @@
     "css-loader": "",
     "eslint": "",
     "eslint-loader": "",
+    "eslint-config-airbnb": "^14.1.0",
+    "eslint-config-prettier": "^1.7.0",
+    "eslint-plugin-babel": "^4.1.1",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^4.0.0",
+    "eslint-plugin-react": "^6.10.3",
+    "express": "",
+    "husky": "",
     "mocha": "",
+    "lint-staged": "^3.4.0",
     "nock": "",
-    "redux": "",
+    "react-hot-loader": "next",
     "redux-mock-store": "",
     "style-loader": "",
     "webpack": "",
     "webpack-dev-server": "",
+    "webpack-hot-middleware": "",
+    "webpack-dev-middleware": "",
     "yargs": "",
     "css-loader": "",
     "postcss-cssnext": "",
@@ -64,6 +90,8 @@
     "react-redux": "",
     "react-router": "",
     "react-router-dom": "",
+    "redux": "",
+    "redux-logger": "",
     "redux-thunk": "^2.1.0"
   }
 }
