@@ -7,8 +7,7 @@
     "build": "NODE_ENV=production webpack --config webpack.config.js -p",
     "precommit": "lint-staged",
     "release": "buck-trap -a",
-    "serve": "node server.js",
-    "start": "webpack-dev-server --progress --colors",
+    "start": "node server.js",
     "storybook": "start-storybook -p 9001 -c .storybook"
   },
   "lint-staged": {
