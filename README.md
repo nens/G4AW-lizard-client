@@ -63,6 +63,8 @@ A pre-commit hook is configured to run `prettier` every time, so the codebase st
 
 If you work on this project, please submit changes via Pull Requests and follow the [commit guidelines as outlined here](https://github.com/conventional-changelog/standard-version#commit-message-convention-at-a-glance).
 
+See [![Standard Version](https://img.shields.io/badge/release-standard%20version-brightgreen.svg)](https://github.com/conventional-changelog/standard-version)
+
 These commit messages will be used to auto-generate `CHANGELOG.md`.
 
 Have a look at the [buck-trap README](https://github.com/nens/buck-trap/blob/master/README.md) for more information about the release procedure.
