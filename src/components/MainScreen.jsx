@@ -1,12 +1,10 @@
-import React, { Component, PropTypes } from 'react';
-import ReactDOM from 'react-dom';
+import React, { Component, PropTypes } from "react";
+import ReactDOM from "react-dom";
+import RastersMap from "./RastersMap";
+import SearchBar from "./SearchBar";
+import SearchResults from "./SearchResults";
 
-import RastersMap from './RastersMap';
-import SearchBar from './SearchBar';
-import SearchResults from './SearchResults';
-
-
-export default class MainScreen extends Component {
+class MainScreen extends Component {
   constructor() {
     super();
     this.state = {
@@ -15,23 +13,26 @@ export default class MainScreen extends Component {
     };
   }
   componentDidMount() {
-    window.addEventListener('resize', () => {
+    window.addEventListener("resize", () => {
       this.setState({
-        'viewportWidth': window.innerWidth,
-        'viewportHeight': window.innerHeight
+        viewportWidth: window.innerWidth,
+        viewportHeight: window.innerHeight
       });
-      console.log('resize detected; this.state =', this.state);
+      console.log("resize detected; this.state =", this.state);
     });
   }
   render() {
     return (
       <div>
         <RastersMap
-            width={this.state.viewportWidth}
-            height={this.state.viewportHeight} />
+          width={this.state.viewportWidth}
+          height={this.state.viewportHeight}
+        />
         <SearchBar />
         <SearchResults />
       </div>
     );
   }
 }
+
+export default MainScreen;
