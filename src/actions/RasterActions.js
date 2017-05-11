@@ -1,9 +1,12 @@
-import { FETCH_RASTER, RECEIVE_RASTER, REMOVE_RASTER }
-  from '../constants/ActionTypes';
-import { theStore } from '../store/Store';
-import { getRasterDetail } from 'lizard-api-client';
+import {
+  FETCH_RASTER,
+  RECEIVE_RASTER,
+  REMOVE_RASTER
+} from "../constants/ActionTypes";
+import { theStore } from "../store/Store";
+import { getRasterDetail } from "lizard-api-client";
 
-export const fetchRaster = (uuid) => {
+export const fetchRaster = uuid => {
   return {
     type: FETCH_RASTER,
     uuid
@@ -18,7 +21,7 @@ const receiveRaster = (uuid, data) => {
   };
 };
 
-export const removeRaster = (uuid) => {
+export const removeRaster = uuid => {
   return {
     type: REMOVE_RASTER,
     uuid
@@ -45,9 +48,9 @@ export function getRaster(uuid, dispatch) {
   dispatch(fetchRaster(uuid));
   // Send a request, store the resulting raster.
   getRasterDetail(uuid).then(data => {
-    console.log('Received raster: ', data.toString());
+    // console.log('Received raster: ', data.toString());
     dispatch(receiveRaster(uuid, data));
   });
 
   return false; // No data present yet.
-};
+}
