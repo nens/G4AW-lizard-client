@@ -70,6 +70,48 @@ These commit messages will be used to auto-generate `CHANGELOG.md`.
 Have a look at the [buck-trap README](https://github.com/nens/buck-trap/blob/master/README.md) for more information about the release procedure.
 
 
+### Internationalisation
+
+This is a multilingual webapp. It supports vietnamese and english.
+
+The language used is determined by the browser locale of the user. This is configurable in `i18n.js`.
+
+The language catalogs are located in `locales/en` and `locales/vi`. To update these catalogs with new translation strings, run:
+
+```bash
+$ npm run extract
+```
+or
+```bash
+$ yarn run extract
+```
+
+Enabling translation in a component can be done by marking them as translation strings using t():
+
+```js
+import React, { Component, PropTypes } from "react";
+import { translate } from "react-i18next";
+
+...
+
+class SomeComponent extends Component {
+  render() {
+    const { t } = this.props;
+    return {
+      <div>{t("translate me")}</div>
+    };
+  }
+}
+
+...
+
+export default translate()(SomeComponent);
+```
+
+For more information on the translation mechanism, have a look at [i18next-react](https://github.com/i18next/react-i18next).
+
+
+
 ### Browser development extensions
 
 This front-end uses React and Redux. These extensions may help:
