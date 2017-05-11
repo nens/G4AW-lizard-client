@@ -1,24 +1,25 @@
-import {createStore, applyMiddleware, combineReducers} from 'redux';
-import thunkMiddleware from 'redux-thunk';
-import reducers from '../reducers/index';
+import { createStore, applyMiddleware, combineReducers } from "redux";
+import { createLogger } from "redux-logger";
+import thunkMiddleware from "redux-thunk";
+import reducers from "../reducers/index";
 
 let createStoreWithMiddleware;
+const logger = createLogger({});
 
-createStoreWithMiddleware = applyMiddleware(thunkMiddleware)(createStore);
+createStoreWithMiddleware = applyMiddleware(thunkMiddleware, logger)(
+  createStore
+);
 
 /**
  * Consumer applications may call createStore({}initialState, {}ownReducers) to
  * create a store with Lizard state and application specific state.
  */
 const initialState = {
-  'rasters': {},
-  'search': {}
+  rasters: {},
+  search: {}
 };
 
-function configureStore(
-  initialState = {},
-  externalReducers = {}) {
-
+function configureStore(initialState = {}, externalReducers = {}) {
   const rootReducer = combineReducers({ ...reducers, ...externalReducers });
 
   return createStoreWithMiddleware(
