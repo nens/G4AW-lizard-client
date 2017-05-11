@@ -72,9 +72,9 @@ Have a look at the [buck-trap README](https://github.com/nens/buck-trap/blob/mas
 
 ### Internationalisation
 
-This is a multilingual webapp. It supports vietnamese and english.
+This webapp has language support for vietnamese and english.
 
-The language used is determined by the browser locale of the user. This is configurable in `i18n.js`.
+The language used is determined by the browser locale. This behavior is configurable in `i18n.js`.
 
 The language catalogs are located in `locales/en` and `locales/vi`. To update these catalogs with new translation strings, run:
 
@@ -107,6 +107,8 @@ class SomeComponent extends Component {
 
 export default translate()(SomeComponent);
 ```
+
+The t() function is provided to the component via translate(), a [HoC](https://www.sitepoint.com/react-higher-order-components/) provided by `i18next-react`.
 
 For more information on the translation mechanism, have a look at [i18next-react](https://github.com/i18next/react-i18next).
 
