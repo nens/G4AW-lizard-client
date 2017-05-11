@@ -31,33 +31,56 @@ executed in your browsers' development console:
 * Go to the root directory of the cloned
 [lizard-api-client](https://github.com/nens/lizard-api-client);
 
-* `$ npm install`;
+* Each of the following `npm` commands can be switched to `yarn` if you use that.
+
+* `$ npm install`
 
 * `$ npm start` will create the files within `.../lizard-api-client/lib/` that
-we will need;
+we will need
 
 * `$ npm link` will make those files available in arbitrary places in your
-filesystem (via the `/usr/local/lib/node_modules/` folder);
+filesystem (via the `/usr/local/lib/node_modules/` folder)
 
-* Go to the root directory of the cloned G4AW-lizard-client repo;
+* Go to the root directory of the cloned G4AW-lizard-client repo
 
-* `$ npm install`;
+* `$ npm install`
 
 * `$ npm link lizard-api-client` wil finish the linking step -- Javascript
 files in the actual client application (the G4AW-lizard-client repo) can now
 have the line `import { LizardApiClient } from 'lizard-api-client';` to make
-the lizard-api-client code available in their local scope.
+the lizard-api-client code available in their local scope
 
-* `$ npm start` will launch a webpack-dev-server on [http://localhost:8080](http://localhost:8080)
+* `$ sso_user=your-sso-username sso_pass=your-sso-password npm start` will launch a development server with Hot Module Reloading enabled and authenticated proxy requests to the Lizard NXT staging server at [http://localhost:3000](http://localhost:3000)
 
-* Open the development console of your browser and you may interact with the app.
-
-
+* See [http://localhost:3000/api/v3](http://localhost:3000/api/v3) for the API root.
 
 
+## Development
+
+This project uses the [Prettier.js](https://github.com/prettier/prettier) code formatter. The .eslintrc extends from the prettier linting configuration.
+
+A pre-commit hook is configured to run `prettier` every time, so the codebase stays in consistent form, style-wise.
+
+If you work on this project, please submit changes via Pull Requests and follow the [commit guidelines as outlined here](https://github.com/conventional-changelog/standard-version#commit-message-convention-at-a-glance).
+
+These commit messages will be used to auto-generate `CHANGELOG.md`.
+
+Have a look at the [buck-trap README](https://github.com/nens/buck-trap/blob/master/README.md) for more information about the release procedure.
 
 
+### Browser development extensions
+
+This front-end uses React and Redux. These extensions may help:
+
+- React Devtools for [Chrome](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=en) or [Firefox](https://addons.mozilla.org/en-US/firefox/addon/react-devtools/)
+
+- Redux Devtools for [Chrome](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd?hl=en) or [Firefox](https://addons.mozilla.org/en-Gb/firefox/addon/remotedev/)
 
 
+## Building a production bundle
 
+```bash
+$ npm run build
+```
 
+This will run webpack in production mode. The result will be a `bundle.js` file in the `dist/` directory.
