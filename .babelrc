@@ -1,4 +1,11 @@
 {
-  "presets": ["es2015", "stage-0"],
-  "plugins": ["babel-plugin-add-module-exports", "transform-react-jsx"]
+  "presets": [
+    ["es2015", "stage-0"],
+    "react"
+  ],
+  "plugins": [
+    "react-hot-loader/babel",
+    "transform-object-rest-spread",
+    "transform-class-properties"
+  ]
 }

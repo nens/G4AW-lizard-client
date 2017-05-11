@@ -1,50 +1,63 @@
+const path = require("path");
+var webpack = require("webpack");
 
-var webpack = require('webpack');
-
-var libraryName = 'Lizard';
+var libraryName = "Lizard";
 
 var config = {
-  entry: [__dirname + '/src/index.js'],
-  devtool: 'source-map',
+  context: path.join(__dirname, "src"),
+  entry: [
+    "react-hot-loader/patch",
+    "webpack-hot-middleware/client",
+    __dirname + "/src/index.js"
+  ],
+  devtool: "inline-source-map",
   output: {
-    path: __dirname + '/lib',
-    filename: libraryName + '.js',
-    publicPath: '/scripts/',
+    path: __dirname + "/lib",
+    filename: libraryName + ".js",
+    publicPath: "/scripts/",
     library: libraryName,
-    libraryTarget: 'umd',
+    libraryTarget: "umd",
     umdNamedDefine: true
   },
   resolve: {
-    extensions: ['.js', '.jsx']
+    extensions: [".js", ".jsx"]
   },
   devServer: {
-    // Redirect these to Lizard NXT running on port 8000,
-    // for local development. Login through /admin.
-    proxy: {
-      '/api': 'http://127.0.0.1:8000/',
-      '/admin': 'http://127.0.0.1:8000/',
-      '/static': 'http://127.0.0.1:8000/',
+    hot: true,
+    compress: false,
+    inline: false,
+    contentBase: path.join(__dirname, "dist"),
+    publicPath: "/",
+    headers: {
+      "Access-Control-Allow-Origin": "http://0.0.0.0:8080",
+      "Access-Control-Allow-Credentials": "true"
     }
   },
   module: {
     loaders: [
       {
         test: /\.css$/,
-        use: [ 'style-loader', 'css-loader?modules', 'postcss-loader']
+        use: ["style-loader", "css-loader?modules", "postcss-loader"]
       },
       {
         test: /(\.jsx|\.js)$/,
-        loader: 'babel-loader',
+        loader: "babel-loader",
         exclude: /(node_modules|bower_components)/
       },
       {
         test: /\.js$/,
-        loader: 'eslint-loader',
+        loader: "eslint-loader",
         exclude: /node_modules|LizardApiClient/
       }
     ]
   },
+  plugins: [
+    new webpack.HotModuleReplacementPlugin(),
+    // enable HMR globally
 
+    new webpack.NamedModulesPlugin()
+    // prints more readable module names in the browser console on HMR updates
+  ]
 };
 
 module.exports = config;
