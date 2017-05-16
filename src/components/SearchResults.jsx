@@ -1,8 +1,8 @@
-import { connect } from 'react-redux';
-import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
-import styles from './styles/SearchResultsComponent.css';
-
+import { connect } from "react-redux";
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import ReactDOM from "react-dom";
+import styles from "./styles/SearchResultsComponent.css";
 
 class SearchResultsComponent extends Component {
   render() {
@@ -11,16 +11,17 @@ class SearchResultsComponent extends Component {
     }
 
     return (
-      <div className={styles['searchresults-container']}>
+      <div className={styles["searchresults-container"]}>
         <p>{this.props.results.size} results.</p>
         <ul>
-          {this.props.results.map(
-             (result, idx) => (
-               <li key={'searchresult-' + idx}>
-                 <p>{result.title}</p>
-                 <p className={styles['searchresults-description']}>{result.description}</p>
-               </li>
-             ))}
+          {this.props.results.map((result, idx) => (
+            <li key={"searchresult-" + idx}>
+              <p>{result.title}</p>
+              <p className={styles["searchresults-description"]}>
+                {result.description}
+              </p>
+            </li>
+          ))}
         </ul>
       </div>
     );
@@ -34,9 +35,10 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return {
-  };
+  return {};
 }
 
-const SearchResults = connect(mapStateToProps, mapDispatchToProps)(SearchResultsComponent);
+const SearchResults = connect(mapStateToProps, mapDispatchToProps)(
+  SearchResultsComponent
+);
 export default SearchResults;

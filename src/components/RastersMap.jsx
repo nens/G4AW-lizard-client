@@ -1,5 +1,6 @@
 import { connect } from "react-redux";
-import React from "react";
+import React, { Component } from "react";
+import PropTypes from "prop-types";
 import { Map, TileLayer, WMSTileLayer } from "react-leaflet";
 import ReactDOM from "react-dom";
 
@@ -25,15 +26,15 @@ class RastersMapComponent extends React.Component {
     const { visibleRasters } = this.props;
 
     return (
-      <div>
+      <div style={{ height: "100%", width: "100%" }}>
         <Map
-          center={[52.092876, 5.104480]}
-          zoom={13}
+          center={[13.0474, 107.7429]}
+          zoom={7}
           zoomControl={false}
-          style={{ width: this.getWidth(), height: this.getHeight() }}
+          style={{ height: "100%" }}
         >
           <TileLayer
-            url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"
+            url="https://{s}.tiles.mapbox.com/v3/nelenschuurmans.iaa98k8k/{z}/{x}/{y}.png"
             attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
           />
           {visibleRasters.map(raster => (
