@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import RastersMap from "./RastersMap";
 import SearchBar from "./SearchBar";
 import SearchResults from "./SearchResults";
+import TimeseriesGraph from "./TimeseriesGraph";
 
 class MainScreen extends Component {
   constructor() {
@@ -30,6 +31,7 @@ class MainScreen extends Component {
         />
         <SearchBar />
         <SearchResults />
+        <TimeseriesGraph />
       </div>
     );
   }
