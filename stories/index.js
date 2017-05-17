@@ -1,9 +1,32 @@
 import React from "react";
 import { Provider } from "react-redux";
+import { I18nextProvider } from "react-i18next";
+import i18n from "../src/i18n"; // initialized i18next instance
 import SearchBar from "../src/components/SearchBar.jsx";
+import ViewSwitchButton from "../src/components/ViewSwitchButton.jsx";
 import SnackBar from "../src/components/SnackBar.jsx";
 import { theStore } from "../src/store/Store";
 import { storiesOf, action } from "@kadira/storybook";
+
+storiesOf("ViewSwitchButton", module)
+  .addDecorator(getStory => (
+    <I18nextProvider i18n={i18n}>
+      {getStory()}
+    </I18nextProvider>
+  ))
+  .add("switch to map", () => (
+    <ViewSwitchButton handleOnClick={action("clicked")} />
+  ));
+
+storiesOf("ViewSwitchButton", module)
+  .addDecorator(getStory => (
+    <I18nextProvider i18n={i18n}>
+      {getStory()}
+    </I18nextProvider>
+  ))
+  .add("switch to omnibox", () => (
+    <ViewSwitchButton handleOnClick={action("clicked")} />
+  ));
 
 storiesOf("SearchBar", module)
   .addDecorator(getStory => (
