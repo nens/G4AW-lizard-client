@@ -114,6 +114,13 @@ For more information on the translation mechanism, have a look at [i18next-react
 
 
 
+### React development
+
+Please follow [the Airbnb React/JSX style guide](https://github.com/airbnb/javascript/tree/master/react) in a pragmatic way.
+
+At least keep an eye on the [ordering section](https://github.com/airbnb/javascript/tree/master/react#ordering) as this helps the team and others read components quicker.
+
+
 ### Browser development extensions
 
 This front-end uses React and Redux. These extensions may help:
