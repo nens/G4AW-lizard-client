@@ -5,6 +5,7 @@ import RastersMap from "./RastersMap";
 import SearchBar from "./SearchBar";
 import SearchResults from "./SearchResults";
 import SnackBar from "./SnackBar";
+import ViewSwitchButton from "./ViewSwitchButton";
 
 import styles from "./styles/MainScreen.css";
 
@@ -60,7 +61,7 @@ class MainScreen extends Component {
                 fontSize: "1.5em",
                 color: "#fff",
                 lineHeight: 0.7,
-                fontFamily: "Roboto-light"
+                fontWeight: 300
               }}
             >
               Trăm năm trong
@@ -70,7 +71,7 @@ class MainScreen extends Component {
                 fontSize: "1em",
                 color: "#fff",
                 lineHeight: 0.5,
-                fontFamily: "Roboto-thin"
+                fontWeight: 100
               }}
             >
               741, Tân Xuân, Tx. Đồng Xoài, Bình Phước
@@ -94,7 +95,6 @@ class MainScreen extends Component {
           message={"Do you copy?"}
         />
         <SearchBar />
-
       </div>
     );
   }
