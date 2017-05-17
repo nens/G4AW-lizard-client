@@ -1,0 +1,14 @@
+.SnackBar {
+  transform: translateX(35%);
+  padding: 20px;
+  width: 50%;
+  background-color: #000;
+  color: #fff;
+}
+
+.ActionButton {
+  float: right;
+  font-weight: bold;
+  color: #00B6A9;
+  cursor: pointer;
+}
