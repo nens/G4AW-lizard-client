@@ -37,7 +37,7 @@ class RaisedButton extends Component {
 }
 
 RaisedButton.propTypes = {
-  buttonText: PropTypes.sting,
+  buttonText: PropTypes.string,
   disabled: PropTypes.bool,
   handleOnClick: PropTypes.func,
   iconClass: PropTypes.string
