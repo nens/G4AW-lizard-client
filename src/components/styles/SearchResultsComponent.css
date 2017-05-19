@@ -1,15 +1,13 @@
 .searchresults-container {
-    z-index: 999;
-    background: red;
-    position: absolute;
-    bottom: 0px;
-
-    border-radius: 10px;
-    overflow-y: hidden;
     background-color: white;
-
-    width: 90%;
+    background: red;
+    border-radius: 10px;
+    bottom: 0px;
     margin: 5%;
+    overflow-y: hidden;
+    position: absolute;
+    width: 90%;
+    z-index: 999;
 }
 
 .searchresults-container p {
