@@ -61,6 +61,7 @@
     "react-hot-loader": "next",
     "redux-mock-store": "",
     "style-loader": "",
+    "url-loader": "^0.5.8",
     "webpack": "",
     "webpack-dev-middleware": "",
     "webpack-dev-server": "",

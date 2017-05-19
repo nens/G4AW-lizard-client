@@ -1,0 +1,28 @@
+.ListSearchView {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #F1F1F2;
+  text-align: center;
+  height: 1000px; /* should be set by react state */
+}
+.Geolocate {
+  padding: 50px;
+  cursor: pointer;
+}
+.Welcome {
+  color: #a0a0a0;
+  font-weight: 300;
+  font-size: 1.8em;
+  margin: 0;
+  padding: 0;
+  line-height: 90px;
+}
+.GetStarted {
+  color: #a0a0a0;
+  justify-content: center;
+  font-weight: 100;
+  font-size: 1.2em;
+  margin: 0;
+  padding: 0 0 20px 0;
+}
