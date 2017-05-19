@@ -7,6 +7,7 @@
   margin: 10px;
   padding: 5px 10px 10px 10px;
   box-shadow: 2px 1px 9px 1px #888888;
+  position: relative;
 }
 .Icon {
   transform: translateY(5px);
