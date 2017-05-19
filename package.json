@@ -94,6 +94,7 @@
     "react": "",
     "react-dom": "",
     "react-i18next": "^3.1.0",
+    "react-ink": "^6.2.0",
     "react-leaflet": "",
     "react-redux": "",
     "react-router": "",

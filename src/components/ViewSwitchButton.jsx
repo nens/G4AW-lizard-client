@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { translate } from "react-i18next";
 import PropTypes from "prop-types";
 import ReactDOM from "react-dom";
+import Ink from "react-ink";
 import styles from "./styles/ViewSwitchButton.css";
 
 import {
@@ -31,6 +32,7 @@ class ViewSwitchButton extends Component {
             {t("Click here to explore the map")}
           </span>
         </span>
+        <Ink />
       </div>
     );
   }

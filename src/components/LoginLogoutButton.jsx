@@ -3,6 +3,7 @@ import { translate } from "react-i18next";
 import PropTypes from "prop-types";
 import ReactDOM from "react-dom";
 import styles from "./styles/LoginLogoutButton.css";
+import Ink from "react-ink";
 
 import {
   VelocityTransitionGroup,
@@ -24,8 +25,10 @@ class LoginLogoutButton extends Component {
       <div
         className={styles.LoginLogoutButton}
         onClick={this.props.handleOnClick}
+        style={{ position: "relative" }}
       >
         <i className={`material-icons ${styles.Icon}`}>lock</i>&nbsp;Login
+        <Ink />
       </div>
     );
   }
