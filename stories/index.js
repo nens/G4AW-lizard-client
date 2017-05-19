@@ -5,10 +5,21 @@ import i18n from "../src/i18n"; // initialized i18next instance
 import SearchBar from "../src/components/SearchBar.jsx";
 import ViewSwitchButton from "../src/components/ViewSwitchButton.jsx";
 import RaisedButton from "../src/components/RaisedButton.jsx";
+import ListSearchView from "../src/components/ListSearchView.jsx";
 import LoginLogoutButton from "../src/components/LoginLogoutButton.jsx";
 import SnackBar from "../src/components/SnackBar.jsx";
 import { theStore } from "../src/store/Store";
 import { storiesOf, action } from "@kadira/storybook";
+
+storiesOf("ListSearchView", module)
+  .addDecorator(getStory => (
+    <I18nextProvider i18n={i18n}>
+      <Provider store={theStore}>
+        {getStory()}
+      </Provider>
+    </I18nextProvider>
+  ))
+  .add("initial view", () => <ListSearchView />);
 
 storiesOf("RaisedButton", module)
   .addDecorator(getStory => (
