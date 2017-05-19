@@ -108,7 +108,7 @@ class ListSearchView extends Component {
           {t("Tap here or start searching to get started")}
         </h5>
         {geolocateButton}
-        <RaisedButton buttonText="Login" iconClass="lock" />
+        <RaisedButton buttonText={t("Login")} iconClass="lock" />
       </div>
     );
   }
