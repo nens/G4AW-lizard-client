@@ -6,6 +6,7 @@ import SearchBar from "../src/components/SearchBar.jsx";
 import ViewSwitchButton from "../src/components/ViewSwitchButton.jsx";
 import LoginLogoutButton from "../src/components/LoginLogoutButton.jsx";
 import SnackBar from "../src/components/SnackBar.jsx";
+import TimeseriesGraph from "../src/components/TimeseriesGraph";
 import { theStore } from "../src/store/Store";
 import { storiesOf, action } from "@kadira/storybook";
 
@@ -88,3 +89,11 @@ storiesOf("SnackBar", module).add("in vietnamese", () => (
     onActionTap={action("clicked")}
   />
 ));
+
+storiesOf("TimeseriesGraph", module)
+  .addDecorator(getStory => (
+    <Provider store={theStore}>
+      {getStory()}
+    </Provider>
+  ))
+  .add("foobar", () => <TimeseriesGraph />);
