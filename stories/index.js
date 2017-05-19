@@ -27,10 +27,10 @@ storiesOf("RaisedButton", module)
       {getStory()}
     </I18nextProvider>
   ))
-  .add("timeline example", () => (
+  .add("icon example", () => (
     <RaisedButton
-      iconClass="timeline"
-      buttonText="Timeline"
+      iconClass="lock"
+      buttonText="With icon"
       handleOnClick={action("clicked")}
     />
   ))
