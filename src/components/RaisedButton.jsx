@@ -1,9 +1,9 @@
-import React, { Component } from "react";
 import { translate } from "react-i18next";
+import Ink from "react-ink";
 import PropTypes from "prop-types";
+import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import styles from "./styles/RaisedButton.css";
-import Ink from "react-ink";
 
 import {
   VelocityTransitionGroup,
@@ -37,9 +37,10 @@ class RaisedButton extends Component {
 }
 
 RaisedButton.propTypes = {
+  buttonText: PropTypes.sting,
   disabled: PropTypes.bool,
-  iconClass: PropTypes.string,
-  buttonText: PropTypes.sting
+  handleOnClick: PropTypes.func,
+  iconClass: PropTypes.string
 };
 
 export default translate()(RaisedButton);
