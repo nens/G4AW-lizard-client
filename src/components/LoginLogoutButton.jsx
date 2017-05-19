@@ -25,7 +25,6 @@ class LoginLogoutButton extends Component {
       <div
         className={styles.LoginLogoutButton}
         onClick={this.props.handleOnClick}
-        style={{ position: "relative" }}
       >
         <i className={`material-icons ${styles.Icon}`}>lock</i>&nbsp;Login
         <Ink />
