@@ -53,9 +53,14 @@ in the lifecycle of a key-value pair in the stores' raster section:
 
 ******************************************************************************/
 
-export const FETCH_RASTER = 'FETCH_RASTER';
-export const RECEIVE_RASTER = 'RECEIVE_RASTER';
-export const REMOVE_RASTER = 'REMOVE_RASTER';
-export const START_SEARCH = 'START_SEARCH';
-export const RECEIVE_SEARCH_RESULTS = 'RECEIVE_SEARCH_RESULTS';
-export const CLEAR_SEARCH_RESULTS = 'CLEAR_SEARCH_RESULTS';
+export const FETCH_RASTER = "FETCH_RASTER";
+export const RECEIVE_RASTER = "RECEIVE_RASTER";
+export const REMOVE_RASTER = "REMOVE_RASTER";
+export const START_SEARCH = "START_SEARCH";
+export const RECEIVE_SEARCH_RESULTS = "RECEIVE_SEARCH_RESULTS";
+export const CLEAR_SEARCH_RESULTS = "CLEAR_SEARCH_RESULTS";
+
+// Actions for the detail page
+export const GET_ATTRIBUTES_FROM_GEOSERVER = "GET_ATTRIBUTES_FROM_GEOSERVER";
+export const RECEIVE_ATTRIBUTES_FROM_GEOSERVER =
+  "RECEIVE_ATTRIBUTES_FROM_GEOSERVER";
