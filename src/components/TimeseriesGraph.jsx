@@ -5,25 +5,33 @@ import ReactDOM from "react-dom";
 
 import { getTimeseries } from "../actions/TimeseriesActions";
 
+const PARCEL_ID = 123;
+
 class TimeseriesGraphComponent extends Component {
   componentDidMount() {
     this.props.getTimeseries(123);
   }
   render() {
-    const { timeseriesAllData } = this.props.timeseriesAllData;
+    const timeseriesData = this.props.timeseriesAllData[PARCEL_ID];
+    let content;
+    if (!timeseriesData) {
+      return null;
+    } else if (!timeseriesData.data && timeseriesData.isFetching) {
+      content = "Data is being fetched...";
+    } else {
+      content = JSON.stringify(timeseriesData.data[0].events);
+    }
 
     return (
       <div id="timeseries-graph">
-        <b>Timeseries graph goes here.. props:</b>
-        <br />
-        <div>{timeseriesAllData}</div>
+        <b>Timeseries graph goes here..:&nbsp;</b>
+        <span>{content}</span>
       </div>
     );
   }
 }
 
 function mapStateToProps(state) {
-  console.log("[F] mapStateToProps; arg 'state' =", state);
   return {
     timeseriesAllData: state.timeseries
   };
