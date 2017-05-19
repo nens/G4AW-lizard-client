@@ -26,7 +26,8 @@ class ListSearchView extends Component {
   constructor() {
     super();
     this.state = {
-      geolocationSupport: false
+      geolocationSupport: false,
+      errorMessage: undefined
     };
     this.performGeolocation = this.performGeolocation.bind(this);
   }
@@ -55,9 +56,8 @@ class ListSearchView extends Component {
             return response.json();
           })
           .then(data => {
-            console.log("data", data);
             this.setState({
-              place_name: data.features[0].place_name,
+              placeName: data.features[0].place_name,
               accuracy: success.coords.accuracy,
               altitude: success.coords.altitude,
               altitudeAccuracy: success.coords.altitudeAccuracy,
@@ -71,6 +71,9 @@ class ListSearchView extends Component {
       },
       error => {
         console.error(error);
+        this.setState({
+          errorMessage: error.message
+        });
       },
       geo_options
     );
@@ -83,13 +86,14 @@ class ListSearchView extends Component {
         geolocateButton = (
           <div className={styles.Geolocate} onClick={this.performGeolocation}>
             <img src={GeolocationAvailable} />
-            <p>{this.state.place_name}</p>
+            <p>{this.state.placeName}</p>
           </div>
         );
       } else {
         geolocateButton = (
           <div className={styles.Geolocate}>
             <img src={GeolocationUnavailable} />
+            <p>{this.state.errorMessage}</p>
           </div>
         );
       }
@@ -98,6 +102,7 @@ class ListSearchView extends Component {
         <div className={styles.Geolocate}>
           <img src={GeolocationUnavailable} />
           <p>{t("No geolocation support")}</p>
+          <p>{this.state.errorMessage}</p>
         </div>
       );
     }
