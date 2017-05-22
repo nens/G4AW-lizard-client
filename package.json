@@ -58,6 +58,7 @@
     "postcss-cssnext": "",
     "postcss-import": "",
     "postcss-loader": "",
+    "prettier": "",
     "react-hot-loader": "next",
     "redux-mock-store": "",
     "style-loader": "",
