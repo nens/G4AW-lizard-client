@@ -27,6 +27,14 @@ class MapSearchView extends Component {
 
   render() {
     const { t } = this.props;
+    if (this.props.match && this.props.match.params) {
+      console.log(
+        "x/y/z:",
+        this.props.match.params.x,
+        this.props.match.params.y,
+        this.props.match.params.z
+      );
+    }
     return (
       <div className={styles.MapSearchView}>
         <RastersMap />
