@@ -12,7 +12,6 @@ import React from "react";
 import SearchBar from "../src/components/SearchBar.jsx";
 import SearchResultCard from "../src/components/SearchResultCard.jsx";
 import SnackBar from "../src/components/SnackBar.jsx";
-import TimeseriesGraph from "../src/components/TimeseriesGraph";
 import ViewSwitchButton from "../src/components/ViewSwitchButton.jsx";
 
 storiesOf("HeaderBar", module)
