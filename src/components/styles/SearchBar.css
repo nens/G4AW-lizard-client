@@ -1,0 +1,74 @@
+.SearchBar {
+  background-color: white;
+  border-radius: 1px;
+  border-radius: 1px;
+  box-shadow: 2px 2px 3px 0 rgba(121,121,121,0.50);
+  height: 50px;
+  margin: 5%;
+  overflow-y: hidden;
+  position: absolute;
+  top: 0;
+  width: 90%;
+  z-index: 999;
+}
+
+.SearchbarInput {
+  font-size: 1em;
+  background-color: white;
+  border: 0;
+  height: 50px;
+  margin: 0 0 0 45px;
+  max-height: 50px;
+  position: relative;
+  top: 0;
+  width: 85%;
+  color: #a0a0a0;
+}
+
+.SearchbarInput:focus {
+  outline: none;
+}
+
+.SearchbarInput-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 30px white inset;
+}
+
+.SettingsButton {
+  position: absolute;
+  top: 17px;
+  left: 10px;
+  width: 25px;
+  color: #989898;
+  cursor: pointer;
+  border-right: 1px solid #e1e1e1;
+}
+.SettingsIcon {
+  margin: 0;
+  font-size: 18px;
+}
+.GeoLocateButton {
+  position: absolute;
+  top: 17px;
+  right: 10px;
+  width: 25px;
+  color: #989898;
+  cursor: pointer;
+  border-left: 1px solid #e1e1e1;
+  padding-left: 5px;
+}
+.GeoLocateIcon {
+  margin: 0;
+  font-size: 18px;
+}
+/*.searchbar {
+  z-index: 999;
+  position: absolute;
+  top: 20px;
+
+  padding: 5px;
+  -webkit-box-shadow: 0 0 0 0 #f00;
+  height: 30px;
+
+  color: #444;
+  background-color: white;
+}*/
