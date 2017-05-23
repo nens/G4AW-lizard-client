@@ -48,6 +48,10 @@ var config = {
         test: /\.js$/,
         loader: "eslint-loader",
         exclude: /node_modules|LizardApiClient/
+      },
+      {
+        test: /\.(png|jpg|svg|woff|eot|ttf|otf)$/,
+        loader: "url-loader?limit=100000"
       }
     ]
   },

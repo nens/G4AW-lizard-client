@@ -46,18 +46,49 @@ Total state:
         ],
         parcels: {
            <parcel-id>: {
-               isFetching: {
-                   'lizard': <Boolean>,
-                   'geoserver': <Boolean>
-               },
-               errors: {
-                   'lizard': <String> or null,
-                   'geoserver': <String> or null,
-               },
-               data: {
-                   // Object with all parcel attributes, some filled in when
-                   // request to Lizard resolves, some when request to Geoserver resolves.
-                   // TODO: Make a list.
+               parcelGeoserverId: <String>,
+               isFetchingLizard: <Boolean>,
+               isFetchGeoserver: <Boolean>,
+
+               errorsLizard: <String> or null,
+               errorsGeoserver: <String> or null,
+
+               // All parcel attributes, some filled in when
+               // request to Lizard resolves, some when request to Geoserver resolves.
+               // The following are in the current layer:
+               'IncomeTota',
+               'LocTroi',
+               'ProfitTota',
+               '3CForce',
+               'LaborSelf',
+               'WaterSourc',
+               'Farmer',
+               'IncomeHa',
+               'LaborHired',
+               'Method',
+               'SowingDay',
+               'YieldWet',
+               'Price',
+               'Variety',
+               'FarmerAdr',
+               'Phone',
+               'InputHa',
+               'InputTotal',
+               'FieldAdr',
+               'HarvestDay',
+               'ProfitHa',
+               'RiceCost',
+               'Pesticide',
+               'MoistPerc',
+               'Fertiliser',
+               'Irrigation',
+               'FarmID',
+               'YieldDry',
+               'Hectare',
+               'Season'
+
+               // TODO: Make a list.
+               ...
                }
            },
        },
