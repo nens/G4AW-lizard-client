@@ -54,10 +54,10 @@ class RastersMapComponent extends React.Component {
           />
           {visibleRasters.map(raster => (
             <WMSTileLayer
-              url={raster.wms_info.get("endpoint")}
+              url={raster.wms_info.endpoint}
               key={raster.uuid}
-              layers={raster.wms_info.get("layer")}
-              styles={raster.options.get("styles")}
+              layers={raster.wms_info.layer}
+              styles={raster.options.styles}
             />
           ))}
         </Map>

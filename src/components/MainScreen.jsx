@@ -4,6 +4,7 @@ import ReactDOM from "react-dom";
 import RastersMap from "./RastersMap";
 import SearchBar from "./SearchBar";
 import SearchResults from "./SearchResults";
+import TimeseriesGraph from "./TimeseriesGraph";
 import SnackBar from "./SnackBar";
 import ViewSwitchButton from "./ViewSwitchButton";
 
@@ -32,69 +33,23 @@ class MainScreen extends Component {
         className={styles.MainScreen}
         style={{ height: this.state.viewportHeight }}
       >
+
         <div className={styles.MapView}>
           <RastersMap />
         </div>
-        <div className={styles.OmniboxView}>
-          <div
-            style={{
-              flex: 1,
-              backgroundColor: "#7F7F7F",
-              padding: "5px 15px 10px 15px"
-            }}
-          >
-            <div
-              style={{
-                color: "#fff",
-                position: "relative"
-              }}
-            >
-              <i
-                style={{ position: "absolute", right: 0, top: 5 }}
-                className="material-icons"
-              >
-                close
-              </i>
-            </div>
-            <p
-              style={{
-                fontSize: "1.5em",
-                color: "#fff",
-                lineHeight: 0.7,
-                fontWeight: 300
-              }}
-            >
-              Trăm năm trong
-            </p>
-            <p
-              style={{
-                fontSize: "1em",
-                color: "#fff",
-                lineHeight: 0.5,
-                fontWeight: 100
-              }}
-            >
-              741, Tân Xuân, Tx. Đồng Xoài, Bình Phước
-            </p>
 
-          </div>
-
-          <div
-            style={{
-              flex: 1,
-              backgroundColor: "#fff",
-              padding: 5
-            }}
-          >
-            <SearchResults />
-          </div>
-        </div>
-        <SnackBar
-          action={"OK"}
-          autoHideDuration={2000}
-          message={"Do you copy?"}
-        />
         <SearchBar />
+
+        <div
+          style={{
+            flex: 1,
+            backgroundColor: "#fff"
+          }}
+        >
+          <TimeseriesGraph />
+          <SearchResults />
+
+        </div>
       </div>
     );
   }
