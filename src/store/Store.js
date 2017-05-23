@@ -16,7 +16,8 @@ createStoreWithMiddleware = applyMiddleware(thunkMiddleware, logger)(
  */
 const initialState = {
   rasters: {},
-  search: {}
+  search: {},
+  timeseries: {}
 };
 
 function configureStore(initialState = {}, externalReducers = {}) {
@@ -48,6 +49,18 @@ State = {
   search: {
       isFetching: <Boolean>,
       results: <SearchResult[]> if successfully requested, or null otherwise
+  },
+  timeseries: {
+    <Parcel ID 1>: {
+      isFetching: <Boolean>,
+      data: <TimeseriesObject 1
+      error: <String[]>
+    },
+    <Parcel ID 2>: {
+      isFetching: <Boolean>,
+      data: <TimeseriesObject 2>,
+      error: <String[]>
+    }
   }
 }
 */
