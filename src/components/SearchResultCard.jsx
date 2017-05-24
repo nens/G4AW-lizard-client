@@ -46,9 +46,8 @@ class SearchResultCard extends Component {
             className={styles.SearchCardIcon}
           >
             <g
-              id=""
               transform="translate(-27.000000, -169.000000)"
-              fill={indicatorColor ? indicatorColor : "#D8D8D8"}
+              fill={indicatorColor || "#D8D8D8"}
             >
               <g
                 id="searchresult-card"
