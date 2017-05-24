@@ -2,17 +2,122 @@ import { I18nextProvider } from "react-i18next";
 import { Provider } from "react-redux";
 import { storiesOf, action } from "@kadira/storybook";
 import { theStore } from "../src/store/Store";
+import CollapsibleBar from "../src/components/CollapsibleBar.jsx";
+import DetailViewSection from "../src/components/DetailViewSection.jsx";
+import DetailViewTable from "../src/components/DetailViewTable.jsx";
 import HeaderBar from "../src/components/HeaderBar.jsx";
+import Modal from "../src/components/Modal.jsx";
 import i18n from "../src/i18n"; // initialized i18next instance
 import ListSearchView from "../src/components/ListSearchView.jsx";
 import LoginLogoutButton from "../src/components/LoginLogoutButton.jsx";
 import MapSearchView from "../src/components/MapSearchView.jsx";
+import FlatButton from "../src/components/FlatButton.jsx";
 import RaisedButton from "../src/components/RaisedButton.jsx";
 import React from "react";
 import SearchBar from "../src/components/SearchBar.jsx";
 import SearchResultCard from "../src/components/SearchResultCard.jsx";
 import SnackBar from "../src/components/SnackBar.jsx";
 import ViewSwitchButton from "../src/components/ViewSwitchButton.jsx";
+
+storiesOf("Modal", module)
+  .addDecorator(getStory => (
+    <I18nextProvider i18n={i18n}>
+      <Provider store={theStore}>
+        {getStory()}
+      </Provider>
+    </I18nextProvider>
+  ))
+  .add("modal open", () => (
+    <Modal
+      open={true}
+      title="Login"
+      actionButtons={[
+        <FlatButton buttonText="Cancel" handleOnClick={action("clicked")} />,
+        <FlatButton buttonText="Log in" handleOnClick={action("clicked")} />
+      ]}
+    >
+      <div>Login form here</div>
+    </Modal>
+  ))
+  .add("modal closed", () => <Modal open={false} />);
+
+storiesOf("DetailViewSection", module)
+  .addDecorator(getStory => (
+    <I18nextProvider i18n={i18n}>
+      <Provider store={theStore}>
+        {getStory()}
+      </Provider>
+    </I18nextProvider>
+  ))
+  .add("rice growth open", () => (
+    <DetailViewSection title="Rice Growth" colorCode="#FFBF1D" open={true}>
+      <DetailViewTable
+        data={[
+          { key: "Pest Risk", value: "High" },
+          { key: "Brown plant hopper present", value: "Yes" },
+          { key: "Leaf Folder present", value: "No" },
+          { key: "Blast present", value: "Yes" },
+          { key: "Brown plant hopper risk", value: "High" },
+          { key: "Leaf Folder risk", value: "Low" },
+          { key: "Blast risk", value: "Medium" }
+        ]}
+      />
+    </DetailViewSection>
+  ))
+  .add("rice growth closed", () => (
+    <DetailViewSection title="Rice Growth" subtitle="Stage 4" open={false}>
+      <DetailViewTable
+        data={[
+          { key: "Brown plant hopper present", value: "Yes" },
+          { key: "Leaf Folder present", value: "No" },
+          { key: "Blast present", value: "Yes" },
+          { key: "Brown plant hopper risk", value: "High" },
+          { key: "Leaf Folder risk", value: "Low" },
+          { key: "Blast risk", value: "Medium" }
+        ]}
+      />
+    </DetailViewSection>
+  ));
+
+storiesOf("DetailViewTable", module)
+  .addDecorator(getStory => (
+    <I18nextProvider i18n={i18n}>
+      <Provider store={theStore}>
+        {getStory()}
+      </Provider>
+    </I18nextProvider>
+  ))
+  .add("sample data", () => (
+    <DetailViewTable
+      data={[
+        { key: "Brown plant hopper present", value: "Yes" },
+        { key: "Leaf Folder present", value: "No" },
+        { key: "Blast present", value: "Yes" },
+        { key: "Brown plant hopper risk", value: "High" },
+        { key: "Leaf Folder risk", value: "Low" },
+        { key: "Blast risk", value: "Medium" }
+      ]}
+    />
+  ))
+  .add("no data", () => <DetailViewTable data={[]} />);
+
+storiesOf("CollapsibleBar", module)
+  .addDecorator(getStory => (
+    <I18nextProvider i18n={i18n}>
+      <Provider store={theStore}>
+        {getStory()}
+      </Provider>
+    </I18nextProvider>
+  ))
+  .add("rice growth closed", () => (
+    <CollapsibleBar title="Rice Growth" subTitle="Stage 4" open={false} />
+  ))
+  .add("rice growth open", () => (
+    <CollapsibleBar title="Rice Growth" subTitle="Stage 4" open={true} />
+  ))
+  .add("rice growth open, colored", () => (
+    <CollapsibleBar title="Rice Growth" colorCode="#FFBF1D" open={true} />
+  ));
 
 storiesOf("HeaderBar", module)
   .addDecorator(getStory => (
@@ -96,6 +201,16 @@ storiesOf("ListSearchView", module)
     </I18nextProvider>
   ))
   .add("initial view", () => <ListSearchView />);
+
+storiesOf("FlatButton", module)
+  .addDecorator(getStory => (
+    <I18nextProvider i18n={i18n}>
+      {getStory()}
+    </I18nextProvider>
+  ))
+  .add("flat button example", () => (
+    <FlatButton buttonText="I am Flat" handleOnClick={action("clicked")} />
+  ));
 
 storiesOf("RaisedButton", module)
   .addDecorator(getStory => (
