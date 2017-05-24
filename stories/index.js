@@ -53,6 +53,14 @@ storiesOf("SearchResultCard", module)
       subtitle="BTR-Q-31673"
     />
   ))
+  .add("colored indicator", () => (
+    <SearchResultCard
+      handleClick={action("clicked")}
+      indicatorColor="#ff0000"
+      title="Hàng Tiệc Cưới Hàng Tiệc Cưới "
+      subtitle="BTR-Q-31673"
+    />
+  ))
   .add("long subtitle", () => (
     <SearchResultCard
       handleClick={action("clicked")}
