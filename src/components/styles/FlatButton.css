@@ -1,0 +1,28 @@
+.FlatButton {
+  background: transparent;
+  color: #2196F3;
+  cursor: pointer;
+  padding: 5px 15px 10px 15px;
+  position: relative;
+  text-align: center;
+  width: 90px;
+  height: 30px;
+  line-height: 35px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;
+  font-size: 14px;
+  text-transform: uppercase;
+}
+.Icon {
+  transform: translateY(5px);
+}
+
+.disabled {
+  color: #a0a0a0;
+  cursor: not-allowed;
+}
+
+.IsOver {
+  background: #ebebeb;
+}
