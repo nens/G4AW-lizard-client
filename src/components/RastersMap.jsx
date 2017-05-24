@@ -11,7 +11,7 @@ const hoogteUuid = "e9ed5725-d94a-4bcb-9dde-5d655da0070e";
 
 class RastersMapComponent extends React.Component {
   componentDidMount() {
-    this.props.getRaster(hoogteUuid);
+    // this.props.getRaster(hoogteUuid);
   }
 
   getWidth() {

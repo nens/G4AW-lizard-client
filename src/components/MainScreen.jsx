@@ -46,7 +46,6 @@ class MainScreen extends Component {
             backgroundColor: "#fff"
           }}
         >
-          <TimeseriesGraph />
           <SearchResults />
 
         </div>

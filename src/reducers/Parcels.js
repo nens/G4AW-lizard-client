@@ -1,4 +1,5 @@
 import * as ActionTypes from "../constants/ActionTypes";
+import { initialParcelsState } from "../store/Store";
 
 import omit from "lodash/omit";
 
@@ -36,32 +37,44 @@ const GEOSERVER_ATTRIBUTES = [
   "Season"
 ];
 
-export default function(state, action) {
-  let newState;
+const initialParcel = {
+  parcelGeoserverId: null,
+  isFetchingLizard: false,
+  isFetchingGeoserver: false,
+  errorsLizard: null,
+  errorsGeoserver: null,
+  hasLizardData: false,
+  hasGeoserverData: false
+};
+
+export default function(state = initialParcelsState, action) {
   let newParcels;
+  let newParcel;
+  console.log("IN PARCELS REDUCER");
 
   switch (action.type) {
     case ActionTypes.GET_ATTRIBUTES_FROM_GEOSERVER:
-      newState = { ...state };
-      newParcels = { ...newState.parcels };
+      newParcels = { ...state };
 
-      // parcelId must already exist
-      newParcel = { ...newParcels[action.parcelId] };
+      if (newParcels[action.parcelId]) {
+        newParcel = { ...newParcels[action.parcelId] };
+      } else {
+        newParcel = { ...initialParcel };
+      }
       newParcel.isFetchingGeoserver = true;
-
       newParcels[action.parcelId] = newParcel;
-      newState.parcels = newParcels;
-      return newState;
+
+      return newParcels;
 
     case ActionTypes.RECEIVE_ATTRIBUTES_FROM_GEOSERVER:
-      newState = { ...state };
-      newParcels = { ...newState.parcels };
+      newParcels = { ...state };
 
-      // parcelId must already exist
+      // parcelId must already exist, otherwise the request couldn't have been made.
       newParcel = { ...newParcels[action.parcelId] };
       newParcel.isFetchingGeoserver = false;
+      newParcel.hasGeoserverData = true;
 
-      for (let attribute in GEOSERVER_ATTRIBUTES) {
+      GEOSERVER_ATTRIBUTES.forEach(attribute => {
         const value = action.data[attribute];
 
         if (!value) {
@@ -70,11 +83,32 @@ export default function(state, action) {
         } else {
           newParcel[attribute] = value;
         }
-      }
+      });
 
       newParcels[action.parcelId] = newParcel;
-      newState.parcels = newParcels;
-      return newState;
+      return newParcels;
+
+    case ActionTypes.RECEIVE_SEARCH_RESULTS:
+      // For each search recult, if it's not in parcels yet, also
+      // create a parcel.
+      newParcels = { ...state };
+
+      action.results.forEach(result => {
+        if (!newParcels.hasOwnProperty(result.pk)) {
+          newParcel = { ...initialParcel };
+        } else {
+          newParcel = { ...newParcels[result.pk] };
+        }
+
+        newParcel.parcelGeoserverId = result.external_id;
+        newParcel.name = result.name;
+        newParcel.geometry = result.geometry;
+        newParcel.hasLizardData = true;
+
+        newParcels[result.pk] = newParcel;
+      });
+
+      return newParcels;
     default:
       return state;
   }

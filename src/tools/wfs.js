@@ -1,4 +1,5 @@
-const wfsUrl = "https://geoserver9.lizard.net/geoserver/g4aw/wms";
+//const wfsUrl = "https://geoserver9.lizard.net/geoserver/g4aw/wms";
+const wfsUrl = "/geoserver/g4aw/wms"; // Proxied because of CORS errors
 
 const parcelLayer = "g4aw:g4aw_vn_ricefield_vin_bihn";
 
@@ -10,13 +11,15 @@ const getFeatureParams = {
 };
 
 export function getParcelAttributes(parcelId) {
-  const totalParams = Object.assign({ featureId: parcelId }, getFeatureParms);
+  const totalParams = Object.assign({ featureId: parcelId }, getFeatureParams);
 
   const query = Object.keys(totalParams)
     .map(k => encodeURIComponent(k) + "=" + encodeURIComponent(totalParams[k]))
     .join("&");
 
   const url = wfsUrl + "?" + query;
+
+  console.log("Trying to send request to ", url);
 
   return new Promise(function(resolve, reject) {
     const request = new XMLHttpRequest();
@@ -30,9 +33,9 @@ export function getParcelAttributes(parcelId) {
       } else {
         reject(`Status ${this.status}, '${this.statusText}' for URL ${url}.`);
       }
-
-      request.open("GET", url);
-      request.send();
     };
+
+    request.open("GET", url);
+    request.send();
   });
 }

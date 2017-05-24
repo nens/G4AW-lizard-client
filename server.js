@@ -28,7 +28,7 @@ app.use((req, res, next) => {
 });
 
 app.use("/media", (req, res) => {
-  const url = "https://nxt.staging.lizard.net/media" + req.url;
+  const url = "http://127.0.0.1:8000/media" + req.url;
   const headers = {
     username: process.env.sso_user,
     password: process.env.sso_pass
@@ -44,7 +44,7 @@ app.use("/media", (req, res) => {
 });
 
 app.use("/api", (req, res) => {
-  const url = "https://nxt.staging.lizard.net/api" + req.url;
+  const url = "http://127.0.0.1:8000/api" + req.url;
   const headers = {
     username: process.env.sso_user,
     password: process.env.sso_pass
@@ -57,6 +57,12 @@ app.use("/api", (req, res) => {
       })
     )
     .pipe(res);
+});
+
+app.use("/geoserver", (req, res) => {
+  const url = "https://geoserver9.lizard.net/geoserver" + req.url;
+
+  req.pipe(request({ url })).pipe(res);
 });
 
 app.listen(port, error => {

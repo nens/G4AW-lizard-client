@@ -1,4 +1,6 @@
-We keep the state as flat as possible, no or very few nested structures.
+We keep the state as flat as possible, no or very few nested structures. However, because
+we use combinedReducer, everything is at least nested one level deep: the things in 'ui' will
+be handled by the ui reducer, et cetera.
 
 However, most objects will be retrieved by an asynchronous API call;
 they generally use the following structure:
@@ -25,33 +27,46 @@ merged representation in the state, with two "isFetching" booleans and
 two errors for the parcels. Image timeseries are stored in another
 structure to prevent it becoming too complicated.
 
+See also src/store/Store.js.
+
 Total state:
 
     {
-        currentPage: <String>,  // 'SearchList', 'SearchMap', 'Parcel', 'Settings', 'Photo'
+        ui: {
+          currentPage: <String>,  // 'SearchList', 'SearchMap', 'Parcel', 'Settings', 'Photo'
+        },
 
-        latestSearchTerm: <String>,
-        isGeoLocationAvailable: <Boolean>,
+        search: {
+          latestSearchTerm: <String>,
+          results: [pk, pk, pk, ...]  // Indexes into 'parcels'
+        },
+
         geoLocation: {
+            isGeoLocationAvailable: <Boolean>,
             isFetching: <Boolean>,
             data: [lat, lon] or null,
             error: <String error message> or null
         },
-        searchResults: [
-           {
-              description: <String>,
-              uuid: <String>,
-              geoJson: <String> // To highlight on map
-           }, ...
-        ],
+
+        timeseries: {
+          // ???
+        },
+
         parcels: {
-           <parcel-id>: {
+           <parcel-pk>: {
                parcelGeoserverId: <String>,
+
                isFetchingLizard: <Boolean>,
-               isFetchGeoserver: <Boolean>,
+               isFetchingGeoserver: <Boolean>,
+
+               hasDataLizard: <Boolean>,
+               hasDataGeoserver: <Boolean>,
 
                errorsLizard: <String> or null,
                errorsGeoserver: <String> or null,
+
+               name: <String>,
+               geometry: <GeoJSON>,
 
                // All parcel attributes, some filled in when
                // request to Lizard resolves, some when request to Geoserver resolves.
@@ -86,16 +101,21 @@ Total state:
                'YieldDry',
                'Hectare',
                'Season'
-
-               // TODO: Make a list.
-               ...
                }
            },
+       },
+       rasters: {
+           <raster-uuid>: {
+              isFetching: <Boolean>,
+              data: null,
+              error: null
+           }, ...
        },
        photosForParcel: {
            // Each parcel has its own photo timeseries, storing them separately from
            // the other details for simplicity. Also needs to be loaded for the detail page.
-           <parcel-id>: {
+           // This clearly isn't final yet! Better normalization needed.
+           <parcel-pk>: {
                isFetching: <Boolean>,
                data: [
                    {
