@@ -5,6 +5,45 @@ import styles from "./styles/DetailViewTable.css";
 
 // A DetailViewTable component.
 
+class YesIcon extends Component {
+  render() {
+    return (
+      <div className={`${styles.Indicator} ${styles.IndicatorSuccess}`}>
+        <svg
+          className={styles.SVGIcon}
+          height="16"
+          version="1.1"
+          viewBox="0 0 12 16"
+          width="12"
+        >
+          <path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5z" />
+        </svg>
+      </div>
+    );
+  }
+}
+
+class NoIcon extends Component {
+  render() {
+    return (
+      <div className={`${styles.Indicator} ${styles.IndicatorFailure}`}>
+        <svg
+          className={styles.SVGIcon}
+          height="16"
+          version="1.1"
+          viewBox="0 0 12 16"
+          width="12"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M7.48 8l3.75 3.75-1.48 1.48L6 9.48l-3.75 3.75-1.48-1.48L4.52 8 .77 4.25l1.48-1.48L6 6.52l3.75-3.75 1.48 1.48z"
+          />
+        </svg>
+      </div>
+    );
+  }
+}
+
 class DetailViewTable extends Component {
   constructor() {
     super();
@@ -22,14 +61,10 @@ class DetailViewTable extends Component {
                 <td className={styles.ColKey}>
                   {row.key}
                 </td>
+                <td>{row.value}</td>
                 <td className={styles.ColValue}>
-                  {row.value}
-                  {row.value.toLowerCase() === "yes"
-                    ? <i className={`${styles.Yes} material-icons`}>check</i>
-                    : ""}
-                  {row.value.toLowerCase() === "no"
-                    ? <i className={`${styles.No} material-icons`}>close</i>
-                    : ""}
+                  {row.value.toLowerCase() === "yes" ? <YesIcon /> : ""}
+                  {row.value.toLowerCase() === "no" ? <NoIcon /> : ""}
                 </td>
               </tr>
             );

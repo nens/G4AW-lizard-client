@@ -27,3 +27,27 @@
 .No {
   color: darkred;
 }
+
+.Indicator {
+  width: 30px;
+  height: 30px;
+  text-align: center;
+}
+.IndicatorSuccess {
+  color: #fff;
+  background-color: #2cbe4e;
+  border-radius: 50%;
+}
+.IndicatorFailure {
+  color: #fff;
+  background-color: #ff0000;
+  border-radius: 50%;
+}
+.SVGIcon {
+  display: block;
+  fill: #fff;
+  padding-top: 7px;
+  margin-right: auto;
+  margin-left: auto;
+  vertical-align: text-bottom;
+}
