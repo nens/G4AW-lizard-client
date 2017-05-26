@@ -15,17 +15,21 @@ class DetailViewHeader extends Component {
   render() {
     const {
       title,
+      halfMode,
       subTitle,
       handleBackButtonClick,
       latlonzoom,
       headerImage
     } = this.props;
     const { lat, lon, zoom } = latlonzoom ? latlonzoom : {};
+    console.log("halfMode", halfMode);
     return (
-      <div className={styles.DetailViewHeader}>
+      <div
+        className={`${styles.DetailViewHeader} ${halfMode ? styles.TitleOnlyMode : styles.FullMode}`}
+      >
         <div className={styles.Titles}>
           <p className={styles.Title}>{title}</p>
-          <span className={styles.SubTitle}>{subTitle}</span>
+          {halfMode ? "" : <span className={styles.SubTitle}>{subTitle}</span>}
         </div>
         <div className={styles.ArrowBackIcon} onClick={handleBackButtonClick}>
           <i className="material-icons">arrow_back</i>
@@ -59,6 +63,7 @@ class DetailViewHeader extends Component {
 }
 
 DetailViewHeader.propTypes = {
+  fullMode: PropTypes.bool,
   handleBackButtonClick: PropTypes.func,
   headerImage: PropTypes.string,
   latlonzoom: PropTypes.object,
