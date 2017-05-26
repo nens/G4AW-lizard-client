@@ -7,6 +7,7 @@ import DetailViewSection from "../src/components/DetailViewSection.jsx";
 import DetailViewTable from "../src/components/DetailViewTable.jsx";
 import HeaderBar from "../src/components/HeaderBar.jsx";
 import Modal from "../src/components/Modal.jsx";
+import InputField from "../src/components/InputField.jsx";
 import i18n from "../src/i18n"; // initialized i18next instance
 import ListSearchView from "../src/components/ListSearchView.jsx";
 import LoginLogoutButton from "../src/components/LoginLogoutButton.jsx";
@@ -36,7 +37,15 @@ storiesOf("Modal", module)
         <FlatButton buttonText="Log in" handleOnClick={action("clicked")} />
       ]}
     >
-      <div>Login form here</div>
+      <div>
+        <p>To view private data, please use your credentials to log in</p>
+        <div>
+          <InputField hintText="Username" />
+        </div>
+        <div>
+          <InputField hintText="Password" type="password" />
+        </div>
+      </div>
     </Modal>
   ))
   .add("modal closed", () => <Modal open={false} />);
@@ -266,51 +275,57 @@ storiesOf("SearchBar", module)
   ))
   .add("empty bar", () => <SearchBar />);
 
-storiesOf("SnackBar", module).add("default", () => (
-  <SnackBar
-    open={true}
-    message={"This is a test"}
-    action={"OK"}
-    onActionTap={action("clicked")}
-  />
-));
-
-storiesOf("SnackBar", module).add("timeout", () => (
-  <SnackBar
-    autoHideDuration={5000}
-    open={true}
-    message={"This closes after 5 seconds"}
-    action={"Fine"}
-    onActionTap={action("clicked")}
-  />
-));
-
-storiesOf("SnackBar", module).add("long string", () => (
-  <SnackBar
-    open={true}
-    message={"This is a very long string that could break the ui"}
-    action={"OK"}
-    onActionTap={action("clicked")}
-  />
-));
-
-storiesOf("SnackBar", module).add("long action string", () => (
-  <SnackBar
-    open={true}
-    message={"This is a test"}
-    action={"Now click this button"}
-    onActionTap={action("clicked")}
-  />
-));
-
-storiesOf("SnackBar", module).add("in vietnamese", () => (
-  <SnackBar
-    open={true}
-    message={"Đây là tiếng Việt"}
-    action={"được"}
-    onActionTap={action("clicked")}
-  />
-));
+storiesOf("SnackBar", module)
+  .add("default", () => (
+    <SnackBar
+      open={true}
+      message={"This is a test"}
+      action={"OK"}
+      onActionTap={action("clicked")}
+    />
+  ))
+  .add("timeout", () => (
+    <SnackBar
+      autoHideDuration={5000}
+      open={true}
+      message={"This closes after 5 seconds"}
+      action={"Fine"}
+      onActionTap={action("clicked")}
+    />
+  ))
+  .add("long string", () => (
+    <SnackBar
+      open={true}
+      message={"This is a very long string that could break the ui"}
+      action={"OK"}
+      onActionTap={action("clicked")}
+    />
+  ))
+  .add("long action string", () => (
+    <SnackBar
+      open={true}
+      message={"This is a test"}
+      action={"Now click this button"}
+      onActionTap={action("clicked")}
+    />
+  ))
+  .add("in vietnamese", () => (
+    <SnackBar
+      open={true}
+      message={"Đây là tiếng Việt"}
+      action={"được"}
+      onActionTap={action("clicked")}
+    />
+  ))
+  .add("with submessage", () => (
+    <SnackBar
+      open={true}
+      message={"This is a SnackBar"}
+      subMessage={"with a sub message"}
+      action={"OK"}
+      onActionTap={action("clicked")}
+    />
+  ));
 
 storiesOf("TimeseriesGraph", module)
   .addDecorator(getStory => (
@@ -319,3 +334,10 @@ storiesOf("TimeseriesGraph", module)
     </Provider>
   ))
   .add("foobar", () => <TimeseriesGraph />);
+
+storiesOf("InputField", module)
+  .add("empty inputfield", () => <InputField />)
+  .add("with hinttext", () => <InputField hintText="Username" />)
+  .add("type=password", () => (
+    <InputField type="password" hintText="Password" />
+  ));
