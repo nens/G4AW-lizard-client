@@ -34,8 +34,10 @@ class Modal extends Component {
             <h2 className={styles.Title}>{title}</h2>
             {children}
             <div className={styles.ActionButtons}>
-              {actionButtons.map(button => {
-                return <div className={styles.ButtonWrapper}>{button}</div>;
+              {actionButtons.map((button, i) => {
+                return (
+                  <div key={i} className={styles.ButtonWrapper}>{button}</div>
+                );
               })}
             </div>
           </div>
