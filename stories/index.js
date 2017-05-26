@@ -14,6 +14,7 @@ import ListSearchView from "../src/components/ListSearchView.jsx";
 import LoginLogoutButton from "../src/components/LoginLogoutButton.jsx";
 import MapSearchView from "../src/components/MapSearchView.jsx";
 import Modal from "../src/components/Modal.jsx";
+import DetailViewPhoto from "../src/components/DetailViewPhoto.jsx";
 import RaisedButton from "../src/components/RaisedButton.jsx";
 import React from "react";
 import SearchBar from "../src/components/SearchBar.jsx";
@@ -169,6 +170,72 @@ storiesOf("DetailViewTable", module)
     />
   ))
   .add("no data", () => <DetailViewTable data={[]} />);
+
+storiesOf("DetailViewPhoto", module)
+  .addDecorator(getStory => (
+    <I18nextProvider i18n={i18n}>
+      <Provider store={theStore}>
+        {getStory()}
+      </Provider>
+    </I18nextProvider>
+  ))
+  .add("open at index 0", () => (
+    <DetailViewPhoto
+      currentPhoto={0}
+      images={[
+        {
+          url: "https://static.pexels.com/photos/317441/pexels-photo-317441.jpeg",
+          date: 1495803155030
+        },
+        {
+          url: "https://upload.wikimedia.org/wikipedia/commons/c/cc/Parched_rice_field_Can_Tho.JPG",
+          date: 1495803540255
+        },
+        {
+          url: "https://upload.wikimedia.org/wikipedia/commons/b/b9/Around_Nha_Trang%2C_rice_fields_%286224431058%29.jpg",
+          date: 1495803541255
+        }
+      ]}
+    />
+  ))
+  .add("open at index 1", () => (
+    <DetailViewPhoto
+      currentPhoto={1}
+      images={[
+        {
+          url: "https://static.pexels.com/photos/317441/pexels-photo-317441.jpeg",
+          date: 1495803155030
+        },
+        {
+          url: "https://upload.wikimedia.org/wikipedia/commons/c/cc/Parched_rice_field_Can_Tho.JPG",
+          date: 1495803540255
+        },
+        {
+          url: "https://upload.wikimedia.org/wikipedia/commons/b/b9/Around_Nha_Trang%2C_rice_fields_%286224431058%29.jpg",
+          date: 1495803541255
+        }
+      ]}
+    />
+  ))
+  .add("open at index 2", () => (
+    <DetailViewPhoto
+      currentPhoto={2}
+      images={[
+        {
+          url: "https://static.pexels.com/photos/317441/pexels-photo-317441.jpeg",
+          date: 1495803155030
+        },
+        {
+          url: "https://upload.wikimedia.org/wikipedia/commons/c/cc/Parched_rice_field_Can_Tho.JPG",
+          date: 1495803540255
+        },
+        {
+          url: "https://upload.wikimedia.org/wikipedia/commons/b/b9/Around_Nha_Trang%2C_rice_fields_%286224431058%29.jpg",
+          date: 1495803541255
+        }
+      ]}
+    />
+  ));
 
 storiesOf("CollapsibleBar", module)
   .addDecorator(getStory => (
