@@ -1,0 +1,66 @@
+.ToggleSwitchWrapper {
+  width: 250px;
+  clear: both;
+}
+.ToggleSwitch {
+    float: right;
+    position: relative;
+    margin-right: 6px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    top: -4px;
+}
+.ToggleSwitch.main-show {
+    margin-right: 0
+}
+.ToggleSwitchCheckbox {
+    display: none
+}
+.ToggleSwitchLabel {
+    display: block;
+    overflow: hidden;
+    cursor: pointer;
+    width: 110px;
+    height: 26px
+}
+.ToggleSwitchText {
+    height: 21px;
+    float: left;
+    margin-top: 5px;
+    max-width: 30px;
+    white-space: nowrap;
+}
+.ToggleSwitchInner {
+    float: right;
+    height: 2px;
+    display: block;
+    width: 30px;
+    margin-left: -15px;
+    margin-top: 14px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    -webkit-transition: margin .2s ease-in 0s;
+    transition: margin .2s ease-in 0s;
+    box-sizing: border-box
+}
+.ToggleSwitchInner:after {
+    content: "";
+    display: block;
+    width: 15px;
+    height: 15px;
+    margin-left: -1px;
+    margin-top: -8px;
+    background: #FAFAFA;
+    border: 2px solid #FFF;
+    border-radius: 100%;
+    -webkit-transition: all .2s ease-in 0s;
+    transition: all .2s ease-in 0s;
+    box-sizing: border-box;
+    box-shadow: 0 1px 3px 0 rgba(0,0,0,.2),0 1px 1px 0 rgba(0,0,0,.14),0 2px 1px -1px rgba(0,0,0,.12);
+}
+.ToggleSwitchCheckbox:checked+.ToggleSwitchLabel .ToggleSwitchInner:after {
+    background: #488DFB;
+    float: right;
+    margin-right: -1px
+}
