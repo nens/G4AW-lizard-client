@@ -3,16 +3,17 @@ import { Provider } from "react-redux";
 import { storiesOf, action } from "@kadira/storybook";
 import { theStore } from "../src/store/Store";
 import CollapsibleBar from "../src/components/CollapsibleBar.jsx";
+import DetailViewHeader from "../src/components/DetailViewHeader.jsx";
 import DetailViewSection from "../src/components/DetailViewSection.jsx";
 import DetailViewTable from "../src/components/DetailViewTable.jsx";
+import FlatButton from "../src/components/FlatButton.jsx";
 import HeaderBar from "../src/components/HeaderBar.jsx";
-import Modal from "../src/components/Modal.jsx";
-import InputField from "../src/components/InputField.jsx";
 import i18n from "../src/i18n"; // initialized i18next instance
+import InputField from "../src/components/InputField.jsx";
 import ListSearchView from "../src/components/ListSearchView.jsx";
 import LoginLogoutButton from "../src/components/LoginLogoutButton.jsx";
 import MapSearchView from "../src/components/MapSearchView.jsx";
-import FlatButton from "../src/components/FlatButton.jsx";
+import Modal from "../src/components/Modal.jsx";
 import RaisedButton from "../src/components/RaisedButton.jsx";
 import React from "react";
 import SearchBar from "../src/components/SearchBar.jsx";
@@ -49,6 +50,55 @@ storiesOf("Modal", module)
     </Modal>
   ))
   .add("modal closed", () => <Modal open={false} />);
+
+storiesOf("DetailViewHeader", module)
+  .addDecorator(getStory => (
+    <I18nextProvider i18n={i18n}>
+      <Provider store={theStore}>
+        {getStory()}
+      </Provider>
+    </I18nextProvider>
+  ))
+  .add("example", () => (
+    <DetailViewHeader
+      latlonzoom={{ lat: 10.7880, lon: 106.7050, zoom: 17 }}
+      title="LocTroi Farm ID"
+      subTitle="Field address here"
+      handleBackButtonClick={action("clicked")}
+    />
+  ))
+  .add("very long title", () => (
+    <DetailViewHeader
+      latlonzoom={{ lat: 10.7880, lon: 106.7050, zoom: 17 }}
+      title="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+      subTitle="Field address here"
+      handleBackButtonClick={action("clicked")}
+    />
+  ))
+  .add("very long subtitle", () => (
+    <DetailViewHeader
+      latlonzoom={{ lat: 10.7880, lon: 106.7050, zoom: 17 }}
+      title="LocTroi Farm ID"
+      subTitle="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+      handleBackButtonClick={action("clicked")}
+    />
+  ))
+  .add("vietnamese", () => (
+    <DetailViewHeader
+      latlonzoom={{ lat: 10.7880, lon: 106.7050, zoom: 17 }}
+      title="Hàng Tiệc Cưới Hàng Tiệc Cưới"
+      subTitle="Đây là tiếng Việt"
+      handleBackButtonClick={action("clicked")}
+    />
+  ))
+  .add("header image instead of map background", () => (
+    <DetailViewHeader
+      headerImage="http://i.imgur.com/vUWMZth.jpg"
+      title="Hàng Tiệc Cưới Hàng Tiệc Cưới"
+      subTitle="Đây là tiếng Việt"
+      handleBackButtonClick={action("clicked")}
+    />
+  ));
 
 storiesOf("DetailViewSection", module)
   .addDecorator(getStory => (
@@ -163,7 +213,7 @@ storiesOf("SearchResultCard", module)
   .add("long title", () => (
     <SearchResultCard
       handleClick={action("clicked")}
-      title="Hàng Tiệc Cưới Hàng Tiệc Cưới "
+      title="Hàng Tiệc Cưới Hàng Tiệc Cưới"
       subtitle="BTR-Q-31673"
     />
   ))
@@ -171,7 +221,7 @@ storiesOf("SearchResultCard", module)
     <SearchResultCard
       handleClick={action("clicked")}
       indicatorColor="#ff0000"
-      title="Hàng Tiệc Cưới Hàng Tiệc Cưới "
+      title="Hàng Tiệc Cưới Hàng Tiệc Cưới"
       subtitle="BTR-Q-31673"
     />
   ))
