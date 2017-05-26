@@ -1,12 +1,13 @@
-import React, { Component } from "react";
 import { translate } from "react-i18next";
-import PropTypes from "prop-types";
-import ReactDOM from "react-dom";
-import RaisedButton from "./RaisedButton";
-import Ink from "react-ink";
-import styles from "./styles/ListSearchView.css";
 import GeolocationAvailable from "./svg/GeolocationAvailable.svg";
 import GeolocationUnavailable from "./svg/GeolocationUnavailable.svg";
+import Ink from "react-ink";
+import PropTypes from "prop-types";
+import RaisedButton from "./RaisedButton";
+import React, { Component } from "react";
+import ReactDOM from "react-dom";
+import SearchBar from "./SearchBar";
+import styles from "./styles/ListSearchView.css";
 
 import {
   VelocityTransitionGroup,
@@ -108,9 +109,10 @@ class ListSearchView extends Component {
     }
     return (
       <div className={styles.ListSearchView}>
+        <SearchBar />
         <h1 className={styles.Welcome}>{t("Welcome")}</h1>
         <h5 className={styles.GetStarted}>
-          {t("Tap here or start searching to get started")}
+          {t("Tap to see the field nearby")}
         </h5>
         {geolocateButton}
         <RaisedButton buttonText={t("Login")} iconClass="lock" />
