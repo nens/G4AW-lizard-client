@@ -31,7 +31,7 @@ class ToggleSwitch extends Component {
             type="checkbox"
             name="toggle-switch"
             id={randId}
-            checked={this.state.selected ? "CHECKED" : ""}
+            defaultChecked={this.state.selected ? true : false}
             className={styles.ToggleSwitchCheckbox}
           />
           <label className={styles.ToggleSwitchLabel} htmlFor={randId}>
