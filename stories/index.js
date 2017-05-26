@@ -19,6 +19,7 @@ import React from "react";
 import SearchBar from "../src/components/SearchBar.jsx";
 import SearchResultCard from "../src/components/SearchResultCard.jsx";
 import SnackBar from "../src/components/SnackBar.jsx";
+import ToggleSwitch from "../src/components/ToggleSwitch.jsx";
 import ViewSwitchButton from "../src/components/ViewSwitchButton.jsx";
 
 storiesOf("Modal", module)
@@ -61,6 +62,15 @@ storiesOf("DetailViewHeader", module)
   ))
   .add("example", () => (
     <DetailViewHeader
+      latlonzoom={{ lat: 10.7880, lon: 106.7050, zoom: 17 }}
+      title="LocTroi Farm ID"
+      subTitle="Field address here"
+      handleBackButtonClick={action("clicked")}
+    />
+  ))
+  .add("half mode", () => (
+    <DetailViewHeader
+      halfMode={true}
       latlonzoom={{ lat: 10.7880, lon: 106.7050, zoom: 17 }}
       title="LocTroi Farm ID"
       subTitle="Field address here"
@@ -390,4 +400,24 @@ storiesOf("InputField", module)
   .add("with hinttext", () => <InputField hintText="Username" />)
   .add("type=password", () => (
     <InputField type="password" hintText="Password" />
+  ));
+
+storiesOf("ToggleSwitch", module)
+  .add("example: selected", () => (
+    <ToggleSwitch
+      defaultSelected={true}
+      labelText="Some setting"
+      onChange={action("Clicked")}
+      labelOnText="On"
+      labelOffText="Off"
+    />
+  ))
+  .add("example: not selected", () => (
+    <ToggleSwitch
+      defaultSelected={false}
+      labelText="Some setting"
+      onChange={action("Clicked")}
+      labelOnText="On"
+      labelOffText="Off"
+    />
   ));
