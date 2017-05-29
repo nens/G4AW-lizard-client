@@ -4,6 +4,7 @@ import { storiesOf, action } from "@kadira/storybook";
 import { theStore } from "../src/store/Store";
 import HeaderBar from "../src/components/HeaderBar.jsx";
 import i18n from "../src/i18n"; // initialized i18next instance
+import LayerSelection from "../src/components/LayerSelection.jsx";
 import ListSearchView from "../src/components/ListSearchView.jsx";
 import LoginLogoutButton from "../src/components/LoginLogoutButton.jsx";
 import MapSearchView from "../src/components/MapSearchView.jsx";
@@ -204,3 +205,84 @@ storiesOf("TimeseriesGraph", module)
     </Provider>
   ))
   .add("foobar", () => <TimeseriesGraph />);
+
+storiesOf("LayerSelection", module)
+  .addDecorator(getStory => (
+    <I18nextProvider i18n={i18n}>
+      <Provider store={theStore}>
+        {getStory()}
+      </Provider>
+    </I18nextProvider>
+  ))
+  .add("topo selected of 7 layers total", () => (
+    <LayerSelection
+      handleLayerSelect={action("handleLayerSelect()")}
+      layers={[
+        {
+          title: "Satellite",
+          attribution: "",
+          url: "https://{s}.tiles.mapbox.com/v3/nelenschuurmans.iaa79205/{z}/{x}/{y}.png",
+          mapThumb: "https://a.tiles.mapbox.com/v3/nelenschuurmans.iaa79205/11/1632/963.png",
+          opacity: 1,
+          layerType: "tms",
+          layerOptions: {},
+          active: false
+        },
+        {
+          title: "Topo",
+          attribution: "",
+          url: "https://{s}.tiles.mapbox.com/v3/nelenschuurmans.iaa98k8k/{z}/{x}/{y}.png",
+          mapThumb: "https://a.tiles.mapbox.com/v3/nelenschuurmans.iaa98k8k/11/1632/963.png",
+          opacity: 1,
+          layerType: "tms",
+          layerOptions: {},
+          active: true
+        },
+        {
+          title: "Aerial",
+          attribution: "",
+          url: "",
+          opacity: 1,
+          layerType: "wms",
+          layerOptions: {},
+          active: false
+        },
+        {
+          title: "LIDAR",
+          attribution: "",
+          url: "",
+          opacity: 1,
+          layerType: "wms",
+          layerOptions: {},
+          active: false
+        },
+        {
+          title: "NDVI",
+          attribution: "",
+          url: "",
+          opacity: 1,
+          layerType: "wms",
+          layerOptions: {},
+          active: false
+        },
+        {
+          title: "Landsat",
+          attribution: "",
+          url: "",
+          opacity: 1,
+          layerType: "wms",
+          layerOptions: {},
+          active: false
+        },
+        {
+          title: "Sentinel 2A",
+          attribution: "",
+          url: "",
+          opacity: 1,
+          layerType: "wms",
+          layerOptions: {},
+          active: false
+        }
+      ]}
+    />
+  ));
