@@ -137,10 +137,10 @@ storiesOf("ViewSwitchButton", module)
     </I18nextProvider>
   ))
   .add("switch to map", () => (
-    <ViewSwitchButton handleOnClick={action("clicked")} />
+    <ViewSwitchButton handleOnClick={action("clicked")} viewIsMap={false} />
   ))
   .add("switch to omnibox", () => (
-    <ViewSwitchButton handleOnClick={action("clicked")} />
+    <ViewSwitchButton handleOnClick={action("clicked")} viewIsMap={true} />
   ));
 
 storiesOf("SearchBar", module)

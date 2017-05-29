@@ -20,17 +20,26 @@ class ViewSwitchButton extends Component {
   }
   componentDidMount() {}
   render() {
-    const { t } = this.props;
+    const { t, viewIsMap } = this.props;
     return (
       <div
         className={styles.ViewSwitchButton}
         onClick={this.props.handleOnClick}
       >
         <span>
-          <i className={`material-icons ${styles.Icon}`}>track_changes</i>
-          <span className={styles.Message}>
-            {t("Click here to explore the map")}
-          </span>
+          {viewIsMap
+            ? <div>
+                <i className={`material-icons ${styles.Icon}`}>apps</i>
+                <span className={styles.Message}>
+                  {t("Click here to view the search results")}
+                </span>
+              </div>
+            : <div>
+                <i className={`material-icons ${styles.Icon}`}>track_changes</i>
+                <span className={styles.Message}>
+                  {t("Click here to explore the map")}
+                </span>
+              </div>}
         </span>
         <Ink />
       </div>
@@ -39,7 +48,8 @@ class ViewSwitchButton extends Component {
 }
 
 ViewSwitchButton.propTypes = {
-  open: PropTypes.bool
+  open: PropTypes.bool,
+  viewIsMap: PropTypes.bool
 };
 
 export default translate()(ViewSwitchButton);
