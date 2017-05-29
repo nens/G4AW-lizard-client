@@ -12,6 +12,7 @@ import React from "react";
 import SearchBar from "../src/components/SearchBar.jsx";
 import SearchResultCard from "../src/components/SearchResultCard.jsx";
 import SnackBar from "../src/components/SnackBar.jsx";
+import { Tab, TabBar } from "../src/components/TabBar.jsx";
 import ViewSwitchButton from "../src/components/ViewSwitchButton.jsx";
 
 storiesOf("HeaderBar", module)
@@ -29,6 +30,54 @@ storiesOf("HeaderBar", module)
       icon="filter_list"
       handleClick={action("clicked")}
     />
+  ));
+
+storiesOf("TabBar", module)
+  .addDecorator(getStory => (
+    <I18nextProvider i18n={i18n}>
+      <Provider store={theStore}>
+        {getStory()}
+      </Provider>
+    </I18nextProvider>
+  ))
+  .add("Tab 1 of 3 open", () => (
+    <TabBar initiallySelected={0}>
+      <Tab title="Settings" handleTabClick={action("Set tab index to 1")}>
+        <HeaderBar title="Map Settings" />
+      </Tab>
+      <Tab title="Account" handleTabClick={action("Set tab index to 2")}>
+        Tab two
+      </Tab>
+      <Tab title="Help" handleTabClick={action("Set tab index to 3")}>
+        Tab three
+      </Tab>
+    </TabBar>
+  ))
+  .add("Tab 2 of 3 open", () => (
+    <TabBar initiallySelected={1}>
+      <Tab title="Settings" handleTabClick={action("Set tab index to 1")}>
+        Tab one
+      </Tab>
+      <Tab title="Account" handleTabClick={action("Set tab index to 2")}>
+        <HeaderBar title="Account Settings" />
+      </Tab>
+      <Tab title="Help" handleTabClick={action("Set tab index to 3")}>
+        Tab three
+      </Tab>
+    </TabBar>
+  ))
+  .add("Tab 3 of 3 open", () => (
+    <TabBar initiallySelected={2}>
+      <Tab title="Settings" handleTabClick={action("Set tab index to 1")}>
+        Tab one
+      </Tab>
+      <Tab title="Account" handleTabClick={action("Set tab index to 2")}>
+        Tab two
+      </Tab>
+      <Tab title="Help" handleTabClick={action("Set tab index to 3")}>
+        <HeaderBar title="Support" />
+      </Tab>
+    </TabBar>
   ));
 
 storiesOf("SearchResultCard", module)
