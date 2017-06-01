@@ -94,10 +94,10 @@ export default function(state = initialParcelsState, action) {
       newParcels = { ...state };
 
       action.results.forEach(result => {
-        if (!newParcels.hasOwnProperty(result.pk)) {
+        if (!newParcels.hasOwnProperty(result.id)) {
           newParcel = { ...initialParcel };
         } else {
-          newParcel = { ...newParcels[result.pk] };
+          newParcel = { ...newParcels[result.id] };
         }
 
         newParcel.parcelGeoserverId = result.external_id;
@@ -105,7 +105,7 @@ export default function(state = initialParcelsState, action) {
         newParcel.geometry = result.geometry;
         newParcel.hasLizardData = true;
 
-        newParcels[result.pk] = newParcel;
+        newParcels[result.id] = newParcel;
       });
 
       return newParcels;
