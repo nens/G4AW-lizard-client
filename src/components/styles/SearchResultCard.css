@@ -1,0 +1,35 @@
+.SearchResultCard {
+  padding: 15px;
+  margin: 15px;
+  width: 165px;
+  min-height: 100px;
+  background: #FFFFFF;
+  box-shadow: 0 2px 4px 0 rgba(0,0,0,0.07);
+  cursor: pointer;
+  position: relative;
+}
+
+.SearchCardIcon {
+  margin: 0 0 15px 0;
+}
+
+.Title {
+  color: #5D5D5D;
+  font-size: 15px;
+}
+
+.SubTitle {
+  color: #a1a1a1;
+  font-size: 12px;
+  width: 100%;
+  border-top: 1px solid #d7d7d7;
+  margin: 10px 0 0 0;
+  padding: 10px 0 0 0;
+}
+
+.Mouseover {
+  border: 2px solid #4CC1FC;
+}
+.Mouseout {
+  box-shadow: 0 2px 4px 0 rgba(0,0,0,0.07);
+}

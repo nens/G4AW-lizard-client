@@ -10,6 +10,12 @@ import { getRaster } from "../actions/RasterActions";
 const hoogteUuid = "e9ed5725-d94a-4bcb-9dde-5d655da0070e";
 
 class RastersMapComponent extends React.Component {
+  constructor() {
+    super();
+    this.state = {};
+    this._handlePanOrZoomEnd = this._handlePanOrZoomEnd.bind(this);
+  }
+
   componentDidMount() {
     // this.props.getRaster(hoogteUuid);
   }
@@ -22,14 +28,23 @@ class RastersMapComponent extends React.Component {
     return (this.props.height || window.innerHeight) - VIEWPORT_PADDING + "px";
   }
 
+  _handlePanOrZoomEnd(e) {
+    const leaflet = this.refs.mapElement.leafletElement;
+    const { lat, lng } = leaflet.getCenter();
+    const zoom = leaflet.getZoom();
+    console.log("lat, lon, zoom: ", lat, lng, zoom);
+  }
+
   render() {
     const { visibleRasters } = this.props;
 
     return (
       <div style={{ height: "100%", width: "100%" }}>
         <Map
+          ref="mapElement"
           center={[13.0474, 107.7429]}
           zoom={7}
+          onMoveend={this._handlePanOrZoomEnd}
           zoomControl={false}
           style={{ height: "100%" }}
         >
