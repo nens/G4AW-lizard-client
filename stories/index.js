@@ -594,7 +594,7 @@ storiesOf("FooterBar", module)
         <i className="material-icons">access_time</i>
       </div>
       <div>
-        <i className="material-icons">chrome_reader_mode</i>
+        <i className="material-icons">list</i>
       </div>
     </FooterBar>
   ));
