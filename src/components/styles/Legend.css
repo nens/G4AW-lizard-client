@@ -1,12 +1,14 @@
 .LegendWrapper {
   position: absolute;
-  /*bottom: 0;*/
+  bottom: 50px;
+  height: 200px;
   width: 100%;
+}
+.Legend {
   height: 50px;
   background-color: #00A899;
   color: #ffffff;
 }
-.Legend {}
 .LegendTopBar {
   display: flex;
   width: calc(100% - 100px);
@@ -32,6 +34,7 @@
   color: #333;
   padding: 10px 0 0 0;
   font-size: 0.9em;
+  height: 140px;
 }
 .LegendTable {
   border-collapse: collapse;
@@ -40,11 +43,15 @@
 .LegendTable td {
   padding: 10px 0 10px 0;
 }
+.LegendTable td:first-child {
+  width: 57px;
+}
 .LegendTable tr {
   border-bottom: 1px solid #d7d7d7;
 }
 
 .LegendColor {
-  width: 20px;
+  border: 1px solid #D7D7D7;
+  width: 30px;
   height: 10px;
 }
