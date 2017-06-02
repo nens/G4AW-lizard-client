@@ -7,6 +7,7 @@ import DetailViewHeader from "../src/components/DetailViewHeader.jsx";
 import DetailViewSection from "../src/components/DetailViewSection.jsx";
 import DetailViewTable from "../src/components/DetailViewTable.jsx";
 import FlatButton from "../src/components/FlatButton.jsx";
+import FooterBar from "../src/components/FooterBar.jsx";
 import HeaderBar from "../src/components/HeaderBar.jsx";
 import i18n from "../src/i18n"; // initialized i18next instance
 import InputField from "../src/components/InputField.jsx";
@@ -577,4 +578,23 @@ storiesOf("ToggleSwitch", module)
       labelOnText="On"
       labelOffText="Off"
     />
+  ));
+
+storiesOf("FooterBar", module)
+  .addDecorator(getStory => (
+    <I18nextProvider i18n={i18n}>
+      <Provider store={theStore}>
+        {getStory()}
+      </Provider>
+    </I18nextProvider>
+  ))
+  .add("example", () => (
+    <FooterBar>
+      <div>
+        <i className="material-icons">access_time</i>
+      </div>
+      <div>
+        <i className="material-icons">chrome_reader_mode</i>
+      </div>
+    </FooterBar>
   ));
