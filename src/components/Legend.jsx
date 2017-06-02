@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import ReactDOM from "react-dom";
+import { Scrollbars } from "react-custom-scrollbars";
 import styles from "./styles/Legend.css";
 
 class LegendColor extends Component {
@@ -27,12 +28,21 @@ class Legend extends Component {
   componentDidMount() {}
   render() {
     const {
-      open,
+      isOpen,
       data,
+      activeLegendIdx,
       handleToggleLegend,
       handlePreviousLayer,
       handleNextLayer
     } = this.props;
+    if (!isOpen) {
+      return null;
+    }
+
+    const currentLayer = data[activeLegendIdx];
+    const layerTitle = currentLayer.title;
+    const legend = currentLayer.legend;
+
     return (
       <div className={styles.LegendWrapper}>
         <div className={styles.Legend}>
@@ -43,7 +53,7 @@ class Legend extends Component {
             >
               <i className="material-icons">keyboard_arrow_left</i>
             </div>
-            <div>Rice growth</div>
+            <div>{layerTitle}</div>
             <div onClick={handleNextLayer} className={styles.LayerSwitchButton}>
               <i className="material-icons">keyboard_arrow_right</i>
             </div>
@@ -52,28 +62,26 @@ class Legend extends Component {
               className={styles.OpenCloseButton}
             >
               <i className="material-icons">
-                {open ? "keyboard_arrow_down" : "keyboard_arrow_up"}
+                {isOpen ? "keyboard_arrow_down" : "keyboard_arrow_up"}
               </i>
             </div>
           </div>
-          <div className={styles.LegendBody}>
-            <table className={styles.LegendTable}>
-              <tbody>
-                <tr>
-                  <td><LegendColor color="#E84506" /></td>
-                  <td>Harvest</td>
-                </tr>
-                <tr>
-                  <td><LegendColor color="#FF7813" /></td>
-                  <td>Ripening</td>
-                </tr>
-                <tr>
-                  <td><LegendColor color="#FFC306" /></td>
-                  <td>Milking</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+          <Scrollbars style={{ width: "100%", height: 140 }}>
+            <div className={styles.LegendBody}>
+              <table className={styles.LegendTable}>
+                <tbody>
+                  {legend.map((l, i) => {
+                    return (
+                      <tr key={i}>
+                        <td><LegendColor color={l.color} /></td>
+                        <td>{l.label}</td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
+          </Scrollbars>
         </div>
       </div>
     );
@@ -82,7 +90,8 @@ class Legend extends Component {
 
 Legend.propTypes = {
   data: PropTypes.any,
-  open: PropTypes.bool
+  handleToggleLegend: PropTypes.func,
+  isOpen: PropTypes.bool
 };
 
 export default Legend;
