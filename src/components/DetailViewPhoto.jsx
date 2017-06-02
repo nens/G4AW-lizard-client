@@ -4,7 +4,9 @@ import ReactDOM from "react-dom";
 import styles from "./styles/DetailViewPhoto.css";
 import MDSpinner from "react-md-spinner";
 
-// A DetailViewPhoto component.
+///////////////////////////////////////////////////////////////////////////////
+// The main Component; the DetailViewPhoto component //////////////////////////
+///////////////////////////////////////////////////////////////////////////////
 
 class DetailViewPhoto extends Component {
   constructor() {
@@ -43,115 +45,152 @@ class DetailViewPhoto extends Component {
   }
   render() {
     const {
-      currentPhoto,
       images,
       handleBackButtonClick,
       handlePrevPhoto,
       handleNextPhoto
     } = this.props;
     const { width, height, imageStatus } = this.state;
-    const currentPhotoIdx = currentPhoto ? currentPhoto : 0;
+    const currentPhotoIdx = this.props.currentPhotoIdx || 0;
     const photo = images[currentPhotoIdx];
-
-    // Replace this with moment.js after my PR is merged.
-    const a = new Date(photo.date);
-    const months = [
-      "Jan",
-      "Feb",
-      "Mar",
-      "Apr",
-      "May",
-      "Jun",
-      "Jul",
-      "Aug",
-      "Sep",
-      "Oct",
-      "Nov",
-      "Dec"
-    ];
-    const year = a.getFullYear();
-    const month = months[a.getMonth()];
-    const date = a.getDate();
-    const hour = a.getHours();
-    const min = a.getMinutes();
-    const sec = a.getSeconds();
-    const time = `${date} ${month} ${year} ${hour}:${min}`;
+    const datetime = new Date(photo.date).toString();
 
     return (
       <div>
         {currentPhotoIdx > 0
-          ? <div className={styles.PrevPhoto} onClick={this.handlePrevPhoto}>
-              <i className={`${styles.LeftArrowIcon} material-icons`}>
-                keyboard_arrow_left
-              </i>
-            </div>
-          : ""}
-        {currentPhotoIdx < images.length - 1
-          ? <div className={styles.NextPhoto} onClick={this.handleNextPhoto}>
-              <i className={`${styles.RightArrowIcon} material-icons`}>
-                keyboard_arrow_right
-              </i>
-            </div>
-          : ""}
+          ? <DetailViewPhotoPrevButton handleClick={this.handlePrevPhoto} />
+          : null}
 
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            height,
-            width
-          }}
-        >
-          <div className={styles.TopPanel}>
-            <div onClick={handleBackButtonClick} className={styles.BackButton}>
-              <i className="material-icons">arrow_back</i>
-            </div>
-            <div>{currentPhotoIdx + 1}/{images.length}</div>
-          </div>
-          <div className={styles.PhotoPanel}>
-            <div className={styles.DetailViewPhoto}>
-              <img
-                src={photo.url}
-                width={width}
-                onLoad={this.handleImageLoaded}
-              />
-            </div>
-          </div>
-          <div className={styles.PhotoPropertiesPanel}>
-            <div className={styles.PhotoProperties}>
-              <p className={styles.General}>General</p>
-              <table className={styles.PropertiesTable}>
-                <tr>
-                  <td className={styles.PropertiesTableFirstColumn}>
-                    Date taken
-                  </td>
-                  <td>{time}</td>
-                </tr>
-              </table>
-            </div>
-          </div>
+        {currentPhotoIdx < images.length - 1
+          ? <DetailViewPhotoNextButton handleClick={this.handleNextPhoto} />
+          : null}
+
+        <div className={styles.DetailViewPhotoInner} style={{ height, width }}>
+
+          <DetailViewPhotoTopPanel
+            idx={currentPhotoIdx}
+            count={images.length}
+            handleBackButtonClick={handleBackButtonClick}
+          />
+
+          <DetailViewPhotoMidPanel
+            url={photo.url}
+            width={width}
+            handleImageLoaded={this.handleImageLoaded}
+          />
+
+          <DetailViewPhotoBottomPanel datetime={datetime} />
+
         </div>
 
-        {imageStatus === "loading"
-          ? <div>
-              <MDSpinner
-                singleColor="#03a9f4"
-                style={{
-                  position: "absolute",
-                  top: "50%",
-                  left: "50%"
-                }}
-              />
-            </div>
-          : ""}
+        {imageStatus === "loading" ? <DetailViewPhotoSpinner /> : null}
       </div>
     );
   }
 }
 
+///////////////////////////////////////////////////////////////////////////////
+// type-checking: /////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
+
 DetailViewPhoto.propTypes = {
   images: PropTypes.array,
   handleBackButtonClick: PropTypes.func
 };
+
+///////////////////////////////////////////////////////////////////////////////
+// Local sub-components: //////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
+
+class DetailViewPhotoPrevButton extends Component {
+  render() {
+    const { handleClick } = this.props;
+    return (
+      <div className={styles.PrevPhoto} onClick={handleClick}>
+        <i className={`${styles.LeftArrowIcon} material-icons`}>
+          keyboard_arrow_left
+        </i>
+      </div>
+    );
+  }
+}
+
+class DetailViewPhotoNextButton extends Component {
+  render() {
+    const { handleClick } = this.props;
+    return (
+      <div className={styles.NextPhoto} onClick={handleClick}>
+        <i className={`${styles.RightArrowIcon} material-icons`}>
+          keyboard_arrow_right
+        </i>
+      </div>
+    );
+  }
+}
+
+class DetailViewPhotoTopPanel extends Component {
+  render() {
+    const { handleBackButtonClick, idx, count } = this.props;
+    return (
+      <div className={styles.TopPanel}>
+        <div onClick={handleBackButtonClick} className={styles.BackButton}>
+          <i className="material-icons">arrow_back</i>
+        </div>
+        <div>{idx + 1}/{count}</div>
+      </div>
+    );
+  }
+}
+
+class DetailViewPhotoMidPanel extends Component {
+  render() {
+    const { url, width, handleImageLoaded } = this.props;
+    return (
+      <div className={styles.PhotoPanel}>
+        <div className={styles.DetailViewPhoto}>
+          <img src={url} width={width} onLoad={handleImageLoaded} />
+        </div>
+      </div>
+    );
+  }
+}
+
+class DetailViewPhotoBottomPanel extends Component {
+  render() {
+    const { datetime } = this.props;
+    return (
+      <div className={styles.PhotoPropertiesPanel}>
+        <div className={styles.PhotoProperties}>
+          <p className={styles.General}>General</p>
+          <table className={styles.PropertiesTable}>
+            <tr>
+              <td className={styles.PropertiesTableFirstColumn}>
+                Date taken
+              </td>
+              <td>{datetime}</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    );
+  }
+}
+
+class DetailViewPhotoSpinner extends Component {
+  render() {
+    return (
+      <div>
+        <MDSpinner
+          singleColor="#03a9f4"
+          style={{
+            position: "absolute",
+            top: "50%",
+            left: "50%"
+          }}
+        />
+      </div>
+    );
+  }
+}
 
 export default DetailViewPhoto;

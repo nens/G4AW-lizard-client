@@ -6,11 +6,6 @@ import styles from "./styles/CollapsibleBar.css";
 // A CollapsibleBar component.
 
 class CollapsibleBar extends Component {
-  constructor() {
-    super();
-    this.state = {};
-  }
-  componentDidMount() {}
   render() {
     const { colorCode, title, subTitle, icon, handleClick, open } = this.props;
     return (

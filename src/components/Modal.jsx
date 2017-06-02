@@ -3,51 +3,59 @@ import PropTypes from "prop-types";
 import ReactDOM from "react-dom";
 import styles from "./styles/Modal.css";
 
-// A Modal component.
+///////////////////////////////////////////////////////////////////////////////
+// The main Component; a generic component for modals /////////////////////////
+///////////////////////////////////////////////////////////////////////////////
+
+// TODO: Receive width/height values from a wrapping component via props,
+//       instead of calculating them here locally (which isn't DRY: better do
+//       everything related to "dimensions" in the top-level component and pass
+//       it down the component hierarchy from there).
 
 class Modal extends Component {
   constructor() {
     super();
     this.state = {
       width: window.innerWidth,
-      height: window.innerHeight
+      height: window.innerHeight,
+      mounted: false
     };
     this.updateDimensions = this.updateDimensions.bind(this);
   }
   componentDidMount() {
+    this.setState({ mounted: true });
     this.updateDimensions();
     window.addEventListener("resize", this.updateDimensions);
   }
-  updateDimensions() {
-    this.setState({
-      width: window.innerWidth,
-      height: window.innerHeight
-    });
+  componentWillUnmount() {
+    this.setState({ mounted: false });
   }
-  render() {
-    const { actionButtons, open, children, title } = this.props;
-    const { width, height } = this.state;
-    if (open) {
-      return (
-        <div className={styles.Modal} style={{ width, height }}>
-          <div className={styles.ModalContent}>
-            <h2 className={styles.Title}>{title}</h2>
-            {children}
-            <div className={styles.ActionButtons}>
-              {actionButtons.map((button, i) => {
-                return (
-                  <div key={i} className={styles.ButtonWrapper}>{button}</div>
-                );
-              })}
-            </div>
-          </div>
-        </div>
-      );
-    } else {
-      return <div />;
+  updateDimensions() {
+    if (this.state.mounted) {
+      this.setState({
+        width: window.innerWidth,
+        height: window.innerHeight
+      });
     }
   }
+  render() {
+    const { actionButtons, isOpen, children, title } = this.props;
+    const { width, height } = this.state;
+    if (!isOpen) return null;
+    return (
+      <div className={styles.Modal} style={{ width, height }}>
+        <div className={styles.ModalInner}>
+          <h2 className={styles.Title}>{title}</h2>
+          {children}
+        </div>
+      </div>
+    );
+  }
 }
+
+///////////////////////////////////////////////////////////////////////////////
+// type-checking for the main Component ///////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
 
 Modal.propTypes = {
   open: PropTypes.bool,

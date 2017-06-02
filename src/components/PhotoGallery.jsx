@@ -5,7 +5,7 @@ import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import styles from "./styles/PhotoGallery.css";
 
-// A PhotoGallery emphasizes important functions on in the app.
+// The main Component: a PhotoGallery emphasizes important functions on in the app.
 
 class PhotoGallery extends Component {
   constructor() {
@@ -48,6 +48,10 @@ class PhotoGallery extends Component {
     );
   }
 }
+
+///////////////////////////////////////////////////////////////////////////////
+// type-checking for the main Component ///////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
 
 PhotoGallery.propTypes = {
   buttonText: PropTypes.string,

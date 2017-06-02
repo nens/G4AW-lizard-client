@@ -3,7 +3,7 @@ import { Provider } from "react-redux";
 import { storiesOf, action } from "@kadira/storybook";
 import { theStore } from "../src/store/Store";
 import CollapsibleBar from "../src/components/CollapsibleBar.jsx";
-import DetailViewHeader from "../src/components/DetailViewHeader.jsx";
+// import DetailViewHeader from "../src/components/DetailViewHeader.jsx";
 import DetailViewSection from "../src/components/DetailViewSection.jsx";
 import DetailViewTable from "../src/components/DetailViewTable.jsx";
 import FlatButton from "../src/components/FlatButton.jsx";
@@ -13,7 +13,6 @@ import InputField from "../src/components/InputField.jsx";
 import ListSearchView from "../src/components/ListSearchView.jsx";
 import LoginLogoutButton from "../src/components/LoginLogoutButton.jsx";
 import MapSearchView from "../src/components/MapSearchView.jsx";
-import Modal from "../src/components/Modal.jsx";
 import DetailViewPhoto from "../src/components/DetailViewPhoto.jsx";
 import PhotoGallery from "../src/components/PhotoGallery.jsx";
 import RaisedButton from "../src/components/RaisedButton.jsx";
@@ -24,242 +23,39 @@ import SnackBar from "../src/components/SnackBar.jsx";
 import ToggleSwitch from "../src/components/ToggleSwitch.jsx";
 import ViewSwitchButton from "../src/components/ViewSwitchButton.jsx";
 
-storiesOf("Modal", module)
-  .addDecorator(getStory => (
-    <I18nextProvider i18n={i18n}>
-      <Provider store={theStore}>
-        {getStory()}
-      </Provider>
-    </I18nextProvider>
-  ))
-  .add("modal open", () => (
-    <Modal
-      open={true}
-      title="Login"
-      actionButtons={[
-        <FlatButton buttonText="Cancel" handleOnClick={action("clicked")} />,
-        <FlatButton buttonText="Log in" handleOnClick={action("clicked")} />
-      ]}
-    >
-      <div>
-        <p>To view private data, please use your credentials to log in</p>
-        <div>
-          <InputField hintText="Username" />
-        </div>
-        <div>
-          <InputField hintText="Password" type="password" />
-        </div>
-      </div>
-    </Modal>
-  ))
-  .add("modal closed", () => <Modal open={false} />);
+import runModal from "./ModalStories";
+runModal();
 
-storiesOf("DetailViewHeader", module)
-  .addDecorator(getStory => (
-    <I18nextProvider i18n={i18n}>
-      <Provider store={theStore}>
-        {getStory()}
-      </Provider>
-    </I18nextProvider>
-  ))
-  .add("example", () => (
-    <DetailViewHeader
-      latlonzoom={{ lat: 10.7880, lon: 106.7050, zoom: 17 }}
-      title="LocTroi Farm ID"
-      subTitle="Field address here"
-      handleBackButtonClick={action("clicked")}
-    />
-  ))
-  .add("half mode", () => (
-    <DetailViewHeader
-      halfMode={true}
-      latlonzoom={{ lat: 10.7880, lon: 106.7050, zoom: 17 }}
-      title="LocTroi Farm ID"
-      subTitle="Field address here"
-      handleBackButtonClick={action("clicked")}
-    />
-  ))
-  .add("very long title", () => (
-    <DetailViewHeader
-      latlonzoom={{ lat: 10.7880, lon: 106.7050, zoom: 17 }}
-      title="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-      subTitle="Field address here"
-      handleBackButtonClick={action("clicked")}
-    />
-  ))
-  .add("very long subtitle", () => (
-    <DetailViewHeader
-      latlonzoom={{ lat: 10.7880, lon: 106.7050, zoom: 17 }}
-      title="LocTroi Farm ID"
-      subTitle="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-      handleBackButtonClick={action("clicked")}
-    />
-  ))
-  .add("vietnamese", () => (
-    <DetailViewHeader
-      latlonzoom={{ lat: 10.7880, lon: 106.7050, zoom: 17 }}
-      title="Hàng Tiệc Cưới Hàng Tiệc Cưới"
-      subTitle="Đây là tiếng Việt"
-      handleBackButtonClick={action("clicked")}
-    />
-  ))
-  .add("header image instead of map background", () => (
-    <DetailViewHeader
-      headerImage="http://i.imgur.com/vUWMZth.jpg"
-      title="Hàng Tiệc Cưới Hàng Tiệc Cưới"
-      subTitle="Đây là tiếng Việt"
-      handleBackButtonClick={action("clicked")}
-    />
-  ));
+import runDetailViewHeader from "./DetailViewHeaderStories";
+runDetailViewHeader();
 
-storiesOf("DetailViewPhotoSection", module)
-  .addDecorator(getStory => (
-    <I18nextProvider i18n={i18n}>
-      <Provider store={theStore}>
-        {getStory()}
-      </Provider>
-    </I18nextProvider>
-  ))
-  .add("photo gallery", () => (
-    <DetailViewSection title="Photos" open={true}>
-      <PhotoGallery
-        images={[
-          {
-            url: "https://static.pexels.com/photos/317441/pexels-photo-317441.jpeg",
-            date: 1495803155030
-          },
-          {
-            url: "https://upload.wikimedia.org/wikipedia/commons/c/cc/Parched_rice_field_Can_Tho.JPG",
-            date: 1495803540255
-          },
-          {
-            url: "https://upload.wikimedia.org/wikipedia/commons/b/b9/Around_Nha_Trang%2C_rice_fields_%286224431058%29.jpg",
-            date: 1495803541255
-          },
-          {
-            url: "https://static.pexels.com/photos/317441/pexels-photo-317441.jpeg",
-            date: 1495803155030
-          },
-          {
-            url: "https://upload.wikimedia.org/wikipedia/commons/c/cc/Parched_rice_field_Can_Tho.JPG",
-            date: 1495803540255
-          },
-          {
-            url: "https://upload.wikimedia.org/wikipedia/commons/b/b9/Around_Nha_Trang%2C_rice_fields_%286224431058%29.jpg",
-            date: 1495803541255
-          },
-          {
-            url: "https://static.pexels.com/photos/317441/pexels-photo-317441.jpeg",
-            date: 1495803155030
-          },
-          {
-            url: "https://upload.wikimedia.org/wikipedia/commons/c/cc/Parched_rice_field_Can_Tho.JPG",
-            date: 1495803540255
-          },
-          {
-            url: "https://upload.wikimedia.org/wikipedia/commons/b/b9/Around_Nha_Trang%2C_rice_fields_%286224431058%29.jpg",
-            date: 1495803541255
-          },
-          {
-            url: "https://static.pexels.com/photos/317441/pexels-photo-317441.jpeg",
-            date: 1495803155030
-          },
-          {
-            url: "https://upload.wikimedia.org/wikipedia/commons/c/cc/Parched_rice_field_Can_Tho.JPG",
-            date: 1495803540255
-          },
-          {
-            url: "https://upload.wikimedia.org/wikipedia/commons/b/b9/Around_Nha_Trang%2C_rice_fields_%286224431058%29.jpg",
-            date: 1495803541255
-          },
-          {
-            url: "https://static.pexels.com/photos/317441/pexels-photo-317441.jpeg",
-            date: 1495803155030
-          },
-          {
-            url: "https://upload.wikimedia.org/wikipedia/commons/c/cc/Parched_rice_field_Can_Tho.JPG",
-            date: 1495803540255
-          },
-          {
-            url: "https://upload.wikimedia.org/wikipedia/commons/b/b9/Around_Nha_Trang%2C_rice_fields_%286224431058%29.jpg",
-            date: 1495803541255
-          },
-          {
-            url: "https://static.pexels.com/photos/317441/pexels-photo-317441.jpeg",
-            date: 1495803155030
-          },
-          {
-            url: "https://upload.wikimedia.org/wikipedia/commons/c/cc/Parched_rice_field_Can_Tho.JPG",
-            date: 1495803540255
-          },
-          {
-            url: "https://upload.wikimedia.org/wikipedia/commons/b/b9/Around_Nha_Trang%2C_rice_fields_%286224431058%29.jpg",
-            date: 1495803541255
-          }
-        ]}
-      />
-    </DetailViewSection>
-  ));
+import runDetailViewPhotoSection from "./DetailViewPhotoSectionStories";
+runDetailViewPhotoSection();
 
-storiesOf("DetailViewSection", module)
-  .addDecorator(getStory => (
-    <I18nextProvider i18n={i18n}>
-      <Provider store={theStore}>
-        {getStory()}
-      </Provider>
-    </I18nextProvider>
-  ))
-  .add("rice growth open", () => (
-    <DetailViewSection title="Rice Growth" colorCode="#FFBF1D" open={true}>
-      <DetailViewTable
-        data={[
-          { key: "Pest Risk", value: "High" },
-          { key: "Brown plant hopper present", value: "Yes" },
-          { key: "Leaf Folder present", value: "No" },
-          { key: "Blast present", value: "Yes" },
-          { key: "Brown plant hopper risk", value: "High" },
-          { key: "Leaf Folder risk", value: "Low" },
-          { key: "Blast risk", value: "Medium" }
-        ]}
-      />
-    </DetailViewSection>
-  ))
-  .add("rice growth closed", () => (
-    <DetailViewSection title="Rice Growth" subtitle="Stage 4" open={false}>
-      <DetailViewTable
-        data={[
-          { key: "Brown plant hopper present", value: "Yes" },
-          { key: "Leaf Folder present", value: "No" },
-          { key: "Blast present", value: "Yes" },
-          { key: "Brown plant hopper risk", value: "High" },
-          { key: "Leaf Folder risk", value: "Low" },
-          { key: "Blast risk", value: "Medium" }
-        ]}
-      />
-    </DetailViewSection>
-  ));
+import runDetailViewSection from "./DetailViewSectionStories";
+runDetailViewSection();
 
-storiesOf("DetailViewTable", module)
-  .addDecorator(getStory => (
-    <I18nextProvider i18n={i18n}>
-      <Provider store={theStore}>
-        {getStory()}
-      </Provider>
-    </I18nextProvider>
-  ))
-  .add("sample data", () => (
-    <DetailViewTable
-      data={[
-        { key: "Brown plant hopper present", value: "Yes" },
-        { key: "Leaf Folder present", value: "No" },
-        { key: "Blast present", value: "Yes" },
-        { key: "Brown plant hopper risk", value: "High" },
-        { key: "Leaf Folder risk", value: "Low" },
-        { key: "Blast risk", value: "Medium" }
-      ]}
-    />
-  ))
-  .add("no data", () => <DetailViewTable data={[]} />);
+// storiesOf("DetailViewTable", module)
+//   .addDecorator(getStory => (
+//     <I18nextProvider i18n={i18n}>
+//       <Provider store={theStore}>
+//         {getStory()}
+//       </Provider>
+//     </I18nextProvider>
+//   ))
+//   .add("sample data", () => (
+//     <DetailViewTable
+//       data={[
+//         { key: "Brown plant hopper present", value: "Yes" },
+//         { key: "Leaf Folder present", value: "No" },
+//         { key: "Blast present", value: "Yes" },
+//         { key: "Brown plant hopper risk", value: "High" },
+//         { key: "Leaf Folder risk", value: "Low" },
+//         { key: "Blast risk", value: "Medium" }
+//       ]}
+//     />
+//   ))
+//   .add("no data", () => <DetailViewTable data={[]} />);
 
 storiesOf("DetailViewPhoto", module)
   .addDecorator(getStory => (
@@ -271,7 +67,7 @@ storiesOf("DetailViewPhoto", module)
   ))
   .add("open at index 0", () => (
     <DetailViewPhoto
-      currentPhoto={0}
+      currentPhotoIdx={0}
       images={[
         {
           url: "https://static.pexels.com/photos/317441/pexels-photo-317441.jpeg",
@@ -290,7 +86,7 @@ storiesOf("DetailViewPhoto", module)
   ))
   .add("open at index 1", () => (
     <DetailViewPhoto
-      currentPhoto={1}
+      currentPhotoIdx={1}
       images={[
         {
           url: "https://static.pexels.com/photos/317441/pexels-photo-317441.jpeg",
@@ -309,7 +105,7 @@ storiesOf("DetailViewPhoto", module)
   ))
   .add("open at index 2", () => (
     <DetailViewPhoto
-      currentPhoto={2}
+      currentPhotoIdx={2}
       images={[
         {
           url: "https://static.pexels.com/photos/317441/pexels-photo-317441.jpeg",

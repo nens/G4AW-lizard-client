@@ -9,14 +9,12 @@ class ToggleSwitch extends Component {
     };
     this._handleToggleSwitch = this._handleToggleSwitch.bind(this);
   }
-
   _handleToggleSwitch(e) {
     this.setState({
       selected: e.target.checked
     });
     this.props.onChange(e.target.checked);
   }
-
   render() {
     const randId = Math.random().toString(36).substring(7);
     const { labelText } = this.props;

@@ -6,11 +6,10 @@
   background-color: #000;
   opacity: 0.8;
 }
-.ModalContent {
+.ModalInner {
   flex: none;
   width: 70%;
   height: 60%;
-  overflow-y: scroll;
   background-color: #fff;
   padding: 30px;
   position: relative;

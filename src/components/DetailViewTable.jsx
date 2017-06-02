@@ -16,7 +16,7 @@ class YesIcon extends Component {
           viewBox="0 0 12 16"
           width="12"
         >
-          <path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5z" />
+          <path fillRule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5z" />
         </svg>
       </div>
     );
@@ -35,7 +35,7 @@ class NoIcon extends Component {
           width="12"
         >
           <path
-            fill-rule="evenodd"
+            fillRule="evenodd"
             d="M7.48 8l3.75 3.75-1.48 1.48L6 9.48l-3.75 3.75-1.48-1.48L4.52 8 .77 4.25l1.48-1.48L6 6.52l3.75-3.75 1.48 1.48z"
           />
         </svg>
@@ -45,30 +45,27 @@ class NoIcon extends Component {
 }
 
 class DetailViewTable extends Component {
-  constructor() {
-    super();
-    this.state = {};
-  }
-  componentDidMount() {}
   render() {
     const { data } = this.props;
     return (
       <div className={styles.DetailViewTable}>
         <table className={styles.Table}>
-          {data.map(row => {
-            return (
-              <tr className={styles.Row}>
-                <td className={styles.ColKey}>
-                  {row.key}
-                </td>
-                <td>{row.value}</td>
-                <td className={styles.ColValue}>
-                  {row.value.toLowerCase() === "yes" ? <YesIcon /> : ""}
-                  {row.value.toLowerCase() === "no" ? <NoIcon /> : ""}
-                </td>
-              </tr>
-            );
-          })}
+          <tbody>
+            {data.map((row, i) => {
+              return (
+                <tr key={i} className={styles.Row}>
+                  <td className={styles.ColKey}>
+                    {row.key}
+                  </td>
+                  <td>{row.value}</td>
+                  <td className={styles.ColValue}>
+                    {row.value.toLowerCase() === "yes" ? <YesIcon /> : ""}
+                    {row.value.toLowerCase() === "no" ? <NoIcon /> : ""}
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
         </table>
       </div>
     );
@@ -76,7 +73,7 @@ class DetailViewTable extends Component {
 }
 
 DetailViewTable.propTypes = {
-  data: PropTypes.object
+  data: PropTypes.array
 };
 
 export default DetailViewTable;
