@@ -1,0 +1,50 @@
+.LegendWrapper {
+  position: absolute;
+  /*bottom: 0;*/
+  width: 100%;
+  height: 50px;
+  background-color: #00A899;
+  color: #ffffff;
+}
+.Legend {}
+.LegendTopBar {
+  display: flex;
+  width: calc(100% - 100px);
+  height: 50px;
+  justify-content: space-between;
+  align-items: center;
+  text-transform: uppercase;
+}
+.LegendTopBar div {
+  padding: 10px;
+}
+.LayerSwitchButton {
+  cursor: pointer;
+}
+.OpenCloseButton {
+  position: absolute;
+  right: 0;
+  cursor: pointer;
+}
+.LegendBody {
+  display: flex;
+  justify-content: center;
+  color: #333;
+  padding: 10px 0 0 0;
+  font-size: 0.9em;
+}
+.LegendTable {
+  border-collapse: collapse;
+  width: 90%;
+}
+.LegendTable td {
+  padding: 10px 0 10px 0;
+}
+.LegendTable tr {
+  border-bottom: 1px solid #d7d7d7;
+}
+
+.LegendColor {
+  width: 20px;
+  height: 10px;
+}

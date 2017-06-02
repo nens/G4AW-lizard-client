@@ -4,6 +4,7 @@ import { storiesOf, action } from "@kadira/storybook";
 import { theStore } from "../src/store/Store";
 import HeaderBar from "../src/components/HeaderBar.jsx";
 import i18n from "../src/i18n"; // initialized i18next instance
+import Legend from "../src/components/Legend.jsx";
 import ListSearchView from "../src/components/ListSearchView.jsx";
 import LoginLogoutButton from "../src/components/LoginLogoutButton.jsx";
 import MapSearchView from "../src/components/MapSearchView.jsx";
@@ -204,3 +205,13 @@ storiesOf("TimeseriesGraph", module)
     </Provider>
   ))
   .add("foobar", () => <TimeseriesGraph />);
+
+storiesOf("Legend", module)
+  .addDecorator(getStory => (
+    <I18nextProvider i18n={i18n}>
+      <Provider store={theStore}>
+        {getStory()}
+      </Provider>
+    </I18nextProvider>
+  ))
+  .add("example", () => <Legend data={{}} open={true} />);
