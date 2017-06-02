@@ -4,7 +4,7 @@
   "description": "Library for client-side storage/exposure of Lizard assets, rasters and timeseries.",
   "main": "src/index.js",
   "scripts": {
-    "build": "NODE_ENV=production webpack --config webpack.config.js -p",
+    "build": "NODE_ENV=production webpack --config webpack.production.config.js -p",
     "extract": "i18next src/components -o locales -r -l en,nl,vi",
     "precommit": "lint-staged",
     "release": "buck-trap -a",
