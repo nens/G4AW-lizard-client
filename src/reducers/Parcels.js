@@ -50,7 +50,6 @@ const initialParcel = {
 export default function(state = initialParcelsState, action) {
   let newParcels;
   let newParcel;
-  console.log("IN PARCELS REDUCER");
 
   switch (action.type) {
     case ActionTypes.GET_ATTRIBUTES_FROM_GEOSERVER:

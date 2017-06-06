@@ -24,7 +24,6 @@ class MainScreen extends Component {
         viewportWidth: window.innerWidth,
         viewportHeight: window.innerHeight
       });
-      console.log("resize detected; this.state =", this.state);
     });
   }
   render() {

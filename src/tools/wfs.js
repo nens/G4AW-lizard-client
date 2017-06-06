@@ -17,9 +17,7 @@ export function getParcelAttributes(parcelId) {
     .map(k => encodeURIComponent(k) + "=" + encodeURIComponent(totalParams[k]))
     .join("&");
 
-  const url = wfsUrl + "?" + query;
-
-  console.log("Trying to send request to ", url);
+  const url = `${wfsUrl}?${query}`;
 
   return new Promise(function(resolve, reject) {
     const request = new XMLHttpRequest();
