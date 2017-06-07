@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`buttonText is shown as OK 1`] = `
+<div
+  className="RaisedButton "
+  onClick={undefined}
+>
+  
+   
+  <span>
+    OK
+  </span>
+  <canvas
+    className="ink"
+    height={0}
+    onDragOver={[Function]}
+    onMouseDown={[Function]}
+    onMouseLeave={[Function]}
+    onMouseUp={[Function]}
+    style={
+      Object {
+        "borderRadius": "inherit",
+        "height": "100%",
+        "left": 0,
+        "position": "absolute",
+        "top": 0,
+        "width": "100%",
+      }
+    }
+    width={0}
+  />
+</div>
+`;
