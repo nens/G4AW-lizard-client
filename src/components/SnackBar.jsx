@@ -41,20 +41,23 @@ class SnackBar extends Component {
     }
   }
   render() {
+    const { message, subMessage, onActionTap, action } = this.props;
+    const { showComponent } = this.state;
     return (
       <VelocityComponent
         animation={{
           translateX: "35%",
-          // translateY: this.state.showComponent ? 0 : "100%",
-          opacity: this.state.showComponent ? 1 : 0
+          // translateY: showComponent ? 0 : "100%",
+          opacity: showComponent ? 1 : 0
         }}
         duration={250}
       >
         <div className={styles.SnackBar}>
-          <div onClick={this.props.onActionTap} className={styles.ActionButton}>
-            {this.props.action ? this.props.action : "OK"}
+          <div onClick={onActionTap} className={styles.ActionButton}>
+            {action ? action : "OK"}
           </div>
-          {this.props.message ? this.props.message : "..."}
+          <p className={styles.Message}>{message ? message : "..."}</p>
+          {subMessage ? <p className={styles.SubMessage}>{subMessage}</p> : ""}
         </div>
       </VelocityComponent>
     );
@@ -65,6 +68,7 @@ SnackBar.propTypes = {
   action: PropTypes.string,
   autoHideDuration: PropTypes.number,
   message: PropTypes.string,
+  subMessage: PropTypes.string,
   open: PropTypes.bool
 };
 

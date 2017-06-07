@@ -4,7 +4,7 @@
   align-items: center;
   background-color: #F1F1F2;
   text-align: center;
-  height: 1000px; /* should be set by react state */
+  height: 1000px; /* TODO: should be set by react state */
 }
 .Geolocate {
   padding: 50px;
@@ -15,7 +15,7 @@
   font-weight: 300;
   font-size: 1.8em;
   margin: 0;
-  padding: 0;
+  padding: 100px 0 0 0;
   line-height: 90px;
 }
 .GetStarted {

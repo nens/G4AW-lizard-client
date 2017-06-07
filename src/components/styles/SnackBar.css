@@ -12,3 +12,14 @@
   color: #00B6A9;
   cursor: pointer;
 }
+
+.Message {
+  padding: 0;
+  margin: 0;
+}
+.SubMessage {
+  padding: 0;
+  margin: 5px 0 0 0;
+  font-size: .8em;
+  font-weight: 100;
+}
