@@ -15,7 +15,7 @@ class SearchResultsComponent extends Component {
       <div className={styles["searchresults-container"]}>
         <p>{this.props.results.length} results.</p>
         <ul>
-          {this.props.results.map((result, idx) => (
+          {this.props.results.map((result, idx) =>
             <li
               key={"searchresult-" + idx}
               onClick={() => this.props.clickResult(result)}
@@ -23,7 +23,7 @@ class SearchResultsComponent extends Component {
               <p>{this.props.parcels[result].name}</p>
               {this.renderResult(result)}
             </li>
-          ))}
+          )}
         </ul>
       </div>
     );

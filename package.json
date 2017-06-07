@@ -103,6 +103,7 @@
     "react-redux": "",
     "react-router": "",
     "react-router-dom": "",
+    "react-transition-group": "^1.1.3",
     "recharts": "^0.22.4",
     "redux": "",
     "redux-logger": "^3.0.1",
