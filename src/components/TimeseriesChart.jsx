@@ -18,11 +18,11 @@ import { size, first, last } from "lodash";
 
 const PARCEL_ID = 123;
 
-// class GraphInfo {
+// class ChartInfo {
 //   constructor (events) {
 //     this.events = events;
 //     this.count = size(events);
-//     console.log("[C] GraphInfo.count:", this.count);
+//     console.log("[C] ChartInfo.count:", this.count);
 //     console.log("[*] MAPPING...");
 //     rawData.map((event) => {
 //       console.log("*** event:", event);
@@ -36,7 +36,10 @@ const formatTimestamp = timestamp => {
   return d.slice(0, wantedStrLen);
 };
 
-class TimeseriesGraphComponent extends Component {
+class TimeseriesChartComponent extends Component {
+  componentDidMount() {
+    this.props.getTimeseries(123);
+  }
   getTicks(events) {
     console.log("[F] getTicks");
     const firstTick = formatTimestamp(events[0].timestamp);
@@ -44,15 +47,12 @@ class TimeseriesGraphComponent extends Component {
     // return [firstTick, lastTick];
     return ["foo", "bar"];
   }
-  componentDidMount() {
-    this.props.getTimeseries(123);
-  }
   render() {
     // Assign the 'connected' timeseriesAllData for a single parcelId
     // to a local variable:
     const timeseriesData = this.props.timeseriesAllData[PARCEL_ID];
 
-    // Check whether we already can assign the ts events to a lcoal variable,
+    // Check whether we already can assign the ts events to a local variable,
     // else assign a message about the ts data still being fetched:
     if (!timeseriesData || !timeseriesData.data) {
       return null;
@@ -65,9 +65,8 @@ class TimeseriesGraphComponent extends Component {
       };
     });
 
-    // return the actual Reactjs component:
     return (
-      <div id="timeseries-graph">
+      <div id="timeseries-chart">
         <LineChart width={350} height={250} data={events}>
           <XAxis
             dataKey="timestamp"
@@ -103,8 +102,8 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-const TimeseriesGraph = connect(mapStateToProps, mapDispatchToProps)(
-  TimeseriesGraphComponent
+const TimeseriesChart = connect(mapStateToProps, mapDispatchToProps)(
+  TimeseriesChartComponent
 );
 
-export default TimeseriesGraph;
+export default TimeseriesChart;

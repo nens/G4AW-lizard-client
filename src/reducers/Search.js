@@ -1,8 +1,7 @@
 import * as ActionTypes from "../constants/ActionTypes";
+import { initialSearchState } from "../store/Store";
 
-const defaultState = {};
-
-export default function(state = defaultState, action) {
+export default function(state = initialSearchState, action) {
   switch (action.type) {
     case ActionTypes.START_SEARCH:
       return {
@@ -10,9 +9,11 @@ export default function(state = defaultState, action) {
         results: null
       };
     case ActionTypes.RECEIVE_SEARCH_RESULTS:
+      // Additionally, in the parcels reducer a parcel is created for each result
+      // that doesn't have one yet.
       return {
         isFetching: false,
-        results: action.results
+        results: action.results.map(result => result.id)
       };
     case ActionTypes.CLEAR_SEARCH_RESULTS:
       return {
