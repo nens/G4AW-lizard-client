@@ -19,10 +19,10 @@ class Tab extends Component {
   }
   componentDidMount() {}
   render() {
-    const { title, idx, initiallySelected, handleTabClick } = this.props;
+    const { title, idx, isSelected, handleTabClick } = this.props;
     return (
       <div
-        className={`${styles.Tab} ${idx === initiallySelected ? styles.Active : ""}`}
+        className={`${styles.Tab} ${idx === isSelected ? styles.Active : ""}`}
         onClick={handleTabClick}
       >
         {title}
@@ -45,12 +45,12 @@ class TabBar extends Component {
   componentDidMount() {}
   render() {
     let tabContent = <div />;
-    const { children, initiallySelected } = this.props;
+    const { children, isSelected } = this.props;
 
-    if (children && initiallySelected < children.length) {
+    if (children && isSelected < children.length) {
       tabContent = (
         <div>
-          {children[initiallySelected].props.children}
+          {children[isSelected].props.children}
         </div>
       );
     }
@@ -58,7 +58,7 @@ class TabBar extends Component {
     const childrenWithProps = React.Children.map(children, (child, i) => {
       return React.cloneElement(child, {
         idx: i,
-        initiallySelected: initiallySelected
+        isSelected: isSelected
       });
     });
 
@@ -73,7 +73,7 @@ class TabBar extends Component {
 
 TabBar.propTypes = {
   children: PropTypes.array,
-  initiallySelected: PropTypes.number
+  isSelected: PropTypes.number
 };
 
 export { TabBar, Tab };
