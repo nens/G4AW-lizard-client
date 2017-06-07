@@ -1,7 +1,7 @@
 const path = require("path");
 const webpack = require("webpack");
 
-const libraryName = "Lizard";
+const libraryName = "G4AWLizardClient";
 
 const definePlugin = new webpack.DefinePlugin({
   "process.env": {
