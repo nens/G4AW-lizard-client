@@ -42,40 +42,40 @@ storiesOf("TabBar", module)
     </I18nextProvider>
   ))
   .add("Tab 1 of 3 open", () => (
-    <TabBar isSelected={0}>
-      <Tab title="Settings" handleTabClick={action("Set tab index to 1")}>
+    <TabBar isSelected={0} handleTabClick={action("handleTabClick()")}>
+      <Tab title="Settings">
         <HeaderBar title="Map Settings" />
       </Tab>
-      <Tab title="Account" handleTabClick={action("Set tab index to 2")}>
+      <Tab title="Account">
         Tab two
       </Tab>
-      <Tab title="Help" handleTabClick={action("Set tab index to 3")}>
+      <Tab title="Help">
         Tab three
       </Tab>
     </TabBar>
   ))
   .add("Tab 2 of 3 open", () => (
-    <TabBar isSelected={1}>
-      <Tab title="Settings" handleTabClick={action("Set tab index to 1")}>
+    <TabBar isSelected={1} handleTabClick={action("handleTabClick()")}>
+      <Tab title="Settings">
         Tab one
       </Tab>
-      <Tab title="Account" handleTabClick={action("Set tab index to 2")}>
+      <Tab title="Account">
         <HeaderBar title="Account Settings" />
       </Tab>
-      <Tab title="Help" handleTabClick={action("Set tab index to 3")}>
+      <Tab title="Help">
         Tab three
       </Tab>
     </TabBar>
   ))
   .add("Tab 3 of 3 open", () => (
-    <TabBar isSelected={2}>
-      <Tab title="Settings" handleTabClick={action("Set tab index to 1")}>
+    <TabBar isSelected={2} handleTabClick={action("handleTabClick()")}>
+      <Tab title="Settings">
         Tab one
       </Tab>
-      <Tab title="Account" handleTabClick={action("Set tab index to 2")}>
+      <Tab title="Account">
         Tab two
       </Tab>
-      <Tab title="Help" handleTabClick={action("Set tab index to 3")}>
+      <Tab title="Help">
         <HeaderBar title="Support" />
       </Tab>
     </TabBar>

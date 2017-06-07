@@ -23,7 +23,7 @@ class Tab extends Component {
     return (
       <div
         className={`${styles.Tab} ${idx === isSelected ? styles.Active : ""}`}
-        onClick={handleTabClick}
+        onClick={() => handleTabClick(idx)}
       >
         {title}
         <Ink />
@@ -41,11 +41,15 @@ class TabBar extends Component {
   constructor() {
     super();
     this.state = {};
+    this.handleTabClick = this.handleTabClick.bind(this);
   }
   componentDidMount() {}
+  handleTabClick(idx) {
+    this.props.handleTabClick(idx);
+  }
   render() {
     let tabContent = <div />;
-    const { children, isSelected } = this.props;
+    const { children, handleTabClick, isSelected } = this.props;
 
     if (children && isSelected < children.length) {
       tabContent = (
@@ -58,7 +62,8 @@ class TabBar extends Component {
     const childrenWithProps = React.Children.map(children, (child, i) => {
       return React.cloneElement(child, {
         idx: i,
-        isSelected: isSelected
+        isSelected: isSelected,
+        handleTabClick: this.handleTabClick
       });
     });
 
@@ -73,6 +78,7 @@ class TabBar extends Component {
 
 TabBar.propTypes = {
   children: PropTypes.array,
+  handleTabClick: PropTypes.func,
   isSelected: PropTypes.number
 };
 
