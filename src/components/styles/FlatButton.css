@@ -1,17 +1,18 @@
-.RaisedButton {
-  background: #F1F1F2;
-  box-shadow: 1px 2px 4px 0 rgba(0,0,0,0.25);
-  color: #333;
+.FlatButton {
+  background: transparent;
+  color: #2196F3;
   cursor: pointer;
   padding: 5px 15px 10px 15px;
   position: relative;
   text-align: center;
-  width: 120px;
+  width: 90px;
   height: 30px;
   line-height: 35px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: normal;
+  font-size: 14px;
+  text-transform: uppercase;
 }
 .Icon {
   transform: translateY(5px);
@@ -20,4 +21,8 @@
 .disabled {
   color: #a0a0a0;
   cursor: not-allowed;
+}
+
+.IsOver {
+  background: #ebebeb;
 }
