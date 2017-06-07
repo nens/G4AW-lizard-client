@@ -6,12 +6,12 @@ import { theStore } from "../store/Store";
 
 import { getParcelAttributes } from "../tools/wfs";
 
-export const getAttributesFromGeoserverAction = parcelId({
+export const getAttributesFromGeoserverAction = parcelId => ({
   type: GET_ATTRIBUTES_FROM_GEOSERVER,
   parcelId: parcelId
 });
 
-export const receiveAttributesFromGeoserverAction = (parcelId, data)({
+export const receiveAttributesFromGeoserverAction = (parcelId, data) => ({
   type: RECEIVE_ATTRIBUTES_FROM_GEOSERVER,
   parcelId: parcelId,
   data: data

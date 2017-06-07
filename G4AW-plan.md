@@ -113,8 +113,6 @@ Zie [scenarios](https://github.com/nens/G4AW-lizard-client/blob/master/G4AW-scen
 Storyboards en UI Components
 ----------------------------
 
-![alt](https://github.com/nens/G4AW-lizard-client/blob/master/ui/ux-session.jpg?raw=true)
-
 - [Storyboards PDF](https://github.com/nens/G4AW-lizard-client/blob/master/ui/lizard-mobile-g4aw-final.pdf)
 
 - [UI States as SVG and PNG](https://github.com/nens/G4AW-lizard-client/blob/master/ui/ui-states/)
