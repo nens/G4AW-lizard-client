@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Component shows word Test as the title 1`] = `
+<div
+  className="HeaderBar"
+>
+  Test
+  <div
+    className="ActionButton"
+    onClick={undefined}
+  >
+    <i
+      className="ActionButtonIcon material-icons"
+    />
+  </div>
+</div>
+`;
