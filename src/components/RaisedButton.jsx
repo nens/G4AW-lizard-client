@@ -1,7 +1,7 @@
 import { translate } from "react-i18next";
 import Ink from "react-ink";
 import PropTypes from "prop-types";
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import ReactDOM from "react-dom";
 import styles from "./styles/RaisedButton.css";
 
@@ -13,7 +13,7 @@ import {
 
 // A RaisedButton emphasizes important functions on in the app.
 
-class RaisedButton extends Component {
+class RaisedButton extends PureComponent {
   constructor() {
     super();
     this.state = {};
@@ -43,4 +43,5 @@ RaisedButton.propTypes = {
   iconClass: PropTypes.string
 };
 
+export { RaisedButton };
 export default translate()(RaisedButton);

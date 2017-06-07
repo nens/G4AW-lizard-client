@@ -130,6 +130,54 @@ This front-end uses React and Redux. These extensions may help:
 - Redux Devtools for [Chrome](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd?hl=en) or [Firefox](https://addons.mozilla.org/en-Gb/firefox/addon/remotedev/)
 
 
+
+## Testing
+
+### Snapshot Testing
+
+To check if UI components in `src/components` behave and look consistently, we've set up [Snapshot testing](https://facebook.github.io/jest/docs/snapshot-testing.html).
+
+To run the test suite:
+
+```
+$ yarn test
+```
+
+This will run the React tests in `__tests__` and should output something like the following:
+
+```bash
+yarn test v0.17.10
+$ jest -u
+ PASS  __tests__/HeaderBar.react-test.js
+ PASS  __tests__/RaisedButton.react-test.js
+
+Snapshot Summary
+ › 1 snapshot updated in 1 test suite.
+
+Test Suites: 2 passed, 2 total
+Tests:       2 passed, 2 total
+Snapshots:   1 updated, 1 passed, 2 total
+Time:        1.174s
+Ran all test suites.
+✨  Done in 2.01s.
+```
+
+If you modify a component and re-run the snapshot test, the test for the modified component should complain.
+
+To regenerate all snapshots at once, run `yarn test -- -u`.
+
+### Snapshot Testing of React Components with a HoC
+
+Snapshot testing should be done on dump/pure components without any higher-order component attached.
+
+This can be achieved easily through exporting components as follows:
+
+```js
+export { RaisedButton };  // Used in Snapshot tests: import { RaisedButton } from ...
+export default translate()(RaisedButton); // Used in the application: import RaisedButton from ...
+```
+
+
 ## Building a production bundle
 
 ```bash
