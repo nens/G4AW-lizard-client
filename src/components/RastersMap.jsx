@@ -52,14 +52,14 @@ class RastersMapComponent extends React.Component {
             url="https://{s}.tiles.mapbox.com/v3/nelenschuurmans.iaa98k8k/{z}/{x}/{y}.png"
             attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
           />
-          {visibleRasters.map(raster => (
+          {visibleRasters.map(raster =>
             <WMSTileLayer
               url={raster.wms_info.endpoint}
               key={raster.uuid}
               layers={raster.wms_info.layer}
               styles={raster.options.styles}
             />
-          ))}
+          )}
         </Map>
       </div>
     );
