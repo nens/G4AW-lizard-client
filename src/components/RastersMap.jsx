@@ -17,7 +17,7 @@ class RastersMapComponent extends React.Component {
   }
 
   componentDidMount() {
-    this.props.getRaster(hoogteUuid);
+    // this.props.getRaster(hoogteUuid);
   }
 
   getWidth() {

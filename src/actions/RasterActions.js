@@ -48,7 +48,6 @@ export function getRaster(uuid, dispatch) {
   dispatch(fetchRaster(uuid));
   // Send a request, store the resulting raster.
   getRasterDetail(uuid).then(data => {
-    // console.log('Received raster: ', data.toString());
     dispatch(receiveRaster(uuid, data));
   });
 

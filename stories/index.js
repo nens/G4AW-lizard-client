@@ -11,7 +11,9 @@ import RaisedButton from "../src/components/RaisedButton.jsx";
 import React from "react";
 import SearchBar from "../src/components/SearchBar.jsx";
 import SearchResultCard from "../src/components/SearchResultCard.jsx";
+import SimpleLineChart from "../src/components/SimpleLineChart.jsx";
 import SnackBar from "../src/components/SnackBar.jsx";
+import TimeseriesChart from "../src/components/TimeseriesChart.jsx";
 import ViewSwitchButton from "../src/components/ViewSwitchButton.jsx";
 
 storiesOf("HeaderBar", module)
@@ -197,10 +199,114 @@ storiesOf("SnackBar", module).add("in vietnamese", () => (
   />
 ));
 
-storiesOf("TimeseriesGraph", module)
+storiesOf("TimeseriesChart", module)
   .addDecorator(getStory => (
     <Provider store={theStore}>
       {getStory()}
     </Provider>
   ))
-  .add("foobar", () => <TimeseriesGraph />);
+  .add("timeseries", () => <TimeseriesChart />);
+
+storiesOf("SimpleLineChart", module)
+  .addDecorator(getStory => (
+    <Provider store={theStore}>
+      {getStory()}
+    </Provider>
+  ))
+  .add("tiny and simple", () => (
+    <SimpleLineChart
+      lineColor="#8884d8"
+      width={250}
+      height={120}
+      data={[
+        { timestamp: 1495519200000, value: 17.3 },
+        { timestamp: 1495522800000, value: 19.2 },
+        { timestamp: 1495526400000, value: 19.8 },
+        { timestamp: 1495530000000, value: 20.4 },
+        { timestamp: 1495533600000, value: 19.9 },
+        { timestamp: 1495537200000, value: 19.3 },
+        { timestamp: 1495540800000, value: 19.1 },
+        { timestamp: 1495544400000, value: 19.2 },
+        { timestamp: 1495548000000, value: 19.2 },
+        { timestamp: 1495551600000, value: 18.2 },
+        { timestamp: 1495555200000, value: 17.5 },
+        { timestamp: 1495558800000, value: 16.0 },
+        { timestamp: 1495562400000, value: 15.3 },
+        { timestamp: 1495566000000, value: 14.7 },
+        { timestamp: 1495569600000, value: 13.5 },
+        { timestamp: 1495573200000, value: 13.1 },
+        { timestamp: 1495576800000, value: 12.6 },
+        { timestamp: 1495580400000, value: 12.0 },
+        { timestamp: 1495584000000, value: 11.4 },
+        { timestamp: 1495587600000, value: 11.2 },
+        { timestamp: 1495591200000, value: 11.3 },
+        { timestamp: 1495594800000, value: 10.9 },
+        { timestamp: 1495598400000, value: 11.2 },
+        { timestamp: 1495602000000, value: 13.0 },
+        { timestamp: 1495605600000, value: 14.8 },
+        { timestamp: 1495609200000, value: 15.7 },
+        { timestamp: 1495612800000, value: 16.3 },
+        { timestamp: 1495616400000, value: 17.4 },
+        { timestamp: 1495620000000, value: 18.1 },
+        { timestamp: 1495623600000, value: 18.7 },
+        { timestamp: 1495627200000, value: 20.0 },
+        { timestamp: 1495630800000, value: 19.9 },
+        { timestamp: 1495634400000, value: 20.0 },
+        { timestamp: 1495638000000, value: 19.8 },
+        { timestamp: 1495641600000, value: 19.3 },
+        { timestamp: 1495645200000, value: 18.2 },
+        { timestamp: 1495648800000, value: 17.1 },
+        { timestamp: 1495652400000, value: 15.7 },
+        { timestamp: 1495656000000, value: null }
+      ]}
+    />
+  ))
+  .add("larger, with grid", () => (
+    <SimpleLineChart
+      lineColor="#8884d8"
+      showGrid={true}
+      width={500}
+      height={300}
+      data={[
+        { timestamp: 1495519200000, value: 17.3 },
+        { timestamp: 1495522800000, value: 19.2 },
+        { timestamp: 1495526400000, value: 19.8 },
+        { timestamp: 1495530000000, value: 20.4 },
+        { timestamp: 1495533600000, value: 19.9 },
+        { timestamp: 1495537200000, value: 19.3 },
+        { timestamp: 1495540800000, value: 19.1 },
+        { timestamp: 1495544400000, value: 19.2 },
+        { timestamp: 1495548000000, value: 19.2 },
+        { timestamp: 1495551600000, value: 18.2 },
+        { timestamp: 1495555200000, value: 17.5 },
+        { timestamp: 1495558800000, value: 16.0 },
+        { timestamp: 1495562400000, value: 15.3 },
+        { timestamp: 1495566000000, value: 14.7 },
+        { timestamp: 1495569600000, value: 13.5 },
+        { timestamp: 1495573200000, value: 13.1 },
+        { timestamp: 1495576800000, value: 12.6 },
+        { timestamp: 1495580400000, value: 12.0 },
+        { timestamp: 1495584000000, value: 11.4 },
+        { timestamp: 1495587600000, value: 11.2 },
+        { timestamp: 1495591200000, value: 11.3 },
+        { timestamp: 1495594800000, value: 10.9 },
+        { timestamp: 1495598400000, value: 11.2 },
+        { timestamp: 1495602000000, value: 13.0 },
+        { timestamp: 1495605600000, value: 14.8 },
+        { timestamp: 1495609200000, value: 15.7 },
+        { timestamp: 1495612800000, value: 16.3 },
+        { timestamp: 1495616400000, value: 17.4 },
+        { timestamp: 1495620000000, value: 18.1 },
+        { timestamp: 1495623600000, value: 18.7 },
+        { timestamp: 1495627200000, value: 20.0 },
+        { timestamp: 1495630800000, value: 19.9 },
+        { timestamp: 1495634400000, value: 20.0 },
+        { timestamp: 1495638000000, value: 19.8 },
+        { timestamp: 1495641600000, value: 19.3 },
+        { timestamp: 1495645200000, value: 18.2 },
+        { timestamp: 1495648800000, value: 17.1 },
+        { timestamp: 1495652400000, value: 15.7 },
+        { timestamp: 1495656000000, value: null }
+      ]}
+    />
+  ));
