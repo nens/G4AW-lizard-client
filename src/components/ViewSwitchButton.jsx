@@ -48,7 +48,6 @@ class ViewSwitchButton extends Component {
 }
 
 ViewSwitchButton.propTypes = {
-  open: PropTypes.bool,
   viewIsMap: PropTypes.bool
 };
 
