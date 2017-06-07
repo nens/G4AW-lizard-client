@@ -1,16 +1,16 @@
-import * as ActionTypes from '../constants/ActionTypes';
+import * as ActionTypes from "../constants/ActionTypes";
+import { initialRastersState } from "../store/Store";
 
-import omit from 'lodash/omit';
+import omit from "lodash/omit";
 
-let defaultState = {};
-
-export default function (state = defaultState, action) {
-
-  let newState = { ...state };
+export default function(state = initialRastersState, action) {
+  let newState;
   let newRaster;
 
   switch (action.type) {
     case ActionTypes.FETCH_RASTER:
+      newState = { ...state };
+
       if (action.uuid in newState) {
         newRaster = { ...newState[action.uuid] };
       } else {
@@ -24,11 +24,12 @@ export default function (state = defaultState, action) {
       newState[action.uuid] = newRaster;
       return newState;
     case ActionTypes.RECEIVE_RASTER:
+      newState = { ...state };
       newRaster = { ...newState[action.uuid] };
       newRaster.isFetching = false;
       if (action.data === null) {
         newRaster.data = null;
-        newRaster.error = 'Error while fetching raster!';
+        newRaster.error = "Error while fetching raster!";
       } else {
         newRaster.data = action.data;
         newRaster.error = null;
@@ -36,7 +37,7 @@ export default function (state = defaultState, action) {
       newState[action.uuid] = newRaster;
       return newState;
     case ActionTypes.REMOVE_RASTER:
-      return omit(newState, action.uuid);
+      return omit(state, action.uuid);
     default:
       return state;
   }
