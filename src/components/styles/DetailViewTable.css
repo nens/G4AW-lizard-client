@@ -1,0 +1,50 @@
+.DetailViewTable {
+  width: 100%;
+  background-color: #fff;
+  line-height: 50px;
+  font-size: 18px;
+}
+.Table {
+  color: #333;
+  font-size: 12px;
+  margin: 20px;
+  width: 95%;
+  border-collapse: collapse;
+}
+.Row {
+  border-bottom: 1px solid #d7d7d7;
+}
+.ColKey {
+  width: 40%;
+}
+.ColValue {
+}
+.Yes {
+  color: darkgreen;
+}
+.No {
+  color: darkred;
+}
+.Indicator {
+  width: 30px;
+  height: 30px;
+  text-align: center;
+}
+.IndicatorSuccess {
+  color: #fff;
+  background-color: #2cbe4e;
+  border-radius: 50%;
+}
+.IndicatorFailure {
+  color: #fff;
+  background-color: #ff0000;
+  border-radius: 50%;
+}
+.SVGIcon {
+  display: block;
+  fill: #fff;
+  padding-top: 7px;
+  margin-right: auto;
+  margin-left: auto;
+  vertical-align: text-bottom;
+}

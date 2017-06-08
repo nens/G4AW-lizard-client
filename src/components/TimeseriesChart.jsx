@@ -2,9 +2,9 @@ import { connect } from "react-redux";
 import { translate } from "react-i18next";
 import React, { Component, PropTypes } from "react";
 import ReactDOM from "react-dom";
+import { size, first, last } from "lodash";
 import { getTimeseries } from "../actions/TimeseriesActions";
 
-// import { LineChart, Line } from 'recharts';
 import {
   LineChart,
   Line,
@@ -14,21 +14,8 @@ import {
   Tooltip,
   Legend
 } from "recharts";
-import { size, first, last } from "lodash";
 
 const PARCEL_ID = 123;
-
-// class ChartInfo {
-//   constructor (events) {
-//     this.events = events;
-//     this.count = size(events);
-//     console.log("[C] ChartInfo.count:", this.count);
-//     console.log("[*] MAPPING...");
-//     rawData.map((event) => {
-//       console.log("*** event:", event);
-//     })
-//   }
-// }
 
 const formatTimestamp = timestamp => {
   const d = new Date(timestamp).toString();
@@ -41,7 +28,6 @@ class TimeseriesChartComponent extends Component {
     this.props.getTimeseries(123);
   }
   getTicks(events) {
-    console.log("[F] getTicks");
     const firstTick = formatTimestamp(events[0].timestamp);
     const lastTick = "+1 week";
     // return [firstTick, lastTick];

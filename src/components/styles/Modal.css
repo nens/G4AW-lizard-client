@@ -1,0 +1,30 @@
+.Modal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #333;
+  background-color: #000;
+  opacity: 0.8;
+}
+.ModalInner {
+  flex: none;
+  width: 70%;
+  height: 60%;
+  background-color: #fff;
+  padding: 30px;
+  position: relative;
+}
+.Title {
+  font-size: 1.5em;
+  font-weight: 400;
+}
+.ActionButtons {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  margin: 15px;
+  display: inline-flex;
+}
+.ButtonWrapper {
+  margin: 5px;
+}

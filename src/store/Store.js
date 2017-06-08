@@ -41,11 +41,12 @@ export const initialRastersState = {};
 export const initialSettingsState = {};
 
 const initialState = {
-  ui: initialUiState,
+  ui: initialUiState, // TODO
+  geoLocation: initialGeoLocationState, // TODO
+  parcels: initialParcelsState, // TODO
+  photosForParcel: initialPhotosForParcelState, //TODO
+
   search: initialSearchState,
-  geoLocation: initialGeoLocationState,
-  parcels: initialParcelsState,
-  photosForParcel: initialPhotosForParcelState,
   timeseries: initialTimeseriesState,
   rasters: initialRastersState,
   settings: initialSettingsState
@@ -66,36 +67,3 @@ function configureStore(initialState = {}, externalReducers = {}) {
 }
 
 export const theStore = configureStore(initialState);
-
-/*
-State = {
-  rasters: {
-    <Raster UUID 1>: {
-      isFetching: <Boolean>,
-      data: <RasterStoreObject 1>,  // "data" and "error" values are mutual
-      error: <String[]>            // exclusive: max. one will be set.
-    },
-    <Raster UUID 2>: {
-      isFetching: <Boolean>,
-      data: <RasterStoreObject 2>,
-      error: <String[]>
-    },
-  },
-  search: {
-      isFetching: <Boolean>,
-      results: <SearchResult[]> if successfully requested, or null otherwise
-  },
-  timeseries: {
-    <Parcel ID 1>: {
-      isFetching: <Boolean>,
-      data: <TimeseriesObject 1
-      error: <String[]>
-    },
-    <Parcel ID 2>: {
-      isFetching: <Boolean>,
-      data: <TimeseriesObject 2>,
-      error: <String[]>
-    }
-  }
-}
-*/

@@ -5,6 +5,7 @@ import {
 } from "../constants/ActionTypes";
 import { theStore } from "../store/Store";
 
+import { search } from "lizard-api-client";
 import { getParcelsByName } from "lizard-api-client";
 
 export const startSearch = () => ({
@@ -20,7 +21,7 @@ export const clearResults = () => ({
   type: CLEAR_SEARCH_RESULTS
 });
 
-export function doSearch(dispatch, q) {
+function doSearch(dispatch, q, types = null, exclude = []) {
   const currentData = theStore.getState().search;
 
   if (currentData && currentData.isFetching) {
@@ -29,6 +30,8 @@ export function doSearch(dispatch, q) {
   }
 
   dispatch(startSearch());
-
+  search(q, types, exclude).then(results => dispatch(receiveResults(results)));
   getParcelsByName(q).then(results => dispatch(receiveResults(results)));
 }
+
+export { doSearch };

@@ -7,6 +7,7 @@ import RaisedButton from "./RaisedButton";
 import RastersMap from "./RastersMap";
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
+import SearchBar from "./SearchBar";
 import styles from "./styles/MapSearchView.css";
 
 import {
@@ -37,6 +38,7 @@ class MapSearchView extends Component {
     }
     return (
       <div className={styles.MapSearchView}>
+        <SearchBar />
         <RastersMap />
       </div>
     );
