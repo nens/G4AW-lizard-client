@@ -35,6 +35,9 @@ runHeaderBar();
 import runInputField from "./InputFieldStories";
 runInputField();
 
+import runLayerSelection from "./LayerSelectionStories";
+runLayerSelection();
+
 import runSearchResultCard from "./SearchResultCardStories";
 runSearchResultCard();
 
