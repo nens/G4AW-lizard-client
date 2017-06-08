@@ -3,11 +3,7 @@ import PropTypes from "prop-types";
 import ReactDOM from "react-dom";
 import styles from "./styles/SnackBar.css";
 
-import {
-  VelocityTransitionGroup,
-  VelocityComponent,
-  velocityHelpers
-} from "velocity-react";
+import { VelocityComponent } from "velocity-react";
 
 // A SnackBar component provides brief feedback about an operation through
 // a message at the bottom of the screen.
@@ -19,50 +15,40 @@ class SnackBar extends Component {
     this.state = {
       showComponent: true
     };
-    this.setAutoHideTimer = this.setAutoHideTimer.bind(this);
   }
   componentDidMount() {
-    if (this.state.showComponent) {
+    if (this.state.showComponent && this.props.autoHideDuration) {
       this.setAutoHideTimer();
     }
   }
   setAutoHideTimer() {
-    const autoHideDuration = this.props.autoHideDuration;
-
-    if (autoHideDuration > 0) {
-      clearTimeout(this.timerAutoHideId);
-      this.timerAutoHideId = setTimeout(() => {
-        if (this.props.open !== null && this.props.onRequestClose) {
-          this.props.onRequestClose("timeout");
-        } else {
-          this.setState({ showComponent: false });
-        }
-      }, autoHideDuration);
-    }
+    clearTimeout(this.timerAutoHideId);
+    this.timerAutoHideId = setTimeout(() => {
+      if (this.props.open !== null && this.props.onRequestClose) {
+        this.props.onRequestClose("timeout");
+      } else {
+        this.setState({ showComponent: false });
+      }
+    }, this.props.autoHideDuration);
   }
   render() {
-    const { message, subMessage, onActionTap, action } = this.props;
-    const { showComponent } = this.state;
     return (
       <VelocityComponent
+        duration={250}
         animation={{
           translateX: "35%",
-          // translateY: showComponent ? 0 : "100%",
-          opacity: showComponent ? 1 : 0
+          opacity: this.state.showComponent ? 1 : 0
         }}
-        duration={250}
       >
-        <div className={styles.SnackBar}>
-          <div onClick={onActionTap} className={styles.ActionButton}>
-            {action ? action : "OK"}
-          </div>
-          <p className={styles.Message}>{message ? message : "..."}</p>
-          {subMessage ? <p className={styles.SubMessage}>{subMessage}</p> : ""}
-        </div>
+        <SnackBarContent {...this.props} />
       </VelocityComponent>
     );
   }
 }
+
+///////////////////////////////////////////////////////////////////////////////
+// type-checking for main Component ///////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
 
 SnackBar.propTypes = {
   action: PropTypes.string,
@@ -71,5 +57,32 @@ SnackBar.propTypes = {
   subMessage: PropTypes.string,
   open: PropTypes.bool
 };
+
+///////////////////////////////////////////////////////////////////////////////
+// local sub-components ///////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
+
+class SnackBarContent extends Component {
+  getMessage(message) {
+    return <p className={styles.Message}>{message || "..."}</p>;
+  }
+  getSubMessage(subMessage) {
+    return subMessage
+      ? <p className={styles.SubMessage}>{subMessage}</p>
+      : null;
+  }
+  render() {
+    const { onActionTap, actionText, message, subMessage } = this.props;
+    return (
+      <div className={styles.SnackBar}>
+        <div onClick={onActionTap} className={styles.ActionButton}>
+          {actionText || "OK"}
+        </div>
+        {this.getMessage(message)}
+        {this.getSubMessage(subMessage)}
+      </div>
+    );
+  }
+}
 
 export default SnackBar;

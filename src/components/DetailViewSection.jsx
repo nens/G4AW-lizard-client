@@ -5,10 +5,16 @@ import CollapsibleBar from "./CollapsibleBar";
 import styles from "./styles/DetailViewSection.css";
 
 ///////////////////////////////////////////////////////////////////////////////
-// The main Component; the DetailViewSection //////////////////////////////////
+// The main Component; the (generic) DetailViewSection ////////////////////////
+// The final form of these components will be rely heavy on the value of //////
+// 'this.props.children' property, as declared in the wrapping Component. /////
+//                                                                           //
+// Currently, the following non-generic instantiations are possible: //////////
+// 1) DetailViewTableSection
+// 2) DetailViewThumbnailsSection
 ///////////////////////////////////////////////////////////////////////////////
 
-class DetailViewSection extends Component {
+export default class DetailViewSection extends Component {
   constructor() {
     super();
     this.state = {};
@@ -21,17 +27,18 @@ class DetailViewSection extends Component {
       handleClick,
       title,
       subtitle,
-      open
+      isOpen
     } = this.props;
+    const content = isOpen ? children : null;
     return (
       <div className={styles.DetailViewSection} onClick={handleClick}>
         <CollapsibleBar
           title={title}
           subTitle={subtitle}
           colorCode={colorCode}
-          open={open}
+          isOpen={isOpen}
         />
-        {open ? children : ""}
+        {content}
       </div>
     );
   }
@@ -48,5 +55,3 @@ DetailViewSection.propTypes = {
   title: PropTypes.string,
   subtitle: PropTypes.string
 };
-
-export default DetailViewSection;

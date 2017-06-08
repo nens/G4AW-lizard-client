@@ -1,6 +1,4 @@
 import { translate } from "react-i18next";
-import GeolocationAvailable from "./svg/GeolocationAvailable.svg";
-import GeolocationUnavailable from "./svg/GeolocationUnavailable.svg";
 import Ink from "react-ink";
 import PropTypes from "prop-types";
 import RaisedButton from "./RaisedButton";
@@ -8,6 +6,8 @@ import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import SearchBar from "./SearchBar";
 import styles from "./styles/ListSearchView.css";
+
+import GeolocateButtonBig from "./GeolocateButtonBig";
 
 import {
   VelocityTransitionGroup,
@@ -44,18 +44,21 @@ class ListSearchView extends Component {
       this.performGeolocation();
     }
   }
+  getMapboxUrl(coords) {
+    return (
+      "https://api.mapbox.com/geocoding/v5/mapbox.places/" +
+      coords.longitude +
+      "," +
+      coords.latitude +
+      ".json?access_token=pk.eyJ1IjoibmVsZW5zY2h1dXJtYW5zIiwiYSI6ImhkXzhTdXc" +
+      "ifQ.3k2-KAxQdyl5bILh_FioCw"
+    );
+  }
   performGeolocation() {
     navigator.geolocation.getCurrentPosition(
       success => {
-        fetch(
-          `https://api.mapbox.com/geocoding/v5/mapbox.places/${success.coords.longitude},${success.coords.latitude}.json?access_token=pk.eyJ1IjoibmVsZW5zY2h1dXJtYW5zIiwiYSI6ImhkXzhTdXcifQ.3k2-KAxQdyl5bILh_FioCw`,
-          {
-            mode: "cors"
-          }
-        )
-          .then(response => {
-            return response.json();
-          })
+        fetch(this.getMapboxUrl(success.coords), { mode: "cors" })
+          .then(response => response.json())
           .then(data => {
             this.setState({
               placeName: data.features[0].place_name,
@@ -80,47 +83,29 @@ class ListSearchView extends Component {
     );
   }
   render() {
-    const { t, performGeolocation } = this.props;
-    let geolocateButton;
-    if (this.state.geolocationSupport) {
-      if (this.state.latitude && this.state.longitude) {
-        geolocateButton = (
-          <div className={styles.Geolocate} onClick={this.performGeolocation}>
-            <img src={GeolocationAvailable} />
-            <p>{this.state.placeName}</p>
-          </div>
-        );
-      } else {
-        geolocateButton = (
-          <div className={styles.Geolocate}>
-            <img src={GeolocationUnavailable} />
-            <p>{this.state.errorMessage}</p>
-          </div>
-        );
-      }
-    } else {
-      geolocateButton = (
-        <div className={styles.Geolocate}>
-          <img src={GeolocationUnavailable} />
-          <p>{t("No geolocation support")}</p>
-          <p>{this.state.errorMessage}</p>
-        </div>
-      );
-    }
+    const { performGeolocation } = this.props;
+    const s = this.state;
+    const handleClick = s.geolocationSupport && s.latitude && s.longitude
+      ? this.performGeolocation
+      : () => false;
     return (
       <div className={styles.ListSearchView}>
         <SearchBar />
-        <h1 className={styles.Welcome}>{t("Welcome")}</h1>
+        <h1 className={styles.Welcome}>Welcome</h1>
         <h5 className={styles.GetStarted}>
-          {t("Tap to see the field nearby")}
+          {"Tap to see the field nearby"}
         </h5>
-        {geolocateButton}
-        <RaisedButton buttonText={t("Login")} iconClass="lock" />
+        <GeolocateButtonBig
+          handleClick={handleClick}
+          supportsGeolocate={this.state.geolocationSupport}
+          hasCoords={this.state.latitude && this.state.longitude}
+          placeName={this.state.placeName}
+          errorMessage={this.state.errorMessage}
+        />
+        <RaisedButton buttonText={"Login"} iconClass="lock" />
       </div>
     );
   }
 }
-
-ListSearchView.propTypes = {};
 
 export default translate()(ListSearchView);

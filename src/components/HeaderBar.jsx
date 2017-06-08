@@ -6,11 +6,6 @@ import styles from "./styles/HeaderBar.css";
 // A HeaderBar component.
 
 class HeaderBar extends Component {
-  constructor() {
-    super();
-    this.state = {};
-  }
-  componentDidMount() {}
   render() {
     const { title, icon, handleClick } = this.props;
     return (
