@@ -6,6 +6,7 @@ import {
 import { theStore } from "../store/Store";
 
 import { search } from "lizard-api-client";
+import { getParcelsByName } from "lizard-api-client";
 
 export const startSearch = () => ({
   type: START_SEARCH
@@ -29,8 +30,8 @@ function doSearch(dispatch, q, types = null, exclude = []) {
   }
 
   dispatch(startSearch());
-
   search(q, types, exclude).then(results => dispatch(receiveResults(results)));
+  getParcelsByName(q).then(results => dispatch(receiveResults(results)));
 }
 
 export { doSearch };
