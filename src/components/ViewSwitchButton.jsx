@@ -5,41 +5,61 @@ import ReactDOM from "react-dom";
 import Ink from "react-ink";
 import styles from "./styles/ViewSwitchButton.css";
 
-import {
-  VelocityTransitionGroup,
-  VelocityComponent,
-  velocityHelpers
-} from "velocity-react";
-
-// A ViewSwitchButton switches between map and omnibox contexts.
+///////////////////////////////////////////////////////////////////////////////
+// A ViewSwitchButton switches between map and omnibox contexts. //////////////
+///////////////////////////////////////////////////////////////////////////////
 
 class ViewSwitchButton extends Component {
-  constructor() {
-    super();
-    this.state = {};
-  }
-  componentDidMount() {}
   render() {
-    const { t } = this.props;
+    const { t, viewIsMap } = this.props;
     return (
       <div
         className={styles.ViewSwitchButton}
         onClick={this.props.handleOnClick}
       >
-        <span>
-          <i className={`material-icons ${styles.Icon}`}>track_changes</i>
-          <span className={styles.Message}>
-            {t("Click here to explore the map")}
-          </span>
-        </span>
+        {viewIsMap ? <SwitchToListButton t={t} /> : <SwitchToMapButton t={t} />}
         <Ink />
       </div>
     );
   }
 }
 
+///////////////////////////////////////////////////////////////////////////////
+// Type-checking for main Component ///////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
+
 ViewSwitchButton.propTypes = {
-  open: PropTypes.bool
+  viewIsMap: PropTypes.bool
 };
+
+///////////////////////////////////////////////////////////////////////////////
+// local sub-components ///////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
+
+class SwitchToMapButton extends Component {
+  render() {
+    return (
+      <div>
+        <i className={`material-icons ${styles.Icon}`}>track_changes</i>
+        <span className={styles.Message}>
+          {this.props.t("Click here to explore the map")}
+        </span>
+      </div>
+    );
+  }
+}
+
+class SwitchToListButton extends Component {
+  render() {
+    return (
+      <div>
+        <i className={`material-icons ${styles.Icon}`}>apps</i>
+        <span className={styles.Message}>
+          {this.props.t("Click here to view the search results")}
+        </span>
+      </div>
+    );
+  }
+}
 
 export default translate()(ViewSwitchButton);
