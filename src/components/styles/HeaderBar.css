@@ -6,7 +6,9 @@
   text-transform: uppercase;
   line-height: 50px;
   font-size: 18px;
-  padding: 0 0 0 20px;
+  padding: 0 0 0 0;
+  margin: 10px 0 0 0;
+  position: relative;
 }
 
 .ActionButton {
@@ -14,4 +16,9 @@
   cursor: pointer;
   right: 25px;
   top: 5px;
+}
+
+.Title {
+  left: 15px;
+  position: absolute;
 }

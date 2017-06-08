@@ -5,12 +5,12 @@ import styles from "./styles/HeaderBar.css";
 
 // A HeaderBar component.
 
-class HeaderBar extends Component {
+export default class HeaderBar extends Component {
   render() {
     const { title, icon, handleClick } = this.props;
     return (
       <div className={styles.HeaderBar}>
-        {title}
+        <span className={styles.Title}>{title}</span>
         <div className={styles.ActionButton} onClick={handleClick}>
           <i className={`${styles.ActionButtonIcon} material-icons`}>{icon}</i>
         </div>
@@ -24,5 +24,3 @@ HeaderBar.propTypes = {
   icon: PropTypes.string,
   title: PropTypes.string
 };
-
-export default HeaderBar;
