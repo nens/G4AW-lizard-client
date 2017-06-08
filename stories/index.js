@@ -32,6 +32,9 @@ runCollapsibleBar();
 import runHeaderBar from "./HeaderBarStories";
 runHeaderBar();
 
+import runInputField from "./InputFieldStories";
+runInputField();
+
 import runSearchResultCard from "./SearchResultCardStories";
 runSearchResultCard();
 
@@ -53,17 +56,14 @@ runViewSwitchButton();
 import runSearchBar from "./SearchBarStories";
 runSearchBar();
 
+import runSimpleLineChart from "./SimpleLineChartStories";
+runSimpleLineChart();
+
 import runSnackBar from "./SnackBarStories";
 runSnackBar();
 
 import runTimeseriesChart from "./TimeseriesChartStories";
 runTimeseriesChart();
 
-import runInputField from "./InputFieldStories";
-runInputField();
-
 import runToggleSwitch from "./ToggleSwitchStories";
 runToggleSwitch();
-
-import runSimpleLineChart from "./SimpleLineChartStories";
-runSimpleLineChart();

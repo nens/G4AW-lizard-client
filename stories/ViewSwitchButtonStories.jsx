@@ -7,10 +7,16 @@ import ViewSwitchButton from "../src/components/ViewSwitchButton";
 export default function runLoginLogoutButton() {
   storiesOf("ViewSwitchButton", module)
     .addDecorator(i18nDecorator)
-    .add("switch to map", () => (
-      <ViewSwitchButton handleOnClick={action("Clicked (switch to map")} />
+    .add("switch to map-view", () => (
+      <ViewSwitchButton
+        handleOnClick={action("Clicked (switch to map-view")}
+        viewIsMap={false}
+      />
     ))
-    .add("switch to omnibox", () => (
-      <ViewSwitchButton handleOnClick={action("Clicked (switch to omnibox)")} />
+    .add("switch to list-view", () => (
+      <ViewSwitchButton
+        handleOnClick={action("Clicked (switch to list-view)")}
+        viewIsMap={true}
+      />
     ));
 }
