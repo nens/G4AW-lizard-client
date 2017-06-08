@@ -1,0 +1,91 @@
+.DetailViewPhoto {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #333;
+  background-color: #000;
+}
+.DetailViewPhotoInner {
+  display: flex;
+  flex-direction: column;
+}
+.BackButton {
+  cursor: pointer;
+}
+.PrevPhoto {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  height: 100%;
+  width: 200px;
+  cursor: pointer;
+}
+.NextPhoto {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  height: 100%;
+  width: 200px;
+  cursor: pointer;
+  right: 0;
+}
+.LeftArrowIcon {
+  position: absolute;
+  font-size: 4em;
+  color: #fff;
+}
+.RightArrowIcon {
+  position: absolute;
+  right: 0;
+  font-size: 4em;
+  color: #fff;
+}
+.TopPanel {
+  display: flex;
+  flex: 2;
+  min-height: 50px;
+  max-height: 50px;
+  z-index: 999;
+  color: #fff;
+  background-color: #000;
+  justify-content: space-between;
+}
+.TopPanel div {
+  margin: 12px;
+}
+.PhotoPanel {
+  display: flex;
+  flex: 20;
+  background-color: #969696;
+}
+.PhotoPropertiesPanel {
+  display: flex;
+  flex: 3;
+  color: white;
+  min-height: 100px;
+  max-height: 100px;
+  background-color: black;
+}
+.General {
+  font-weight: 200;
+  color: #fff;
+  text-transform: uppercase;
+  padding: 0;
+  margin: 10px 0 0 0;
+  line-height: 30px;
+}
+.PhotoProperties {
+  width: 100%;
+  margin: 0 0 0 20px;
+}
+.PropertiesTable {
+  font-size: 0.9em;
+  font-weight: 100;
+  width: 100%;
+  color: #d1d1d1;
+  padding: 0;
+  margin: 0;
+}
+.PropertiesTableFirstColumn {
+  width: 150px;
+}
