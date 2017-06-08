@@ -10,54 +10,6 @@ runDetailViewSection();
 import runTabBar from "./TabBarStories";
 runTabBar();
 
-// storiesOf("TabBar", module)
-//   .addDecorator(getStory => (
-//     <I18nextProvider i18n={i18n}>
-//       <Provider store={theStore}>
-//         {getStory()}
-//       </Provider>
-//     </I18nextProvider>
-//   ))
-//   .add("Tab 1 of 3 open", () => (
-//     <TabBar isSelected={0} handleTabClick={action("handleTabClick()")}>
-//       <Tab title="Settings">
-//         <HeaderBar title="Map Settings" />
-//       </Tab>
-//       <Tab title="Account">
-//         Tab two
-//       </Tab>
-//       <Tab title="Help">
-//         Tab three
-//       </Tab>
-//     </TabBar>
-//   ))
-//   .add("Tab 2 of 3 open", () => (
-//     <TabBar isSelected={1} handleTabClick={action("handleTabClick()")}>
-//       <Tab title="Settings">
-//         Tab one
-//       </Tab>
-//       <Tab title="Account">
-//         <HeaderBar title="Account Settings" />
-//       </Tab>
-//       <Tab title="Help">
-//         Tab three
-//       </Tab>
-//     </TabBar>
-//   ))
-//   .add("Tab 3 of 3 open", () => (
-//     <TabBar isSelected={2} handleTabClick={action("handleTabClick()")}>
-//       <Tab title="Settings">
-//         Tab one
-//       </Tab>
-//       <Tab title="Account">
-//         Tab two
-//       </Tab>
-//       <Tab title="Help">
-//         <HeaderBar title="Support" />
-//       </Tab>
-//     </TabBar>
-//   ));
-
 import runDetailViewThumbnails from "./DetailViewThumbnailsStories";
 runDetailViewThumbnails();
 
