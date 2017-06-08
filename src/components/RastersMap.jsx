@@ -9,17 +9,7 @@ import { getRaster } from "../actions/RasterActions";
 
 const hoogteUuid = "e9ed5725-d94a-4bcb-9dde-5d655da0070e";
 
-class RastersMapComponent extends React.Component {
-  constructor() {
-    super();
-    this.state = {};
-    this._handlePanOrZoomEnd = this._handlePanOrZoomEnd.bind(this);
-  }
-
-  componentDidMount() {
-    // this.props.getRaster(hoogteUuid);
-  }
-
+class RastersMapComponent extends Component {
   getWidth() {
     return (this.props.width || window.innerWidth) - VIEWPORT_PADDING + "px";
   }
@@ -52,14 +42,14 @@ class RastersMapComponent extends React.Component {
             url="https://{s}.tiles.mapbox.com/v3/nelenschuurmans.iaa98k8k/{z}/{x}/{y}.png"
             attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
           />
-          {/* {visibleRasters.map(raster => (
+          {visibleRasters.map(raster => (
             <WMSTileLayer
               url={raster.wms_info.endpoint}
               key={raster.uuid}
               layers={raster.wms_info.layer}
               styles={raster.options.styles}
             />
-          ))} */}
+          ))}
         </Map>
       </div>
     );
