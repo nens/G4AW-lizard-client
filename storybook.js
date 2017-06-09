@@ -49,6 +49,22 @@ app.use("/api", (req, res) => {
     .pipe(res);
 });
 
+app.use("/geoserver/g4aw/wms", (req, res) => {
+  const url = "https://nxt.staging.lizard.net/api" + req.url;
+  const headers = {
+    username: process.env.sso_user,
+    password: process.env.sso_pass
+  };
+  req
+    .pipe(
+      request({
+        url,
+        headers
+      })
+    )
+    .pipe(res);
+});
+
 app.listen(port, error => {
   if (error) {
     console.error(error);

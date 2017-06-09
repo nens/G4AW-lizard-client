@@ -4,7 +4,6 @@ import ReactDOM from "react-dom";
 import RastersMap from "./RastersMap";
 import SearchBar from "./SearchBar";
 import SearchResults from "./SearchResults";
-import TimeseriesGraph from "./TimeseriesGraph";
 import SnackBar from "./SnackBar";
 import ViewSwitchButton from "./ViewSwitchButton";
 

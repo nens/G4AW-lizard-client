@@ -23,11 +23,11 @@ runDetailViewTable();
 import runDetailViewTableSection from "./DetailViewTableSectionStories";
 runDetailViewTableSection();
 
-import runPhotoView from "./PhotoViewStories";
-runPhotoView();
-
 import runCollapsibleBar from "./CollapsibleBarStories";
 runCollapsibleBar();
+
+import runFlatButton from "./FlatButtonStories";
+runFlatButton();
 
 import runHeaderBar from "./HeaderBarStories";
 runHeaderBar();
@@ -41,23 +41,20 @@ runLayerSelection();
 import runLegend from "./LegendStories";
 runLegend();
 
-import runSearchResultCard from "./SearchResultCardStories";
-runSearchResultCard();
-
 import runListSearchView from "./ListSearchViewStories";
 runListSearchView();
-
-import runFlatButton from "./FlatButtonStories";
-runFlatButton();
-
-import runRaisedButton from "./RaisedButtonStories";
-runRaisedButton();
 
 import runLoginLogoutButton from "./LoginLogoutButtonStories";
 runLoginLogoutButton();
 
-import runViewSwitchButton from "./ViewSwitchButtonStories";
-runViewSwitchButton();
+import runPhotoView from "./PhotoViewStories";
+runPhotoView();
+
+import runRaisedButton from "./RaisedButtonStories";
+runRaisedButton();
+
+import runSearchResultCard from "./SearchResultCardStories";
+runSearchResultCard();
 
 import runSearchBar from "./SearchBarStories";
 runSearchBar();
@@ -73,3 +70,6 @@ runTimeseriesChart();
 
 import runToggleSwitch from "./ToggleSwitchStories";
 runToggleSwitch();
+
+import runViewSwitchButton from "./ViewSwitchButtonStories";
+runViewSwitchButton();

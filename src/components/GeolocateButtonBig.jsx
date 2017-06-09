@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import styles from "./styles/ListSearchView.css";
 
+import Ink from "react-ink";
+
 import GeolocationAvailable from "./svg/GeolocationAvailable.svg";
 import GeolocationUnavailable from "./svg/GeolocationUnavailable.svg";
 
