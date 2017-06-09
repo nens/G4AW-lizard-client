@@ -1,6 +1,6 @@
 {
-  "name": "lizard-state-client",
-  "version": "0.3.0",
+  "name": "G4AW-lizard-client",
+  "version": "0.1.0",
   "description": "Library for client-side storage/exposure of Lizard assets, rasters and timeseries.",
   "main": "src/index.js",
   "scripts": {
@@ -72,8 +72,8 @@
   },
   "repository": {
     "type": "git",
-    "name": "nens/lizard-state-client",
-    "url": "https://github.com/nens/lizard-state-client.git"
+    "name": "nens/G4AW-lizard-client",
+    "url": "https://github.com/nens/G4AW-lizard-client.git"
   },
   "keywords": [
     "lizard",
@@ -83,9 +83,9 @@
   "author": "Gijs Nijholt",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/nens/lizard-state-client/issues"
+    "url": "https://github.com/nens/G4AW-lizard-client/issues"
   },
-  "homepage": "https://github.com/nens/lizard-state-client",
+  "homepage": "https://github.com/nens/G4AW-lizard-client",
   "dependencies": {
     "es6-promise": "^4.0.5",
     "i18next": "^8.1.0",
