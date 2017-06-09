@@ -96,7 +96,7 @@ class LegendBody extends Component {
               {this.props.legendData.map((l, i) => {
                 return (
                   <tr key={i}>
-                    <td><LegendColor color={l.color} /></td>
+                    <td><LegendColorLabel color={l.color} /></td>
                     <td>{l.label}</td>
                   </tr>
                 );
@@ -109,7 +109,7 @@ class LegendBody extends Component {
   }
 }
 
-class LegendColor extends Component {
+class LegendColorLabel extends Component {
   render() {
     return (
       <div
