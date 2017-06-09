@@ -59,8 +59,9 @@ app.use("/api", (req, res) => {
     .pipe(res);
 });
 
-app.use("/geoserver", (req, res) => {
-  const url = "https://geoserver9.lizard.net/geoserver" + req.url;
+app.use("/proxy", (req, res) => {
+  // So I heard you like proxies...
+  const url = "https://nxt.staging.lizard.net/proxy" + req.url;
 
   req.pipe(request({ url })).pipe(res);
 });

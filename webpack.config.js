@@ -1,7 +1,7 @@
 const path = require("path");
 var webpack = require("webpack");
 
-var libraryName = "Lizard";
+var libraryName = "G4AWLizardClient";
 
 var config = {
   context: path.join(__dirname, "src"),
@@ -12,7 +12,7 @@ var config = {
   ],
   devtool: "inline-source-map",
   output: {
-    path: __dirname + "/lib",
+    path: __dirname + "/dist/scripts",
     filename: libraryName + ".js",
     publicPath: "/scripts/",
     library: libraryName,
