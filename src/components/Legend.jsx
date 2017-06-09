@@ -93,14 +93,12 @@ class LegendBody extends Component {
         <div className={styles.LegendBody}>
           <table className={styles.LegendTable}>
             <tbody>
-              {this.props.legendData.map((l, i) => {
-                return (
-                  <tr key={i}>
-                    <td><LegendColorLabel color={l.color} /></td>
-                    <td>{l.label}</td>
-                  </tr>
-                );
-              })}
+              {this.props.legendData.map((l, i) => (
+                <tr key={i}>
+                  <td><LegendColorLabel color={l.color} /></td>
+                  <td>{l.label}</td>
+                </tr>
+              ))}
             </tbody>
           </table>
         </div>
