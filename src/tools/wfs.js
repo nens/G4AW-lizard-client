@@ -1,5 +1,5 @@
 //const wfsUrl = "https://geoserver9.lizard.net/geoserver/g4aw/wms";
-const wfsUrl = "/geoserver/g4aw/wms"; // Proxied because of CORS errors
+const wfsUrl = "/proxy/http://geoserver9.lizard.net/geoserver/g4aw/wms"; // Proxied because of CORS errors
 
 const parcelLayer = "g4aw:g4aw_vn_ricefield_vin_bihn";
 
