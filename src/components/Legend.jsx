@@ -4,89 +4,125 @@ import ReactDOM from "react-dom";
 import { Scrollbars } from "react-custom-scrollbars";
 import styles from "./styles/Legend.css";
 
-class LegendColor extends Component {
-  render() {
-    const { color } = this.props;
-    return (
-      <div
-        className={styles.LegendColor}
-        style={{
-          backgroundColor: color
-        }}
-      />
-    );
-  }
-}
-
-// A Legend component.
+///////////////////////////////////////////////////////////////////////////////
+// The main Component; a legend (for discrete rasters). ///////////////////////
+///////////////////////////////////////////////////////////////////////////////
 
 class Legend extends Component {
-  constructor() {
-    super();
-    this.state = {};
-  }
-  componentDidMount() {}
   render() {
-    const {
-      isOpen,
-      data,
-      activeLegendIdx,
-      handleToggleLegend,
-      handlePreviousLayer,
-      handleNextLayer
-    } = this.props;
-    if (!isOpen) {
-      return null;
-    }
-
+    const { data, activeLegendIdx, isOpen } = this.props;
     const currentLayer = data[activeLegendIdx];
     const layerTitle = currentLayer.title;
-    const legend = currentLayer.legend;
+    const legendData = currentLayer.legend;
 
     return (
       <div className={styles.LegendWrapper}>
         <div className={styles.Legend}>
-          <div className={styles.LegendTopBar}>
-            <div
-              onClick={handlePreviousLayer}
-              className={styles.LayerSwitchButton}
-            >
-              <i className="material-icons">keyboard_arrow_left</i>
-            </div>
-            <div>{layerTitle}</div>
-            <div onClick={handleNextLayer} className={styles.LayerSwitchButton}>
-              <i className="material-icons">keyboard_arrow_right</i>
-            </div>
-            <div
-              onClick={handleToggleLegend}
-              className={styles.OpenCloseButton}
-            >
-              <i className="material-icons">
-                {isOpen ? "keyboard_arrow_down" : "keyboard_arrow_up"}
-              </i>
-            </div>
-          </div>
-          <Scrollbars style={{ width: "100%", height: 140 }}>
-            <div className={styles.LegendBody}>
-              <table className={styles.LegendTable}>
-                <tbody>
-                  {legend.map((l, i) => {
-                    return (
-                      <tr key={i}>
-                        <td><LegendColor color={l.color} /></td>
-                        <td>{l.label}</td>
-                      </tr>
-                    );
-                  })}
-                </tbody>
-              </table>
-            </div>
-          </Scrollbars>
+          <LegendTopBar layerTitle={layerTitle} {...this.props} />
+          {isOpen ? <LegendBody legendData={legendData} /> : null}
         </div>
       </div>
     );
   }
 }
+
+///////////////////////////////////////////////////////////////////////////////
+// local sub-components ///////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
+
+class LegendTopBar extends Component {
+  render() {
+    const {
+      layerTitle,
+      handlePreviousLayer,
+      handleNextLayer,
+      handleToggleLegend,
+      isOpen
+    } = this.props;
+
+    return (
+      <div className={styles.LegendTopBar}>
+        <PrevLayerButton handleClick={handlePreviousLayer} />
+        <div>{layerTitle}</div>
+        <NextLayerButton handleClick={handleNextLayer} />
+        <ToggleLegendButton isOpen={isOpen} handleClick={handleToggleLegend} />
+      </div>
+    );
+  }
+}
+
+class PrevLayerButton extends Component {
+  render() {
+    const { handleClick } = this.props;
+    return (
+      <div onClick={handleClick} className={styles.LayerSwitchButton}>
+        <i className="material-icons">keyboard_arrow_left</i>
+      </div>
+    );
+  }
+}
+
+class NextLayerButton extends Component {
+  render() {
+    const { handleClick } = this.props;
+    return (
+      <div onClick={handleClick} className={styles.LayerSwitchButton}>
+        <i className="material-icons">keyboard_arrow_right</i>
+      </div>
+    );
+  }
+}
+
+class ToggleLegendButton extends Component {
+  render() {
+    const { isOpen, handleClick } = this.props;
+    return (
+      <div onClick={handleClick} className={styles.OpenCloseButton}>
+        <i className="material-icons">
+          {isOpen ? "keyboard_arrow_down" : "keyboard_arrow_up"}
+        </i>
+      </div>
+    );
+  }
+}
+
+class LegendBody extends Component {
+  render() {
+    return (
+      <Scrollbars style={{ width: "100%", height: 140 }}>
+        <div className={styles.LegendBody}>
+          <table className={styles.LegendTable}>
+            <tbody>
+              {this.props.legendData.map((l, i) => {
+                return (
+                  <tr key={i}>
+                    <td><LegendColor color={l.color} /></td>
+                    <td>{l.label}</td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+      </Scrollbars>
+    );
+  }
+}
+
+class LegendColor extends Component {
+  render() {
+    return (
+      <div
+        className={styles.LegendColor}
+        style={{ backgroundColor: this.props.color }}
+      />
+    );
+  }
+}
+
+///////////////////////////////////////////////////////////////////////////////
+// type-checking //////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
 
 Legend.propTypes = {
   data: PropTypes.any,
