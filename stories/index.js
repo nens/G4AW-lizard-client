@@ -38,6 +38,9 @@ runInputField();
 import runLayerSelection from "./LayerSelectionStories";
 runLayerSelection();
 
+import runLegend from "./LegendStories";
+runLegend();
+
 import runSearchResultCard from "./SearchResultCardStories";
 runSearchResultCard();
 
