@@ -70,7 +70,7 @@ class SwitchToListButton extends Component {
 
 function mapDispatchToProps(dispatch) {
   return {
-    changeView: newView => changeView(newView, dispatch)
+    changeView: newView => changeView(dispatch, newView)
   };
 }
 

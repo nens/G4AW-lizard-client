@@ -6,6 +6,8 @@ import { theStore } from "../store/Store";
 
 import { getParcelAttributes } from "../tools/wfs";
 
+import { changeView } from "./UiActions";
+
 export const getAttributesFromGeoserverAction = parcelId => ({
   type: GET_ATTRIBUTES_FROM_GEOSERVER,
   parcelId: parcelId
@@ -18,12 +20,8 @@ export const receiveAttributesFromGeoserverAction = (parcelId, data) => ({
 });
 
 export function getAttributesFromGeoserver(dispatch, parcelId) {
-  console.log("[F] getAttributesFromGeoserver");
   const currentData = theStore.getState().parcels[parcelId];
-  console.log("*** currentData =", currentData);
-
   if (!currentData || !currentData.parcelGeoserverId) {
-    console.log("*** ...returning early!");
     // We can't find the Geoserver featureID
     return;
   }

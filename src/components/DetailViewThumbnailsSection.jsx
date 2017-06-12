@@ -13,10 +13,7 @@ export default class DetailViewThumbnailsSection extends Component {
   render() {
     const { isOpen, thumbnails } = this.props;
     return (
-      <DetailViewSection
-        title="Section for DetailView (thumbnails)"
-        isOpen={isOpen}
-      >
+      <DetailViewSection title="Images" isOpen={isOpen}>
         <DetailViewThumbnails images={thumbnails} />
       </DetailViewSection>
     );

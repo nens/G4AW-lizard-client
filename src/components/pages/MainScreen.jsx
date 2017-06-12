@@ -15,6 +15,7 @@ import ReactDOM from "react-dom";
 // NEW:
 import MapSearchView from "./MapSearchView";
 import ListSearchView from "./ListSearchView";
+import DetailView from "./DetailView";
 
 class MainScreenComponent extends Component {
   constructor() {
@@ -35,14 +36,11 @@ class MainScreenComponent extends Component {
   getViewComponent(currentView) {
     switch (currentView) {
       case "MapSearchView":
-        console.log("[dbg] About to render component: MapSearchView");
         return <MapSearchView />;
       case "ListSearchView":
-        console.log("[dbg] About to render component: ListSearchView");
         return <ListSearchView />;
       case "DetailView":
-        console.log("[dbg] About to render component: DetailView");
-        return null;
+        return <DetailView />;
       case "PhotoView":
         console.log("[E] Should render component: PhotoView (WIP!)");
         return null;

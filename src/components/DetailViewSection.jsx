@@ -17,7 +17,20 @@ import styles from "./styles/DetailViewSection.css";
 export default class DetailViewSection extends Component {
   constructor() {
     super();
-    this.state = {};
+    this.state = {
+      isOpen: this.props && this.props.isOpen
+    };
+    this.toggleSection = this.toggleSection.bind(this);
+    this.isCurrentlyOpened = this.isCurrentlyOpened.bind(this);
+    // this.handleMouseOver = this.handleMouseOver.bind(this);
+  }
+  toggleSection() {
+    console.log("[f] toggleSection");
+    this.setState({ isOpen: !this.state.isOpen });
+    console.log("*** this.state now looks like:", this.state);
+  }
+  isCurrentlyOpened() {
+    return !!this.state.isOpen;
   }
   componentDidMount() {}
   render() {
@@ -26,17 +39,23 @@ export default class DetailViewSection extends Component {
       colorCode,
       handleClick,
       title,
-      subtitle,
+      subTitle,
       isOpen
     } = this.props;
-    const content = isOpen ? children : null;
+
+    //this.setState({isOpen: isOpen});
+
+    const toggleSection = this.toggleSection;
+    // const isCurrentlyOpened = this.isCurrentlyOpened;
+
+    const content = this.state.isOpen ? children : null;
+
     return (
-      <div className={styles.DetailViewSection} onClick={handleClick}>
+      <div className={styles.DetailViewSection} onClick={toggleSection}>
         <CollapsibleBar
           title={title}
-          subTitle={subtitle}
+          subTitle={subTitle}
           colorCode={colorCode}
-          isOpen={isOpen}
         />
         {content}
       </div>

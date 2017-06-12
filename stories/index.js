@@ -1,14 +1,14 @@
-import runModal from "./ModalStories";
-runModal();
+import runCollapsibleBar from "./CollapsibleBarStories";
+runCollapsibleBar();
+
+import runDetailView from "./DetailViewStories";
+runDetailView();
 
 import runDetailViewHeader from "./DetailViewHeaderStories";
 runDetailViewHeader();
 
 import runDetailViewSection from "./DetailViewSectionStories";
 runDetailViewSection();
-
-import runTabBar from "./TabBarStories";
-runTabBar();
 
 import runDetailViewThumbnails from "./DetailViewThumbnailsStories";
 runDetailViewThumbnails();
@@ -22,9 +22,6 @@ runDetailViewTable();
 
 import runDetailViewTableSection from "./DetailViewTableSectionStories";
 runDetailViewTableSection();
-
-import runCollapsibleBar from "./CollapsibleBarStories";
-runCollapsibleBar();
 
 import runFlatButton from "./FlatButtonStories";
 runFlatButton();
@@ -53,6 +50,9 @@ runMapSearchView();
 import runMainScreen from "./MainScreenStories";
 runMainScreen();
 
+import runModal from "./ModalStories";
+runModal();
+
 import runPhotoView from "./PhotoViewStories";
 runPhotoView();
 
@@ -70,6 +70,9 @@ runSimpleLineChart();
 
 import runSnackBar from "./SnackBarStories";
 runSnackBar();
+
+import runTabBar from "./TabBarStories";
+runTabBar();
 
 import runTimeseriesChart from "./TimeseriesChartStories";
 runTimeseriesChart();

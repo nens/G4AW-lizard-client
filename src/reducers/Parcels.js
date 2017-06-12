@@ -54,6 +54,7 @@ export default function(state = initialParcelsState, action) {
   switch (action.type) {
     case ActionTypes.GET_ATTRIBUTES_FROM_GEOSERVER:
       newParcels = { ...state };
+      newParcels.selected = action.parcelId;
 
       if (newParcels[action.parcelId]) {
         newParcel = { ...newParcels[action.parcelId] };

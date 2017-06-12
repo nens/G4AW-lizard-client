@@ -18,6 +18,8 @@ import { replaceUnderscores } from "./string-formatting";
 
 import { getAttributesFromGeoserver } from "../../actions/ParcelActions";
 
+import { changeView } from "../../actions/UiActions";
+
 const GEO_OPTIONS = {
   enableHighAccuracy: true,
   maximumAge: 30000,
@@ -87,6 +89,7 @@ class ListSearchViewComponent extends Component {
   }
   render() {
     const {
+      currentView, // via: mapStateToProps
       isFetching, // via: mapStateToProps
       isFinishedSearching, // via: mapStateToProps
       searchResults, // via: mapStateToProps
@@ -99,6 +102,7 @@ class ListSearchViewComponent extends Component {
     return (
       <div className={styles.ListSearchView}>
         <SearchBar />
+        <ViewSwitchButton viewIsMap={currentView === "MapSearchView"} />
         {isFinishedSearching
           ? <ListSearchResults
               searchResults={searchResults}
@@ -122,7 +126,7 @@ class ListSearchLanding extends Component {
     const { handleGeoClick, parentState } = this.props;
     return (
       <div style={{ width: "100%" }}>
-        <ViewSwitchButton viewIsMap={false} />
+        {/*<ViewSwitchButton viewIsMap={false} />*/}
         <h1 className={styles.Welcome}>Welcome</h1>
         <h5 className={styles.GetStarted}>Tap to see the field nearby</h5>
         <GeolocateButtonBig
@@ -171,6 +175,7 @@ class ListSearchResults extends Component {
 
 function mapStateToProps(state) {
   return {
+    currentView: state.ui.currentView,
     isFetching: state.search.isFetching,
     isFinishedSearching: !state.search.isFetching && state.search.results,
     searchResults: state.search.results
@@ -179,7 +184,10 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    getDetails: id => getAttributesFromGeoserver(dispatch, id)
+    getDetails: id => {
+      getAttributesFromGeoserver(dispatch, id);
+      changeView(dispatch, "DetailView");
+    }
   };
 }
 
