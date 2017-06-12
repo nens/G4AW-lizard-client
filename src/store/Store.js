@@ -3,6 +3,8 @@ import { createLogger } from "redux-logger";
 import thunkMiddleware from "redux-thunk";
 import reducers from "../reducers/index";
 
+console.log("[dbg] importted reduces for creating store:", reducers);
+
 let createStoreWithMiddleware;
 const logger = createLogger({});
 
@@ -15,7 +17,7 @@ createStoreWithMiddleware = applyMiddleware(thunkMiddleware, logger)(
 // See G4AW-state-plan.md.
 
 export const initialUiState = {
-  currentPage: null // Todo
+  currentView: "MapSearchView"
 };
 
 export const initialSearchState = {
@@ -41,11 +43,11 @@ export const initialRastersState = {};
 export const initialSettingsState = {};
 
 const initialState = {
-  ui: initialUiState, // TODO
   geoLocation: initialGeoLocationState, // TODO
   parcels: initialParcelsState, // TODO
   photosForParcel: initialPhotosForParcelState, //TODO
 
+  ui: initialUiState,
   search: initialSearchState,
   timeseries: initialTimeseriesState,
   rasters: initialRastersState,

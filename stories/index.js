@@ -47,6 +47,9 @@ runListSearchView();
 import runLoginLogoutButton from "./LoginLogoutButtonStories";
 runLoginLogoutButton();
 
+import runMapSearchView from "./MapSearchViewStories";
+runMapSearchView();
+
 import runPhotoView from "./PhotoViewStories";
 runPhotoView();
 

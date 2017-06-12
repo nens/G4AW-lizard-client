@@ -53,6 +53,8 @@ in the lifecycle of a key-value pair in the stores' raster section:
 
 ******************************************************************************/
 
+export const CHANGE_VIEW = "CHANGE_VIEW";
+
 export const FETCH_RASTER = "FETCH_RASTER";
 export const RECEIVE_RASTER = "RECEIVE_RASTER";
 export const REMOVE_RASTER = "REMOVE_RASTER";

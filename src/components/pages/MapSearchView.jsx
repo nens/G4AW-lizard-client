@@ -1,29 +1,41 @@
-// reactjs/redux boilerplate imports:
-import React, { Component } from "react";
-import { connect } from "react-redux";
+import { translate } from "react-i18next";
+import GeolocationAvailable from "../svg/GeolocationAvailable.svg";
+import GeolocationUnavailable from "../svg/GeolocationUnavailable.svg";
+import Ink from "react-ink";
 import PropTypes from "prop-types";
-import ReactDOM from "react-dom";
-
-// reactjs sub-components imports:
+import RaisedButton from "../RaisedButton";
 import RastersMap from "../RastersMap";
+import React, { Component } from "react";
+import ReactDOM from "react-dom";
 import SearchBar from "../SearchBar";
 import ViewSwitchButton from "../ViewSwitchButton";
-import SnackBar from "../SnackBar";
+import styles from "../styles/MapSearchView.css";
 
-// imports for CSS:
-import styles from "../styles/MainScreen.css";
+///////////////////////////////////////////////////////////////////////////////
+// A MapSearchView shows searchresults on the map /////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
 
-export default class MapPageComponent extends Component {
+class MapSearchView extends Component {
   render() {
+    const { t } = this.props;
+    if (this.props.match && this.props.match.params) {
+      console.log(
+        "x/y/z:",
+        this.props.match.params.x,
+        this.props.match.params.y,
+        this.props.match.params.z
+      );
+    }
     return (
-      <div className={styles.MainScreen} style={{ height: "1000px" }}>
+      <div className={styles.MapSearchView}>
         <SearchBar />
-        <ViewSwitchButton />
-        <div className={styles.MapView}>
-          <RastersMap />
-        </div>
-        <SnackBar />
+        <ViewSwitchButton viewIsMap={true} />
+        <RastersMap />
       </div>
     );
   }
 }
+
+MapSearchView.propTypes = {};
+
+export default translate()(MapSearchView);

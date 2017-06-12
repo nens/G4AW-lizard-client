@@ -122,7 +122,8 @@ class ListSearchLanding extends Component {
   render() {
     const { handleGeoClick, parentState } = this.props;
     return (
-      <div>
+      <div style={{ width: "100%" }}>
+        <ViewSwitchButton viewIsMap={false} />
         <h1 className={styles.Welcome}>Welcome</h1>
         <h5 className={styles.GetStarted}>Tap to see the field nearby</h5>
         <GeolocateButtonBig
@@ -133,13 +134,11 @@ class ListSearchLanding extends Component {
           errorMessage={parentState.errorMessage}
         />
         <RaisedButton buttonText="Login" iconClass="lock" />
-        <ViewSwitchButton viewIsMap={false} handleOnClick={() => false} />
       </div>
     );
   }
 }
 
-// `${styles.DetailViewHeader} ${mode}`;
 class ListSearchResults extends Component {
   getTitleBarText(searchResults) {
     const count = searchResults.length;
