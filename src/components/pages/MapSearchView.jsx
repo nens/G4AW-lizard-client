@@ -17,7 +17,6 @@ import styles from "../styles/MapSearchView.css";
 
 class MapSearchView extends Component {
   render() {
-    const { t } = this.props;
     if (this.props.match && this.props.match.params) {
       console.log(
         "x/y/z:",

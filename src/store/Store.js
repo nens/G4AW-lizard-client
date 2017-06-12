@@ -3,8 +3,6 @@ import { createLogger } from "redux-logger";
 import thunkMiddleware from "redux-thunk";
 import reducers from "../reducers/index";
 
-console.log("[dbg] importted reduces for creating store:", reducers);
-
 let createStoreWithMiddleware;
 const logger = createLogger({});
 

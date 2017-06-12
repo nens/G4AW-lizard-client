@@ -50,6 +50,9 @@ runLoginLogoutButton();
 import runMapSearchView from "./MapSearchViewStories";
 runMapSearchView();
 
+import runMainScreen from "./MainScreenStories";
+runMainScreen();
+
 import runPhotoView from "./PhotoViewStories";
 runPhotoView();
 

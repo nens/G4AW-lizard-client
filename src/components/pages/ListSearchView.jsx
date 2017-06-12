@@ -87,11 +87,10 @@ class ListSearchViewComponent extends Component {
   }
   render() {
     const {
-      performGeolocation,
-      isFetching,
-      isFinishedSearching,
-      searchResults,
-      getDetails
+      isFetching, // via: mapStateToProps
+      isFinishedSearching, // via: mapStateToProps
+      searchResults, // via: mapStateToProps
+      getDetails // via: mapDispatchToProps
     } = this.props;
     const s = this.state;
     const handleGeoClick = s.geolocationSupport && s.latitude && s.longitude

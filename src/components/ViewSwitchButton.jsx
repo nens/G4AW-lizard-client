@@ -16,10 +16,7 @@ class ViewSwitchButtonComponent extends Component {
   render() {
     const { t, viewIsMap, changeView } = this.props;
     const handleClick = () =>
-      changeView((viewIsMap ? "List" : "map") + "SearchView");
-
-    console.log("state.ui:", this.props.ui);
-
+      changeView((viewIsMap ? "List" : "Map") + "SearchView");
     return (
       <div className={styles.ViewSwitchButton} onClick={handleClick}>
         {viewIsMap ? <SwitchToListButton t={t} /> : <SwitchToMapButton t={t} />}
@@ -71,19 +68,13 @@ class SwitchToListButton extends Component {
 // react-redux bindings ///////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
 
-function mapStateToProps(state) {
-  return {
-    ui: state.ui
-  };
-}
-
 function mapDispatchToProps(dispatch) {
   return {
     changeView: newView => changeView(newView, dispatch)
   };
 }
 
-const ViewSwitchButton = connect(mapStateToProps, mapDispatchToProps)(
+const ViewSwitchButton = connect(null, mapDispatchToProps)(
   ViewSwitchButtonComponent
 );
 
