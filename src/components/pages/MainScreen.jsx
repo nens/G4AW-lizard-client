@@ -4,15 +4,6 @@ import { translate } from "react-i18next";
 import PropTypes from "prop-types";
 import ReactDOM from "react-dom";
 
-// OLD:
-// import RastersMap from "../RastersMap";
-// import SearchBar from "../SearchBar";
-// import SearchResults from "../SearchResults";
-// import SnackBar from "../SnackBar";
-// import ViewSwitchButton from "../ViewSwitchButton";
-// import styles from "../styles/MainScreen.css";
-
-// NEW:
 import MapSearchView from "./MapSearchView";
 import ListSearchView from "./ListSearchView";
 import DetailView from "./DetailView";
