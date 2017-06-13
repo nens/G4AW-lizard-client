@@ -76,7 +76,7 @@ export class DetailViewComponent extends Component {
         <DetailViewSection
           title="Rice Growth"
           subTitle="ving bhin data"
-          isOpen={true}
+          isOpen
           colorCode={"#ff0000"}
         >
           <p style={{ padding: "20px" }}>{LOREM}</p>
@@ -89,7 +89,7 @@ export class DetailViewComponent extends Component {
           <p style={{ padding: "20px" }}>{LOREM}</p>
         </DetailViewSection>
         <DetailViewThumbnailsSection
-          isOpen={true}
+          isOpen
           handleClick={handleThumbnailClick}
           thumbnails={THUMBNAIL_LIST}
         />
