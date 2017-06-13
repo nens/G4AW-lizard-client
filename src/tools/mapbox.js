@@ -1,4 +1,4 @@
-export function getMapboxUrl(coords) {
+export function getGeocoderUrl(coords) {
   return (
     "https://api.mapbox.com/geocoding/v5/mapbox.places/" +
     coords.longitude +

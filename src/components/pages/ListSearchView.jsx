@@ -15,20 +15,14 @@ import HeaderBar from "../HeaderBar";
 import SearchResultCard from "../SearchResultCard";
 
 import { replaceUnderscores } from "../../tools/string-formatting";
-
+import { falsum } from "../../tools/generic";
 import { getAttributesFromGeoserver } from "../../actions/ParcelActions";
-
 import { changeView } from "../../actions/UiActions";
-
 import { performGeolocation } from "../../tools/geolocate";
 
-// const GEO_OPTIONS = {
-//   enableHighAccuracy: true,
-//   maximumAge: 30000,
-//   timeout: 27000
-// };
-
-// A ListSearchView shows searchresults in a list mode
+///////////////////////////////////////////////////////////////////////////////
+// Main Component: Shows/enables search-results in a list mode. ///////////////
+///////////////////////////////////////////////////////////////////////////////
 
 class ListSearchViewComponent extends Component {
   constructor() {
@@ -37,6 +31,7 @@ class ListSearchViewComponent extends Component {
       geolocationSupport: false,
       errorMessage: undefined
     };
+    this.getGeoClickHandler = this.getGeoClickHandler.bind(this);
   }
   componentWillMount() {
     if (navigator.geolocation) {
@@ -50,6 +45,13 @@ class ListSearchViewComponent extends Component {
       performGeolocation(result => this.setState(result));
     }
   }
+  getGeoClickHandler() {
+    const condition =
+      this.state.geolocationSupport &&
+      this.state.latitude &&
+      this.state.longitude;
+    return condition ? performGeolocation : falsum;
+  }
   render() {
     const {
       currentView, // via: mapStateToProps
@@ -59,9 +61,6 @@ class ListSearchViewComponent extends Component {
       getDetails // via: mapDispatchToProps
     } = this.props;
     const s = this.state;
-    const handleGeoClick = s.geolocationSupport && s.latitude && s.longitude
-      ? this.performGeolocation
-      : () => false;
     return (
       <div className={styles.ListSearchView}>
         <SearchBar />
@@ -72,10 +71,9 @@ class ListSearchViewComponent extends Component {
               getDetails={getDetails}
             />
           : <ListSearchLanding
-              handleGeoClick={handleGeoClick}
+              handleGeoClick={this.getGeoClickHandler()}
               parentState={s}
             />}
-
       </div>
     );
   }
@@ -90,7 +88,6 @@ class ListSearchLanding extends Component {
     const { handleGeoClick, parentState } = this.props;
     return (
       <div style={{ width: "100%" }}>
-        {/*<ViewSwitchButton viewIsMap={false} />*/}
         <h1 className={styles.Welcome}>Welcome</h1>
         <h5 className={styles.GetStarted}>Tap to see the field nearby</h5>
         <GeolocateButtonBig

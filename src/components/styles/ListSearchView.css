@@ -28,7 +28,6 @@
 }
 .SearchResultCardContainer {
   width: calc(100% - 30px);
-  /*background-color: #ff0000;*/
   position: relative;
   top: 75px;
 }

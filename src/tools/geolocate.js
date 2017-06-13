@@ -1,4 +1,4 @@
-import { getMapboxUrl } from "./mapbox";
+import { getGeocoderUrl } from "./mapbox";
 
 const GEO_OPTIONS = {
   enableHighAccuracy: true,
@@ -9,7 +9,7 @@ const GEO_OPTIONS = {
 export function performGeolocation(callback) {
   navigator.geolocation.getCurrentPosition(
     success => {
-      fetch(getMapboxUrl(success.coords), { mode: "cors" })
+      fetch(getGeocoderUrl(success.coords), { mode: "cors" })
         .then(response => response.json())
         .then(data => {
           callback({
