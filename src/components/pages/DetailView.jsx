@@ -11,11 +11,7 @@ import DetailViewThumbnailsSection from "../DetailViewThumbnailsSection";
 
 import { changeView } from "../../actions/UiActions";
 
-import {
-  THUMBNAIL_LIST,
-  LOREM,
-  DEFAULT_TABLE_DATA
-} from "../../../stories/helpers";
+import { THUMBNAIL_LIST, LOREM } from "../../../stories/helpers";
 
 const DEFAULT_ZOOM = 11; // Used for map in header of the page
 const TABULAR_DATA_KEYS = [
