@@ -24,27 +24,25 @@ class MainScreenComponent extends Component {
       });
     });
   }
-  getViewComponent(currentView) {
-    switch (currentView) {
+  render() {
+    let component = null;
+    switch (this.props.currentView) {
       case "MapSearchView":
-        return <MapSearchView />;
+        component = <MapSearchView />;
       case "ListSearchView":
-        return <ListSearchView />;
+        component = <ListSearchView />;
       case "DetailView":
-        return <DetailView />;
+        component = <DetailView />;
       case "PhotoView":
         console.log("[E] Should render component: PhotoView (WIP!)");
-        return null;
       case "SettingsView":
         console.log("[E] Should render component: SettingsView (WIP!)");
-        return null;
       default:
-        console.log("[E] Cannot render unknown view '" + currentView + "'!");
-        return null;
+        console.log(
+          "[E] Cannot render unknown view '" + this.props.currentView + "'!"
+        );
     }
-  }
-  render() {
-    return this.getViewComponent(this.props.currentView);
+    return component;
   }
 }
 
