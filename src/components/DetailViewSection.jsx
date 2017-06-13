@@ -22,12 +22,9 @@ export default class DetailViewSection extends Component {
     };
     this.toggleSection = this.toggleSection.bind(this);
     this.isCurrentlyOpened = this.isCurrentlyOpened.bind(this);
-    // this.handleMouseOver = this.handleMouseOver.bind(this);
   }
   toggleSection() {
-    console.log("[f] toggleSection");
     this.setState({ isOpen: !this.state.isOpen });
-    console.log("*** this.state now looks like:", this.state);
   }
   isCurrentlyOpened() {
     return !!this.state.isOpen;
@@ -43,19 +40,16 @@ export default class DetailViewSection extends Component {
       isOpen
     } = this.props;
 
-    //this.setState({isOpen: isOpen});
-
     const toggleSection = this.toggleSection;
-    // const isCurrentlyOpened = this.isCurrentlyOpened;
-
     const content = this.state.isOpen ? children : null;
 
     return (
-      <div className={styles.DetailViewSection} onClick={toggleSection}>
+      <div className={styles.DetailViewSection}>
         <CollapsibleBar
           title={title}
           subTitle={subTitle}
           colorCode={colorCode}
+          handleClick={toggleSection}
         />
         {content}
       </div>

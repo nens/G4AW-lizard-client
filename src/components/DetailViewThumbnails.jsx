@@ -28,12 +28,12 @@ class DetailViewThumbnails extends Component {
     });
   }
   render() {
-    const { t, images, disabled, handleOnClick } = this.props;
+    const { t, images, disabled, handleClick } = this.props;
     const { isOver } = this.state;
     return (
       <div
         className={`${styles.PhotoGallery} ${disabled ? styles.disabled : ""} ${isOver ? styles.IsOver : ""}`}
-        onClick={disabled ? "" : this.props.handleOnClick}
+        onClick={disabled ? "" : handleClick}
         onMouseOver={this.handleMouseOver}
         onMouseOut={this.handleMouseOut}
       >

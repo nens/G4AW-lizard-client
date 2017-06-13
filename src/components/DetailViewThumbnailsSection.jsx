@@ -11,10 +11,10 @@ import DetailViewThumbnails from "./DetailViewThumbnails";
 
 export default class DetailViewThumbnailsSection extends Component {
   render() {
-    const { isOpen, thumbnails } = this.props;
+    const { isOpen, thumbnails, handleClick } = this.props;
     return (
       <DetailViewSection title="Images" isOpen={isOpen}>
-        <DetailViewThumbnails images={thumbnails} />
+        <DetailViewThumbnails images={thumbnails} handleClick={handleClick} />
       </DetailViewSection>
     );
   }

@@ -52,11 +52,15 @@ export class DetailViewComponent extends Component {
   render() {
     const {
       parcel, // via: mapStateToProps
-      changeView // via: mapDispatchToProps
+      changeView, // via: mapDispatchToProps
+      handleThumbnailClick // via: mapDispatchToProps
     } = this.props;
     let tabularData, latlonzoom;
-    if (!parcel) return null;
-    else {
+    if (!parcel || !parcel.hasGeoserverData) {
+      return null;
+    } else if (parcel.isFetchingGeoserver) {
+      return <p>Spinner.</p>;
+    } else {
       console.log("[dbg] parcel:", parcel);
       latlonzoom = this.getLatLonZoom(parcel.geometry.coordinates[0]);
       tabularData = this.formatTabularData(parcel);
@@ -90,6 +94,7 @@ export class DetailViewComponent extends Component {
         </DetailViewSection>
         <DetailViewThumbnailsSection
           isOpen={true}
+          handleClick={handleThumbnailClick}
           thumbnails={THUMBNAIL_LIST}
         />
       </div>
@@ -110,7 +115,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    gotoPhotoView: () => alert("WIP"),
+    handleThumbnailClick: () => alert("WIP"),
     changeView: () => changeView(dispatch, "ListSearchView")
   };
 }
