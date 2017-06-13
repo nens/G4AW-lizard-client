@@ -47,8 +47,8 @@ runListSearchView();
 import runLoginLogoutButton from "./LoginLogoutButtonStories";
 runLoginLogoutButton();
 
-import runMainScreen from "./MainScreenStories";
-runMainScreen();
+import runMainView from "./MainViewStories";
+runMainView();
 
 import runMapSearchView from "./MapSearchViewStories";
 runMapSearchView();

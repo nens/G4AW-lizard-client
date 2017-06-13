@@ -1,2 +1,2 @@
-import MainScreen from "./MainScreen";
-export default MainScreen;
+import MainView from "./MainView";
+export default MainView;

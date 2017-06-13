@@ -62,11 +62,17 @@ class ListSearchViewComponent extends Component {
       searchResults, // via: mapStateToProps
       getDetails // via: mapDispatchToProps
     } = this.props;
-    const s = this.state;
+    const {
+      geolocationSupport,
+      latitude,
+      longitude,
+      placeName,
+      errorMessage
+    } = this.state;
     return (
       <div className={styles.ListSearchView}>
         <SearchBar />
-        <ViewSwitchButton viewIsMap={currentView === "MapSearchView"} />
+        <ViewSwitchButton viewIsMap={false} />
         {isFinishedSearching
           ? <ListSearchResults
               searchResults={searchResults}
@@ -74,7 +80,11 @@ class ListSearchViewComponent extends Component {
             />
           : <ListSearchLanding
               handleGeoClick={this.getGeoClickHandler()}
-              parentState={s}
+              geolocationSupport={geolocationSupport}
+              latitude={latitude}
+              longitude={longitude}
+              placeName={placeName}
+              errorMessage={errorMessage}
             />}
       </div>
     );
@@ -87,17 +97,25 @@ class ListSearchViewComponent extends Component {
 
 class ListSearchLanding extends Component {
   render() {
-    const { handleGeoClick, parentState } = this.props;
+    const {
+      handleGeoClick,
+      parentState,
+      geolocationSupport,
+      latitude,
+      longitude,
+      placeName,
+      errorMessage
+    } = this.props;
     return (
       <div style={{ width: "100%" }}>
         <h1 className={styles.Welcome}>Welcome</h1>
         <h5 className={styles.GetStarted}>Tap to see the field nearby</h5>
         <GeolocateButtonBig
           handleClick={handleGeoClick}
-          supportsGeolocate={parentState.geolocationSupport}
-          hasCoords={parentState.latitude && parentState.longitude}
-          placeName={parentState.placeName}
-          errorMessage={parentState.errorMessage}
+          supportsGeolocate={geolocationSupport}
+          hasCoords={latitude && longitude}
+          placeName={placeName}
+          errorMessage={errorMessage}
         />
         <RaisedButton buttonText="Login" iconClass="lock" />
       </div>

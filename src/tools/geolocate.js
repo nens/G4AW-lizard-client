@@ -1,10 +1,19 @@
-import { getGeocoderUrl } from "./mapbox";
-
 const GEO_OPTIONS = {
   enableHighAccuracy: true,
   maximumAge: 30000,
   timeout: 27000
 };
+
+function getGeocoderUrl(coords) {
+  return (
+    "https://api.mapbox.com/geocoding/v5/mapbox.places/" +
+    coords.longitude +
+    "," +
+    coords.latitude +
+    ".json?access_token=pk.eyJ1IjoibmVsZW5zY2h1dXJtYW5zIiwiYSI6ImhkXzhTdXc" +
+    "ifQ.3k2-KAxQdyl5bILh_FioCw"
+  );
+}
 
 export function performGeolocation(callback) {
   navigator.geolocation.getCurrentPosition(

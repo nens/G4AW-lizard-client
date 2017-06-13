@@ -8,7 +8,7 @@ import MapSearchView from "./MapSearchView";
 import ListSearchView from "./ListSearchView";
 import DetailView from "./DetailView";
 
-class MainScreenComponent extends Component {
+class MainViewComponent extends Component {
   constructor() {
     super();
     this.state = {
@@ -29,18 +29,24 @@ class MainScreenComponent extends Component {
     switch (this.props.currentView) {
       case "MapSearchView":
         component = <MapSearchView />;
+        break;
       case "ListSearchView":
         component = <ListSearchView />;
+        break;
       case "DetailView":
         component = <DetailView />;
+        break;
       case "PhotoView":
         console.log("[E] Should render component: PhotoView (WIP!)");
+        break;
       case "SettingsView":
         console.log("[E] Should render component: SettingsView (WIP!)");
+        break;
       default:
         console.log(
           "[E] Cannot render unknown view '" + this.props.currentView + "'!"
         );
+        break;
     }
     return component;
   }
@@ -56,5 +62,5 @@ function mapStateToProps(state) {
   };
 }
 
-const MainScreen = connect(mapStateToProps, null)(MainScreenComponent);
-export default translate()(MainScreen);
+const MainView = connect(mapStateToProps, null)(MainViewComponent);
+export default translate()(MainView);
