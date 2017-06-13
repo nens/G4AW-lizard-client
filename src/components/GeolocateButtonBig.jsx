@@ -34,7 +34,10 @@ export default class GeolocateButtonBig extends Component {
       : GeolocationUnavailable;
     return (
       <div className={styles.Geolocate} onClick={handleClick}>
-        <img src={icon} />
+        <div style={{ position: "relative", display: "table-cell" }}>
+          <Ink duration={1000} background={false} />
+          <img src={icon} />
+        </div>
         {this.getChildren()}
       </div>
     );
