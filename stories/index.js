@@ -26,6 +26,9 @@ runDetailViewTableSection();
 import runFlatButton from "./FlatButtonStories";
 runFlatButton();
 
+import runFooterBar from "./FooterBarStories";
+runFooterBar();
+
 import runHeaderBar from "./HeaderBarStories";
 runHeaderBar();
 
@@ -44,11 +47,11 @@ runListSearchView();
 import runLoginLogoutButton from "./LoginLogoutButtonStories";
 runLoginLogoutButton();
 
-import runMapSearchView from "./MapSearchViewStories";
-runMapSearchView();
-
 import runMainScreen from "./MainScreenStories";
 runMainScreen();
+
+import runMapSearchView from "./MapSearchViewStories";
+runMapSearchView();
 
 import runModal from "./ModalStories";
 runModal();
