@@ -5,6 +5,8 @@ import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import styles from "./styles/PhotoGallery.css";
 
+import { falsum } from "../tools/generic";
+
 // The main Component: a PhotoGallery emphasizes important functions on in the app.
 
 class DetailViewThumbnails extends Component {
@@ -33,7 +35,7 @@ class DetailViewThumbnails extends Component {
     return (
       <div
         className={`${styles.PhotoGallery} ${disabled ? styles.disabled : ""} ${isOver ? styles.IsOver : ""}`}
-        onClick={disabled ? "" : handleClick}
+        onClick={disabled ? falsum : handleClick}
         onMouseOver={this.handleMouseOver}
         onMouseOut={this.handleMouseOut}
       >
