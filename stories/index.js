@@ -1,54 +1,78 @@
-import runCollapsibleBar from "./CollapsibleBarStories";
+import runModal from "./ModalStories";
+runModal();
+
 import runDetailViewHeader from "./DetailViewHeaderStories";
+runDetailViewHeader();
+
 import runDetailViewSection from "./DetailViewSectionStories";
-import runDetailViewTable from "./DetailViewTableStories";
-import runDetailViewTableSection from "./DetailViewTableSectionStories";
+runDetailViewSection();
+
+import runTabBar from "./TabBarStories";
+runTabBar();
+
 import runDetailViewThumbnails from "./DetailViewThumbnailsStories";
+runDetailViewThumbnails();
+
 import runDetailViewThumbnailsSection
   from "./DetailViewThumbnailsSectionStories";
-import runFlatButton from "./FlatButtonStories";
-import runFooterBar from "./FooterBarStories";
-import runHeaderBar from "./HeaderBarStories";
-import runInputField from "./InputFieldStories";
-import runLayerSelection from "./LayerSelectionStories";
-import runLegend from "./LegendStories";
-import runListSearchView from "./ListSearchViewStories";
-import runLoginLogoutButton from "./LoginLogoutButtonStories";
-import runModal from "./ModalStories";
-import runPhotoView from "./PhotoViewStories";
-import runRaisedButton from "./RaisedButtonStories";
-import runSearchBar from "./SearchBarStories";
-import runSearchResultCard from "./SearchResultCardStories";
-import runSimpleLineChart from "./SimpleLineChartStories";
-import runSnackBar from "./SnackBarStories";
-import runTabBar from "./TabBarStories";
-import runTimeseriesChart from "./TimeseriesChartStories";
-import runToggleSwitch from "./ToggleSwitchStories";
-import runViewSwitchButton from "./ViewSwitchButtonStories";
-
-runCollapsibleBar();
-runDetailViewHeader();
-runDetailViewSection();
-runDetailViewTable();
-runDetailViewTableSection();
-runDetailViewThumbnails();
 runDetailViewThumbnailsSection();
+
+import runDetailViewTable from "./DetailViewTableStories";
+runDetailViewTable();
+
+import runDetailViewTableSection from "./DetailViewTableSectionStories";
+runDetailViewTableSection();
+
+import runCollapsibleBar from "./CollapsibleBarStories";
+runCollapsibleBar();
+
+import runFlatButton from "./FlatButtonStories";
 runFlatButton();
-runHeaderBar();
-runInputField();
+
+import runFooterBar from "./FooterBarStories";
 runFooterBar();
+
+import runHeaderBar from "./HeaderBarStories";
+runHeaderBar();
+
+import runInputField from "./InputFieldStories";
+runInputField();
+
+import runLayerSelection from "./LayerSelectionStories";
 runLayerSelection();
+
+import runLegend from "./LegendStories";
 runLegend();
+
+import runListSearchView from "./ListSearchViewStories";
 runListSearchView();
+
+import runLoginLogoutButton from "./LoginLogoutButtonStories";
 runLoginLogoutButton();
-runModal();
+
+import runPhotoView from "./PhotoViewStories";
 runPhotoView();
+
+import runRaisedButton from "./RaisedButtonStories";
 runRaisedButton();
-runSearchBar();
+
+import runSearchResultCard from "./SearchResultCardStories";
 runSearchResultCard();
+
+import runSearchBar from "./SearchBarStories";
+runSearchBar();
+
+import runSimpleLineChart from "./SimpleLineChartStories";
 runSimpleLineChart();
+
+import runSnackBar from "./SnackBarStories";
 runSnackBar();
-runTabBar();
+
+import runTimeseriesChart from "./TimeseriesChartStories";
 runTimeseriesChart();
+
+import runToggleSwitch from "./ToggleSwitchStories";
 runToggleSwitch();
+
+import runViewSwitchButton from "./ViewSwitchButtonStories";
 runViewSwitchButton();
