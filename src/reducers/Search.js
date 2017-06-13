@@ -13,7 +13,7 @@ export default function(state = initialSearchState, action) {
       // that doesn't have one yet.
       return {
         isFetching: false,
-        results: action.results
+        results: action.results.map(result => result.id)
       };
     case ActionTypes.CLEAR_SEARCH_RESULTS:
       return {

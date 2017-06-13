@@ -105,7 +105,7 @@ export class DetailViewComponent extends Component {
 function mapStateToProps(state) {
   return {
     currentView: state.ui.currentView,
-    parcel: state.parcels && state.parcels[state.parcels.selected]
+    parcel: state.parcels && state.parcels[state.ui.selectedParcel]
   };
 }
 

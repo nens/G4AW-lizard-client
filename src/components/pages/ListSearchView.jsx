@@ -15,7 +15,6 @@ import HeaderBar from "../HeaderBar";
 import SearchResultCard from "../SearchResultCard";
 
 import { replaceUnderscores } from "../../tools/string-formatting";
-import { falsum } from "../../tools/generic";
 import { getAttributesFromGeoserver } from "../../actions/ParcelActions";
 import { changeView } from "../../actions/UiActions";
 import { performGeolocation } from "../../tools/geolocate";
@@ -31,7 +30,7 @@ class ListSearchViewComponent extends Component {
       geolocationSupport: false,
       errorMessage: undefined
     };
-    this.getGeoClickHandler = this.getGeoClickHandler.bind(this);
+    this.setState = this.setState.bind(this);
   }
   componentWillMount() {
     if (navigator.geolocation) {
@@ -40,27 +39,13 @@ class ListSearchViewComponent extends Component {
       });
     }
   }
-  componentDidMount() {
-    if (this.state.geolocationSupport) {
-      performGeolocation(result => this.setState(result));
-    }
-  }
-  getGeoClickHandler() {
-    const condition =
-      this.state.geolocationSupport &&
-      this.state.latitude &&
-      this.state.longitude;
-    return condition
-      ? () => performGeolocation(result => this.setState(result))
-      : falsum;
-  }
   render() {
     const {
-      currentView, // via: mapStateToProps
       isFetching, // via: mapStateToProps
       isFinishedSearching, // via: mapStateToProps
       searchResults, // via: mapStateToProps
-      getDetails // via: mapDispatchToProps
+      getDetails, // via: mapDispatchToProps
+      getParcel // via: mapStateToProps
     } = this.props;
     const {
       geolocationSupport,
@@ -77,9 +62,10 @@ class ListSearchViewComponent extends Component {
           ? <ListSearchResults
               searchResults={searchResults}
               getDetails={getDetails}
+              getParcel={getParcel}
             />
           : <ListSearchLanding
-              handleGeoClick={this.getGeoClickHandler()}
+              handleGeoClick={() => performGeolocation(this.setState)}
               geolocationSupport={geolocationSupport}
               latitude={latitude}
               longitude={longitude}
@@ -95,59 +81,53 @@ class ListSearchViewComponent extends Component {
 // local sub-components ///////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
 
-class ListSearchLanding extends Component {
-  render() {
-    const {
-      handleGeoClick,
-      parentState,
-      geolocationSupport,
-      latitude,
-      longitude,
-      placeName,
-      errorMessage
-    } = this.props;
-    return (
-      <div style={{ width: "100%" }}>
-        <h1 className={styles.Welcome}>Welcome</h1>
-        <h5 className={styles.GetStarted}>Tap to see the field nearby</h5>
-        <GeolocateButtonBig
-          handleClick={handleGeoClick}
-          supportsGeolocate={geolocationSupport}
-          hasCoords={latitude && longitude}
-          placeName={placeName}
-          errorMessage={errorMessage}
-        />
-        <RaisedButton buttonText="Login" iconClass="lock" />
-      </div>
-    );
-  }
+function ListSearchLanding({
+  handleGeoClick,
+  geolocationSupport,
+  latitude,
+  longitude,
+  placeName,
+  errorMessage
+}) {
+  return (
+    <div style={{ width: "100%" }}>
+      <h1 className={styles.Welcome}>Welcome</h1>
+      <h5 className={styles.GetStarted}>Tap to see the field nearby</h5>
+      <GeolocateButtonBig
+        handleClick={handleGeoClick}
+        supportsGeolocate={geolocationSupport}
+        hasCoords={latitude && longitude}
+        placeName={placeName}
+        errorMessage={errorMessage}
+      />
+      <RaisedButton buttonText="Login" iconClass="lock" />
+    </div>
+  );
 }
 
-class ListSearchResults extends Component {
-  getTitleBarText(searchResults) {
-    const count = searchResults.length;
-    return "SEARCH RESULTS (" + count + ")";
-  }
-  render() {
-    const { parentState, searchResults, getDetails } = this.props;
-    return (
-      <div className={styles.SearchResultCardContainer}>
-        <HeaderBar title={this.getTitleBarText(searchResults)} />
-        {searchResults.map((r, i) => {
-          return (
-            <SearchResultCard
-              handleClick={() => getDetails(r.id)}
-              key={i}
-              title={replaceUnderscores(r.name)}
-              subtitle={replaceUnderscores(r.code)}
-              ripple={true}
-              indicatorColor="#FEDF56"
-            />
-          );
-        })}
-      </div>
-    );
-  }
+function ListSearchResults({
+  parentState,
+  searchResults,
+  getParcel,
+  getDetails
+}) {
+  return (
+    <div className={styles.SearchResultCardContainer}>
+      <HeaderBar title={"SEARCH RESULTS (" + searchResults.length + ")"} />
+      {searchResults.map((r, i) => {
+        const parcel = getParcel(r);
+        return (
+          <SearchResultCard
+            handleClick={() => getDetails(r)}
+            key={r}
+            title={replaceUnderscores(parcel.name)}
+            ripple={true}
+            indicatorColor="#FEDF56"
+          />
+        );
+      })}
+    </div>
+  );
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -156,7 +136,7 @@ class ListSearchResults extends Component {
 
 function mapStateToProps(state) {
   return {
-    currentView: state.ui.currentView,
+    getParcel: idx => state.parcels[idx],
     isFetching: state.search.isFetching,
     isFinishedSearching: !state.search.isFetching && state.search.results,
     searchResults: state.search.results
