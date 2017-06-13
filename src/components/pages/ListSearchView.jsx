@@ -50,7 +50,9 @@ class ListSearchViewComponent extends Component {
       this.state.geolocationSupport &&
       this.state.latitude &&
       this.state.longitude;
-    return condition ? performGeolocation : falsum;
+    return condition
+      ? () => performGeolocation(result => this.setState(result))
+      : falsum;
   }
   render() {
     const {
