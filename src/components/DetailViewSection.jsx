@@ -4,15 +4,17 @@ import ReactDOM from "react-dom";
 import CollapsibleBar from "./CollapsibleBar";
 import styles from "./styles/DetailViewSection.css";
 
-///////////////////////////////////////////////////////////////////////////////
-// The main Component; the (generic) DetailViewSection ////////////////////////
-// The final form of these components will be rely heavy on the value of //////
-// 'this.props.children' property, as declared in the wrapping Component. /////
-//                                                                           //
-// Currently, the following non-generic instantiations are possible: //////////
-// 1) DetailViewTableSection
-// 2) DetailViewThumbnailsSection
-///////////////////////////////////////////////////////////////////////////////
+/*
+DetailViewSection
+-----------------
+The final form of these components will be rely heavy on the value of
+'this.props.children' property, as declared in the wrapping Component.
+
+Currently, the following non-generic instantiations are possible:
+
+1) DetailViewTableSection
+2) DetailViewThumbnailsSection
+*/
 
 export default class DetailViewSection extends Component {
   constructor() {
@@ -42,6 +44,7 @@ export default class DetailViewSection extends Component {
     return (
       <div className={styles.DetailViewSection}>
         <CollapsibleBar
+          isOpen={this.state.isOpen}
           title={title}
           subTitle={subTitle}
           colorCode={colorCode}
@@ -52,10 +55,6 @@ export default class DetailViewSection extends Component {
     );
   }
 }
-
-///////////////////////////////////////////////////////////////////////////////
-// type-checking: /////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////
 
 DetailViewSection.propTypes = {
   handleClick: PropTypes.func,
