@@ -30,7 +30,6 @@ function doSearch(dispatch, q, types = null, exclude = []) {
   }
 
   dispatch(startSearch());
-  search(q, types, exclude).then(results => dispatch(receiveResults(results)));
   getParcelsByName(q).then(results => dispatch(receiveResults(results)));
 }
 

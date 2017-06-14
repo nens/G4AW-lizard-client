@@ -49,6 +49,13 @@ app.use("/api", (req, res) => {
     .pipe(res);
 });
 
+app.use("/proxy", (req, res) => {
+  // So I heard you like proxies...
+  const url = "https://nxt.staging.lizard.net/proxy" + req.url;
+
+  req.pipe(request({ url })).pipe(res);
+});
+
 app.listen(port, error => {
   if (error) {
     console.error(error);

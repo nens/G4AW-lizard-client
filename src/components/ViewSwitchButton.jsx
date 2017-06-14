@@ -1,22 +1,24 @@
 import React, { Component } from "react";
 import { translate } from "react-i18next";
+import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import ReactDOM from "react-dom";
 import Ink from "react-ink";
 import styles from "./styles/ViewSwitchButton.css";
 
+import { changeView } from "../actions/UiActions";
+
 ///////////////////////////////////////////////////////////////////////////////
 // A ViewSwitchButton switches between map and omnibox contexts. //////////////
 ///////////////////////////////////////////////////////////////////////////////
 
-class ViewSwitchButton extends Component {
+class ViewSwitchButtonComponent extends Component {
   render() {
-    const { t, viewIsMap } = this.props;
+    const { t, viewIsMap, changeView } = this.props;
+    const handleClick = () =>
+      changeView((viewIsMap ? "List" : "Map") + "SearchView");
     return (
-      <div
-        className={styles.ViewSwitchButton}
-        onClick={this.props.handleOnClick}
-      >
+      <div className={styles.ViewSwitchButton} onClick={handleClick}>
         {viewIsMap ? <SwitchToListButton t={t} /> : <SwitchToMapButton t={t} />}
         <Ink />
       </div>
@@ -28,7 +30,7 @@ class ViewSwitchButton extends Component {
 // Type-checking for main Component ///////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
 
-ViewSwitchButton.propTypes = {
+ViewSwitchButtonComponent.propTypes = {
   viewIsMap: PropTypes.bool
 };
 
@@ -61,5 +63,19 @@ class SwitchToListButton extends Component {
     );
   }
 }
+
+///////////////////////////////////////////////////////////////////////////////
+// react-redux bindings ///////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
+
+function mapDispatchToProps(dispatch) {
+  return {
+    changeView: newView => changeView(dispatch, newView)
+  };
+}
+
+const ViewSwitchButton = connect(null, mapDispatchToProps)(
+  ViewSwitchButtonComponent
+);
 
 export default translate()(ViewSwitchButton);

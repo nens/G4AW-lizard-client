@@ -1,33 +1,22 @@
 import { translate } from "react-i18next";
-import GeolocationAvailable from "./svg/GeolocationAvailable.svg";
-import GeolocationUnavailable from "./svg/GeolocationUnavailable.svg";
+import GeolocationAvailable from "../svg/GeolocationAvailable.svg";
+import GeolocationUnavailable from "../svg/GeolocationUnavailable.svg";
 import Ink from "react-ink";
 import PropTypes from "prop-types";
-import RaisedButton from "./RaisedButton";
-import RastersMap from "./RastersMap";
+import RaisedButton from "../RaisedButton";
+import RastersMap from "../RastersMap";
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
-import SearchBar from "./SearchBar";
-import styles from "./styles/MapSearchView.css";
+import SearchBar from "../SearchBar";
+import ViewSwitchButton from "../ViewSwitchButton";
+import styles from "../styles/MapSearchView.css";
 
-import {
-  VelocityTransitionGroup,
-  VelocityComponent,
-  velocityHelpers
-} from "velocity-react";
-
-// A MapSearchView shows searchresults in a list mode
+///////////////////////////////////////////////////////////////////////////////
+// A MapSearchView shows searchresults on the map /////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
 
 class MapSearchView extends Component {
-  constructor() {
-    super();
-    this.state = {};
-  }
-
-  componentDidMount() {}
-
   render() {
-    const { t } = this.props;
     if (this.props.match && this.props.match.params) {
       console.log(
         "x/y/z:",
@@ -39,6 +28,7 @@ class MapSearchView extends Component {
     return (
       <div className={styles.MapSearchView}>
         <SearchBar />
+        <ViewSwitchButton viewIsMap={true} />
         <RastersMap />
       </div>
     );

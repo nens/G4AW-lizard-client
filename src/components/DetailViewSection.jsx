@@ -17,7 +17,13 @@ import styles from "./styles/DetailViewSection.css";
 export default class DetailViewSection extends Component {
   constructor() {
     super();
-    this.state = {};
+    this.state = {
+      isOpen: this.props && this.props.isOpen
+    };
+    this.toggleSection = this.toggleSection.bind(this);
+  }
+  toggleSection() {
+    this.setState({ isOpen: !this.state.isOpen });
   }
   componentDidMount() {}
   render() {
@@ -26,17 +32,20 @@ export default class DetailViewSection extends Component {
       colorCode,
       handleClick,
       title,
-      subtitle,
+      subTitle,
       isOpen
     } = this.props;
-    const content = isOpen ? children : null;
+
+    const toggleSection = this.toggleSection;
+    const content = this.state.isOpen ? children : null;
+
     return (
-      <div className={styles.DetailViewSection} onClick={handleClick}>
+      <div className={styles.DetailViewSection}>
         <CollapsibleBar
           title={title}
-          subTitle={subtitle}
+          subTitle={subTitle}
           colorCode={colorCode}
-          isOpen={isOpen}
+          handleClick={toggleSection}
         />
         {content}
       </div>

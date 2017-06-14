@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import styles from "./styles/ListSearchView.css";
 
+import Ink from "react-ink";
+
 import GeolocationAvailable from "./svg/GeolocationAvailable.svg";
 import GeolocationUnavailable from "./svg/GeolocationUnavailable.svg";
 
@@ -32,7 +34,10 @@ export default class GeolocateButtonBig extends Component {
       : GeolocationUnavailable;
     return (
       <div className={styles.Geolocate} onClick={handleClick}>
-        <img src={icon} />
+        <div style={{ position: "relative", display: "table-cell" }}>
+          <Ink duration={1000} background={false} />
+          <img src={icon} />
+        </div>
         {this.getChildren()}
       </div>
     );

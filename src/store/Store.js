@@ -15,7 +15,7 @@ createStoreWithMiddleware = applyMiddleware(thunkMiddleware, logger)(
 // See G4AW-state-plan.md.
 
 export const initialUiState = {
-  currentPage: null // Todo
+  currentView: "MapSearchView"
 };
 
 export const initialSearchState = {
@@ -41,11 +41,11 @@ export const initialRastersState = {};
 export const initialSettingsState = {};
 
 const initialState = {
-  ui: initialUiState, // TODO
   geoLocation: initialGeoLocationState, // TODO
   parcels: initialParcelsState, // TODO
   photosForParcel: initialPhotosForParcelState, //TODO
 
+  ui: initialUiState,
   search: initialSearchState,
   timeseries: initialTimeseriesState,
   rasters: initialRastersState,
