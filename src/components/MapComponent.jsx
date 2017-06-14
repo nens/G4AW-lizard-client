@@ -1,24 +1,19 @@
 import { connect } from "react-redux";
-import React, { Component } from "react";
-import PropTypes from "prop-types";
 import { Map, TileLayer, WMSTileLayer } from "react-leaflet";
+import PropTypes from "prop-types";
+import React, { Component } from "react";
 import ReactDOM from "react-dom";
+import styles from "./styles/MapComponent.css";
 
 import { VIEWPORT_PADDING } from "./Constants";
 import { getRaster } from "../actions/RasterActions";
 
 const hoogteUuid = "e9ed5725-d94a-4bcb-9dde-5d655da0070e";
 
-class RastersMapComponent extends Component {
+class MapComponent extends Component {
   constructor() {
     super();
     this.handlePanOrZoomEnd = this.handlePanOrZoomEnd.bind(this);
-  }
-  getWidth() {
-    return (this.props.width || window.innerWidth) - VIEWPORT_PADDING + "px";
-  }
-  getHeight() {
-    return (this.props.height || window.innerHeight) - VIEWPORT_PADDING + "px";
   }
   handlePanOrZoomEnd(e) {
     const leaflet = this.refs.mapElement.leafletElement;
@@ -28,14 +23,15 @@ class RastersMapComponent extends Component {
   render() {
     const { visibleRasters } = this.props;
     return (
-      <div style={{ height: "80%", width: "100%", marginTop: "5%" }}>
+      <div className={styles.MapComponent} id="MapComponent">
         <Map
           ref="mapElement"
+          id="mapElement"
           center={[13.0474, 107.7429]}
           zoom={7}
           onMoveend={this.handlePanOrZoomEnd}
           zoomControl={false}
-          style={{ height: "100%" }}
+          className={styles.MapElement}
         >
           <TileLayer
             url="https://{s}.tiles.mapbox.com/v3/nelenschuurmans.iaa98k8k/{z}/{x}/{y}.png"
@@ -69,8 +65,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-const RastersMap = connect(mapStateToProps, mapDispatchToProps)(
-  RastersMapComponent
-);
-
-export default RastersMap;
+export default connect(mapStateToProps, mapDispatchToProps)(MapComponent);

@@ -4,7 +4,7 @@ import GeolocationUnavailable from "../svg/GeolocationUnavailable.svg";
 import Ink from "react-ink";
 import PropTypes from "prop-types";
 import RaisedButton from "../RaisedButton";
-import RastersMap from "../RastersMap";
+import MapComponent from "../MapComponent";
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import SearchBar from "../SearchBar";
@@ -17,24 +17,27 @@ import styles from "../styles/MapSearchView.css";
 
 class MapSearchView extends Component {
   render() {
-    if (this.props.match && this.props.match.params) {
-      console.log(
-        "x/y/z:",
-        this.props.match.params.x,
-        this.props.match.params.y,
-        this.props.match.params.z
-      );
-    }
+    const { width, height } = this.props;
+
     return (
-      <div className={styles.MapSearchView}>
+      <div
+        className={styles.MapSearchView}
+        style={{
+          width,
+          height
+        }}
+      >
+        <MapComponent />
         <SearchBar />
         <ViewSwitchButton viewIsMap={true} />
-        <RastersMap />
       </div>
     );
   }
 }
 
-MapSearchView.propTypes = {};
+MapSearchView.propTypes = {
+  width: PropTypes.number,
+  height: PropTypes.number
+};
 
 export default translate()(MapSearchView);

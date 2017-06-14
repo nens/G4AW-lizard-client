@@ -1,11 +1,8 @@
+import GeolocationAvailable from "./svg/GeolocationAvailable.svg";
+import GeolocationUnavailable from "./svg/GeolocationUnavailable.svg";
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import styles from "./styles/ListSearchView.css";
-
-import Ink from "react-ink";
-
-import GeolocationAvailable from "./svg/GeolocationAvailable.svg";
-import GeolocationUnavailable from "./svg/GeolocationUnavailable.svg";
 
 export default class GeolocateButtonBig extends Component {
   getChildren() {
@@ -34,8 +31,7 @@ export default class GeolocateButtonBig extends Component {
       : GeolocationUnavailable;
     return (
       <div className={styles.Geolocate} onClick={handleClick}>
-        <div style={{ position: "relative", display: "table-cell" }}>
-          <Ink duration={1000} background={false} />
+        <div>
           <img src={icon} />
         </div>
         {this.getChildren()}
