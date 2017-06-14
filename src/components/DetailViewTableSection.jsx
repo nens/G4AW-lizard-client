@@ -5,12 +5,12 @@ import ReactDOM from "react-dom";
 import DetailViewSection from "./DetailViewSection";
 import DetailViewTable from "./DetailViewTable";
 
-///////////////////////////////////////////////////////////////////////////////
-// The main Component: the DetailViewTableSection /////////////////////////////
-// ------------------------------------------------------------------------- //
-// This Component is a non-generic section of the DetailView: it is used in ///
-// sections of the DetailView that show a table. //////////////////////////////
-///////////////////////////////////////////////////////////////////////////////
+/*
+DetailViewTableSection
+----------------------
+This is a non-generic section of the DetailView. It is used in
+sections of the DetailView that show a table.
+*/
 
 export default class DetailViewTableSection extends Component {
   render() {
@@ -22,10 +22,6 @@ export default class DetailViewTableSection extends Component {
     );
   }
 }
-
-///////////////////////////////////////////////////////////////////////////////
-// type-checking for main Component ///////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////
 
 DetailViewTableSection.propTypes = {
   data: PropTypes.array,
