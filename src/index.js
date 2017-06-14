@@ -5,7 +5,6 @@ import { Provider } from "react-redux";
 import { theStore } from "./store/Store";
 
 import App from "./components/App";
-import MapSearchView from "./components/MapSearchView";
 import i18n from "./i18n"; // initialized i18next instance
 import React from "react";
 import ReactDOM from "react-dom";
@@ -24,7 +23,6 @@ ReactDOM.render(
         <Router basename="/">
           <div>
             <Route exact path="/" component={App} />
-            <Route path="/map/:z/:x/:y" component={MapSearchView} />
           </div>
         </Router>
       </Provider>
