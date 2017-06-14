@@ -19,9 +19,9 @@ import { getAttributesFromGeoserver } from "../../actions/ParcelActions";
 import { changeView } from "../../actions/UiActions";
 import { performGeolocation } from "../../tools/geolocate";
 
-///////////////////////////////////////////////////////////////////////////////
-// Main Component: Shows/enables search-results in a list mode. ///////////////
-///////////////////////////////////////////////////////////////////////////////
+/*
+ListSearchViewComponent: Shows/enables search-results in a list mode.
+*/
 
 class ListSearchViewComponent extends Component {
   constructor() {
@@ -77,9 +77,7 @@ class ListSearchViewComponent extends Component {
   }
 }
 
-///////////////////////////////////////////////////////////////////////////////
-// local sub-components ///////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////
+/* local sub-components */
 
 function ListSearchLanding({
   handleGeoClick,
@@ -90,7 +88,7 @@ function ListSearchLanding({
   errorMessage
 }) {
   return (
-    <div style={{ width: "100%" }}>
+    <div className={styles.ListSearchLanding}>
       <h1 className={styles.Welcome}>Welcome</h1>
       <h5 className={styles.GetStarted}>Tap to see the field nearby</h5>
       <GeolocateButtonBig
@@ -100,7 +98,7 @@ function ListSearchLanding({
         placeName={placeName}
         errorMessage={errorMessage}
       />
-      <RaisedButton buttonText="Login" iconClass="lock" />
+      {/* <RaisedButton buttonText="Login" iconClass="lock" /> */}
     </div>
   );
 }
@@ -130,9 +128,7 @@ function ListSearchResults({
   );
 }
 
-///////////////////////////////////////////////////////////////////////////////
-// react-redux coupling ///////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////
+/* react-redux coupling */
 
 function mapStateToProps(state) {
   return {
