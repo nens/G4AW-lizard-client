@@ -15,20 +15,30 @@ class MainViewComponent extends Component {
       viewportWidth: window.innerWidth,
       viewportHeight: window.innerHeight
     };
+    this.handleResize = this.handleResize.bind(this);
   }
   componentDidMount() {
-    window.addEventListener("resize", () => {
-      this.setState({
-        viewportWidth: window.innerWidth,
-        viewportHeight: window.innerHeight
-      });
+    window.addEventListener("resize", this.handleResize, false);
+  }
+  componentWillUnmount() {
+    window.removeEventListener("resize", this.handleResize, false);
+  }
+  handleResize() {
+    this.setState({
+      viewportWidth: window.innerWidth,
+      viewportHeight: window.innerHeight
     });
   }
   render() {
     let component = null;
     switch (this.props.currentView) {
       case "MapSearchView":
-        component = <MapSearchView />;
+        component = (
+          <MapSearchView
+            width={this.state.viewportWidth}
+            height={this.state.viewportHeight}
+          />
+        );
         break;
       case "ListSearchView":
         component = <ListSearchView />;
@@ -52,9 +62,7 @@ class MainViewComponent extends Component {
   }
 }
 
-///////////////////////////////////////////////////////////////////////////////
-// react-redux bindings ///////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////
+/* react-redux bindings */
 
 function mapStateToProps(state) {
   return {
