@@ -28,7 +28,10 @@
 .SearchResultCardContainer {
   width: calc(100% - 30px);
   position: relative;
-  top: 75px;
+  top: 125px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
 }
 .ListSearchLanding {
   margin-top: 50px;
