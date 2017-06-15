@@ -1,4 +1,7 @@
 .ListSearchView {
+  position: absolute;
+  width: 100%;
+  height: 200%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -36,4 +39,5 @@
 .ListSearchLanding {
   margin-top: 50px;
   text-align: center;
+  height: 100%;
 }
