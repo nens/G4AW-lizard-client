@@ -9,7 +9,6 @@ import Ink from "react-ink";
 class LoginLogoutButtonComponent extends Component {
   render() {
     const { t, bootstrap } = this.props;
-    const isAuthenticated = bootstrap && bootstrap.authenticated;
 
     return (
       <div
