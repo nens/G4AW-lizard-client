@@ -1,4 +1,4 @@
-The .../components/pages/ contains only "wrapper-components" corresponding to
+The ../components/pages/ contains only "wrapper-components" corresponding to
 the individual "pages"/ux-states the client can have. The current page/ux-state
 of the app will be saved in the Redux state.
 
@@ -202,7 +202,3 @@ As of 22-05-17, we can have the following pages/states in the screen:
 
   5.3) Help ..TODO?
   +++++++++++++++++
-
-
-
-
