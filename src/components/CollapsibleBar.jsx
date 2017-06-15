@@ -17,9 +17,11 @@ class CollapsibleBar extends Component {
     } = this.props;
     return (
       <div className={styles.CollapsibleBar} onClick={handleClick}>
-        <i className={`${styles.Arrow} material-icons`}>
-          {isOpen ? "keyboard_arrow_down" : "keyboard_arrow_right"}
-        </i>
+        <span>
+          <i className={`${styles.Arrow} material-icons`} id="Arrow">
+            {isOpen ? "keyboard_arrow_down" : "keyboard_arrow_right"}
+          </i>
+        </span>
         <span className={styles.Title}>{title}</span>
         {subTitle
           ? <span className={styles.Subtitle}>{subTitle}</span>
