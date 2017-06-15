@@ -33,6 +33,7 @@ class SearchResultCard extends Component {
     const { title, subtitle, ripple, handleClick, indicatorColor } = this.props;
     return (
       <div
+        id="SearchResultCard"
         onClick={handleClick}
         className={`${styles.SearchResultCard} ${this.state.mouseover ? styles.Mouseover : styles.Mouseout}`}
         onMouseOver={this.handleMouseOver}
