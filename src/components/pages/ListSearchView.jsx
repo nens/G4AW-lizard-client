@@ -110,8 +110,11 @@ function ListSearchResults({
   getDetails
 }) {
   return (
-    <div className={styles.SearchResultCardContainer}>
-      <HeaderBar title={"SEARCH RESULTS (" + searchResults.length + ")"} />
+    <div
+      id="SearchResultCardContainer"
+      className={styles.SearchResultCardContainer}
+    >
+      <HeaderBar title={"Search results (" + searchResults.length + ")"} />
       {searchResults.map((r, i) => {
         const parcel = getParcel(r);
         return (

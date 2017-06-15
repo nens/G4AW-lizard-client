@@ -5,36 +5,35 @@ import ReactDOM from "react-dom";
 import styles from "./styles/ListSearchView.css";
 
 export default class GeolocateButtonBig extends Component {
-  getChildren() {
+  render() {
     const {
-      supportsGeolocate,
       hasCoords,
+      supportsGeolocate,
+      handleClick,
       placeName,
-      errorMessage,
-      handleClick
+      errorMessage
     } = this.props;
+    const icon = hasCoords && supportsGeolocate
+      ? GeolocationAvailable
+      : GeolocationUnavailable;
+
+    let geolocateButton;
     if (supportsGeolocate) {
-      return hasCoords ? <p>{placeName}</p> : <p>{errorMessage}</p>;
+      geolocateButton = hasCoords ? <p>{placeName}</p> : <p>{errorMessage}</p>;
     } else {
-      return (
+      geolocateButton = (
         <div>
           <p>No geolocation support!</p>
           <p>{errorMessage}</p>
         </div>
       );
     }
-  }
-  render() {
-    const { hasCoords, supportsGeolocate, handleClick } = this.props;
-    const icon = hasCoords && supportsGeolocate
-      ? GeolocationAvailable
-      : GeolocationUnavailable;
     return (
       <div className={styles.Geolocate} onClick={handleClick}>
         <div>
           <img src={icon} />
         </div>
-        {this.getChildren()}
+        {geolocateButton}
       </div>
     );
   }
