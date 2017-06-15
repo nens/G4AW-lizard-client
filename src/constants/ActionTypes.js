@@ -55,6 +55,10 @@ in the lifecycle of a key-value pair in the stores' raster section:
 
 export const CHANGE_VIEW = "CHANGE_VIEW";
 
+// Session constants (fetch /bootstrap/lizard, receive it)
+export const FETCH_BOOTSTRAP = "FETCH_BOOTSTRAP";
+export const RECEIVE_BOOTSTRAP = "RECEIVE_BOOTSTRAP";
+
 export const FETCH_RASTER = "FETCH_RASTER";
 export const RECEIVE_RASTER = "RECEIVE_RASTER";
 export const REMOVE_RASTER = "REMOVE_RASTER";

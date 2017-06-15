@@ -8,6 +8,8 @@ import MapSearchView from "./MapSearchView";
 import ListSearchView from "./ListSearchView";
 import DetailView from "./DetailView";
 
+import { fetchBootstrap } from "../../actions/SessionActions";
+
 class MainViewComponent extends Component {
   constructor() {
     super();
@@ -17,6 +19,12 @@ class MainViewComponent extends Component {
     };
     this.handleResize = this.handleResize.bind(this);
   }
+
+  componentWillMount() {
+    // Startup functions.
+    this.props.fetchBootstrap(this.props.sessionState);
+  }
+
   componentDidMount() {
     window.addEventListener("resize", this.handleResize, false);
   }
@@ -29,6 +37,7 @@ class MainViewComponent extends Component {
       viewportHeight: window.innerHeight
     });
   }
+
   render() {
     let component = null;
     switch (this.props.currentView) {
@@ -66,9 +75,18 @@ class MainViewComponent extends Component {
 
 function mapStateToProps(state) {
   return {
-    currentView: state.ui.currentView
+    currentView: state.ui.currentView,
+    sessionState: state.session
   };
 }
 
-const MainView = connect(mapStateToProps, null)(MainViewComponent);
+function mapDispatchToProps(dispatch) {
+  return {
+    fetchBootstrap: sessionState => fetchBootstrap(dispatch, sessionState)
+  };
+}
+
+const MainView = connect(mapStateToProps, mapDispatchToProps)(
+  MainViewComponent
+);
 export default translate()(MainView);
