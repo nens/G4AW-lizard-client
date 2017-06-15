@@ -50,9 +50,11 @@ files in the actual client application (the G4AW-lizard-client repo) can now
 have the line `import { LizardApiClient } from 'lizard-api-client';` to make
 the lizard-api-client code available in their local scope
 
-* `$ sso_user=your-sso-username sso_pass=your-sso-password npm start` will launch a development server with Hot Module Reloading enabled and authenticated proxy requests to the Lizard NXT staging server at [http://localhost:3000](http://localhost:3000)
+* `$ node server.js` runs a development server with Hot Module Reloading enabled that proxies to a locally running Lizard instance on port 8000, on which one can login normally.
 
-* See [http://localhost:3000/api/v3](http://localhost:3000/api/v3) for the API root.
+* `$ sso_user=your-sso-username sso_pass=your-sso_password node server.js` instead proxies to the staging Lizard server, and you are already logged in using those credentials.
+
+* See [http://localhost:9000/api/v3](http://localhost:9000/api/v3) for the API root.
 
 
 ## Development

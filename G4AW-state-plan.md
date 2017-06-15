@@ -36,6 +36,13 @@ Total state:
           currentPage: <String>,  // 'SearchList', 'SearchMap', 'Parcel', 'Settings', 'Photo'
         },
 
+        session: {
+           // Authentication and user information
+           isFetching: false,  // Sent a request to bootstrap
+           hasBootstrap: false, // Whether result is in
+           bootstrap: null,  // Resulting bootstrap object from Lizard API /bootstrap/lizard
+        },
+
         search: {
           latestSearchTerm: <String>,
           results: [pk, pk, pk, ...]  // Indexes into 'parcels'
