@@ -29,7 +29,7 @@ class SearchBarComponent extends Component {
     this.setState({
       q: e.target.value
     });
-    if (e.key === "Enter") {
+    if (e.target.value.length > 0 && e.key === "Enter") {
       this.props.search(e.target.value);
     }
   }
