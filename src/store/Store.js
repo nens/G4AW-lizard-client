@@ -15,7 +15,7 @@ createStoreWithMiddleware = applyMiddleware(thunkMiddleware, logger)(
 // See G4AW-state-plan.md.
 
 export const initialUiState = {
-  currentView: "MapSearchView"
+  currentView: "ListSearchView"
 };
 
 export const initialSearchState = {
