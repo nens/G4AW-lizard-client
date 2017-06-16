@@ -38,7 +38,7 @@ class SearchBarComponent extends Component {
       q: ""
     });
     this.refs.searchInputField.value = "";
-    this.props.search("");
+    this.props.clear();
   }
   render() {
     return (
@@ -74,6 +74,9 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
+    clear: () => {
+      dispatch(clearResults());
+    },
     search: q => {
       if (q) {
         doSearch(dispatch, q);
