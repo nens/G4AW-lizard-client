@@ -36,15 +36,26 @@ export default class GeolocateButtonBig extends Component {
         </div>
       );
     } else {
-      const { placeName } = this.props.geolocationData.result;
-      return (
-        <div className={styles.Geolocate} onClick={handleClick}>
-          <div>
-            <img src={GeolocationAvailable} />
+      if (this.props.geolocationData.result) {
+        const { placeName } = this.props.geolocationData.result;
+        return (
+          <div className={styles.Geolocate} onClick={handleClick}>
+            <div>
+              <img src={GeolocationAvailable} />
+            </div>
+            {placeName}
           </div>
-          {placeName}
-        </div>
-      );
+        );
+      } else {
+        return (
+          <div className={styles.Geolocate} onClick={handleClick}>
+            <div>
+              <img src={GeolocationUnavailable} />
+            </div>
+            <p>Waiting</p>
+          </div>
+        );
+      }
     }
   }
 }
