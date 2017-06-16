@@ -5,7 +5,7 @@ import React from "react";
 import ListSearchView from "../src/components/views/ListSearchView";
 
 export default function runListSearchView() {
-  storiesOf("ListSearchView", module)
+  storiesOf("[V] ListSearchView", module)
     .addDecorator(i18nDecorator)
     .add("initial view", () => <ListSearchView />);
 }
