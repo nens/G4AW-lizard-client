@@ -40,7 +40,7 @@ class ListSearchViewComponent extends Component {
       geolocationData // via: mapStateToProps
     } = this.props;
     return (
-      <div className={styles.ListSearchView}>
+      <div className={styles.ListSearchView} id="ListSearchView">
         <SearchBar />
         <ViewSwitchButton viewIsMap={false} />
         {isFinishedSearching
