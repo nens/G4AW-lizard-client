@@ -9,6 +9,7 @@
   box-shadow: 2px 1px 9px 1px #888888;
   position: absolute;
   top: 70px;
+  left: 15px;
   width: calc(100% - 50px);
   z-index: 1000;
 }
