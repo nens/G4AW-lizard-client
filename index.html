@@ -17,6 +17,11 @@
 </head>
 <body>
   <div id="root" />
+  <script src="https://cdn.ravenjs.com/3.16.0/raven.min.js"
+      crossorigin="anonymous"></script>
+  <script>
+  Raven.config('https://42ebba016cb34bdd88912ff49f12e4df@sentry.io/179911').install()
+  </script>
   <script src="scripts/G4AWLizardClient.js"></script>
 </body>
 </html>
