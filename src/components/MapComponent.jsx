@@ -32,7 +32,7 @@ class MapComponent extends Component {
           return (
             <Marker key={i} position={[lat, lon]}>
               <Popup>
-                <h4>{`${parcel.name}`}</h4>
+                <h4>{parcel.name}</h4>
               </Popup>
             </Marker>
           );
