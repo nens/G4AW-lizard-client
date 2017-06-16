@@ -33,7 +33,6 @@ export default class GeolocateButtonBig extends Component {
           <div>
             <img src={GeolocationUnavailable} />
           </div>
-          Just a second...
         </div>
       );
     } else {
