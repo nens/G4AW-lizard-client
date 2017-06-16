@@ -15,7 +15,11 @@ app.use(
     publicPath: config.output.publicPath
   })
 );
-app.use(webpackHotMiddleware(compiler));
+app.use(
+  webpackHotMiddleware(compiler, {
+    heartbeat: 10 * 1000
+  })
+);
 app.use(express.static(`${__dirname}/`));
 
 app.use((req, res, next) => {
@@ -28,7 +32,7 @@ app.use((req, res, next) => {
 });
 
 app.use("/media", (req, res) => {
-  const url = "http://nxt.staging.lizard.net/media" + req.url;
+  const url = "https://nxt.staging.lizard.net/media" + req.url;
   const headers = {
     username: process.env.sso_user,
     password: process.env.sso_pass
@@ -44,7 +48,7 @@ app.use("/media", (req, res) => {
 });
 
 app.use("/api", (req, res) => {
-  const url = "http://nxt.staging.lizard.net/api" + req.url;
+  const url = "https://nxt.staging.lizard.net/api" + req.url;
   const headers = {
     username: process.env.sso_user,
     password: process.env.sso_pass
