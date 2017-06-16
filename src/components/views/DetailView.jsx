@@ -51,7 +51,8 @@ export class DetailViewComponent extends Component {
     const {
       parcel, // via: mapStateToProps
       changeView, // via: mapDispatchToProps
-      handleThumbnailClick // via: mapDispatchToProps
+      handleThumbnailClick, // via: mapDispatchToProps
+      t
     } = this.props;
     let tabularData, latlonzoom;
     if (!parcel || !parcel.hasGeoserverData) {
@@ -78,16 +79,16 @@ export class DetailViewComponent extends Component {
               <DetailViewTable data={tabularData} />
               <br />
               <DetailViewSection
-                title="Rice Growth"
-                subTitle="ving bhin data"
+                title={t("Rice Growth")}
+                subTitle={t("ving bhin data")}
                 isOpen
                 colorCode={"#ff0000"}
               >
                 <p style={{ padding: "20px" }}>{LOREM}</p>
               </DetailViewSection>
               <DetailViewSection
-                title="Flood Risk"
-                subTitle="ving bhin data"
+                title={t("Flood Risk")}
+                subTitle={t("ving bhin data")}
                 isOpen={false}
               >
                 <p style={{ padding: "20px" }}>{LOREM}</p>

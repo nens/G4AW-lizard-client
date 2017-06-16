@@ -37,7 +37,8 @@ class ListSearchViewComponent extends Component {
       isFetching, // via: mapStateToProps
       isFinishedSearching, // via: mapStateToProps
       searchResults, // via: mapStateToProps
-      geolocationData // via: mapStateToProps
+      geolocationData, // via: mapStateToProps
+      t
     } = this.props;
     return (
       <div className={styles.ListSearchView} id="ListSearchView">
@@ -48,10 +49,12 @@ class ListSearchViewComponent extends Component {
               searchResults={searchResults}
               getDetails={getDetails}
               getParcel={getParcel}
+              t={t}
             />
           : <ListSearchLanding
               geolocationData={geolocationData}
               getGeolocation={getGeolocation}
+              t={t}
             />}
       </div>
     );
@@ -60,16 +63,16 @@ class ListSearchViewComponent extends Component {
 
 /* local sub-components */
 
-function ListSearchLanding({ getGeolocation, geolocationData }) {
+function ListSearchLanding({ getGeolocation, geolocationData, t }) {
   return (
     <div className={styles.ListSearchLanding} id="ListSearchLanding">
-      <h1 className={styles.Welcome}>Welcome</h1>
-      <h5 className={styles.GetStarted}>Tap to see the field nearby</h5>
+      <h1 className={styles.Welcome}>{t("Welcome")}</h1>
+      <h5 className={styles.GetStarted}>{t("Tap to see the field nearby")}</h5>
       <GeolocateButtonBig
         geolocationData={geolocationData}
         handleClick={() => getGeolocation()}
       />
-      <RaisedButton buttonText="Login" />
+      <RaisedButton buttonText={t("Login")} />
     </div>
   );
 }
