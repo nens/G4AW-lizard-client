@@ -30,7 +30,7 @@ export const initialSearchState = {
   results: null
 };
 
-export const initialGeoLocationState = {
+export const initialGeolocationState = {
   isGeoLocationAvailable: null,
   isFetching: false,
   data: null,
@@ -48,7 +48,7 @@ export const initialRastersState = {};
 export const initialSettingsState = {};
 
 const initialState = {
-  geoLocation: initialGeoLocationState, // TODO
+  geoLocation: initialGeolocationState, // TODO
   parcels: initialParcelsState, // TODO
   photosForParcel: initialPhotosForParcelState, //TODO
 
