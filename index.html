@@ -20,7 +20,9 @@
   <script src="https://cdn.ravenjs.com/3.16.0/raven.min.js"
       crossorigin="anonymous"></script>
   <script>
-  Raven.config('https://e9316322d6ae4256a0de0cce5427fc22@sentry.io/180392').install()
+  if (window.location.origin.indexOf("localhost") > 0) {
+    Raven.config('https://e9316322d6ae4256a0de0cce5427fc22@sentry.io/180392').install()
+  }
   </script>
   <script src="scripts/G4AWLizardClient.js"></script>
 </body>
