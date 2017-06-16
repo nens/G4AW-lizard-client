@@ -61,7 +61,7 @@ export class DetailViewComponent extends Component {
       tabularData = this.formatTabularData(parcel);
     }
     return (
-      <div>
+      <div id="DetailView">
         <DetailViewHeader
           title={parcel.Farmer}
           subTitle={parcel.FieldAdr}

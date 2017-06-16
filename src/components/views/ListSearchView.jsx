@@ -62,7 +62,7 @@ class ListSearchViewComponent extends Component {
 
 function ListSearchLanding({ getGeolocation, geolocationData }) {
   return (
-    <div className={styles.ListSearchLanding}>
+    <div className={styles.ListSearchLanding} id="ListSearchLanding">
       <h1 className={styles.Welcome}>Welcome</h1>
       <h5 className={styles.GetStarted}>Tap to see the field nearby</h5>
       <GeolocateButtonBig
