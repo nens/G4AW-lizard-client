@@ -2,7 +2,6 @@ import * as ActionTypes from "../constants/ActionTypes";
 import { initialSessionState } from "../store/Store";
 
 export default function(state = initialSessionState, action) {
-  console.log("Action:", action);
   switch (action.type) {
     case ActionTypes.FETCH_BOOTSTRAP:
       return {
