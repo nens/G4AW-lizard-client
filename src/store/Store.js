@@ -18,6 +18,13 @@ export const initialUiState = {
   currentView: "ListSearchView"
 };
 
+export const initialSessionState = {
+  // Authentication and user information
+  isFetching: false, // Sent a request to bootstrap
+  hasBootstrap: false, // Whether result is in
+  bootstrap: null // Resulting bootstrap object from Lizard API /bootstrap/lizard
+};
+
 export const initialSearchState = {
   latestSearchTerm: null,
   results: null
@@ -46,6 +53,7 @@ const initialState = {
   photosForParcel: initialPhotosForParcelState, //TODO
 
   ui: initialUiState,
+  session: initialSessionState,
   search: initialSearchState,
   timeseries: initialTimeseriesState,
   rasters: initialRastersState,
