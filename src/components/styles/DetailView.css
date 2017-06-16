@@ -1,0 +1,8 @@
+.LoadingIndicator {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  margin: 50px;
+}

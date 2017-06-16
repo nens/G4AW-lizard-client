@@ -9,12 +9,13 @@
   font-weight: 100;
   padding: 0 0 0 20px;
   cursor: pointer;
+  border-bottom: 1px solid #ffffff;
 }
 .Arrow {
-  position: absolute;
+  position: relative;
   cursor: pointer;
   left: 10px;
-  top: 13px;
+  top: 5px;
 }
 .Title {
   margin-left: 20px;

@@ -6,16 +6,39 @@ import ReactDOM from "react-dom";
 import styles from "./styles/SearchBar.css";
 import { doSearch, clearResults } from "../actions/SearchActions";
 
+class ClearInputButton extends Component {
+  render() {
+    return (
+      <div onClick={this.props.onClick}>
+        <i className={`${styles.ClearInput} material-icons`}>clear</i>
+      </div>
+    );
+  }
+}
+
 class SearchBarComponent extends Component {
   constructor() {
     super();
-    this.state = {};
+    this.state = {
+      q: ""
+    };
     this.handleSearch = this.handleSearch.bind(this);
+    this.handleClearInput = this.handleClearInput.bind(this);
   }
   handleSearch(e) {
+    this.setState({
+      q: e.target.value
+    });
     if (e.key === "Enter") {
       this.props.search(e.target.value);
     }
+  }
+  handleClearInput() {
+    this.setState({
+      q: ""
+    });
+    this.refs.searchInputField.value = "";
+    this.props.search("");
   }
   render() {
     return (
@@ -25,11 +48,15 @@ class SearchBarComponent extends Component {
         </div>
         <input
           id="searchInputField"
+          ref="searchInputField"
           type="text"
           disabled={this.props.searchFetching}
-          onKeyPress={this.handleSearch}
+          onKeyUp={this.handleSearch}
           className={styles.SearchbarInput}
         />
+        {this.state.q.length > 0
+          ? <ClearInputButton onClick={this.handleClearInput} />
+          : null}
         <div className={styles.GeoLocateButton}>
           <i className={`${styles.GeoLocateIcon} material-icons`}>near_me</i>
         </div>

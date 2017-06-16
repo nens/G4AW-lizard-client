@@ -50,7 +50,12 @@ class MainViewComponent extends Component {
         );
         break;
       case "ListSearchView":
-        component = <ListSearchView />;
+        component = (
+          <ListSearchView
+            width={this.state.viewportWidth}
+            height={this.state.viewportHeight}
+          />
+        );
         break;
       case "DetailView":
         component = <DetailView />;

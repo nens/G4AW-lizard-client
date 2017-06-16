@@ -1,7 +1,7 @@
 .SearchResultCard {
   padding: 15px;
   margin: 15px 10px 0 0;
-  width: 140px;
+  width: 120px;
   min-height: 100px;
   background: #FFFFFF;
   box-shadow: 0 2px 4px 0 rgba(0,0,0,0.07);
@@ -15,7 +15,7 @@
 
 .Title {
   color: #5D5D5D;
-  font-size: 15px;
+  font-size: 14px;
 }
 
 .SubTitle {
