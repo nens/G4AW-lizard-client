@@ -7,6 +7,7 @@ import { connect } from "react-redux";
 
 import styles from "../styles/ListSearchView.css";
 
+import LoginLogoutButton from "../LoginLogoutButton";
 import RaisedButton from "../RaisedButton";
 import SearchBar from "../SearchBar";
 import GeolocateButtonBig from "../GeolocateButtonBig";
@@ -98,7 +99,7 @@ function ListSearchLanding({
         placeName={placeName}
         errorMessage={errorMessage}
       />
-      {/* <RaisedButton buttonText="Login" iconClass="lock" /> */}
+      <LoginLogoutButton />
     </div>
   );
 }

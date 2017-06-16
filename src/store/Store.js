@@ -15,7 +15,14 @@ createStoreWithMiddleware = applyMiddleware(thunkMiddleware, logger)(
 // See G4AW-state-plan.md.
 
 export const initialUiState = {
-  currentView: "MapSearchView"
+  currentView: "ListSearchView"
+};
+
+export const initialSessionState = {
+  // Authentication and user information
+  isFetching: false, // Sent a request to bootstrap
+  hasBootstrap: false, // Whether result is in
+  bootstrap: null // Resulting bootstrap object from Lizard API /bootstrap/lizard
 };
 
 export const initialSearchState = {
@@ -46,6 +53,7 @@ const initialState = {
   photosForParcel: initialPhotosForParcelState, //TODO
 
   ui: initialUiState,
+  session: initialSessionState,
   search: initialSearchState,
   timeseries: initialTimeseriesState,
   rasters: initialRastersState,
