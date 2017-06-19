@@ -24,7 +24,7 @@ export const clearResults = () => ({
 
 export const setSearchInputText = inputText => ({
   type: SET_SEARCH_INPUT_TEXT,
-  inputText: inputText
+  inputText
 });
 
 function doSearch(dispatch, q, types = null, exclude = []) {
