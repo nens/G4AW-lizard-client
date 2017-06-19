@@ -72,7 +72,8 @@ function ListSearchLanding({ getGeolocation, geolocationData, t }) {
         geolocationData={geolocationData}
         handleClick={() => getGeolocation()}
       />
-      <RaisedButton buttonText={t("Login")} />
+      <LoginLogoutButton />
+
     </div>
   );
 }
