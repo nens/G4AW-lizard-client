@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import { Map, TileLayer, WMSTileLayer } from "react-leaflet";
+import { Map, TileLayer, Marker, Popup, WMSTileLayer } from "react-leaflet";
 import PropTypes from "prop-types";
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
@@ -21,14 +21,31 @@ class MapComponent extends Component {
     const zoom = leaflet.getZoom();
   }
   render() {
-    const { visibleRasters } = this.props;
+    const { visibleRasters, getParcel, searchResults } = this.props;
+
+    const searchResultsAsMarkers = searchResults
+      ? searchResults.map((r, i) => {
+          const parcel = getParcel(r);
+          const coords = parcel.geometry.coordinates[0][0];
+          const lat = coords[0];
+          const lon = coords[1];
+          return (
+            <Marker key={i} position={[lat, lon]}>
+              <Popup>
+                <h4>{parcel.name}</h4>
+              </Popup>
+            </Marker>
+          );
+        })
+      : [];
+
     return (
       <div className={styles.MapComponent} id="MapComponent">
         <Map
           ref="mapElement"
           id="mapElement"
           center={[13.0474, 107.7429]}
-          zoom={7}
+          zoom={6}
           onMoveend={this.handlePanOrZoomEnd}
           zoomControl={false}
           className={styles.MapElement}
@@ -45,6 +62,7 @@ class MapComponent extends Component {
               styles={raster.options.styles}
             />
           ))}
+          {searchResultsAsMarkers}
         </Map>
       </div>
     );
@@ -53,6 +71,7 @@ class MapComponent extends Component {
 
 function mapStateToProps(state) {
   return {
+    getParcel: idx => state.parcels[idx],
     visibleRasters: Object.values(state.rasters)
       .filter(raster => !!raster.data)
       .map(raster => raster.data)

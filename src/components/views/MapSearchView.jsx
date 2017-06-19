@@ -1,4 +1,5 @@
 import { translate } from "react-i18next";
+import { connect } from "react-redux";
 import GeolocationAvailable from "../svg/GeolocationAvailable.svg";
 import GeolocationUnavailable from "../svg/GeolocationUnavailable.svg";
 import Ink from "react-ink";
@@ -15,9 +16,9 @@ import styles from "../styles/MapSearchView.css";
 // A MapSearchView shows searchresults on the map /////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
 
-class MapSearchView extends Component {
+class MapSearchViewComponent extends Component {
   render() {
-    const { width, height } = this.props;
+    const { width, height, searchResults } = this.props;
 
     return (
       <div
@@ -27,7 +28,7 @@ class MapSearchView extends Component {
           height
         }}
       >
-        <MapComponent />
+        <MapComponent searchResults={searchResults} />
         <SearchBar />
         <ViewSwitchButton viewIsMap={true} />
       </div>
@@ -35,9 +36,32 @@ class MapSearchView extends Component {
   }
 }
 
-MapSearchView.propTypes = {
+MapSearchViewComponent.propTypes = {
   width: PropTypes.number,
   height: PropTypes.number
 };
+
+function mapStateToProps(state) {
+  console.log(state);
+  return {
+    getParcel: idx => state.parcels[idx],
+    isFetching: state.search.isFetching,
+    isFinishedSearching: !state.search.isFetching && state.search.results,
+    searchResults: state.search.results
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    getDetails: id => {
+      getAttributesFromGeoserver(dispatch, id);
+      changeView(dispatch, "DetailView");
+    }
+  };
+}
+
+const MapSearchView = connect(mapStateToProps, mapDispatchToProps)(
+  MapSearchViewComponent
+);
 
 export default translate()(MapSearchView);

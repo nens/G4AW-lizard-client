@@ -18,7 +18,7 @@ import SearchResultCard from "../SearchResultCard";
 import { replaceUnderscores } from "../../tools/string-formatting";
 import { getAttributesFromGeoserver } from "../../actions/ParcelActions";
 import { changeView } from "../../actions/UiActions";
-import { performGeolocation } from "../../tools/geolocate";
+import { performGeolocation } from "../../actions/GeolocationActions";
 
 /*
 ListSearchViewComponent: Shows/enables search-results in a list mode.
@@ -27,36 +27,21 @@ ListSearchViewComponent: Shows/enables search-results in a list mode.
 class ListSearchViewComponent extends Component {
   constructor() {
     super();
-    this.state = {
-      geolocationSupport: false,
-      errorMessage: undefined
-    };
-    this.setState = this.setState.bind(this);
-  }
-  componentWillMount() {
-    if (navigator.geolocation) {
-      this.setState({
-        geolocationSupport: true
-      });
-    }
+    this.state = {};
   }
   render() {
     const {
+      getDetails, // via: mapDispatchToProps
+      getParcel, // via: mapStateToProps
+      getGeolocation, // via: mapDispatchToProps
       isFetching, // via: mapStateToProps
       isFinishedSearching, // via: mapStateToProps
       searchResults, // via: mapStateToProps
-      getDetails, // via: mapDispatchToProps
-      getParcel // via: mapStateToProps
+      geolocationData, // via: mapStateToProps
+      t
     } = this.props;
-    const {
-      geolocationSupport,
-      latitude,
-      longitude,
-      placeName,
-      errorMessage
-    } = this.state;
     return (
-      <div className={styles.ListSearchView}>
+      <div className={styles.ListSearchView} id="ListSearchView">
         <SearchBar />
         <ViewSwitchButton viewIsMap={false} />
         {isFinishedSearching
@@ -64,14 +49,12 @@ class ListSearchViewComponent extends Component {
               searchResults={searchResults}
               getDetails={getDetails}
               getParcel={getParcel}
+              t={t}
             />
           : <ListSearchLanding
-              handleGeoClick={() => performGeolocation(this.setState)}
-              geolocationSupport={geolocationSupport}
-              latitude={latitude}
-              longitude={longitude}
-              placeName={placeName}
-              errorMessage={errorMessage}
+              geolocationData={geolocationData}
+              getGeolocation={getGeolocation}
+              t={t}
             />}
       </div>
     );
@@ -80,26 +63,16 @@ class ListSearchViewComponent extends Component {
 
 /* local sub-components */
 
-function ListSearchLanding({
-  handleGeoClick,
-  geolocationSupport,
-  latitude,
-  longitude,
-  placeName,
-  errorMessage
-}) {
+function ListSearchLanding({ getGeolocation, geolocationData, t }) {
   return (
-    <div className={styles.ListSearchLanding}>
-      <h1 className={styles.Welcome}>Welcome</h1>
-      <h5 className={styles.GetStarted}>Tap to see the field nearby</h5>
+    <div className={styles.ListSearchLanding} id="ListSearchLanding">
+      <h1 className={styles.Welcome}>{t("Welcome")}</h1>
+      <h5 className={styles.GetStarted}>{t("Tap to see the field nearby")}</h5>
       <GeolocateButtonBig
-        handleClick={handleGeoClick}
-        supportsGeolocate={geolocationSupport}
-        hasCoords={latitude && longitude}
-        placeName={placeName}
-        errorMessage={errorMessage}
+        geolocationData={geolocationData}
+        handleClick={() => getGeolocation()}
       />
-      <LoginLogoutButton />
+      <RaisedButton buttonText={t("Login")} />
     </div>
   );
 }
@@ -111,8 +84,11 @@ function ListSearchResults({
   getDetails
 }) {
   return (
-    <div className={styles.SearchResultCardContainer}>
-      <HeaderBar title={"SEARCH RESULTS (" + searchResults.length + ")"} />
+    <div
+      id="SearchResultCardContainer"
+      className={styles.SearchResultCardContainer}
+    >
+      <HeaderBar title={"Search results (" + searchResults.length + ")"} />
       {searchResults.map((r, i) => {
         const parcel = getParcel(r);
         return (
@@ -136,7 +112,8 @@ function mapStateToProps(state) {
     getParcel: idx => state.parcels[idx],
     isFetching: state.search.isFetching,
     isFinishedSearching: !state.search.isFetching && state.search.results,
-    searchResults: state.search.results
+    searchResults: state.search.results,
+    geolocationData: state.geolocation
   };
 }
 
@@ -145,6 +122,9 @@ function mapDispatchToProps(dispatch) {
     getDetails: id => {
       getAttributesFromGeoserver(dispatch, id);
       changeView(dispatch, "DetailView");
+    },
+    getGeolocation: () => {
+      performGeolocation(dispatch);
     }
   };
 }

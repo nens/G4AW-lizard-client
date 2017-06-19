@@ -5,37 +5,57 @@ import ReactDOM from "react-dom";
 import styles from "./styles/ListSearchView.css";
 
 export default class GeolocateButtonBig extends Component {
-  getChildren() {
-    const {
-      supportsGeolocate,
-      hasCoords,
-      placeName,
-      errorMessage,
-      handleClick
-    } = this.props;
-    if (supportsGeolocate) {
-      return hasCoords ? <p>{placeName}</p> : <p>{errorMessage}</p>;
-    } else {
-      return (
-        <div>
-          <p>No geolocation support!</p>
-          <p>{errorMessage}</p>
-        </div>
-      );
+  constructor() {
+    super();
+    this.state = {
+      geolocationSupport: undefined
+    };
+  }
+  componentWillMount() {
+    if (navigator.geolocation) {
+      this.setState({
+        geolocationSupport: true
+      });
     }
   }
   render() {
-    const { hasCoords, supportsGeolocate, handleClick } = this.props;
-    const icon = hasCoords && supportsGeolocate
-      ? GeolocationAvailable
-      : GeolocationUnavailable;
-    return (
-      <div className={styles.Geolocate} onClick={handleClick}>
-        <div>
-          <img src={icon} />
+    const {
+      hasCoords,
+      supportsGeolocate,
+      handleClick,
+      errorMessage,
+      geolocationData
+    } = this.props;
+
+    if (geolocationData.data === null) {
+      return (
+        <div className={styles.Geolocate} onClick={handleClick}>
+          <div>
+            <img src={GeolocationUnavailable} />
+          </div>
         </div>
-        {this.getChildren()}
-      </div>
-    );
+      );
+    } else {
+      if (this.props.geolocationData.result) {
+        const { placeName } = this.props.geolocationData.result;
+        return (
+          <div className={styles.Geolocate} onClick={handleClick}>
+            <div>
+              <img src={GeolocationAvailable} />
+            </div>
+            {placeName}
+          </div>
+        );
+      } else {
+        return (
+          <div className={styles.Geolocate} onClick={handleClick}>
+            <div>
+              <img src={GeolocationUnavailable} />
+            </div>
+            <p>Waiting</p>
+          </div>
+        );
+      }
+    }
   }
 }

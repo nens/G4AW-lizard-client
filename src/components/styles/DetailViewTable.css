@@ -1,18 +1,24 @@
 .DetailViewTable {
   width: 100%;
   background-color: #fff;
-  line-height: 50px;
+  line-height: 20px;
   font-size: 18px;
 }
 .Table {
   color: #333;
   font-size: 12px;
   margin: 20px;
-  width: 95%;
+  width: calc(100% - 30px);
   border-collapse: collapse;
+  border-spacing: 10px;
 }
 .Row {
+  vertical-align: top;
+  text-transform: capitalize;
   border-bottom: 1px solid #d7d7d7;
+}
+.Row td {
+  padding: 10px 0 10px 0;
 }
 .ColKey {
   width: 40%;
@@ -26,8 +32,8 @@
   color: darkred;
 }
 .Indicator {
-  width: 30px;
-  height: 30px;
+  width: 20px;
+  height: 20px;
   text-align: center;
 }
 .IndicatorSuccess {

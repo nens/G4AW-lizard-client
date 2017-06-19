@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import ReactDOM from "react-dom";
-
+import { translate } from "react-i18next";
 import DetailViewSection from "./DetailViewSection";
 import DetailViewThumbnails from "./DetailViewThumbnails";
 
@@ -9,13 +9,15 @@ import DetailViewThumbnails from "./DetailViewThumbnails";
 // The main Component: the DetailViewThumbnailsSection ////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
 
-export default class DetailViewThumbnailsSection extends Component {
+class DetailViewThumbnailsSection extends Component {
   render() {
-    const { isOpen, thumbnails, handleClick } = this.props;
+    const { isOpen, thumbnails, handleClick, t } = this.props;
     return (
-      <DetailViewSection title="Images" isOpen={isOpen}>
+      <DetailViewSection title={t("Images")} isOpen={isOpen}>
         <DetailViewThumbnails images={thumbnails} handleClick={handleClick} />
       </DetailViewSection>
     );
   }
 }
+
+export default translate()(DetailViewThumbnailsSection);

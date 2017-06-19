@@ -1,6 +1,6 @@
 import { FETCH_BOOTSTRAP, RECEIVE_BOOTSTRAP } from "../constants/ActionTypes";
-import { theStore } from "../store/Store";
 import { getBootstrap } from "lizard-api-client";
+import { theStore } from "../store/Store";
 
 export function fetchBootstrapAction() {
   return { type: FETCH_BOOTSTRAP };

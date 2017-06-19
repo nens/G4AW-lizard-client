@@ -2,7 +2,9 @@ import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import { connect } from "react-redux";
 import { translate } from "react-i18next";
+import MDSpinner from "react-md-spinner";
 
+import styles from "../styles/DetailView.css";
 import DetailViewHeader from "../DetailViewHeader";
 import DetailViewSection from "../DetailViewSection";
 import DetailViewTable from "../DetailViewTable";
@@ -49,20 +51,18 @@ export class DetailViewComponent extends Component {
     const {
       parcel, // via: mapStateToProps
       changeView, // via: mapDispatchToProps
-      handleThumbnailClick // via: mapDispatchToProps
+      handleThumbnailClick, // via: mapDispatchToProps
+      t
     } = this.props;
     let tabularData, latlonzoom;
     if (!parcel || !parcel.hasGeoserverData) {
       return null;
-    } else if (parcel.isFetchingGeoserver) {
-      return <p>Spinner.</p>;
     } else {
-      console.log("[dbg] parcel:", parcel);
       latlonzoom = this.getLatLonZoom(parcel.geometry.coordinates[0]);
       tabularData = this.formatTabularData(parcel);
     }
     return (
-      <div>
+      <div id="DetailView">
         <DetailViewHeader
           title={parcel.Farmer}
           subTitle={parcel.FieldAdr}
@@ -70,29 +70,35 @@ export class DetailViewComponent extends Component {
           latlonzoom={latlonzoom}
           handleBackButtonClick={changeView}
         />
-        <p style={{ padding: "20px" }}>{LOREM}</p>
-        <DetailViewTable data={tabularData} />
-        <br />
-        <DetailViewSection
-          title="Rice Growth"
-          subTitle="ving bhin data"
-          isOpen
-          colorCode={"#ff0000"}
-        >
-          <p style={{ padding: "20px" }}>{LOREM}</p>
-        </DetailViewSection>
-        <DetailViewSection
-          title="Flood Risk"
-          subTitle="ving bhin data"
-          isOpen={false}
-        >
-          <p style={{ padding: "20px" }}>{LOREM}</p>
-        </DetailViewSection>
-        <DetailViewThumbnailsSection
-          isOpen
-          handleClick={handleThumbnailClick}
-          thumbnails={THUMBNAIL_LIST}
-        />
+        {parcel.isFetchingGeoserver
+          ? <div className={styles.LoadingIndicator} id="LoadingIndicator">
+              <MDSpinner />
+            </div>
+          : <div>
+              <p style={{ padding: "20px" }}>{LOREM}</p>
+              <DetailViewTable data={tabularData} />
+              <br />
+              <DetailViewSection
+                title={t("Rice Growth")}
+                subTitle={t("ving bhin data")}
+                isOpen
+                colorCode={"#ff0000"}
+              >
+                <p style={{ padding: "20px" }}>{LOREM}</p>
+              </DetailViewSection>
+              <DetailViewSection
+                title={t("Flood Risk")}
+                subTitle={t("ving bhin data")}
+                isOpen={false}
+              >
+                <p style={{ padding: "20px" }}>{LOREM}</p>
+              </DetailViewSection>
+              <DetailViewThumbnailsSection
+                isOpen
+                handleClick={handleThumbnailClick}
+                thumbnails={THUMBNAIL_LIST}
+              />
+            </div>}
       </div>
     );
   }

@@ -139,3 +139,9 @@ $ npm run build
 ```
 
 This will run webpack in production mode. The result will be a `bundle.js` file in the `dist/` directory.
+
+
+
+## Sentry
+
+See [https://sentry.io/nens/g4aw-frontend/](https://sentry.io/nens/g4aw-frontend/).
