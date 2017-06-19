@@ -2,6 +2,38 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.3.0"></a>
+# [0.3.0](https://github.com/nens/G4AW-lizard-client/compare/v0.1.1...v0.3.0) (2017-06-19)
+
+
+### Bug Fixes
+
+* Add link in README.md ([43c6966](https://github.com/nens/G4AW-lizard-client/commit/43c6966))
+* Adding short fadein for result cards ([ab4e6cb](https://github.com/nens/G4AW-lizard-client/commit/ab4e6cb))
+* Clear instead of doing empty string search ([2071c55](https://github.com/nens/G4AW-lizard-client/commit/2071c55))
+* CollapsibleBar styling. ([d0493a4](https://github.com/nens/G4AW-lizard-client/commit/d0493a4))
+* Fix undefined error ([38b56c3](https://github.com/nens/G4AW-lizard-client/commit/38b56c3))
+* No Raven on localhost. ([a6fc972](https://github.com/nens/G4AW-lizard-client/commit/a6fc972))
+* **Session.js:** Remove unneeded console.log (we have redux-logger for that) ([c4ebd84](https://github.com/nens/G4AW-lizard-client/commit/c4ebd84))
+* Search only if more than 0 chars are counted ([7fb48b6](https://github.com/nens/G4AW-lizard-client/commit/7fb48b6))
+* Translations using t() ([5ad5527](https://github.com/nens/G4AW-lizard-client/commit/5ad5527))
+* Translations. ([b71053f](https://github.com/nens/G4AW-lizard-client/commit/b71053f))
+* Update DetailViewTable ([9cd5439](https://github.com/nens/G4AW-lizard-client/commit/9cd5439))
+* **CollapsibleBar:** Remove unneeded padding. ([9ecbda4](https://github.com/nens/G4AW-lizard-client/commit/9ecbda4))
+* **SessionActions.js:** Removed double import ([4731898](https://github.com/nens/G4AW-lizard-client/commit/4731898))
+
+
+### Features
+
+* **Sentry:** Adds and configures Raven. ([309f277](https://github.com/nens/G4AW-lizard-client/commit/309f277))
+
+
+
+<a name="0.1.1"></a>
+## [0.1.1](https://github.com/nens/G4AW-lizard-client/compare/v0.2.1...v0.1.1) (2017-06-19)
+
+
+
 <a name="0.1.0"></a>
 # 0.1.0 (2017-06-09)
 
