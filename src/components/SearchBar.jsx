@@ -4,7 +4,11 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import ReactDOM from "react-dom";
 import styles from "./styles/SearchBar.css";
-import { doSearch, clearResults } from "../actions/SearchActions";
+import {
+  doSearch,
+  clearResults,
+  setSearchInputText
+} from "../actions/SearchActions";
 
 class ClearInputButton extends Component {
   render() {
@@ -26,9 +30,9 @@ class SearchBarComponent extends Component {
     this.handleClearInput = this.handleClearInput.bind(this);
   }
   handleSearch(e) {
-    this.setState({
-      q: e.target.value
-    });
+    const { setSearchInput } = this.props;
+    setSearchInput(e.target.value);
+
     if (e.target.value.length > 0 && e.key === "Enter") {
       this.props.search(e.target.value);
     }
@@ -41,6 +45,7 @@ class SearchBarComponent extends Component {
     this.props.clear();
   }
   render() {
+    const { searchInput } = this.props;
     return (
       <div className={styles.SearchBar}>
         <div className={styles.SettingsButton}>
@@ -50,11 +55,12 @@ class SearchBarComponent extends Component {
           id="searchInputField"
           ref="searchInputField"
           type="text"
+          defaultValue={searchInput}
           disabled={this.props.searchFetching}
           onKeyUp={this.handleSearch}
           className={styles.SearchbarInput}
         />
-        {this.state.q.length > 0
+        {searchInput && searchInput.length > 0
           ? <ClearInputButton onClick={this.handleClearInput} />
           : null}
         <div className={styles.GeoLocateButton}>
@@ -68,12 +74,16 @@ class SearchBarComponent extends Component {
 function mapStateToProps(state) {
   return {
     searchFetching: !!state.search.isFetching,
+    searchInput: state.search.inputText,
     searchResults: state.search.isFetching ? null : state.search.results
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
+    setSearchInput: q => {
+      dispatch(setSearchInputText(q));
+    },
     clear: () => {
       dispatch(clearResults());
     },
