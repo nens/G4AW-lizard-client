@@ -7,6 +7,12 @@ runDetailView();
 import runDetailViewHeader from "./DetailViewHeaderStories";
 runDetailViewHeader();
 
+import runDetailViewPhoto from "./DetailViewPhotoStories";
+runDetailViewPhoto();
+
+import runDetailViewPhotoSection from "./DetailViewPhotoSectionStories";
+runDetailViewPhotoSection();
+
 import runDetailViewSection from "./DetailViewSectionStories";
 runDetailViewSection();
 

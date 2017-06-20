@@ -5,7 +5,7 @@ import React from "react";
 import PhotoView from "../src/components/views/PhotoView";
 
 function getPhotoView(idx) {
-  return <PhotoView currentPhotoIdx={idx} images={PHOTO_LIST} />;
+  return <PhotoView currentPhotoIdx={idx} photo={PHOTO_LIST[0]} />;
 }
 
 export default function runPhotoView() {

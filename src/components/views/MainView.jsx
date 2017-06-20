@@ -42,7 +42,7 @@ class MainViewComponent extends Component {
   }
 
   render() {
-    let component = null;
+    const { getPhotoForSelectedParcel } = this.props;
     switch (this.props.currentView) {
       case "MapSearchView":
         return (
@@ -61,9 +61,20 @@ class MainViewComponent extends Component {
         );
         break;
       case "DetailView":
-        return <DetailView />;
+        return (
+          <DetailView
+            width={this.state.viewportWidth}
+            height={this.state.viewportHeight}
+          />
+        );
       case "PhotoView":
-        return <PhotoView currentPhotoIdx={0} images={PHOTO_LIST} />;
+        return (
+          <PhotoView
+            width={this.state.viewportWidth}
+            height={this.state.viewportHeight}
+            photo={getPhotoForSelectedParcel()}
+          />
+        );
       case "SettingsView":
         console.log("[E] Should render component: SettingsView (WIP!)");
         return null;
@@ -81,7 +92,11 @@ class MainViewComponent extends Component {
 function mapStateToProps(state) {
   return {
     currentView: state.ui.currentView,
-    sessionState: state.session
+    sessionState: state.session,
+    // TODO: Instead of getting the object from our test_data (PHOTO_LIST),
+    // retrieve (=build) it from the readily available parcel data in the Redux
+    // store.
+    getPhotoForSelectedParcel: () => PHOTO_LIST[0]
   };
 }
 

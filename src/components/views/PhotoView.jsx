@@ -15,31 +15,19 @@ class PhotoViewComponent extends Component {
   constructor() {
     super();
     this.state = {
-      width: window.innerWidth,
-      height: window.innerHeight,
-      imageStatus: "loading"
-      // selected: this.props.defaultSelected ? true : false
+      imageStatus: "loading",
+      topPanelHeight: null,
+      bottomPanelHeight: null
     };
-    this.updateDimensions = this.updateDimensions.bind(this);
-    this.handleNextPhoto = this.handleNextPhoto.bind(this);
-    this.handlePrevPhoto = this.handlePrevPhoto.bind(this);
     this.handleImageLoaded = this.handleImageLoaded.bind(this);
   }
   componentDidMount() {
-    this.updateDimensions();
-    window.addEventListener("resize", this.updateDimensions);
-  }
-  updateDimensions() {
+    const topPanelElement = ReactDOM.findDOMNode(this.topPanelElement);
+    const bottomPanelElement = ReactDOM.findDOMNode(this.bottomPanelElement);
     this.setState({
-      width: window.innerWidth,
-      height: window.innerHeight
+      midPanelHeight: this.props.height -
+        (topPanelElement.clientHeight + bottomPanelElement.clientHeight)
     });
-  }
-  handleNextPhoto() {
-    console.log("handleNextPhoto()");
-  }
-  handlePrevPhoto() {
-    console.log("handlePrevPhoto()");
   }
   handleImageLoaded() {
     this.setState({
@@ -47,34 +35,28 @@ class PhotoViewComponent extends Component {
     });
   }
   render() {
-    const {
-      images,
-      handleBackButtonClick,
-      handlePrevPhoto,
-      handleNextPhoto
-    } = this.props;
-    const { width, height, imageStatus } = this.state;
-    const currentPhotoIdx = this.props.currentPhotoIdx || 0;
-    const photo = images[currentPhotoIdx];
+    const { photo, handleBackButtonClick, width } = this.props;
+    const { imageStatus } = this.state;
     const datetime = new Date(photo.date).toString();
 
     return (
       <div>
-
         <div className={styles.DetailViewPhotoInner} style={{ height, width }}>
           <PhotoViewTopPanel
-            idx={currentPhotoIdx}
-            count={images.length}
+            ref={elem => (this.topPanelElement = elem)}
             handleBackButtonClick={handleBackButtonClick}
           />
           <PhotoViewMidPanel
             url={photo.url}
             width={width}
+            height={this.state.midPanelHeight}
             handleImageLoaded={this.handleImageLoaded}
           />
-          <PhotoViewBottomPanel datetime={datetime} />
+          <PhotoViewBottomPanel
+            ref={elem => (this.bottomPanelElement = elem)}
+            datetime={datetime}
+          />
         </div>
-
         {imageStatus === "loading" ? <PhotoViewSpinner /> : null}
       </div>
     );
@@ -86,7 +68,7 @@ class PhotoViewComponent extends Component {
 ///////////////////////////////////////////////////////////////////////////////
 
 PhotoViewComponent.propTypes = {
-  images: PropTypes.array,
+  photo: PropTypes.object,
   handleBackButtonClick: PropTypes.func
 };
 
@@ -94,41 +76,14 @@ PhotoViewComponent.propTypes = {
 // Local sub-components: //////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
 
-class PhotoViewPrevButton extends Component {
-  render() {
-    const { handleClick } = this.props;
-    return (
-      <div className={styles.PrevPhoto} onClick={handleClick}>
-        <i className={`${styles.LeftArrowIcon} material-icons`}>
-          keyboard_arrow_left
-        </i>
-      </div>
-    );
-  }
-}
-
-class PhotoViewNextButton extends Component {
-  render() {
-    const { handleClick } = this.props;
-    return (
-      <div className={styles.NextPhoto} onClick={handleClick}>
-        <i className={`${styles.RightArrowIcon} material-icons`}>
-          keyboard_arrow_right
-        </i>
-      </div>
-    );
-  }
-}
-
 class PhotoViewTopPanel extends Component {
   render() {
-    const { handleBackButtonClick, idx, count } = this.props;
+    const { handleBackButtonClick } = this.props;
     return (
       <div className={styles.TopPanel}>
         <div onClick={handleBackButtonClick} className={styles.BackButton}>
           <i className="material-icons">arrow_back</i>
         </div>
-        <div>{idx + 1}/{count}</div>
       </div>
     );
   }
@@ -136,11 +91,16 @@ class PhotoViewTopPanel extends Component {
 
 class PhotoViewMidPanel extends Component {
   render() {
-    const { url, width, handleImageLoaded } = this.props;
+    const { url, width, height, handleImageLoaded } = this.props;
     return (
       <div className={styles.PhotoPanel}>
         <div className={styles.DetailViewPhoto}>
-          <img src={url} width={width} onLoad={handleImageLoaded} />
+          <img
+            src={url}
+            width={width}
+            height={height}
+            onLoad={handleImageLoaded}
+          />
         </div>
       </div>
     );

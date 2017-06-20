@@ -9,7 +9,7 @@ import DetailViewHeader from "../DetailViewHeader";
 import DetailViewSection from "../DetailViewSection";
 import DetailViewTable from "../DetailViewTable";
 import DetailViewTableSection from "../DetailViewTableSection";
-import DetailViewThumbnailsSection from "../DetailViewThumbnailsSection";
+import DetailViewPhotoSection from "../DetailViewPhotoSection";
 
 import { changeView } from "../../actions/UiActions";
 
@@ -51,7 +51,9 @@ export class DetailViewComponent extends Component {
     const {
       parcel, // via: mapStateToProps
       changeView, // via: mapDispatchToProps
-      handleThumbnailClick, // via: mapDispatchToProps
+      changeToPhotoView, // via: mapDispatchToProps,
+      changeToListSearchView, // via: mapDispatchToProps
+      width, // via: parent
       t
     } = this.props;
     let tabularData, latlonzoom;
@@ -68,7 +70,7 @@ export class DetailViewComponent extends Component {
           subTitle={parcel.FieldAdr}
           halfMode={false}
           latlonzoom={latlonzoom}
-          handleBackButtonClick={changeView}
+          handleBackButtonClick={changeToListSearchView}
         />
         {parcel.isFetchingGeoserver
           ? <div className={styles.LoadingIndicator} id="LoadingIndicator">
@@ -93,10 +95,10 @@ export class DetailViewComponent extends Component {
               >
                 <p style={{ padding: "20px" }}>{LOREM}</p>
               </DetailViewSection>
-              <DetailViewThumbnailsSection
-                isOpen
-                handleClick={handleThumbnailClick}
-                thumbnails={THUMBNAIL_LIST}
+              <DetailViewPhotoSection
+                isOpen={false}
+                width={width}
+                handleClick={changeToPhotoView}
               />
             </div>}
       </div>
@@ -117,8 +119,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    handleThumbnailClick: () => changeView(dispatch, "PhotoView"),
-    changeView: () => changeView(dispatch, "ListSearchView")
+    changeToPhotoView: () => changeView(dispatch, "PhotoView"),
+    changeToListSearchView: () => changeView(dispatch, "ListSearchView")
   };
 }
 

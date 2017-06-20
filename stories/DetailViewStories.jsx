@@ -5,7 +5,7 @@ import React from "react";
 import DetailView from "../src/components/views/DetailView";
 
 export default function runDetailView() {
-  storiesOf("DetailView", module)
+  storiesOf("[V] DetailView", module)
     .addDecorator(i18nDecorator)
     .add("default", () => {
       return <DetailView />;

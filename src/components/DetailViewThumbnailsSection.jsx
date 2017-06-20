@@ -7,6 +7,11 @@ import DetailViewThumbnails from "./DetailViewThumbnails";
 
 ///////////////////////////////////////////////////////////////////////////////
 // The main Component: the DetailViewThumbnailsSection ////////////////////////
+// ------------------------------------------------------------------------- //
+// Update 20-06-17: It has been decided that, for our first production       //
+// release, we will only show a single photo in the DetailView (a.o.t. the   //
+// collection of thumbnails originally planned). Later on we will use this   //
+// component again, that is: after 09-2017.                                  //
 ///////////////////////////////////////////////////////////////////////////////
 
 class DetailViewThumbnailsSection extends Component {
