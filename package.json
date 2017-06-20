@@ -10,7 +10,7 @@
     "release": "buck-trap -a",
     "start": "node server.js",
     "storybook": "babel-node storybook.js",
-    "buck-trap": "buck-trap -a"
+    "staging-deploy": "read -p 'Version? (see above) ' V && test $V && ansible-playbook -i deploy/hosts -K deploy/deploy.yml --limit=staging --extra-vars=\"sitename=staging.nxt.lizard.net version=v$V\""
   },
   "lint-staged": {
     "*.js": [
