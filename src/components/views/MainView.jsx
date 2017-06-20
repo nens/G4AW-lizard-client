@@ -7,6 +7,9 @@ import ReactDOM from "react-dom";
 import MapSearchView from "./MapSearchView";
 import ListSearchView from "./ListSearchView";
 import DetailView from "./DetailView";
+import PhotoView from "./PhotoView";
+
+import { PHOTO_LIST } from "../../../stories/helpers";
 
 import { fetchBootstrap } from "../../actions/SessionActions";
 
@@ -42,7 +45,7 @@ class MainViewComponent extends Component {
     let component = null;
     switch (this.props.currentView) {
       case "MapSearchView":
-        component = (
+        return (
           <MapSearchView
             width={this.state.viewportWidth}
             height={this.state.viewportHeight}
@@ -50,7 +53,7 @@ class MainViewComponent extends Component {
         );
         break;
       case "ListSearchView":
-        component = (
+        return (
           <ListSearchView
             width={this.state.viewportWidth}
             height={this.state.viewportHeight}
@@ -58,21 +61,18 @@ class MainViewComponent extends Component {
         );
         break;
       case "DetailView":
-        component = <DetailView />;
-        break;
+        return <DetailView />;
       case "PhotoView":
-        console.log("[E] Should render component: PhotoView (WIP!)");
-        break;
+        return <PhotoView currentPhotoIdx={0} images={PHOTO_LIST} />;
       case "SettingsView":
         console.log("[E] Should render component: SettingsView (WIP!)");
-        break;
+        return null;
       default:
         console.log(
           "[E] Cannot render unknown view '" + this.props.currentView + "'!"
         );
-        break;
+        return null;
     }
-    return component;
   }
 }
 

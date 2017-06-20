@@ -48,16 +48,16 @@ export const initialRastersState = {};
 export const initialSettingsState = {};
 
 const initialState = {
-  geoLocation: initialGeolocationState, // TODO
-  parcels: initialParcelsState, // TODO
   photosForParcel: initialPhotosForParcelState, //TODO
+  settings: initialSettingsState, // TODO
 
+  geolocation: initialGeolocationState,
+  parcels: initialParcelsState,
   ui: initialUiState,
   session: initialSessionState,
   search: initialSearchState,
   timeseries: initialTimeseriesState,
-  rasters: initialRastersState,
-  settings: initialSettingsState
+  rasters: initialRastersState
 };
 
 /**

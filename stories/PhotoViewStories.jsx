@@ -2,7 +2,7 @@ import { storiesOf } from "@kadira/storybook";
 import { i18nDecorator, PHOTO_LIST } from "./helpers.jsx";
 import React from "react";
 
-import PhotoView from "../src/components/PhotoView";
+import PhotoView from "../src/components/views/PhotoView";
 
 function getPhotoView(idx) {
   return <PhotoView currentPhotoIdx={idx} images={PHOTO_LIST} />;

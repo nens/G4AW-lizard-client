@@ -1,14 +1,17 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import ReactDOM from "react-dom";
-import styles from "./styles/PhotoView.css";
+import { connect } from "react-redux";
+import { translate } from "react-i18next";
+import styles from "../styles/PhotoView.css";
 import MDSpinner from "react-md-spinner";
+import { changeView } from "../../actions/UiActions";
 
 ///////////////////////////////////////////////////////////////////////////////
 // The main Component; the PhotoView component ////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
 
-export default class PhotoView extends Component {
+class PhotoViewComponent extends Component {
   constructor() {
     super();
     this.state = {
@@ -57,13 +60,6 @@ export default class PhotoView extends Component {
 
     return (
       <div>
-        {currentPhotoIdx > 0
-          ? <PhotoViewPrevButton handleClick={this.handlePrevPhoto} />
-          : null}
-
-        {currentPhotoIdx < images.length - 1
-          ? <PhotoViewNextButton handleClick={this.handleNextPhoto} />
-          : null}
 
         <div className={styles.DetailViewPhotoInner} style={{ height, width }}>
           <PhotoViewTopPanel
@@ -89,7 +85,7 @@ export default class PhotoView extends Component {
 // type-checking: /////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
 
-PhotoView.propTypes = {
+PhotoViewComponent.propTypes = {
   images: PropTypes.array,
   handleBackButtonClick: PropTypes.func
 };
@@ -190,3 +186,17 @@ class PhotoViewSpinner extends Component {
     );
   }
 }
+
+///////////////////////////////////////////////////////////////////////////////
+// react-redux bindings ///////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
+
+function mapDispatchToProps(dispatch) {
+  return {
+    handleBackButtonClick: () => changeView(dispatch, "DetailView")
+  };
+}
+
+const PhotoView = connect(null, mapDispatchToProps)(PhotoViewComponent);
+
+export default translate()(PhotoView);

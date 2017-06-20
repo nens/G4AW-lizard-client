@@ -117,7 +117,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    handleThumbnailClick: () => alert("WIP"),
+    handleThumbnailClick: () => changeView(dispatch, "PhotoView"),
     changeView: () => changeView(dispatch, "ListSearchView")
   };
 }
