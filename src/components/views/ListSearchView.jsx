@@ -89,13 +89,16 @@ function ListSearchResults({
       id="SearchResultCardContainer"
       className={styles.SearchResultCardContainer}
     >
-      <HeaderBar title={"Search results (" + searchResults.length + ")"} />
-      {searchResults.map((r, i) => {
-        const parcel = getParcel(r);
+      <HeaderBar
+        icon="list"
+        title={"Search results (" + searchResults.length + ")"}
+      />
+      {searchResults.map((result, i) => {
+        const parcel = getParcel(result);
         return (
           <SearchResultCard
-            handleClick={() => getDetails(r)}
-            key={r}
+            handleClick={() => getDetails(result)}
+            key={result}
             title={replaceUnderscores(parcel.name)}
             ripple={true}
             indicatorColor="#FEDF56"

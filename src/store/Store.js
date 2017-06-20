@@ -27,7 +27,8 @@ export const initialSessionState = {
 
 export const initialSearchState = {
   latestSearchTerm: null,
-  results: null
+  results: null,
+  inputText: ""
 };
 
 export const initialGeolocationState = {
