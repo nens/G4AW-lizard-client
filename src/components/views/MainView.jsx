@@ -4,11 +4,13 @@ import { translate } from "react-i18next";
 import PropTypes from "prop-types";
 import ReactDOM from "react-dom";
 
+import SnackBar from "../SnackBar";
 import MapSearchView from "./MapSearchView";
 import ListSearchView from "./ListSearchView";
 import DetailView from "./DetailView";
 
 import { fetchBootstrap } from "../../actions/SessionActions";
+import { showSnackBar, hideSnackBar } from "../../actions/UiActions";
 
 class MainViewComponent extends Component {
   constructor() {
@@ -39,6 +41,7 @@ class MainViewComponent extends Component {
   }
 
   render() {
+    const { snackBarOpen, snackBarOptions, hideSnackBar } = this.props;
     let component = null;
     switch (this.props.currentView) {
       case "MapSearchView":
@@ -72,7 +75,18 @@ class MainViewComponent extends Component {
         );
         break;
     }
-    return component;
+    return (
+      <div>
+        {component}
+        <SnackBar
+          isOpen={snackBarOpen}
+          message={snackBarOptions.message}
+          subMessage={snackBarOptions.subMessage}
+          actionText={"OK"}
+          onActionTap={() => hideSnackBar()}
+        />
+      </div>
+    );
   }
 }
 
@@ -80,6 +94,8 @@ class MainViewComponent extends Component {
 
 function mapStateToProps(state) {
   return {
+    snackBarOptions: state.ui.snackBarOptions,
+    snackBarOpen: state.ui.showSnackBar,
     currentView: state.ui.currentView,
     sessionState: state.session
   };
@@ -87,6 +103,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
+    hideSnackBar: () => hideSnackBar(dispatch),
+    showSnackBar: options => showSnackBar(dispatch, options),
     fetchBootstrap: sessionState => fetchBootstrap(dispatch, sessionState)
   };
 }
