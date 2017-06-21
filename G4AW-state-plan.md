@@ -34,6 +34,12 @@ Total state:
     {
         ui: {
           currentPage: <String>,  // 'SearchList', 'SearchMap', 'Parcel', 'Settings', 'Photo'
+          showSnackBar: <Boolean>,
+          snackBarOptions: {
+            message: <String>, // required
+            subMessage: <String>, // optional
+            autoHideDuration: <Number> // optional, in ms
+          }
         },
 
         session: {
