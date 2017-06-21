@@ -15,7 +15,12 @@ createStoreWithMiddleware = applyMiddleware(thunkMiddleware, logger)(
 // See G4AW-state-plan.md.
 
 export const initialUiState = {
-  currentView: "ListSearchView"
+  currentView: "ListSearchView",
+  showSnackBar: false,
+  snackBarOptions: {
+    message: "",
+    subMessage: ""
+  }
 };
 
 export const initialSessionState = {
