@@ -8,24 +8,15 @@ export default function runSnackBar() {
   storiesOf("SnackBar", module)
     .add("default", () => (
       <SnackBar
-        open={true}
+        isOpen={true}
         message={"This is a test"}
         actionText={"OK"}
         onActionTap={action("clicked")}
       />
     ))
-    .add("timeout", () => (
-      <SnackBar
-        autoHideDuration={5000}
-        open={true}
-        message={"This closes after 5 seconds"}
-        actionText={"Fine"}
-        onActionTap={action("clicked")}
-      />
-    ))
     .add("long string", () => (
       <SnackBar
-        open={true}
+        isOpen={true}
         message={
           "This is a very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, verrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrry long string that could break the ui"
         }
@@ -35,7 +26,7 @@ export default function runSnackBar() {
     ))
     .add("long action string", () => (
       <SnackBar
-        open={true}
+        isOpen={true}
         message={"This is a test"}
         actionText={"Now click this button"}
         onActionTap={action("clicked")}
@@ -43,7 +34,7 @@ export default function runSnackBar() {
     ))
     .add("in vietnamese", () => (
       <SnackBar
-        open={true}
+        isOpen={true}
         message={"Đây là tiếng Việt"}
         actionText={"được"}
         onActionTap={action("clicked")}
@@ -51,7 +42,7 @@ export default function runSnackBar() {
     ))
     .add("with submessage", () => (
       <SnackBar
-        open={true}
+        isOpen={true}
         message={"This is a SnackBar"}
         subMessage={"with a sub message"}
         actionText={"OK"}
