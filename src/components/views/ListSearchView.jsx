@@ -25,10 +25,6 @@ ListSearchViewComponent: Shows/enables search-results in a list mode.
 */
 
 class ListSearchViewComponent extends Component {
-  constructor() {
-    super();
-    this.state = {};
-  }
   render() {
     const {
       getDetails, // via: mapDispatchToProps

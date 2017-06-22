@@ -7,6 +7,8 @@ import styles from "../styles/PhotoView.css";
 import MDSpinner from "react-md-spinner";
 import { changeView } from "../../actions/UiActions";
 
+import { WIDTH, HEIGHT } from "../../tools/dimensions";
+
 ///////////////////////////////////////////////////////////////////////////////
 // The main Component; the PhotoView component ////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
@@ -16,48 +18,46 @@ class PhotoViewComponent extends Component {
     super();
     this.state = {
       imageStatus: "loading",
-      topPanelHeight: null,
-      bottomPanelHeight: null
+      midPanelHeight: null
     };
     this.handleImageLoaded = this.handleImageLoaded.bind(this);
   }
   componentDidMount() {
-    const topPanelElement = ReactDOM.findDOMNode(this.topPanelElement);
-    const bottomPanelElement = ReactDOM.findDOMNode(this.bottomPanelElement);
+    const topPanelElement = ReactDOM.findDOMNode(this.topPanelComponent);
+    const bottomPanelElement = ReactDOM.findDOMNode(this.bottomPanelComponent);
     this.setState({
-      midPanelHeight: this.props.height -
+      midPanelHeight: HEIGHT -
         (topPanelElement.clientHeight + bottomPanelElement.clientHeight)
     });
   }
   handleImageLoaded() {
-    this.setState({
-      imageStatus: "loaded"
-    });
+    this.setState({ imageStatus: "loaded" });
   }
   render() {
-    const { photo, handleBackButtonClick, width } = this.props;
+    const { photo, handleBackButtonClick } = this.props;
     const { imageStatus } = this.state;
     const datetime = new Date(photo.date).toString();
-
+    const dimensions = { width: WIDTH, height: HEIGHT };
     return (
       <div>
-        <div className={styles.DetailViewPhotoInner} style={{ height, width }}>
+        <div className={styles.DetailViewPhotoInner} style={dimensions}>
           <PhotoViewTopPanel
-            ref={elem => (this.topPanelElement = elem)}
+            ref={component => (this.topPanelComponent = component)}
             handleBackButtonClick={handleBackButtonClick}
           />
+          {imageStatus === "loading" ? <PhotoViewSpinner /> : null}
           <PhotoViewMidPanel
+            ref={component => (this.midPanelComponent = component)}
             url={photo.url}
-            width={width}
             height={this.state.midPanelHeight}
             handleImageLoaded={this.handleImageLoaded}
+            imageIsLoaded={imageStatus === "loaded"}
           />
           <PhotoViewBottomPanel
-            ref={elem => (this.bottomPanelElement = elem)}
+            ref={component => (this.bottomPanelComponent = component)}
             datetime={datetime}
           />
         </div>
-        {imageStatus === "loading" ? <PhotoViewSpinner /> : null}
       </div>
     );
   }
@@ -91,13 +91,15 @@ class PhotoViewTopPanel extends Component {
 
 class PhotoViewMidPanel extends Component {
   render() {
-    const { url, width, height, handleImageLoaded } = this.props;
+    const { url, height, handleImageLoaded, imageIsLoaded } = this.props;
     return (
       <div className={styles.PhotoPanel}>
         <div className={styles.DetailViewPhoto}>
           <img
+            style={{ opacity: imageIsLoaded ? 1 : 0 }}
+            ref="the_img"
             src={url}
-            width={width}
+            width={WIDTH}
             height={height}
             onLoad={handleImageLoaded}
           />

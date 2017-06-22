@@ -3,10 +3,9 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import ReactDOM from "react-dom";
 import { translate } from "react-i18next";
-
 import { changeView } from "../actions/UiActions";
-
 import styles from "./styles/DetailViewPhoto.css";
+import { WIDTH } from "../tools/dimensions";
 
 ///////////////////////////////////////////////////////////////////////////////
 // The main Component: used for displaying a single image (not full-screen)  //
@@ -15,10 +14,10 @@ import styles from "./styles/DetailViewPhoto.css";
 
 export class DetailViewPhoto extends Component {
   render() {
-    const { photo, handleClick, width } = this.props;
+    const { photo, handleClick } = this.props;
     return (
       <div className={styles.Container}>
-        <img src={photo.url} onClick={handleClick} width={width - 50} />
+        <img src={photo.url} onClick={handleClick} width={WIDTH} />
       </div>
     );
   }
@@ -30,12 +29,7 @@ export class DetailViewPhoto extends Component {
 
 DetailViewPhoto.propTypes = {
   photo: PropTypes.object,
-  handleClick: PropTypes.func,
-  width: PropTypes.number
+  handleClick: PropTypes.func
 };
-
-///////////////////////////////////////////////////////////////////////////////
-// type-checking: /////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////
 
 export default translate()(DetailViewPhoto);

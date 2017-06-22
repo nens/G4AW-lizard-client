@@ -15,6 +15,8 @@ import { changeView } from "../../actions/UiActions";
 
 import { THUMBNAIL_LIST, LOREM } from "../../../stories/helpers";
 
+import { WIDTH } from "../../tools/dimensions";
+
 const DEFAULT_ZOOM = 11; // Used for map in header of the page
 const TABULAR_DATA_KEYS = [
   "name",
@@ -52,16 +54,17 @@ export class DetailViewComponent extends Component {
       parcel, // via: mapStateToProps
       changeView, // via: mapDispatchToProps
       changeToPhotoView, // via: mapDispatchToProps,
-      changeToListSearchView, // via: mapDispatchToProps
-      width, // via: parent
+      changeToListSearchView, // via: mapDispatchToProps,
+      photo, // via: parent
       t
     } = this.props;
+
     let tabularData, latlonzoom;
-    if (!parcel || !parcel.hasGeoserverData) {
-      return null;
-    } else {
+    if (parcel && parcel.hasGeoserverData) {
       latlonzoom = this.getLatLonZoom(parcel.geometry.coordinates[0]);
       tabularData = this.formatTabularData(parcel);
+    } else {
+      return null;
     }
     return (
       <div id="DetailView">
@@ -81,23 +84,24 @@ export class DetailViewComponent extends Component {
               <DetailViewTable data={tabularData} />
               <br />
               <DetailViewSection
+                isOpen
                 title={t("Rice Growth")}
                 subTitle={t("ving bhin data")}
-                isOpen
                 colorCode={"#ff0000"}
               >
                 <p style={{ padding: "20px" }}>{LOREM}</p>
               </DetailViewSection>
               <DetailViewSection
+                isOpen={false}
                 title={t("Flood Risk")}
                 subTitle={t("ving bhin data")}
-                isOpen={false}
               >
                 <p style={{ padding: "20px" }}>{LOREM}</p>
               </DetailViewSection>
               <DetailViewPhotoSection
                 isOpen={false}
-                width={width}
+                photo={photo}
+                width={WIDTH}
                 handleClick={changeToPhotoView}
               />
             </div>}

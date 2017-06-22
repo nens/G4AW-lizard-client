@@ -9,14 +9,10 @@ import { PHOTO_LIST } from "../../stories/helpers";
 
 class DetailViewPhotoSection extends Component {
   render() {
-    const { width, isOpen, handleClick, t } = this.props;
+    const { isOpen, handleClick, t, photo } = this.props;
     return (
       <DetailViewSection title={t("Most recent image")} isOpen={isOpen}>
-        <DetailViewPhoto
-          width={width}
-          photo={PHOTO_LIST[0]}
-          handleClick={handleClick}
-        />
+        <DetailViewPhoto photo={photo} handleClick={handleClick} />
       </DetailViewSection>
     );
   }

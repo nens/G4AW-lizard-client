@@ -14,67 +14,21 @@ import { PHOTO_LIST } from "../../../stories/helpers";
 import { fetchBootstrap } from "../../actions/SessionActions";
 
 class MainViewComponent extends Component {
-  constructor() {
-    super();
-    this.state = {
-      viewportWidth: window.innerWidth,
-      viewportHeight: window.innerHeight
-    };
-    this.handleResize = this.handleResize.bind(this);
-  }
-
   componentWillMount() {
     // Startup functions.
     this.props.fetchBootstrap(this.props.sessionState);
   }
-
-  componentDidMount() {
-    window.addEventListener("resize", this.handleResize, false);
-  }
-  componentWillUnmount() {
-    window.removeEventListener("resize", this.handleResize, false);
-  }
-  handleResize() {
-    this.setState({
-      viewportWidth: window.innerWidth,
-      viewportHeight: window.innerHeight
-    });
-  }
-
   render() {
-    const { getPhotoForSelectedParcel } = this.props;
+    const photo = this.props.getPhotoForSelectedParcel();
     switch (this.props.currentView) {
       case "MapSearchView":
-        return (
-          <MapSearchView
-            width={this.state.viewportWidth}
-            height={this.state.viewportHeight}
-          />
-        );
-        break;
+        return <MapSearchView />;
       case "ListSearchView":
-        return (
-          <ListSearchView
-            width={this.state.viewportWidth}
-            height={this.state.viewportHeight}
-          />
-        );
-        break;
+        return <ListSearchView />;
       case "DetailView":
-        return (
-          <DetailView
-            width={this.state.viewportWidth}
-            height={this.state.viewportHeight}
-          />
-        );
+        return <DetailView photo={photo} />;
       case "PhotoView":
-        return (
-          <PhotoView
-            width={this.state.viewportWidth}
-            height={this.state.viewportHeight}
-            photo={getPhotoForSelectedParcel()}
-          />
-        );
+        return <PhotoView photo={photo} />;
       case "SettingsView":
         console.log("[E] Should render component: SettingsView (WIP!)");
         return null;
@@ -93,10 +47,10 @@ function mapStateToProps(state) {
   return {
     currentView: state.ui.currentView,
     sessionState: state.session,
+    getPhotoForSelectedParcel: () => PHOTO_LIST[0]
     // TODO: Instead of getting the object from our test_data (PHOTO_LIST),
     // retrieve (=build) it from the readily available parcel data in the Redux
     // store.
-    getPhotoForSelectedParcel: () => PHOTO_LIST[0]
   };
 }
 
@@ -109,4 +63,5 @@ function mapDispatchToProps(dispatch) {
 const MainView = connect(mapStateToProps, mapDispatchToProps)(
   MainViewComponent
 );
+
 export default translate()(MainView);
