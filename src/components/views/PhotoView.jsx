@@ -22,16 +22,12 @@ class PhotoViewComponent extends Component {
     };
     this.handleImageLoaded = this.handleImageLoaded.bind(this);
   }
-  componentDidMount() {
-    const topPanelElement = ReactDOM.findDOMNode(this.topPanelComponent);
-    const bottomPanelElement = ReactDOM.findDOMNode(this.bottomPanelComponent);
+  handleImageLoaded(imageElement) {
+    const heightRatio = imageElement.naturalHeight / imageElement.naturalWidth;
     this.setState({
-      midPanelHeight: HEIGHT -
-        (topPanelElement.clientHeight + bottomPanelElement.clientHeight)
+      midPanelHeight: Math.round(heightRatio * WIDTH),
+      imageStatus: "loaded"
     });
-  }
-  handleImageLoaded() {
-    this.setState({ imageStatus: "loaded" });
   }
   render() {
     const { photo, handleBackButtonClick } = this.props;
@@ -97,10 +93,13 @@ class PhotoViewMidPanel extends Component {
         <div className={styles.DetailViewPhoto}>
           <img
             style={{ opacity: imageIsLoaded ? 1 : 0 }}
+            id="theImage"
             src={url}
             width={WIDTH}
             height={height}
-            onLoad={handleImageLoaded}
+            onLoad={() => {
+              handleImageLoaded(document.getElementById("theImage"));
+            }}
           />
         </div>
       </div>
