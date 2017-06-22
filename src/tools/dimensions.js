@@ -1,8 +1,14 @@
-export const WIDTH = window.innerWidth;
+export let WIDTH;
 
-export const HEIGHT = window.innerHeight;
+export let HEIGHT;
 
-export const DIMENSIONS = {
-  WIDTH: WIDTH,
-  HEIGHT: HEIGHT
-};
+export const DETAIL_VIEW_PHOTO_MARGIN = 50;
+
+// For dev/demo-purposes only, i.e. IRL people won't change the viewport
+// dimensions at runtime:
+export function updateDimensions() {
+  WIDTH = window.innerWidth;
+  HEIGHT = window.innerHeight;
+}
+
+updateDimensions();

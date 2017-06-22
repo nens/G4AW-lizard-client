@@ -33,20 +33,17 @@ const TABULAR_DATA_KEYS = [
 
 export class DetailViewComponent extends Component {
   formatTabularData(parcel) {
-    const result = [];
     return TABULAR_DATA_KEYS.map(requiredKey => {
       return { key: requiredKey, value: parcel[requiredKey] || "..." };
     });
   }
   getLatLonZoom(coords) {
-    let latSum = 0;
-    let lonSum = 0;
+    let latSum = 0, lonSum = 0;
     coords.forEach(function(coord) {
       latSum += coord[0];
       lonSum += coord[1];
     });
-    const latAvg = latSum / coords.length;
-    const lonAvg = lonSum / coords.length;
+    const latAvg = latSum / coords.length, lonAvg = lonSum / coords.length;
     return { lat: latAvg, lon: lonAvg, zoom: DEFAULT_ZOOM };
   }
   render() {
@@ -76,9 +73,7 @@ export class DetailViewComponent extends Component {
           handleBackButtonClick={changeToListSearchView}
         />
         {parcel.isFetchingGeoserver
-          ? <div className={styles.LoadingIndicator} id="LoadingIndicator">
-              <MDSpinner />
-            </div>
+          ? <DetailViewSpinner />
           : <div>
               <p style={{ padding: "20px" }}>{LOREM}</p>
               <DetailViewTable data={tabularData} />
@@ -105,6 +100,30 @@ export class DetailViewComponent extends Component {
                 handleClick={changeToPhotoView}
               />
             </div>}
+      </div>
+    );
+  }
+}
+
+///////////////////////////////////////////////////////////////////////////////
+// local sub-components ///////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
+
+class DetailViewSpinner extends Component {
+  render() {
+    console.log(
+      "IS FETCHING....! IS FETCHING....! IS FETCHING....! IS FETCHING....! IS FETCHING....! "
+    );
+    return (
+      <div>
+        <MDSpinner
+          singleColor="#03a9f4"
+          style={{
+            position: "absolute",
+            top: "50%",
+            left: "50%"
+          }}
+        />
       </div>
     );
   }

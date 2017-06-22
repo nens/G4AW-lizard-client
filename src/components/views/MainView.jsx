@@ -13,10 +13,13 @@ import { PHOTO_LIST } from "../../../stories/helpers";
 
 import { fetchBootstrap } from "../../actions/SessionActions";
 
+import { updateDimensions } from "../../tools/dimensions";
+
 class MainViewComponent extends Component {
   componentWillMount() {
     // Startup functions.
     this.props.fetchBootstrap(this.props.sessionState);
+    window.addEventListener("resize", updateDimensions);
   }
   render() {
     const photo = this.props.getPhotoForSelectedParcel();
