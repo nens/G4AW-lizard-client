@@ -97,7 +97,6 @@ class PhotoViewMidPanel extends Component {
         <div className={styles.DetailViewPhoto}>
           <img
             style={{ opacity: imageIsLoaded ? 1 : 0 }}
-            ref="the_img"
             src={url}
             width={WIDTH}
             height={height}
