@@ -111,9 +111,6 @@ export class DetailViewComponent extends Component {
 
 class DetailViewSpinner extends Component {
   render() {
-    console.log(
-      "IS FETCHING....! IS FETCHING....! IS FETCHING....! IS FETCHING....! IS FETCHING....! "
-    );
     return (
       <div>
         <MDSpinner
