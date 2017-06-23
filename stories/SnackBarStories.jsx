@@ -16,7 +16,7 @@ export default function runSnackBar() {
     ))
     .add("long string", () => (
       <SnackBar
-        isOpen={true}
+        isOpen
         message={
           "This is a very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, verrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrry long string that could break the ui"
         }
@@ -26,7 +26,7 @@ export default function runSnackBar() {
     ))
     .add("long action string", () => (
       <SnackBar
-        isOpen={true}
+        isOpen
         message={"This is a test"}
         actionText={"Now click this button"}
         onActionTap={action("clicked")}
@@ -34,7 +34,7 @@ export default function runSnackBar() {
     ))
     .add("in vietnamese", () => (
       <SnackBar
-        isOpen={true}
+        isOpen
         message={"Đây là tiếng Việt"}
         actionText={"được"}
         onActionTap={action("clicked")}
@@ -42,7 +42,7 @@ export default function runSnackBar() {
     ))
     .add("with submessage", () => (
       <SnackBar
-        isOpen={true}
+        isOpen
         message={"This is a SnackBar"}
         subMessage={"with a sub message"}
         actionText={"OK"}
