@@ -7,6 +7,7 @@ import MapComponent from "../MapComponent";
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import SearchBar from "../SearchBar";
+import { showSnackBar, hideSnackBar } from "../../actions/UiActions";
 import ViewSwitchButton from "../ViewSwitchButton";
 import styles from "../styles/MapSearchView.css";
 import { WIDTH, HEIGHT } from "../../tools/dimensions";
@@ -16,6 +17,13 @@ import { WIDTH, HEIGHT } from "../../tools/dimensions";
 ///////////////////////////////////////////////////////////////////////////////
 
 class MapSearchViewComponent extends Component {
+  componentDidMount() {
+    this.props.showSnackBar({
+      message: "Map view",
+      subMessage: "This is the map view",
+      autoHideDuration: 4000
+    });
+  }
   render() {
     const { searchResults } = this.props;
     return (
@@ -55,6 +63,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
+    hideSnackBar: () => hideSnackBar(dispatch),
+    showSnackBar: options => showSnackBar(dispatch, options),
     getDetails: id => {
       getAttributesFromGeoserver(dispatch, id);
       changeView(dispatch, "DetailView");

@@ -14,6 +14,7 @@ import GeolocateButtonBig from "../GeolocateButtonBig";
 import ViewSwitchButton from "../ViewSwitchButton";
 import HeaderBar from "../HeaderBar";
 import SearchResultCard from "../SearchResultCard";
+import { showSnackBar, hideSnackBar } from "../../actions/UiActions";
 
 import { replaceUnderscores } from "../../tools/string-formatting";
 import { getAttributesFromGeoserver } from "../../actions/ParcelActions";
@@ -27,6 +28,17 @@ import MDSpinner from "react-md-spinner";
 ///////////////////////////////////////////////////////////////////////////////
 
 class ListSearchViewComponent extends Component {
+  constructor() {
+    super();
+    this.state = {};
+  }
+  componentDidMount() {
+    this.props.showSnackBar({
+      message: "List view",
+      subMessage: "This is the list view",
+      autoHideDuration: 4000
+    });
+  }
   render() {
     const {
       getDetails, // via: mapDispatchToProps
@@ -79,7 +91,6 @@ function ListSearchLanding({ t }) {
       </h5>
       <GeolocateButtonBig t={t} />
       <LoginLogoutButton />
-
     </div>
   );
 }
@@ -148,6 +159,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
+    hideSnackBar: () => hideSnackBar(dispatch),
+    showSnackBar: options => showSnackBar(dispatch, options),
     getDetails: id => {
       getAttributesFromGeoserver(dispatch, id);
       changeView(dispatch, "DetailView");

@@ -12,55 +12,31 @@ import { VelocityComponent } from "velocity-react";
 class SnackBar extends Component {
   constructor() {
     super();
-    this.state = {
-      showComponent: true
-    };
-  }
-  componentDidMount() {
-    if (this.state.showComponent && this.props.autoHideDuration) {
-      this.setAutoHideTimer();
-    }
-  }
-  setAutoHideTimer() {
-    clearTimeout(this.timerAutoHideId);
-    this.timerAutoHideId = setTimeout(() => {
-      if (this.props.open !== null && this.props.onRequestClose) {
-        this.props.onRequestClose("timeout");
-      } else {
-        this.setState({ showComponent: false });
-      }
-    }, this.props.autoHideDuration);
   }
   render() {
+    const { isOpen } = this.props;
     return (
-      <VelocityComponent
-        duration={250}
-        animation={{
-          translateX: "35%",
-          opacity: this.state.showComponent ? 1 : 0
-        }}
-      >
-        <SnackBarContent {...this.props} />
-      </VelocityComponent>
+      <div className={styles.SnackBarWrapper}>
+        <VelocityComponent
+          duration={150}
+          animation={{
+            translateY: isOpen ? 0 : "100px"
+          }}
+        >
+          <SnackBarContent {...this.props} />
+        </VelocityComponent>
+      </div>
     );
   }
 }
-
-///////////////////////////////////////////////////////////////////////////////
-// type-checking for main Component ///////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////
 
 SnackBar.propTypes = {
   action: PropTypes.string,
   autoHideDuration: PropTypes.number,
   message: PropTypes.string,
   subMessage: PropTypes.string,
-  open: PropTypes.bool
+  isOpen: PropTypes.bool
 };
-
-///////////////////////////////////////////////////////////////////////////////
-// local sub-components ///////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////
 
 class SnackBarContent extends Component {
   getMessage(message) {
