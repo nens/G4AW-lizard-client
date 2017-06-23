@@ -4,6 +4,7 @@ import { translate } from "react-i18next";
 import PropTypes from "prop-types";
 import ReactDOM from "react-dom";
 
+import SnackBar from "../SnackBar";
 import MapSearchView from "./MapSearchView";
 import ListSearchView from "./ListSearchView";
 import DetailView from "./DetailView";
@@ -12,6 +13,7 @@ import PhotoView from "./PhotoView";
 import { PHOTO_LIST } from "../../../stories/helpers";
 
 import { fetchBootstrap } from "../../actions/SessionActions";
+import { showSnackBar, hideSnackBar } from "../../actions/UiActions";
 
 import { updateDimensions } from "../../tools/dimensions";
 
@@ -22,16 +24,22 @@ class MainViewComponent extends Component {
     window.addEventListener("resize", updateDimensions);
   }
   render() {
+    const { snackBarOpen, snackBarOptions, hideSnackBar } = this.props;
     const photo = this.props.getPhotoForSelectedParcel();
+    let component = null;
     switch (this.props.currentView) {
       case "MapSearchView":
-        return <MapSearchView />;
+        component = <MapSearchView />;
+        break;
       case "ListSearchView":
-        return <ListSearchView />;
+        component = <ListSearchView />;
+        break;
       case "DetailView":
-        return <DetailView photo={photo} />;
+        component = <DetailView photo={photo} />;
+        break;
       case "PhotoView":
-        return <PhotoView photo={photo} />;
+        component = <PhotoView photo={photo} />;
+        break;
       case "SettingsView":
         console.log("[E] Should render component: SettingsView (WIP!)");
         return null;
@@ -41,6 +49,18 @@ class MainViewComponent extends Component {
         );
         return null;
     }
+    return (
+      <div>
+        {component}
+        <SnackBar
+          isOpen={snackBarOpen}
+          message={snackBarOptions.message}
+          subMessage={snackBarOptions.subMessage}
+          actionText={"OK"}
+          onActionTap={() => hideSnackBar()}
+        />
+      </div>
+    );
   }
 }
 
@@ -48,6 +68,8 @@ class MainViewComponent extends Component {
 
 function mapStateToProps(state) {
   return {
+    snackBarOptions: state.ui.snackBarOptions,
+    snackBarOpen: state.ui.showSnackBar,
     currentView: state.ui.currentView,
     sessionState: state.session,
     getPhotoForSelectedParcel: () => PHOTO_LIST[0]
@@ -59,6 +81,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
+    hideSnackBar: () => hideSnackBar(dispatch),
+    showSnackBar: options => showSnackBar(dispatch, options),
     fetchBootstrap: sessionState => fetchBootstrap(dispatch, sessionState)
   };
 }
