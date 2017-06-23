@@ -12,6 +12,7 @@ import SearchBar from "../SearchBar";
 import { showSnackBar, hideSnackBar } from "../../actions/UiActions";
 import ViewSwitchButton from "../ViewSwitchButton";
 import styles from "../styles/MapSearchView.css";
+import { WIDTH, HEIGHT } from "../../tools/dimensions";
 
 ///////////////////////////////////////////////////////////////////////////////
 // A MapSearchView shows searchresults on the map /////////////////////////////
@@ -26,28 +27,31 @@ class MapSearchViewComponent extends Component {
     });
   }
   render() {
-    const { width, height, searchResults } = this.props;
-
+    const { searchResults } = this.props;
     return (
       <div
         className={styles.MapSearchView}
-        style={{
-          width,
-          height
-        }}
+        style={{ width: WIDTH, height: HEIGHT }}
       >
         <MapComponent searchResults={searchResults} />
         <SearchBar />
-        <ViewSwitchButton viewIsMap={true} />
+        <ViewSwitchButton viewIsMap />
       </div>
     );
   }
 }
 
+///////////////////////////////////////////////////////////////////////////////
+// type-checking: /////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
+
 MapSearchViewComponent.propTypes = {
-  width: PropTypes.number,
-  height: PropTypes.number
+  searchResults: PropTypes.array
 };
+
+///////////////////////////////////////////////////////////////////////////////
+// react-redux coupling ///////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
 
 function mapStateToProps(state) {
   console.log(state);

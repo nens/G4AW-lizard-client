@@ -3,47 +3,29 @@ import PropTypes from "prop-types";
 import ReactDOM from "react-dom";
 import styles from "./styles/Modal.css";
 
+import { WIDTH, HEIGHT } from "../tools/dimensions";
+
 ///////////////////////////////////////////////////////////////////////////////
 // The main Component; a generic component for modals /////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
 
-// TODO: Receive width/height values from a wrapping component via props,
-//       instead of calculating them here locally (which isn't DRY: better do
-//       everything related to "dimensions" in the top-level component and pass
-//       it down the component hierarchy from there).
-
 class Modal extends Component {
   constructor() {
     super();
-    this.state = {
-      width: window.innerWidth,
-      height: window.innerHeight,
-      mounted: false
-    };
-    this.updateDimensions = this.updateDimensions.bind(this);
+    this.state = { mounted: false };
   }
   componentDidMount() {
     this.setState({ mounted: true });
-    this.updateDimensions();
-    window.addEventListener("resize", this.updateDimensions);
   }
   componentWillUnmount() {
     this.setState({ mounted: false });
   }
-  updateDimensions() {
-    if (this.state.mounted) {
-      this.setState({
-        width: window.innerWidth,
-        height: window.innerHeight
-      });
-    }
-  }
   render() {
+    if (!this.props.isOpen) return null;
     const { actionButtons, isOpen, children, title } = this.props;
-    const { width, height } = this.state;
-    if (!isOpen) return null;
+    const dimensions = { width: WIDTH, height: HEIGHT };
     return (
-      <div className={styles.Modal} style={{ width, height }}>
+      <div className={styles.Modal} style={dimensions}>
         <div className={styles.ModalInner}>
           <h2 className={styles.Title}>{title}</h2>
           {children}
@@ -58,7 +40,7 @@ class Modal extends Component {
 ///////////////////////////////////////////////////////////////////////////////
 
 Modal.propTypes = {
-  open: PropTypes.bool,
+  isOpen: PropTypes.bool,
   title: PropTypes.string,
   children: PropTypes.any
 };
