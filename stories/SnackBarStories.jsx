@@ -8,7 +8,7 @@ export default function runSnackBar() {
   storiesOf("SnackBar", module)
     .add("default", () => (
       <SnackBar
-        isOpen={true}
+        isOpen
         message={"This is a test"}
         actionText={"OK"}
         onActionTap={action("clicked")}
