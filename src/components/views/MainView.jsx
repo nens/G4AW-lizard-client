@@ -29,13 +29,17 @@ class MainViewComponent extends Component {
     let component = null;
     switch (this.props.currentView) {
       case "MapSearchView":
-        return <MapSearchView />;
+        component = <MapSearchView />;
+        break;
       case "ListSearchView":
-        return <ListSearchView />;
+        component = <ListSearchView />;
+        break;
       case "DetailView":
-        return <DetailView photo={photo} />;
+        component = <DetailView photo={photo} />;
+        break;
       case "PhotoView":
-        return <PhotoView photo={photo} />;
+        component = <PhotoView photo={photo} />;
+        break;
       case "SettingsView":
         console.log("[E] Should render component: SettingsView (WIP!)");
         return null;

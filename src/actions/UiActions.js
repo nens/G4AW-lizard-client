@@ -12,15 +12,13 @@ export function changeView(dispatch, newView) {
 }
 
 export function showSnackBar(dispatch, options) {
-  const { showSnackBar } = theStore.getState().ui;
   if (options.autoHideDuration) {
     clearTimeout(timerAutoHideId);
     timerAutoHideId = setTimeout(() => {
       dispatch(hideSnackBar);
     }, options.autoHideDuration);
-  } else {
-    clearTimeout(timerAutoHideId);
   }
+  clearTimeout(timerAutoHideId);
   dispatch({ type: SHOW_SNACKBAR, options });
 }
 

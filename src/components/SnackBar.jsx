@@ -13,11 +13,6 @@ class SnackBar extends Component {
   constructor() {
     super();
   }
-  componentDidMount() {
-    if (this.props.autoHideDuration) {
-      this.setAutoHideTimer();
-    }
-  }
   render() {
     const { isOpen } = this.props;
     return (
