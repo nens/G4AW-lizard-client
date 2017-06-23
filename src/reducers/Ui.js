@@ -10,8 +10,8 @@ export default function(state = initialUiState, action) {
         ...state,
         showSnackBar: false,
         snackBarOptions: {
-          message: "",
-          subMessage: ""
+          message: null,
+          subMessage: null
         }
       };
     case ActionTypes.GET_ATTRIBUTES_FROM_GEOSERVER:
