@@ -53,13 +53,7 @@ class ListSearchViewComponent extends Component {
     } else if (isFetching) {
       component = <ListSearchViewSpinner />;
     } else {
-      component = (
-        <ListSearchLanding
-          geolocationData={geolocationData}
-          getGeolocation={getGeolocation}
-          t={t}
-        />
-      );
+      component = <ListSearchLanding t={t} />;
     }
 
     return (
@@ -76,15 +70,14 @@ class ListSearchViewComponent extends Component {
 // Local sub-components ///////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
 
-function ListSearchLanding({ getGeolocation, geolocationData, t }) {
+function ListSearchLanding({ t }) {
   return (
     <div className={styles.ListSearchLanding} id="ListSearchLanding">
       <h1 className={styles.Welcome}>{t("Welcome")}</h1>
-      <h5 className={styles.GetStarted}>{t("Tap to see the field nearby")}</h5>
-      <GeolocateButtonBig
-        geolocationData={geolocationData}
-        handleClick={() => getGeolocation()}
-      />
+      <h5 id="welcomeText" className={styles.GetStarted}>
+        {t("Tap to see the field nearby")}
+      </h5>
+      <GeolocateButtonBig t={t} />
       <LoginLogoutButton />
 
     </div>

@@ -12,6 +12,7 @@ import PhotoView from "./PhotoView";
 import { PHOTO_LIST } from "../../../stories/helpers";
 
 import { fetchBootstrap } from "../../actions/SessionActions";
+import { setGeolocationAvailability } from "../../actions/GeolocationActions";
 
 import { updateDimensions } from "../../tools/dimensions";
 
@@ -19,6 +20,7 @@ class MainViewComponent extends Component {
   componentWillMount() {
     // Startup functions.
     this.props.fetchBootstrap(this.props.sessionState);
+    this.props.setGeolocationAvailability();
     window.addEventListener("resize", updateDimensions);
   }
   render() {
@@ -59,6 +61,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
+    setGeolocationAvailability: () => setGeolocationAvailability(dispatch),
     fetchBootstrap: sessionState => fetchBootstrap(dispatch, sessionState)
   };
 }

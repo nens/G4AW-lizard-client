@@ -9,6 +9,7 @@ import {
   clearResults,
   setSearchInputText
 } from "../actions/SearchActions";
+import { performGeolocation } from "../actions/GeolocationActions";
 
 class ClearInputButton extends Component {
   render() {
@@ -45,7 +46,7 @@ class SearchBarComponent extends Component {
     this.props.clear();
   }
   render() {
-    const { searchInput } = this.props;
+    const { searchInput, getGeolocation } = this.props;
     return (
       <div className={styles.SearchBar}>
         <div className={styles.SettingsButton}>
@@ -63,7 +64,11 @@ class SearchBarComponent extends Component {
         {searchInput && searchInput.length > 0
           ? <ClearInputButton onClick={this.handleClearInput} />
           : null}
-        <div className={styles.GeoLocateButton}>
+        <div
+          className={styles.GeoLocateButton}
+          style={{ color: "#00AA99" }}
+          onClick={getGeolocation}
+        >
           <i className={`${styles.GeoLocateIcon} material-icons`}>near_me</i>
         </div>
       </div>
@@ -93,6 +98,9 @@ function mapDispatchToProps(dispatch) {
       } else {
         dispatch(clearResults());
       }
+    },
+    getGeolocation: () => {
+      performGeolocation(dispatch);
     }
   };
 }
