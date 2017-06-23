@@ -1,85 +1,59 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import ReactDOM from "react-dom";
-import styles from "./styles/PhotoView.css";
+import { connect } from "react-redux";
+import { translate } from "react-i18next";
+import styles from "../styles/PhotoView.css";
 import MDSpinner from "react-md-spinner";
+import { changeView } from "../../actions/UiActions";
+
+import { WIDTH, HEIGHT } from "../../tools/dimensions";
 
 ///////////////////////////////////////////////////////////////////////////////
 // The main Component; the PhotoView component ////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
 
-export default class PhotoView extends Component {
+class PhotoViewComponent extends Component {
   constructor() {
     super();
     this.state = {
-      width: window.innerWidth,
-      height: window.innerHeight,
-      imageStatus: "loading"
-      // selected: this.props.defaultSelected ? true : false
+      imageStatus: "loading",
+      midPanelHeight: null
     };
-    this.updateDimensions = this.updateDimensions.bind(this);
-    this.handleNextPhoto = this.handleNextPhoto.bind(this);
-    this.handlePrevPhoto = this.handlePrevPhoto.bind(this);
     this.handleImageLoaded = this.handleImageLoaded.bind(this);
   }
-  componentDidMount() {
-    this.updateDimensions();
-    window.addEventListener("resize", this.updateDimensions);
-  }
-  updateDimensions() {
+  handleImageLoaded(imageElement) {
+    const heightRatio = imageElement.naturalHeight / imageElement.naturalWidth;
     this.setState({
-      width: window.innerWidth,
-      height: window.innerHeight
-    });
-  }
-  handleNextPhoto() {
-    console.log("handleNextPhoto()");
-  }
-  handlePrevPhoto() {
-    console.log("handlePrevPhoto()");
-  }
-  handleImageLoaded() {
-    this.setState({
+      midPanelHeight: Math.round(heightRatio * WIDTH),
       imageStatus: "loaded"
     });
   }
   render() {
-    const {
-      images,
-      handleBackButtonClick,
-      handlePrevPhoto,
-      handleNextPhoto
-    } = this.props;
-    const { width, height, imageStatus } = this.state;
-    const currentPhotoIdx = this.props.currentPhotoIdx || 0;
-    const photo = images[currentPhotoIdx];
+    const { photo, handleBackButtonClick } = this.props;
+    const { imageStatus } = this.state;
     const datetime = new Date(photo.date).toString();
-
+    const dimensions = { width: WIDTH, height: HEIGHT };
     return (
       <div>
-        {currentPhotoIdx > 0
-          ? <PhotoViewPrevButton handleClick={this.handlePrevPhoto} />
-          : null}
-
-        {currentPhotoIdx < images.length - 1
-          ? <PhotoViewNextButton handleClick={this.handleNextPhoto} />
-          : null}
-
-        <div className={styles.DetailViewPhotoInner} style={{ height, width }}>
+        <div className={styles.DetailViewPhotoInner} style={dimensions}>
           <PhotoViewTopPanel
-            idx={currentPhotoIdx}
-            count={images.length}
+            ref={component => (this.topPanelComponent = component)}
             handleBackButtonClick={handleBackButtonClick}
           />
+          {imageStatus === "loading" ? <PhotoViewSpinner /> : null}
           <PhotoViewMidPanel
+            ref={component => (this.midPanelComponent = component)}
             url={photo.url}
-            width={width}
+            height={this.state.midPanelHeight}
             handleImageLoaded={this.handleImageLoaded}
+            imageIsLoaded={imageStatus === "loaded"}
           />
-          <PhotoViewBottomPanel datetime={datetime} />
+          <PhotoViewBottomPanel
+            ref={component => (this.bottomPanelComponent = component)}
+            datetime={datetime}
+          />
         </div>
-
-        {imageStatus === "loading" ? <PhotoViewSpinner /> : null}
       </div>
     );
   }
@@ -89,8 +63,8 @@ export default class PhotoView extends Component {
 // type-checking: /////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
 
-PhotoView.propTypes = {
-  images: PropTypes.array,
+PhotoViewComponent.propTypes = {
+  photo: PropTypes.object,
   handleBackButtonClick: PropTypes.func
 };
 
@@ -98,41 +72,14 @@ PhotoView.propTypes = {
 // Local sub-components: //////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
 
-class PhotoViewPrevButton extends Component {
-  render() {
-    const { handleClick } = this.props;
-    return (
-      <div className={styles.PrevPhoto} onClick={handleClick}>
-        <i className={`${styles.LeftArrowIcon} material-icons`}>
-          keyboard_arrow_left
-        </i>
-      </div>
-    );
-  }
-}
-
-class PhotoViewNextButton extends Component {
-  render() {
-    const { handleClick } = this.props;
-    return (
-      <div className={styles.NextPhoto} onClick={handleClick}>
-        <i className={`${styles.RightArrowIcon} material-icons`}>
-          keyboard_arrow_right
-        </i>
-      </div>
-    );
-  }
-}
-
 class PhotoViewTopPanel extends Component {
   render() {
-    const { handleBackButtonClick, idx, count } = this.props;
+    const { handleBackButtonClick } = this.props;
     return (
       <div className={styles.TopPanel}>
         <div onClick={handleBackButtonClick} className={styles.BackButton}>
           <i className="material-icons">arrow_back</i>
         </div>
-        <div>{idx + 1}/{count}</div>
       </div>
     );
   }
@@ -140,11 +87,20 @@ class PhotoViewTopPanel extends Component {
 
 class PhotoViewMidPanel extends Component {
   render() {
-    const { url, width, handleImageLoaded } = this.props;
+    const { url, height, handleImageLoaded, imageIsLoaded } = this.props;
     return (
       <div className={styles.PhotoPanel}>
         <div className={styles.DetailViewPhoto}>
-          <img src={url} width={width} onLoad={handleImageLoaded} />
+          <img
+            style={{ opacity: imageIsLoaded ? 1 : 0 }}
+            id="theImage"
+            src={url}
+            width={WIDTH}
+            height={height}
+            onLoad={() => {
+              handleImageLoaded(document.getElementById("theImage"));
+            }}
+          />
         </div>
       </div>
     );
@@ -190,3 +146,17 @@ class PhotoViewSpinner extends Component {
     );
   }
 }
+
+///////////////////////////////////////////////////////////////////////////////
+// react-redux bindings ///////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
+
+function mapDispatchToProps(dispatch) {
+  return {
+    handleBackButtonClick: () => changeView(dispatch, "DetailView")
+  };
+}
+
+const PhotoView = connect(null, mapDispatchToProps)(PhotoViewComponent);
+
+export default translate()(PhotoView);

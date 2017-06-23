@@ -7,72 +7,40 @@ import ReactDOM from "react-dom";
 import MapSearchView from "./MapSearchView";
 import ListSearchView from "./ListSearchView";
 import DetailView from "./DetailView";
+import PhotoView from "./PhotoView";
+
+import { PHOTO_LIST } from "../../../stories/helpers";
 
 import { fetchBootstrap } from "../../actions/SessionActions";
 
-class MainViewComponent extends Component {
-  constructor() {
-    super();
-    this.state = {
-      viewportWidth: window.innerWidth,
-      viewportHeight: window.innerHeight
-    };
-    this.handleResize = this.handleResize.bind(this);
-  }
+import { updateDimensions } from "../../tools/dimensions";
 
+class MainViewComponent extends Component {
   componentWillMount() {
     // Startup functions.
     this.props.fetchBootstrap(this.props.sessionState);
+    window.addEventListener("resize", updateDimensions);
   }
-
-  componentDidMount() {
-    window.addEventListener("resize", this.handleResize, false);
-  }
-  componentWillUnmount() {
-    window.removeEventListener("resize", this.handleResize, false);
-  }
-  handleResize() {
-    this.setState({
-      viewportWidth: window.innerWidth,
-      viewportHeight: window.innerHeight
-    });
-  }
-
   render() {
-    let component = null;
+    const photo = this.props.getPhotoForSelectedParcel();
     switch (this.props.currentView) {
       case "MapSearchView":
-        component = (
-          <MapSearchView
-            width={this.state.viewportWidth}
-            height={this.state.viewportHeight}
-          />
-        );
-        break;
+        return <MapSearchView />;
       case "ListSearchView":
-        component = (
-          <ListSearchView
-            width={this.state.viewportWidth}
-            height={this.state.viewportHeight}
-          />
-        );
-        break;
+        return <ListSearchView />;
       case "DetailView":
-        component = <DetailView />;
-        break;
+        return <DetailView photo={photo} />;
       case "PhotoView":
-        console.log("[E] Should render component: PhotoView (WIP!)");
-        break;
+        return <PhotoView photo={photo} />;
       case "SettingsView":
         console.log("[E] Should render component: SettingsView (WIP!)");
-        break;
+        return null;
       default:
         console.log(
           "[E] Cannot render unknown view '" + this.props.currentView + "'!"
         );
-        break;
+        return null;
     }
-    return component;
   }
 }
 
@@ -81,7 +49,11 @@ class MainViewComponent extends Component {
 function mapStateToProps(state) {
   return {
     currentView: state.ui.currentView,
-    sessionState: state.session
+    sessionState: state.session,
+    getPhotoForSelectedParcel: () => PHOTO_LIST[0]
+    // TODO: Instead of getting the object from our test_data (PHOTO_LIST),
+    // retrieve (=build) it from the readily available parcel data in the Redux
+    // store.
   };
 }
 
@@ -94,4 +66,5 @@ function mapDispatchToProps(dispatch) {
 const MainView = connect(mapStateToProps, mapDispatchToProps)(
   MainViewComponent
 );
+
 export default translate()(MainView);

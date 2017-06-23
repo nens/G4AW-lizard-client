@@ -20,15 +20,13 @@ import { getAttributesFromGeoserver } from "../../actions/ParcelActions";
 import { changeView } from "../../actions/UiActions";
 import { performGeolocation } from "../../actions/GeolocationActions";
 
-/*
-ListSearchViewComponent: Shows/enables search-results in a list mode.
-*/
+import MDSpinner from "react-md-spinner";
+
+///////////////////////////////////////////////////////////////////////////////
+// ListSearchViewComponent: Shows/enables search-results in a list mode.     //
+///////////////////////////////////////////////////////////////////////////////
 
 class ListSearchViewComponent extends Component {
-  constructor() {
-    super();
-    this.state = {};
-  }
   render() {
     const {
       getDetails, // via: mapDispatchToProps
@@ -40,28 +38,43 @@ class ListSearchViewComponent extends Component {
       geolocationData, // via: mapStateToProps
       t
     } = this.props;
+
+    let component;
+
+    if (isFinishedSearching) {
+      component = (
+        <ListSearchResults
+          searchResults={searchResults}
+          getDetails={getDetails}
+          getParcel={getParcel}
+          t={t}
+        />
+      );
+    } else if (isFetching) {
+      component = <ListSearchViewSpinner />;
+    } else {
+      component = (
+        <ListSearchLanding
+          geolocationData={geolocationData}
+          getGeolocation={getGeolocation}
+          t={t}
+        />
+      );
+    }
+
     return (
       <div className={styles.ListSearchView} id="ListSearchView">
         <SearchBar />
         <ViewSwitchButton viewIsMap={false} />
-        {isFinishedSearching
-          ? <ListSearchResults
-              searchResults={searchResults}
-              getDetails={getDetails}
-              getParcel={getParcel}
-              t={t}
-            />
-          : <ListSearchLanding
-              geolocationData={geolocationData}
-              getGeolocation={getGeolocation}
-              t={t}
-            />}
+        {component}
       </div>
     );
   }
 }
 
-/* local sub-components */
+///////////////////////////////////////////////////////////////////////////////
+// Local sub-components ///////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
 
 function ListSearchLanding({ getGeolocation, geolocationData, t }) {
   return (
@@ -109,7 +122,26 @@ function ListSearchResults({
   );
 }
 
-/* react-redux coupling */
+class ListSearchViewSpinner extends Component {
+  render() {
+    return (
+      <div>
+        <MDSpinner
+          singleColor="#03a9f4"
+          style={{
+            position: "absolute",
+            top: "200px",
+            left: "50%"
+          }}
+        />
+      </div>
+    );
+  }
+}
+
+///////////////////////////////////////////////////////////////////////////////
+// react-redux coupling ///////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
 
 function mapStateToProps(state) {
   return {

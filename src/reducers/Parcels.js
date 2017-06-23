@@ -75,13 +75,7 @@ export default function(state = initialParcelsState, action) {
 
       GEOSERVER_ATTRIBUTES.forEach(attribute => {
         const value = action.data[attribute];
-
-        if (!value) {
-          // Empty string or missing
-          newParcel[attribute] = null;
-        } else {
-          newParcel[attribute] = value;
-        }
+        newParcel[attribute] = value || null;
       });
 
       newParcels[action.parcelId] = newParcel;

@@ -25,15 +25,12 @@ class DetailViewHeader extends Component {
 
     return (
       <div className={this.getComponentClassName(halfMode)}>
-
         <DetailViewHeaderTitle
           halfMode={halfMode}
           title={title}
           subTitle={subTitle}
         />
-
         <DetailViewHeaderBackArrow handleClick={handleBackButtonClick} />
-
         {headerImage
           ? <DetailViewHeaderImg headerImage={headerImage} />
           : <DetailViewHeaderMap latlonzoom={latlonzoom} />}
