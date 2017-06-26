@@ -43,7 +43,7 @@ function showSnackbarGeolocationTurnedOff(dispatch) {
   showSnackBar(dispatch, options);
 }
 
-export function setGeolocationAvailability(dispatch) {
+export function setGeolocationSupport(dispatch) {
   dispatch({
     type: SET_GEOLOCATION_SUPPORT,
     value: !!navigator.geolocation
