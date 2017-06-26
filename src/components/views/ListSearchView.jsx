@@ -32,13 +32,6 @@ class ListSearchViewComponent extends Component {
     super();
     this.state = {};
   }
-  componentDidMount() {
-    this.props.showSnackBar({
-      message: "List view",
-      subMessage: "This is the list view",
-      autoHideDuration: 4000
-    });
-  }
   render() {
     const {
       getDetails, // via: mapDispatchToProps
@@ -47,8 +40,8 @@ class ListSearchViewComponent extends Component {
       isFetching, // via: mapStateToProps
       isFinishedSearching, // via: mapStateToProps
       searchResults, // via: mapStateToProps
-      geolocationData, // via: mapStateToProps
-      t
+      geolocationData, // via: mapStateToProps,
+      t // via: parent
     } = this.props;
 
     let component;
@@ -65,13 +58,7 @@ class ListSearchViewComponent extends Component {
     } else if (isFetching) {
       component = <ListSearchViewSpinner />;
     } else {
-      component = (
-        <ListSearchLanding
-          geolocationData={geolocationData}
-          getGeolocation={getGeolocation}
-          t={t}
-        />
-      );
+      component = <ListSearchLanding t={t} />;
     }
 
     return (
@@ -88,15 +75,11 @@ class ListSearchViewComponent extends Component {
 // Local sub-components ///////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
 
-function ListSearchLanding({ getGeolocation, geolocationData, t }) {
+function ListSearchLanding({ t }) {
   return (
     <div className={styles.ListSearchLanding} id="ListSearchLanding">
       <h1 className={styles.Welcome}>{t("Welcome")}</h1>
-      <h5 className={styles.GetStarted}>{t("Tap to see the field nearby")}</h5>
-      <GeolocateButtonBig
-        geolocationData={geolocationData}
-        handleClick={() => getGeolocation()}
-      />
+      <GeolocateButtonBig t={t} />
       <LoginLogoutButton />
     </div>
   );

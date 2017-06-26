@@ -33,11 +33,11 @@ export const initialSessionState = {
 export const initialSearchState = {
   latestSearchTerm: null,
   results: null,
-  inputText: ""
+  inputText: null
 };
 
 export const initialGeolocationState = {
-  isGeoLocationAvailable: null,
+  isGeolocationSupported: null,
   isFetching: false,
   data: null,
   error: null

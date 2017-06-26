@@ -6,7 +6,8 @@ export default function(state = initialSearchState, action) {
     case ActionTypes.SET_SEARCH_INPUT_TEXT:
       return {
         ...state,
-        inputText: action.inputText
+        inputText: action.inputText,
+        latestSearchTerm: action.inputText
       };
     case ActionTypes.START_SEARCH:
       return {

@@ -1,0 +1,23 @@
+<svg width="101px" height="101px" viewBox="0 0 101 101" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 44 (41411) - http://www.bohemiancoding.com/sketch -->
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M46.5,93 C72.1812409,93 93,72.1812409 93,46.5 C93,20.8187591 72.1812409,0 46.5,0 C20.8187591,0 0,20.8187591 0,46.5 C0,72.1812409 20.8187591,93 46.5,93 Z" id="path-1"></path>
+        <filter x="-5.4%" y="-5.4%" width="115.1%" height="115.1%" filterUnits="objectBoundingBox" id="filter-2">
+            <feOffset dx="2" dy="2" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="2" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.5 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Initial-view-Omnibox" transform="translate(-136.000000, -287.000000)">
+            <g id="geolocation" transform="translate(138.000000, 289.000000)">
+                <g id="Oval-1">
+                    <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"></use>
+                    <use fill="#EEEEEE" fill-rule="evenodd" xlink:href="#path-1"></use>
+                </g>
+                <polygon id="near_me---material" fill="#FFFFFF" points="64.5350421 32.930543 51.8686748 63.1846051 50.2147861 63.1846051 45.7775236 51.6880615 34.28098 47.2507991 34.28098 45.5969104"></polygon>
+            </g>
+        </g>
+    </g>
+</svg>

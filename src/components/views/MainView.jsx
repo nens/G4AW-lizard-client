@@ -9,22 +9,21 @@ import MapSearchView from "./MapSearchView";
 import ListSearchView from "./ListSearchView";
 import DetailView from "./DetailView";
 import PhotoView from "./PhotoView";
-
 import { PHOTO_LIST } from "../../../stories/helpers";
-
 import { fetchBootstrap } from "../../actions/SessionActions";
+import { setGeolocationSupport } from "../../actions/GeolocationActions";
 import { showSnackBar, hideSnackBar } from "../../actions/UiActions";
-
 import { updateDimensions } from "../../tools/dimensions";
 
 class MainViewComponent extends Component {
   componentWillMount() {
     // Startup functions.
     this.props.fetchBootstrap(this.props.sessionState);
+    this.props.setGeolocationSupport();
     window.addEventListener("resize", updateDimensions);
   }
   render() {
-    const { snackBarOpen, snackBarOptions, hideSnackBar } = this.props;
+    const { snackBarIsOpen, snackBarOptions, hideSnackBar } = this.props;
     const photo = this.props.getPhotoForSelectedParcel();
     let component = null;
     switch (this.props.currentView) {
@@ -53,11 +52,12 @@ class MainViewComponent extends Component {
       <div>
         {component}
         <SnackBar
-          isOpen={snackBarOpen}
+          isOpen={snackBarIsOpen}
           message={snackBarOptions.message}
           subMessage={snackBarOptions.subMessage}
-          actionText={"OK"}
-          onActionTap={() => hideSnackBar()}
+          actionText="OK"
+          isError={snackBarOptions.isError}
+          onActionTap={hideSnackBar}
         />
       </div>
     );
@@ -69,7 +69,7 @@ class MainViewComponent extends Component {
 function mapStateToProps(state) {
   return {
     snackBarOptions: state.ui.snackBarOptions,
-    snackBarOpen: state.ui.showSnackBar,
+    snackBarIsOpen: state.ui.showSnackBar,
     currentView: state.ui.currentView,
     sessionState: state.session,
     getPhotoForSelectedParcel: () => PHOTO_LIST[0]
@@ -81,6 +81,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
+    setGeolocationSupport: () => setGeolocationSupport(dispatch),
     hideSnackBar: () => hideSnackBar(dispatch),
     showSnackBar: options => showSnackBar(dispatch, options),
     fetchBootstrap: sessionState => fetchBootstrap(dispatch, sessionState)
