@@ -74,11 +74,11 @@ Have a look at the [buck-trap README](https://github.com/nens/buck-trap/blob/mas
 
 ### Internationalisation
 
-This webapp has language support for vietnamese and english.
+This webapp has language support for vietnamese, dutch and english.
 
 The language used is determined by the browser locale. This behavior is configurable in `i18n.js`.
 
-The language catalogs are located in `locales/en` and `locales/vi`. To update these catalogs with new translation strings, run:
+The language catalogs are located in `locales/vi`, `locales/nl` and `locales/en`. To update these catalogs with new translation strings, run:
 
 ```bash
 $ npm run extract
@@ -88,7 +88,7 @@ or
 $ yarn run extract
 ```
 
-Enabling translation in a component can be done by marking them as translation strings using t():
+Enabling translation in a React component can be done by marking them as translation strings using the t() HOC:
 
 ```js
 import React, { Component, PropTypes } from "react";
@@ -111,6 +111,17 @@ export default translate()(SomeComponent);
 ```
 
 The t() function is provided to the component via translate(), a [HoC](https://www.sitepoint.com/react-higher-order-components/) provided by `i18next-react`.
+
+
+Translating in non-react files such as Redux actions can be done as follows:
+
+```js
+import i18next from "i18next";
+...
+console.log(i18next.t('sometext'));
+```
+
+
 
 For more information on the translation mechanism, have a look at [i18next-react](https://github.com/i18next/react-i18next).
 
