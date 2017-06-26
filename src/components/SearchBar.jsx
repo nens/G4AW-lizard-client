@@ -15,17 +15,15 @@ import { performGeolocation } from "../actions/GeolocationActions";
 class SearchBarComponent extends Component {
   constructor() {
     super();
-    this.state = {
-      q: ""
-    };
+    this.state = { q: null };
     this.handleSearch = this.handleSearch.bind(this);
     this.handleClearInput = this.handleClearInput.bind(this);
   }
   handleSearch(e) {
-    const { setSearchInput } = this.props;
+    const { setSearchInput, search } = this.props;
     setSearchInput(e.target.value);
     if (e.target.value.length > 0 && e.key === "Enter") {
-      this.props.search(e.target.value);
+      search(e.target.value);
     }
   }
   handleClearInput() {

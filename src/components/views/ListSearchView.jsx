@@ -18,7 +18,6 @@ import { showSnackBar, hideSnackBar } from "../../actions/UiActions";
 
 import { replaceUnderscores } from "../../tools/string-formatting";
 import { getAttributesFromGeoserver } from "../../actions/ParcelActions";
-import { changeView } from "../../actions/UiActions";
 import { performGeolocation } from "../../actions/GeolocationActions";
 
 import MDSpinner from "react-md-spinner";
@@ -151,13 +150,8 @@ function mapDispatchToProps(dispatch) {
   return {
     hideSnackBar: () => hideSnackBar(dispatch),
     showSnackBar: options => showSnackBar(dispatch, options),
-    getDetails: id => {
-      getAttributesFromGeoserver(dispatch, id);
-      changeView(dispatch, "DetailView");
-    },
-    getGeolocation: () => {
-      performGeolocation(dispatch);
-    }
+    getDetails: id => getAttributesFromGeoserver(dispatch, id),
+    getGeolocation: () => performGeolocation(dispatch)
   };
 }
 

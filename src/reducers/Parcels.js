@@ -48,13 +48,11 @@ const initialParcel = {
 };
 
 export default function(state = initialParcelsState, action) {
-  let newParcels;
+  const newParcels = { ...state };
   let newParcel;
 
   switch (action.type) {
     case ActionTypes.GET_ATTRIBUTES_FROM_GEOSERVER:
-      newParcels = { ...state };
-
       if (newParcels[action.parcelId]) {
         newParcel = { ...newParcels[action.parcelId] };
       } else {
@@ -65,18 +63,31 @@ export default function(state = initialParcelsState, action) {
 
       return newParcels;
 
-    case ActionTypes.RECEIVE_ATTRIBUTES_FROM_GEOSERVER:
-      newParcels = { ...state };
-
-      // parcelId must already exist, otherwise the request couldn't have been made.
-      newParcel = { ...newParcels[action.parcelId] };
-      newParcel.isFetchingGeoserver = false;
-      newParcel.hasGeoserverData = true;
+    case ActionTypes.RECEIVE_ATTRIBUTES_FROM_GEOSERVER_SUCCESS:
+      // parcelId must already exist, otherwise the request to geoserver
+      // couldn't have been made.
+      newParcel = {
+        ...newParcels[action.parcelId],
+        isFetchingGeoserver: false,
+        hasGeoserverData: true
+      };
 
       GEOSERVER_ATTRIBUTES.forEach(attribute => {
-        const value = action.data[attribute];
-        newParcel[attribute] = value || null;
+        newParcel[attribute] = action.data[attribute] || null;
       });
+
+      newParcels[action.parcelId] = newParcel;
+      return newParcels;
+
+    case ActionTypes.RECEIVE_ATTRIBUTES_FROM_GEOSERVER_ERROR:
+      // parcelId must already exist, otherwise the request to geoserver
+      // couldn't have been made.
+      newParcel = {
+        ...newParcels[action.parcelId],
+        isFetchingGeoserver: false,
+        hasGeoserverData: false,
+        errorsGeoserver: action.error
+      };
 
       newParcels[action.parcelId] = newParcel;
       return newParcels;
@@ -84,7 +95,6 @@ export default function(state = initialParcelsState, action) {
     case ActionTypes.RECEIVE_SEARCH_RESULTS:
       // For each search recult, if it's not in parcels yet, also
       // create a parcel.
-      newParcels = { ...state };
 
       action.results.forEach(result => {
         if (!newParcels.hasOwnProperty(result.id)) {

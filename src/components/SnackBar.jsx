@@ -43,7 +43,6 @@ SnackBar.defaultProps = {
 
 class SnackBarContent extends Component {
   getActionElem(onActionTap, actionText, isError) {
-    console.log("[F] getActionElem; arg 'actionText' =", actionText);
     const actionButtonStyle = isError
       ? styles.ActionButtonError
       : styles.ActionButtonDefault;
@@ -69,7 +68,6 @@ class SnackBarContent extends Component {
       subMessage,
       isError
     } = this.props;
-    console.log("[dbg] this.propz =", this.props);
     return (
       <div className={styles.SnackBar}>
         {this.getActionElem(onActionTap, actionText, isError)}
