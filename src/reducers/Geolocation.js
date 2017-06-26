@@ -7,8 +7,10 @@ export default function(state = initialGeolocationState, action) {
       return { ...state, isGeolocationAvailable: action.value };
     case ActionTypes.START_GEOLOCATION:
       return { ...state, isFetching: true, data: null, error: null };
-    case ActionTypes.RECEIVE_GEOLOCATION:
+    case ActionTypes.RECEIVE_GEOLOCATION_SUCCESS:
       return { ...state, isFetching: false, data: action.result, error: null };
+    case ActionTypes.RECEIVE_GEOLOCATION_ERROR:
+      return { ...state, isFetching: false, data: null, error: action.error };
     case ActionTypes.CLEAR_GEOLOCATION:
       return {
         ...initialGeolocationState,

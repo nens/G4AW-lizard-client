@@ -32,101 +32,74 @@ class GeolocateButtonBigComponent extends Component {
   }
   handleReset(clearGeolocation) {
     clearGeolocation();
-    this.state.welcomeTextElem.style.color = "#a0a0a0";
     this.state.welcomeTextElem.innerHTML = this.state.initialWelcomeText;
   }
   render() {
+    if (!this.state.isMounted) return null;
+
     const {
       t, // via: parent
-      isGeolocationSupported,
-      isNotStartedFetching,
-      isFetching,
-      hasData,
-      hasError,
-      geolocationData,
+      isGeolocationSupported, // via: mapStateToProps
+      isNotStartedFetching, // via: mapStateToProps
+      isFetching, // via: mapStateToProps
+      hasData, // via: mapStateToProps
+      hasError, // via: mapStateToProps
+      geolocationData, // via: mapStateToProps
       getGeolocation, // via: mapDispatchToProps
       clearGeolocation // via: mapDispatchToProps
     } = this.props;
 
-    if (!this.state.isMounted) return null;
+    let welcomeText, child, onClick = () => false;
 
     if (!isGeolocationSupported) {
-      // if (true) {
-      console.log("[dbg] Geolocation 1/4");
-      // Case 1 of 4: Geolocate is not supported:
-      this.state.welcomeTextElem.style.color = "red";
-      this.state.welcomeTextElem.innerHTML = t(
-        "Geolocation is not supported by your device"
-      );
-      return (
-        <div className={styles.Geolocate} onClick={() => false}>
-          <div>
-            <img src={GeolocationUnsupportedSVG} />
-          </div>
-        </div>
-      );
-    } else if (isNotStartedFetching) {
-      console.log("[dbg] Geolocation 2/4");
-      // case 2 of 4: Geolocate is supported but not yet activated/"clicked":
-      return (
-        <div className={styles.Geolocate} onClick={getGeolocation}>
-          <div>
-            <img src={GeolocationSupportedSVG} />
-          </div>
-        </div>
-      );
+      welcomeText = t("Geolocation is not supported by your device");
+      child = <img src={GeolocationUnsupportedSVG} />;
+    } else if (isNotStartedFetching || hasError) {
+      welcomeText = this.state.initialWelcomeText;
+      child = <img src={GeolocationSupportedSVG} />;
+      onClick = getGeolocation;
     } else if (isFetching) {
-      console.log("[dbg] Geolocation 3/4");
-      this.state.welcomeTextElem.innerHTML = t(
-        "Location data is being fetched..."
-      );
-      // case 3 of 4: Geolocate is supported, activated/"clicked" but the
-      // resulting data is not yet available in the client:
-      return (
-        <div className={styles.Geolocate} onClick={() => false}>
-          <div>
-            <GeolocateSpinner />
-          </div>
-        </div>
-      );
+      welcomeText = t("Location data is being fetched...");
+      child = <GeolocateSpinner />;
     } else if (hasData) {
-      console.log(
-        "[dbg] Geolocation 4/4; arg 'geolocationData' =",
-        geolocationData
-      );
-      this.state.welcomeTextElem.style.color = "black";
-      this.state.welcomeTextElem.innerHTML = this.props.geolocationData.placeName;
-      return (
-        <div
-          className={styles.Geolocate}
-          onClick={() => this.handleReset(clearGeolocation)}
-        >
-          <div>
-            <img src={GeolocationAvailableSVG} />
-          </div>
-        </div>
-      );
+      welcomeText = this.props.geolocationData.placeName;
+      child = <img src={GeolocationAvailableSVG} />;
+      onClick = () => this.handleReset(clearGeolocation);
+    } else if (hasError) {
+      welcomeText = t("Geolocation is not supported by your device");
+      child = <img src={GeolocationUnsupportedSVG} />;
     }
+
+    this.state.welcomeTextElem.innerHTML = welcomeText;
+    return <GeolocateButtonContent {...{ onClick, child }} />;
   }
 }
 
 /* local sub-components ******************************************************/
 
-class GeolocateSpinner extends Component {
-  render() {
-    return (
+function GeolocateButtonContent({ onClick, child }) {
+  return (
+    <div className={styles.Geolocate} onClick={onClick}>
       <div>
-        <MDSpinner
-          singleColor="#00AA99"
-          style={{
-            position: "absolute",
-            top: "370px",
-            left: "47%"
-          }}
-        />
+        {child}
       </div>
-    );
-  }
+    </div>
+  );
+}
+
+function GeolocateSpinner() {
+  return (
+    <div>
+      <MDSpinner
+        singleColor="#CECECE"
+        style={{
+          position: "absolute",
+          top: "370px",
+          left: "47%"
+        }}
+      />
+    </div>
+  );
 }
 
 /* react-redux coupling ******************************************************/
@@ -138,8 +111,6 @@ function mapStateToProps(state) {
     isNotStartedFetching: !(state.geolocation.isFetching ||
       state.geolocation.data ||
       state.geolocation.error),
-    // isFinishedFetching: !state.geolocation.isFetching
-    //   && (state.geolocation.data || state.geolocation.error),
     hasData: !state.geolocation.isFetching && state.geolocation.data,
     hasError: !state.geolocation.isFetching && state.geolocation.error,
     geolocationData: state.geolocation.data

@@ -12,10 +12,16 @@
   display: flex;
   justify-content: center;
 }
-.ActionButton {
+.ActionButtonDefault {
   float: right;
   font-weight: bold;
   color: #00B6A9;
+  cursor: pointer;
+}
+.ActionButtonNegative {
+  float: right;
+  font-weight: bold;
+  color: #EA2152;
   cursor: pointer;
 }
 .Message {

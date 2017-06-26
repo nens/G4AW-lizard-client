@@ -14,14 +14,12 @@ class SnackBar extends Component {
     super();
   }
   render() {
-    const { isOpen } = this.props;
+    const { isOpen, t } = this.props;
     return (
       <div className={styles.SnackBarWrapper}>
         <VelocityComponent
-          duration={150}
-          animation={{
-            translateY: isOpen ? 0 : "100px"
-          }}
+          duration={250}
+          animation={{ translateY: isOpen ? 0 : "100px" }}
         >
           <SnackBarContent {...this.props} />
         </VelocityComponent>
@@ -31,6 +29,7 @@ class SnackBar extends Component {
 }
 
 SnackBar.propTypes = {
+  negative: PropTypes.bool,
   action: PropTypes.string,
   autoHideDuration: PropTypes.number,
   message: PropTypes.string,
@@ -48,10 +47,19 @@ class SnackBarContent extends Component {
       : null;
   }
   render() {
-    const { onActionTap, actionText, message, subMessage } = this.props;
+    const {
+      onActionTap,
+      actionText,
+      message,
+      subMessage,
+      negative
+    } = this.props;
+    const actionButtonStyle = negative
+      ? styles.ActionButtonNegative
+      : styles.ActionButtonDefault;
     return (
       <div className={styles.SnackBar}>
-        <div onClick={onActionTap} className={styles.ActionButton}>
+        <div onClick={onActionTap} className={actionButtonStyle}>
           {actionText || "OK"}
         </div>
         {this.getMessage(message)}

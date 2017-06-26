@@ -17,8 +17,9 @@ export function showSnackBar(dispatch, options) {
     timerAutoHideId = setTimeout(() => {
       dispatch(hideSnackBar);
     }, options.autoHideDuration);
+  } else {
+    clearTimeout(timerAutoHideId);
   }
-  clearTimeout(timerAutoHideId);
   dispatch({ type: SHOW_SNACKBAR, options });
 }
 
