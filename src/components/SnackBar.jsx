@@ -19,7 +19,7 @@ class SnackBar extends Component {
       <div className={styles.SnackBarWrapper}>
         <VelocityComponent
           duration={250}
-          animation={{ translateY: isOpen ? 0 : "100px" }}
+          animation={{ translateY: isOpen ? -10 : "100px" }}
         >
           <SnackBarContent {...this.props} />
         </VelocityComponent>
@@ -29,17 +29,26 @@ class SnackBar extends Component {
 }
 
 SnackBar.propTypes = {
-  isError: PropTypes.bool,
-  action: PropTypes.string,
+  // Required props:
+  message: PropTypes.string.isRequired,
+
+  // Optional props:
+  isOpen: true,
+  actionText: PropTypes.string,
   autoHideDuration: PropTypes.number,
-  message: PropTypes.string,
-  subMessage: PropTypes.string,
-  isOpen: PropTypes.bool
+  isError: PropTypes.bool,
+  subMessage: PropTypes.string
+};
+
+SnackBar.defaultProps = {
+  actionText: "OK",
+  isError: false,
+  message: "..."
 };
 
 class SnackBarContent extends Component {
   getMessage(message) {
-    return <p className={styles.Message}>{message || "..."}</p>;
+    return <p className={styles.Message}>{message}</p>;
   }
   getSubMessage(subMessage) {
     return subMessage
