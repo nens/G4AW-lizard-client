@@ -9,7 +9,7 @@ export default class HeaderBar extends Component {
   render() {
     const { title, icon, handleClick } = this.props;
     return (
-      <div className={styles.HeaderBar}>
+      <div className={styles.HeaderBar} id="HeaderBar">
         <span className={styles.Title}>{title}</span>
         <div className={styles.ActionButton} onClick={handleClick}>
           <i className={`${styles.ActionButtonIcon} material-icons`}>{icon}</i>
