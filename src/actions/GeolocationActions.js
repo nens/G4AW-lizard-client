@@ -1,11 +1,13 @@
 import config from "../config";
 import {
-  SET_GEOLOCATION_AVAILABILITY,
+  SET_GEOLOCATION_SUPPORT,
   START_GEOLOCATION,
   RECEIVE_GEOLOCATION_SUCCESS,
   RECEIVE_GEOLOCATION_ERROR,
   CLEAR_GEOLOCATION
 } from "../constants/ActionTypes";
+
+// TODO: translate english strings
 
 import { showSnackBar } from "./UiActions";
 
@@ -43,7 +45,7 @@ function showSnackbarGeolocationTurnedOff(dispatch) {
 
 export function setGeolocationAvailability(dispatch) {
   dispatch({
-    type: SET_GEOLOCATION_AVAILABILITY,
+    type: SET_GEOLOCATION_SUPPORT,
     value: !!navigator.geolocation
   });
 }

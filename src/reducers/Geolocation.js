@@ -3,7 +3,7 @@ import { initialGeolocationState } from "../store/Store";
 
 export default function(state = initialGeolocationState, action) {
   switch (action.type) {
-    case ActionTypes.SET_GEOLOCATION_AVAILABILITY:
+    case ActionTypes.SET_GEOLOCATION_SUPPORT:
       return { ...state, isGeolocationSupported: action.value };
     case ActionTypes.START_GEOLOCATION:
       return { ...state, isFetching: true, data: null, error: null };
