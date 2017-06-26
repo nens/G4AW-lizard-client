@@ -81,7 +81,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    setGeolocatioSupport: () => setGeolocationSupport(dispatch),
+    setGeolocationSupport: () => setGeolocationSupport(dispatch),
     hideSnackBar: () => hideSnackBar(dispatch),
     showSnackBar: options => showSnackBar(dispatch, options),
     fetchBootstrap: sessionState => fetchBootstrap(dispatch, sessionState)
