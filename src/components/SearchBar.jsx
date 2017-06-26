@@ -24,7 +24,6 @@ class SearchBarComponent extends Component {
   handleSearch(e) {
     const { setSearchInput } = this.props;
     setSearchInput(e.target.value);
-
     if (e.target.value.length > 0 && e.key === "Enter") {
       this.props.search(e.target.value);
     }
@@ -35,27 +34,17 @@ class SearchBarComponent extends Component {
     this.props.clear();
   }
   render() {
-    const { searchInput, getGeolocation, searchFetching } = this.props;
+    const { searchInput, getGeolocation, searchIsFetching } = this.props;
     return (
       <div className={styles.SearchBar}>
         <SettingsButton />
         <SearchField
           searchInput={searchInput}
-          searchFetching={searchFetching}
+          searchIsFetching={searchIsFetching}
           handleSearch={this.handleSearch}
           handleClearInput={this.handleClearInput}
         />
         <GeolocateButtonSmall />
-
-        {/*}
-        <div
-          className={styles.GeoLocateButton}
-          style={{ color: "#00AA99" }}
-          onClick={getGeolocation}
-        >
-          <i className={`${styles.GeoLocateIcon} material-icons`}>near_me</i>
-        </div>
-        */}
       </div>
     );
   }
@@ -75,7 +64,7 @@ class SearchField extends Component {
   render() {
     const {
       searchInput,
-      searchFetching,
+      searchIsFetching,
       handleSearch,
       handleClearInput
     } = this.props;
@@ -87,7 +76,7 @@ class SearchField extends Component {
           ref="searchInputField"
           type="text"
           defaultValue={searchInput}
-          disabled={searchFetching}
+          disabled={searchIsFetching}
           onKeyUp={handleSearch}
           className={styles.SearchbarInput}
         />
@@ -113,7 +102,7 @@ class ClearInputButton extends Component {
 
 function mapStateToProps(state) {
   return {
-    searchFetching: !!state.search.isFetching,
+    searchIsFetching: !!state.search.isFetching,
     searchInput: state.search.inputText,
     searchResults: state.search.isFetching ? null : state.search.results
   };

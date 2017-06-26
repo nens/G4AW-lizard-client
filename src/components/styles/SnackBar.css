@@ -18,7 +18,7 @@
   color: #00B6A9;
   cursor: pointer;
 }
-.ActionButtonNegative {
+.ActionButtonError {
   float: right;
   font-weight: bold;
   color: #EA2152;

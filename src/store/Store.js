@@ -37,7 +37,7 @@ export const initialSearchState = {
 };
 
 export const initialGeolocationState = {
-  isGeolocationAvailable: null,
+  isGeolocationSupported: null,
   isFetching: false,
   data: null,
   error: null

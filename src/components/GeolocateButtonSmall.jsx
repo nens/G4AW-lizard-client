@@ -64,8 +64,8 @@ function GeolocateSpinner() {
         singleColor="#CECECE"
         style={{
           position: "relative",
-          top: "-4px",
-          left: "1"
+          top: -4,
+          left: 1
         }}
       />
     </div>
@@ -76,7 +76,7 @@ function GeolocateSpinner() {
 
 function mapStateToProps(state) {
   return {
-    isGeolocationSupported: state.geolocation.isGeolocationAvailable,
+    isGeolocationSupported: state.geolocation.isGeolocationSupported,
     isFetchingGeolocation: state.geolocation.isFetching,
     isNotStartedFetchingGeolocation: !(state.geolocation.isFetching ||
       state.geolocation.data ||

@@ -56,7 +56,7 @@ class MainViewComponent extends Component {
           message={snackBarOptions.message}
           subMessage={snackBarOptions.subMessage}
           actionText="OK"
-          negative={snackBarOptions.negative}
+          isError={snackBarOptions.isError}
           onActionTap={hideSnackBar}
         />
       </div>

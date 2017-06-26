@@ -14,7 +14,7 @@ export default function(state = initialGeolocationState, action) {
     case ActionTypes.CLEAR_GEOLOCATION:
       return {
         ...initialGeolocationState,
-        isGeolocationAvailable: state.isGeolocationAvailable
+        isGeolocationSupported: state.isGeolocationSupported
       };
     default:
       return state;

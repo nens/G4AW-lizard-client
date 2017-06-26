@@ -29,7 +29,7 @@ class SnackBar extends Component {
 }
 
 SnackBar.propTypes = {
-  negative: PropTypes.bool,
+  isError: PropTypes.bool,
   action: PropTypes.string,
   autoHideDuration: PropTypes.number,
   message: PropTypes.string,
@@ -52,10 +52,10 @@ class SnackBarContent extends Component {
       actionText,
       message,
       subMessage,
-      negative
+      isError
     } = this.props;
-    const actionButtonStyle = negative
-      ? styles.ActionButtonNegative
+    const actionButtonStyle = isError
+      ? styles.ActionButtonError
       : styles.ActionButtonDefault;
     return (
       <div className={styles.SnackBar}>

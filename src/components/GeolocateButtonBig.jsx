@@ -106,7 +106,7 @@ function GeolocateSpinner() {
 
 function mapStateToProps(state) {
   return {
-    isGeolocationSupported: state.geolocation.isGeolocationAvailable,
+    isGeolocationSupported: state.geolocation.isGeolocationSupported,
     isFetching: state.geolocation.isFetching,
     isNotStartedFetching: !(state.geolocation.isFetching ||
       state.geolocation.data ||

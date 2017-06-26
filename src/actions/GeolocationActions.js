@@ -27,7 +27,7 @@ function showSnackbarGeolocationError(dispatch) {
     message: "There was an error while retrieving your location",
     subMessage: "Your search-results can not be based on your location",
     autoHideDuration: 3000,
-    negative: true
+    isError: true
   };
   showSnackBar(dispatch, options);
 }
