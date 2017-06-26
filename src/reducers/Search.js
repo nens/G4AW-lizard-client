@@ -7,28 +7,39 @@ export default function(state = initialSearchState, action) {
       return {
         ...state,
         inputText: action.inputText,
-        latestSearchTerm: action.inputText
+        latestSearchTerm: action.inputText,
+        error: null
       };
     case ActionTypes.START_SEARCH:
       return {
         ...state,
         isFetching: true,
-        results: null
+        results: null,
+        error: null
       };
-    case ActionTypes.RECEIVE_SEARCH_RESULTS:
+    case ActionTypes.RECEIVE_SEARCH_RESULTS_SUCCESS:
       // Additionally, in the parcels reducer a parcel is created for each result
       // that doesn't have one yet.
       return {
         ...state,
         isFetching: false,
-        results: action.results.map(result => result.id)
+        results: action.results.map(result => result.id),
+        error: null
+      };
+    case ActionTypes.RECEIVE_SEARCH_RESULTS_ERROR:
+      return {
+        ...state,
+        isFetching: false,
+        results: null,
+        error: "Terror!"
       };
     case ActionTypes.CLEAR_SEARCH_RESULTS:
       return {
         ...state,
         isFetching: false,
         results: null,
-        inputText: ""
+        error: null,
+        inputText: null
       };
     default:
       return state;
