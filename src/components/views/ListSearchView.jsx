@@ -40,8 +40,8 @@ class ListSearchViewComponent extends Component {
       isFetching, // via: mapStateToProps
       isFinishedSearching, // via: mapStateToProps
       searchResults, // via: mapStateToProps
-      geolocationData, // via: mapStateToProps
-      t
+      geolocationData, // via: mapStateToProps,
+      t // via: parent
     } = this.props;
 
     let component;
@@ -79,9 +79,6 @@ function ListSearchLanding({ t }) {
   return (
     <div className={styles.ListSearchLanding} id="ListSearchLanding">
       <h1 className={styles.Welcome}>{t("Welcome")}</h1>
-      <h5 id="welcomeText" className={styles.GetStarted}>
-        {t("Tap to see the field nearby")}
-      </h5>
       <GeolocateButtonBig t={t} />
       <LoginLogoutButton />
     </div>

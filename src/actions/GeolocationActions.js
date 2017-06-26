@@ -76,5 +76,5 @@ export function performGeolocation(dispatch) {
       },
       config.geolocationOptions
     );
-  }, 500);
+  }, 1000);
 }

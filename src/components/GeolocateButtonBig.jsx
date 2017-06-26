@@ -18,25 +18,7 @@ import {
 /* The main component: a big button for toggling geolocation-awareness ********/
 
 class GeolocateButtonBigComponent extends Component {
-  constructor() {
-    super();
-    this.state = { isMounted: false, welcomeTextElem: null };
-  }
-  componentDidMount() {
-    const welcomeTextElem = document.getElementById("welcomeText");
-    this.setState({
-      welcomeTextElem,
-      isMounted: true,
-      initialWelcomeText: welcomeTextElem.innerHTML
-    });
-  }
-  handleReset(clearGeolocation) {
-    clearGeolocation();
-    this.state.welcomeTextElem.innerHTML = this.state.initialWelcomeText;
-  }
   render() {
-    if (!this.state.isMounted) return null;
-
     const {
       t, // via: parent
       isGeolocationSupported, // via: mapStateToProps
@@ -55,7 +37,7 @@ class GeolocateButtonBigComponent extends Component {
       welcomeText = t("Geolocation is not supported by your device");
       child = <img src={GeolocationUnsupportedSVG} />;
     } else if (isNotStartedFetching || hasError) {
-      welcomeText = this.state.initialWelcomeText;
+      welcomeText = t("Tap to see the field nearby");
       child = <img src={GeolocationSupportedSVG} />;
       onClick = getGeolocation;
     } else if (isFetching) {
@@ -64,14 +46,16 @@ class GeolocateButtonBigComponent extends Component {
     } else if (hasData) {
       welcomeText = this.props.geolocationData.placeName;
       child = <img src={GeolocationAvailableSVG} />;
-      onClick = () => this.handleReset(clearGeolocation);
-    } else if (hasError) {
-      welcomeText = t("Geolocation is not supported by your device");
-      child = <img src={GeolocationUnsupportedSVG} />;
+      onClick = clearGeolocation;
     }
-
-    this.state.welcomeTextElem.innerHTML = welcomeText;
-    return <GeolocateButtonContent {...{ onClick, child }} />;
+    return (
+      <div>
+        <h5 id="welcomeText" className={styles.GetStarted}>
+          {t(welcomeText)}
+        </h5>
+        <GeolocateButtonContent {...{ onClick, child }} />
+      </div>
+    );
   }
 }
 
