@@ -14,14 +14,12 @@ class SnackBar extends Component {
     super();
   }
   render() {
-    const { isOpen } = this.props;
+    const { isOpen, t } = this.props;
     return (
       <div className={styles.SnackBarWrapper}>
         <VelocityComponent
-          duration={150}
-          animation={{
-            translateY: isOpen ? 0 : "100px"
-          }}
+          duration={250}
+          animation={{ translateY: isOpen ? -10 : "100px" }}
         >
           <SnackBarContent {...this.props} />
         </VelocityComponent>
@@ -31,31 +29,52 @@ class SnackBar extends Component {
 }
 
 SnackBar.propTypes = {
-  action: PropTypes.string,
-  autoHideDuration: PropTypes.number,
   message: PropTypes.string,
-  subMessage: PropTypes.string,
-  isOpen: PropTypes.bool
+  isOpen: PropTypes.bool,
+  actionText: PropTypes.string,
+  autoHideDuration: PropTypes.number,
+  isError: PropTypes.bool,
+  subMessage: PropTypes.string
+};
+
+SnackBar.defaultProps = {
+  actionText: "OK" // It just werks
 };
 
 class SnackBarContent extends Component {
-  getMessage(message) {
-    return <p className={styles.Message}>{message || "..."}</p>;
+  getActionElem(onActionTap, actionText, isError) {
+    console.log("[F] getActionElem; arg 'actionText' =", actionText);
+    const actionButtonStyle = isError
+      ? styles.ActionButtonError
+      : styles.ActionButtonDefault;
+    return (
+      <div onClick={onActionTap} className={actionButtonStyle}>
+        {actionText}
+      </div>
+    );
   }
-  getSubMessage(subMessage) {
+  getMessageElem(message) {
+    return <p className={styles.Message}>{message}</p>;
+  }
+  getSubMessageElem(subMessage) {
     return subMessage
       ? <p className={styles.SubMessage}>{subMessage}</p>
       : null;
   }
   render() {
-    const { onActionTap, actionText, message, subMessage } = this.props;
+    const {
+      onActionTap,
+      actionText,
+      message,
+      subMessage,
+      isError
+    } = this.props;
+    console.log("[dbg] this.propz =", this.props);
     return (
       <div className={styles.SnackBar}>
-        <div onClick={onActionTap} className={styles.ActionButton}>
-          {actionText || "OK"}
-        </div>
-        {this.getMessage(message)}
-        {this.getSubMessage(subMessage)}
+        {this.getActionElem(onActionTap, actionText, isError)}
+        {this.getMessageElem(message)}
+        {this.getSubMessageElem(subMessage)}
       </div>
     );
   }

@@ -4,21 +4,13 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import ReactDOM from "react-dom";
 import styles from "./styles/SearchBar.css";
+import GeolocateButtonSmall from "./GeolocateButtonSmall";
 import {
   doSearch,
   clearResults,
   setSearchInputText
 } from "../actions/SearchActions";
-
-class ClearInputButton extends Component {
-  render() {
-    return (
-      <div onClick={this.props.onClick}>
-        <i className={`${styles.ClearInput} material-icons`}>clear</i>
-      </div>
-    );
-  }
-}
+import { performGeolocation } from "../actions/GeolocationActions";
 
 class SearchBarComponent extends Component {
   constructor() {
@@ -32,48 +24,85 @@ class SearchBarComponent extends Component {
   handleSearch(e) {
     const { setSearchInput } = this.props;
     setSearchInput(e.target.value);
-
     if (e.target.value.length > 0 && e.key === "Enter") {
       this.props.search(e.target.value);
     }
   }
   handleClearInput() {
-    this.setState({
-      q: ""
-    });
-    this.refs.searchInputField.value = "";
+    this.setState({ q: null });
+    document.getElementById("searchInputField").value = null;
     this.props.clear();
   }
   render() {
-    const { searchInput } = this.props;
+    const { searchInput, searchIsFetching } = this.props;
     return (
       <div className={styles.SearchBar}>
-        <div className={styles.SettingsButton}>
-          <i className={`${styles.SettingsIcon} material-icons`}>settings</i>
-        </div>
-        <input
-          id="searchInputField"
-          ref="searchInputField"
-          type="text"
-          defaultValue={searchInput}
-          disabled={this.props.searchFetching}
-          onKeyUp={this.handleSearch}
-          className={styles.SearchbarInput}
+        <SettingsButton />
+        <SearchField
+          searchInput={searchInput}
+          searchIsFetching={searchIsFetching}
+          handleSearch={this.handleSearch}
+          handleClearInput={this.handleClearInput}
         />
-        {searchInput && searchInput.length > 0
-          ? <ClearInputButton onClick={this.handleClearInput} />
-          : null}
-        <div className={styles.GeoLocateButton}>
-          <i className={`${styles.GeoLocateIcon} material-icons`}>near_me</i>
-        </div>
+        <GeolocateButtonSmall />
       </div>
     );
   }
 }
 
+/* local sub-components ******************************************************/
+
+function SettingsButton() {
+  return (
+    <div className={styles.SettingsButton}>
+      <i className={`${styles.SettingsIcon} material-icons`}>settings</i>
+    </div>
+  );
+}
+
+class SearchField extends Component {
+  render() {
+    const {
+      searchInput,
+      searchIsFetching,
+      handleSearch,
+      handleClearInput
+    } = this.props;
+
+    return (
+      <div>
+        <input
+          id="searchInputField"
+          ref="searchInputField"
+          type="text"
+          defaultValue={searchInput}
+          disabled={searchIsFetching}
+          onKeyUp={handleSearch}
+          className={styles.SearchbarInput}
+        />
+        {searchInput && searchInput.length > 0
+          ? <ClearInputButton onClick={handleClearInput} />
+          : null}
+      </div>
+    );
+  }
+}
+
+class ClearInputButton extends Component {
+  render() {
+    return (
+      <div onClick={this.props.onClick}>
+        <i className={`${styles.ClearInput} material-icons`}>clear</i>
+      </div>
+    );
+  }
+}
+
+/* react-redux coupling ******************************************************/
+
 function mapStateToProps(state) {
   return {
-    searchFetching: !!state.search.isFetching,
+    searchIsFetching: !!state.search.isFetching,
     searchInput: state.search.inputText,
     searchResults: state.search.isFetching ? null : state.search.results
   };
