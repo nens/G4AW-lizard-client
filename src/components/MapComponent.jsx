@@ -1,5 +1,16 @@
 import { connect } from "react-redux";
-import { Map, TileLayer, Marker, Popup, WMSTileLayer } from "react-leaflet";
+import bbox from "@turf/bbox";
+import flip from "@turf/flip";
+import { feature, featureCollection } from "@turf/helpers";
+import {
+  Map,
+  TileLayer,
+  Marker,
+  GeoJSON,
+  Popup,
+  Polygon,
+  WMSTileLayer
+} from "react-leaflet";
 import PropTypes from "prop-types";
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
@@ -39,13 +50,55 @@ class MapComponent extends Component {
         })
       : [];
 
+    const searchResultsAsPolygons = searchResults
+      ? searchResults.map((r, i) => {
+          const parcel = getParcel(r);
+          return (
+            <Polygon
+              color="#ff0000"
+              stroke="1"
+              key={i}
+              positions={parcel.geometry.coordinates}
+            >
+              <Popup>
+                <h4>{parcel.name}</h4>
+              </Popup>
+            </Polygon>
+          );
+        })
+      : [];
+
+    let bounds;
+    const parcels = searchResults
+      ? searchResults.map((r, i) => {
+          const parcel = getParcel(r);
+          return flip(feature(parcel.geometry));
+        })
+      : [];
+
+    if (parcels.length > 0) {
+      // If there are parcels to be shown, set the bounds of the Map to the
+      // bounding box of resultset
+      const boundingBox = bbox(featureCollection(parcels));
+      const corner1 = L.latLng(boundingBox[1], boundingBox[0]);
+      const corner2 = L.latLng(boundingBox[3], boundingBox[2]);
+      bounds = L.latLngBounds(corner1, corner2);
+    } else {
+      // otherwise, set the bounds of the Map to the bounding box of Vietnam
+      // TODO: Read this default bbox from lizard/bootstrap or something
+      // instead of hardcoding...
+      bounds = L.latLngBounds(
+        L.latLng(22.5658, 101.9275),
+        L.latLng(9.2078, 110.6612)
+      );
+    }
+
     return (
       <div className={styles.MapComponent} id="MapComponent">
         <Map
           ref="mapElement"
           id="mapElement"
-          center={[13.0474, 107.7429]}
-          zoom={6}
+          bounds={bounds}
           onMoveend={this.handlePanOrZoomEnd}
           zoomControl={false}
           className={styles.MapElement}
@@ -62,7 +115,8 @@ class MapComponent extends Component {
               styles={raster.options.styles}
             />
           ))}
-          {searchResultsAsMarkers}
+          {searchResultsAsPolygons}
+          {/* {searchResultsAsMarkers} */}
         </Map>
       </div>
     );
