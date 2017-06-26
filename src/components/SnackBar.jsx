@@ -29,11 +29,8 @@ class SnackBar extends Component {
 }
 
 SnackBar.propTypes = {
-  // Required props:
-  message: PropTypes.string.isRequired,
-
-  // Optional props:
-  isOpen: true,
+  message: PropTypes.string,
+  isOpen: PropTypes.bool,
   actionText: PropTypes.string,
   autoHideDuration: PropTypes.number,
   isError: PropTypes.bool,
@@ -47,10 +44,18 @@ SnackBar.defaultProps = {
 };
 
 class SnackBarContent extends Component {
-  getMessage(message) {
+  getActionElem(onActionTap, actionText, isError) {
+    const actionButtonStyle = isError
+      ? styles.ActionButtonError
+      : styles.ActionButtonDefault;
+    <div onClick={onActionTap} className={actionButtonStyle}>
+      {actionText}
+    </div>;
+  }
+  getMessageElem(message) {
     return <p className={styles.Message}>{message}</p>;
   }
-  getSubMessage(subMessage) {
+  getSubMessageElem(subMessage) {
     return subMessage
       ? <p className={styles.SubMessage}>{subMessage}</p>
       : null;
@@ -63,16 +68,11 @@ class SnackBarContent extends Component {
       subMessage,
       isError
     } = this.props;
-    const actionButtonStyle = isError
-      ? styles.ActionButtonError
-      : styles.ActionButtonDefault;
     return (
       <div className={styles.SnackBar}>
-        <div onClick={onActionTap} className={actionButtonStyle}>
-          {actionText || "OK"}
-        </div>
-        {this.getMessage(message)}
-        {this.getSubMessage(subMessage)}
+        {this.getActionElem(onActionTap, actionText, isError)}
+        {this.getMessageElem(message)}
+        {this.getSubMessageElem(subMessage)}
       </div>
     );
   }

@@ -23,7 +23,7 @@ class MainViewComponent extends Component {
     window.addEventListener("resize", updateDimensions);
   }
   render() {
-    const { snackBarOpen, snackBarOptions, hideSnackBar } = this.props;
+    const { snackBarIsOpen, snackBarOptions, hideSnackBar } = this.props;
     const photo = this.props.getPhotoForSelectedParcel();
     let component = null;
     switch (this.props.currentView) {
@@ -52,7 +52,7 @@ class MainViewComponent extends Component {
       <div>
         {component}
         <SnackBar
-          isOpen={snackBarOpen}
+          isOpen={snackBarIsOpen}
           message={snackBarOptions.message}
           subMessage={snackBarOptions.subMessage}
           actionText="OK"
@@ -69,7 +69,7 @@ class MainViewComponent extends Component {
 function mapStateToProps(state) {
   return {
     snackBarOptions: state.ui.snackBarOptions,
-    snackBarOpen: state.ui.showSnackBar,
+    snackBarIsOpen: state.ui.showSnackBar,
     currentView: state.ui.currentView,
     sessionState: state.session,
     getPhotoForSelectedParcel: () => PHOTO_LIST[0]
