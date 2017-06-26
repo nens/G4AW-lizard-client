@@ -34,7 +34,7 @@ class SearchBarComponent extends Component {
     this.props.clear();
   }
   render() {
-    const { searchInput, getGeolocation, searchIsFetching } = this.props;
+    const { searchInput, searchIsFetching } = this.props;
     return (
       <div className={styles.SearchBar}>
         <SettingsButton />
