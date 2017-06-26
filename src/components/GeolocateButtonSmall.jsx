@@ -87,9 +87,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    getGeolocation: () => {
-      performGeolocation(dispatch);
-    }
+    getGeolocation: () => performGeolocation(dispatch),
+    clearGeolocation: () => clearGeolocation(dispatch)
   };
 }
 
