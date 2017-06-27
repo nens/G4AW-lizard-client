@@ -31,6 +31,13 @@ class ListSearchViewComponent extends Component {
     super();
     this.state = {};
   }
+  componentDidMount() {
+    this.props.showSnackBar({
+      message: "List view",
+      subMessage: "This is the list view",
+      autoHideDuration: 4000
+    });
+  }
   render() {
     const {
       getDetails, // via: mapDispatchToProps
@@ -99,18 +106,20 @@ function ListSearchResults({
         icon="list"
         title={"Search results (" + searchResults.length + ")"}
       />
-      {searchResults.map((result, i) => {
-        const parcel = getParcel(result);
-        return (
-          <SearchResultCard
-            handleClick={() => getDetails(result)}
-            key={result}
-            title={replaceUnderscores(parcel.name)}
-            ripple={true}
-            indicatorColor="#FEDF56"
-          />
-        );
-      })}
+      <div className={styles.SearchResultsList}>
+        {searchResults.map((result, i) => {
+          const parcel = getParcel(result);
+          return (
+            <SearchResultCard
+              handleClick={() => getDetails(result)}
+              key={result}
+              title={replaceUnderscores(parcel.name)}
+              ripple={true}
+              indicatorColor="#FEDF56"
+            />
+          );
+        })}
+      </div>
     </div>
   );
 }
