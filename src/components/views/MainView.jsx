@@ -5,15 +5,18 @@ import PropTypes from "prop-types";
 import ReactDOM from "react-dom";
 
 import SnackBar from "../SnackBar";
-import MapSearchView from "./MapSearchView";
-import ListSearchView from "./ListSearchView";
-import DetailView from "./DetailView";
-import PhotoView from "./PhotoView";
+import { MapSearchView, ListSearchView, DetailView, PhotoView } from ".";
+
 import { PHOTO_LIST } from "../../../stories/helpers";
-import { fetchBootstrap } from "../../actions/SessionActions";
-import { setGeolocationSupport } from "../../actions/GeolocationActions";
-import { showSnackBar, hideSnackBar } from "../../actions/UiActions";
+
 import { updateDimensions } from "../../tools/dimensions";
+
+import {
+  fetchBootstrap,
+  setGeolocationSupport,
+  showSnackBar,
+  hideSnackBar
+} from "../../actions/";
 
 class MainViewComponent extends Component {
   componentWillMount() {

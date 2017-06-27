@@ -2,8 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import ReactDOM from "react-dom";
 
-import DetailViewSection from "./DetailViewSection";
-import DetailViewTable from "./DetailViewTable";
+import { DetailViewSection, DetailViewTable } from ".";
 
 /*
 DetailViewTableSection

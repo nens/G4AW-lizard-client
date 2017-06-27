@@ -16,7 +16,6 @@ import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import styles from "./styles/MapComponent.css";
 
-import { VIEWPORT_PADDING } from "./Constants";
 import { getRaster } from "../actions/RasterActions";
 import { getAttributesFromGeoserver } from "../actions/ParcelActions";
 

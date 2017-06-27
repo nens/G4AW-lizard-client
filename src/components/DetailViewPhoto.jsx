@@ -17,7 +17,7 @@ import {
 // to be used in the DetailView ///////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
 
-export class DetailViewPhoto extends Component {
+class DetailViewPhoto extends Component {
   constructor() {
     super();
     this.state = {
