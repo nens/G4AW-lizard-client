@@ -68,13 +68,14 @@ class MapComponent extends Component {
         })
       : [];
 
-    let bounds;
     const parcels = searchResults
       ? searchResults.map((r, i) => {
           const parcel = getParcel(r);
           return flip(feature(parcel.geometry));
         })
       : [];
+
+    let bounds;
 
     if (parcels.length > 0) {
       // If there are parcels to be shown, set the bounds of the Map to the
@@ -116,7 +117,6 @@ class MapComponent extends Component {
             />
           ))}
           {searchResultsAsPolygons}
-          {/* {searchResultsAsMarkers} */}
         </Map>
       </div>
     );
