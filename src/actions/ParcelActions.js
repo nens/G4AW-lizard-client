@@ -36,13 +36,8 @@ function handleInvalidDataFormatError(
   parcelId,
   parcelGeoserverId
 ) {
-  const msg =
-    "Returned geoserver data for parcel with hydracoreID=" +
-    parcelId +
-    " / GeoserverID=" +
-    parcelGeoserverId +
-    " is not in correct format";
-  console.error(msg);
+  console.error(`Returned geoserver data for parcel with hydracoreID=${parcelId}
+    / GeoserverID=${parcelGeoserverId} is not in correct format`);
   dispatch(
     receiveAttributesFromGeoserverErrorAction(parcelId, "Invalid data format")
   );
@@ -56,14 +51,8 @@ function handleGeoserverError(
   parcelGeoserverId,
   errorMsg
 ) {
-  const msg =
-    "Error while fetching parcel with hydracoreID=" +
-    parcelId +
-    " / GeoserverID=" +
-    parcelGeoserverId +
-    ": " +
-    errorMsg;
-  console.error(msg);
+  console.error(`"Error while fetching parcel with hydracoreID="${parcelId} /
+    GeoserverID=${parcelGeoserverId}: ${errorMsg}`);
   dispatch(receiveAttributesFromGeoserverErrorAction(parcelId, errorMsg));
   showSnackBarParcelReceiveError(dispatch, placeName);
 }
