@@ -87,6 +87,9 @@
   },
   "homepage": "https://github.com/nens/G4AW-lizard-client",
   "dependencies": {
+    "@turf/bbox": "^4.4.0",
+    "@turf/flip": "^4.4.0",
+    "@turf/helpers": "^4.4.0",
     "es6-promise": "^4.0.5",
     "i18next": "^8.1.0",
     "i18next-browser-languagedetector": "^1.0.1",

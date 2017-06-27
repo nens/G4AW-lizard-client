@@ -12,15 +12,24 @@ export function changeView(dispatch, newView) {
 }
 
 export function showSnackBar(dispatch, options) {
-  if (options.autoHideDuration) {
-    clearTimeout(timerAutoHideId);
-    timerAutoHideId = setTimeout(() => {
-      dispatch(hideSnackBar);
-    }, options.autoHideDuration);
+  const state = theStore.getState();
+
+  if (state.ui.showSnackBar === true) {
+    dispatch({ type: HIDE_SNACKBAR });
+    setTimeout(() => {
+      dispatch({ type: SHOW_SNACKBAR, options });
+    }, 250);
   } else {
-    clearTimeout(timerAutoHideId);
+    if (options.autoHideDuration) {
+      clearTimeout(timerAutoHideId);
+      timerAutoHideId = setTimeout(() => {
+        dispatch(hideSnackBar);
+      }, options.autoHideDuration);
+    } else {
+      clearTimeout(timerAutoHideId);
+    }
+    dispatch({ type: SHOW_SNACKBAR, options });
   }
-  dispatch({ type: SHOW_SNACKBAR, options });
 }
 
 export function hideSnackBar(dispatch) {

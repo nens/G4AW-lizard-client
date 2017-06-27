@@ -92,7 +92,7 @@ export default function(state = initialParcelsState, action) {
       newParcels[action.parcelId] = newParcel;
       return newParcels;
 
-    case ActionTypes.RECEIVE_SEARCH_RESULTS:
+    case ActionTypes.RECEIVE_SEARCH_RESULTS_SUCCESS:
       // For each search recult, if it's not in parcels yet, also
       // create a parcel.
 

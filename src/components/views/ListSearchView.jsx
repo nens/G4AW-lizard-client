@@ -27,10 +27,6 @@ import MDSpinner from "react-md-spinner";
 ///////////////////////////////////////////////////////////////////////////////
 
 class ListSearchViewComponent extends Component {
-  constructor() {
-    super();
-    this.state = {};
-  }
   render() {
     const {
       getDetails, // via: mapDispatchToProps
@@ -40,6 +36,7 @@ class ListSearchViewComponent extends Component {
       isFinishedSearching, // via: mapStateToProps
       searchResults, // via: mapStateToProps
       geolocationData, // via: mapStateToProps,
+      username, // via: mapStateToProps,
       t // via: parent
     } = this.props;
 
@@ -57,7 +54,7 @@ class ListSearchViewComponent extends Component {
     } else if (isFetching) {
       component = <ListSearchViewSpinner />;
     } else {
-      component = <ListSearchLanding t={t} />;
+      component = <ListSearchLanding t={t} username={username} />;
     }
 
     return (
@@ -74,10 +71,12 @@ class ListSearchViewComponent extends Component {
 // Local sub-components ///////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
 
-function ListSearchLanding({ t }) {
+function ListSearchLanding({ t, username }) {
   return (
     <div className={styles.ListSearchLanding} id="ListSearchLanding">
-      <h1 className={styles.Welcome}>{t("Welcome")}</h1>
+      <h1 className={styles.Welcome}>
+        {t(`Welcome, ${username || "Guest"}`)}
+      </h1>
       <GeolocateButtonBig t={t} />
       <LoginLogoutButton />
     </div>
@@ -97,20 +96,22 @@ function ListSearchResults({
     >
       <HeaderBar
         icon="list"
-        title={"Search results (" + searchResults.length + ")"}
+        title={`Search results (${searchResults.length})`}
       />
-      {searchResults.map((result, i) => {
-        const parcel = getParcel(result);
-        return (
-          <SearchResultCard
-            handleClick={() => getDetails(result)}
-            key={result}
-            title={replaceUnderscores(parcel.name)}
-            ripple={true}
-            indicatorColor="#FEDF56"
-          />
-        );
-      })}
+      <div className={styles.SearchResultsList}>
+        {searchResults.map((result, i) => {
+          const parcel = getParcel(result);
+          return (
+            <SearchResultCard
+              handleClick={() => getDetails(result)}
+              key={result}
+              title={replaceUnderscores(parcel.name)}
+              ripple={true}
+              indicatorColor="#FEDF56"
+            />
+          );
+        })}
+      </div>
     </div>
   );
 }
@@ -142,7 +143,10 @@ function mapStateToProps(state) {
     isFetching: state.search.isFetching,
     isFinishedSearching: !state.search.isFetching && state.search.results,
     searchResults: state.search.results,
-    geolocationData: state.geolocation
+    geolocationData: state.geolocation,
+    username: state.session.hasBootstrap
+      ? state.session.bootstrap.first_name || state.session.bootstrap.username
+      : "Guest"
   };
 }
 

@@ -56,6 +56,13 @@ app.use("/proxy", (req, res) => {
   req.pipe(request({ url })).pipe(res);
 });
 
+app.use("/bootstrap/lizard", (req, res) => {
+  // So I heard you like boom-step...
+  const url = "http://localhost:9000/bootstrap/lizard";
+
+  req.pipe(request({ url })).pipe(res);
+});
+
 app.listen(port, error => {
   if (error) {
     console.error(error);
