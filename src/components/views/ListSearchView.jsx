@@ -13,9 +13,13 @@ import SearchBar from "../SearchBar";
 import GeolocateButtonBig from "../GeolocateButtonBig";
 import ViewSwitchButton from "../ViewSwitchButton";
 import HeaderBar from "../HeaderBar";
-import SearchResultCard from "../SearchResultCard";
-import { showSnackBar, hideSnackBar } from "../../actions/UiActions";
-
+import SearchResultCardItem from "../SearchResultCardItem";
+import SearchResultListItem from "../SearchResultListItem";
+import {
+  showSnackBar,
+  hideSnackBar,
+  toggleSearchResultsListOrCardMode
+} from "../../actions/UiActions";
 import { replaceUnderscores } from "../../tools/string-formatting";
 import { getAttributesFromGeoserver } from "../../actions/ParcelActions";
 import { performGeolocation } from "../../actions/GeolocationActions";
@@ -27,15 +31,23 @@ import MDSpinner from "react-md-spinner";
 ///////////////////////////////////////////////////////////////////////////////
 
 class ListSearchViewComponent extends Component {
+  constructor() {
+    super();
+    this.state = {
+      isListView: false
+    };
+  }
   render() {
     const {
+      geolocationData, // via: mapStateToProps,
       getDetails, // via: mapDispatchToProps
-      getParcel, // via: mapStateToProps
       getGeolocation, // via: mapDispatchToProps
+      getParcel, // via: mapStateToProps
       isFetching, // via: mapStateToProps
       isFinishedSearching, // via: mapStateToProps
       searchResults, // via: mapStateToProps
-      geolocationData, // via: mapStateToProps,
+      searchResultsAsList, // via: mapStateToProps
+      toggleSearchResultsListOrCardMode, // via: mapDispatchToProps
       username, // via: mapStateToProps,
       t // via: parent
     } = this.props;
@@ -45,9 +57,12 @@ class ListSearchViewComponent extends Component {
     if (isFinishedSearching) {
       component = (
         <ListSearchResults
-          searchResults={searchResults}
           getDetails={getDetails}
           getParcel={getParcel}
+          isListView={this.state.isListView}
+          searchResults={searchResults}
+          searchResultsAsList={searchResultsAsList}
+          toggleSearchResultsListOrCardMode={toggleSearchResultsListOrCardMode}
           t={t}
         />
       );
@@ -84,10 +99,13 @@ function ListSearchLanding({ t, username }) {
 }
 
 function ListSearchResults({
+  getDetails,
+  getParcel,
+  isListView,
   parentState,
   searchResults,
-  getParcel,
-  getDetails
+  searchResultsAsList,
+  toggleSearchResultsListOrCardMode
 }) {
   return (
     <div
@@ -95,23 +113,42 @@ function ListSearchResults({
       className={styles.SearchResultCardContainer}
     >
       <HeaderBar
-        icon="list"
+        icon={searchResultsAsList ? "view_module" : "list"}
+        handleClick={toggleSearchResultsListOrCardMode}
         title={`Search results (${searchResults.length})`}
       />
-      <div className={styles.SearchResultsList}>
-        {searchResults.map((result, i) => {
-          const parcel = getParcel(result);
-          return (
-            <SearchResultCard
-              handleClick={() => getDetails(result)}
-              key={result}
-              title={replaceUnderscores(parcel.name)}
-              ripple={true}
-              indicatorColor="#FEDF56"
-            />
-          );
-        })}
-      </div>
+      {searchResultsAsList
+        ? <div className={styles.SearchResultsAsList} id="SearchResultsAsList">
+            {searchResults.map((result, i) => {
+              const parcel = getParcel(result);
+              return (
+                <SearchResultListItem
+                  handleClick={() => getDetails(result)}
+                  key={result}
+                  title={replaceUnderscores(parcel.name)}
+                  ripple={true}
+                  indicatorColor="#FEDF56"
+                />
+              );
+            })}
+          </div>
+        : <div
+            className={styles.SearchResultsAsCards}
+            id="SearchResultsAsCards"
+          >
+            {searchResults.map((result, i) => {
+              const parcel = getParcel(result);
+              return (
+                <SearchResultCardItem
+                  handleClick={() => getDetails(result)}
+                  key={result}
+                  title={replaceUnderscores(parcel.name)}
+                  ripple={true}
+                  indicatorColor="#FEDF56"
+                />
+              );
+            })}
+          </div>}
     </div>
   );
 }
@@ -140,6 +177,7 @@ class ListSearchViewSpinner extends Component {
 function mapStateToProps(state) {
   return {
     getParcel: idx => state.parcels[idx],
+    searchResultsAsList: state.ui.searchResultsAsList,
     isFetching: state.search.isFetching,
     isFinishedSearching: !state.search.isFetching && state.search.results,
     searchResults: state.search.results,
@@ -152,6 +190,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
+    toggleSearchResultsListOrCardMode: () =>
+      toggleSearchResultsListOrCardMode(dispatch),
     hideSnackBar: () => hideSnackBar(dispatch),
     showSnackBar: options => showSnackBar(dispatch, options),
     getDetails: id => getAttributesFromGeoserver(dispatch, id),

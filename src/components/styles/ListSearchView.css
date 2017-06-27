@@ -1,15 +1,16 @@
 .ListSearchView {
   position: absolute;
   width: 100%;
-  display: flex;
   flex-direction: column;
   align-items: center;
   background-color: #F1F1F2;
 }
+
 .Geolocate {
   padding: 50px;
   cursor: pointer;
 }
+
 .Welcome {
   color: #a0a0a0;
   font-weight: 300;
@@ -18,6 +19,7 @@
   padding: 100px 0 0 0;
   line-height: 90px;
 }
+
 .GetStarted {
   color: #a0a0a0;
   justify-content: center;
@@ -26,30 +28,28 @@
   margin: 0;
   padding: 0 0 20px 0;
 }
+
 .SearchResultCardContainer {
   width: calc(100% - 30px);
   position: relative;
   top: 125px;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-around;
+  left: 15px;
 }
-.SearchResultsList {
+
+.SearchResultsAsList {
   display: flex;
   width: 100%;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-between;
 }
-.SearchResultsList:after {
-  /*
-  Hack from https://stackoverflow.com/questions/18744164/flex-box-align-last-row-to-grid
-  */
-  content: "";
-  flex: auto;
-}
 
+.SearchResultsAsCards {
+  left: 0px;
+  position: absolute;
+  top: 70px;
+  width: 100%;
+}
 
 .ListSearchLanding {
   margin-top: 50px;
