@@ -27,17 +27,6 @@ import MDSpinner from "react-md-spinner";
 ///////////////////////////////////////////////////////////////////////////////
 
 class ListSearchViewComponent extends Component {
-  constructor() {
-    super();
-    this.state = {};
-  }
-  componentDidMount() {
-    this.props.showSnackBar({
-      message: "List view",
-      subMessage: "This is the list view",
-      autoHideDuration: 4000
-    });
-  }
   render() {
     const {
       getDetails, // via: mapDispatchToProps

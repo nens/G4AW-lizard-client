@@ -57,7 +57,8 @@ export const CHANGE_VIEW = "CHANGE_VIEW";
 
 // Session constants (fetch /bootstrap/lizard, receive it)
 export const FETCH_BOOTSTRAP = "FETCH_BOOTSTRAP";
-export const RECEIVE_BOOTSTRAP = "RECEIVE_BOOTSTRAP";
+export const RECEIVE_BOOTSTRAP_SUCCESS = "RECEIVE_BOOTSTRAP_SUCCESS";
+export const RECEIVE_BOOTSTRAP_ERROR = "RECEIVE_BOOTSTRAP_ERROR";
 
 export const FETCH_RASTER = "FETCH_RASTER";
 export const RECEIVE_RASTER = "RECEIVE_RASTER";
