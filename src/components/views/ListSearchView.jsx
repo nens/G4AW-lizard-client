@@ -145,7 +145,7 @@ function mapStateToProps(state) {
     searchResults: state.search.results,
     geolocationData: state.geolocation,
     username: state.session.hasBootstrap
-      ? state.session.bootstrap.first_name
+      ? state.session.bootstrap.first_name || state.session.bootstrap.username
       : "Guest"
   };
 }

@@ -63,8 +63,8 @@ class GeolocateButtonBigComponent extends Component {
 
 function GeolocateButtonContent({ onClick, child }) {
   return (
-    <div className={styles.Geolocate} onClick={onClick}>
-      <div>
+    <div className={styles.Geolocate}>
+      <div onClick={onClick}>
         {child}
       </div>
     </div>
