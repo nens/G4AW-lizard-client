@@ -54,8 +54,8 @@ export const initialRastersState = {};
 export const initialSettingsState = {};
 
 const initialState = {
-  photosForParcel: initialPhotosForParcelState, //TODO
-  settings: initialSettingsState, // TODO
+  //photosForParcel: initialPhotosForParcelState, //TODO
+  //settings: initialSettingsState, // TODO
 
   geolocation: initialGeolocationState,
   parcels: initialParcelsState,
