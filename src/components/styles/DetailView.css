@@ -6,3 +6,8 @@
   position: relative;
   margin: 50px;
 }
+
+.DetailView {
+  position: relative;
+  height: 0px;
+}

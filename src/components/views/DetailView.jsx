@@ -64,7 +64,7 @@ export class DetailViewComponent extends Component {
       return null;
     }
     return (
-      <div id="DetailView">
+      <div id="DetailView" className={styles.DetailView}>
         <DetailViewHeader
           title={parcel.Farmer}
           subTitle={parcel.FieldAdr}
