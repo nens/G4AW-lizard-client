@@ -3,7 +3,7 @@ import Ink from "react-ink";
 import PropTypes from "prop-types";
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
-import styles from "./styles/FlatButton.css";
+import styles from "./styles/FlatButton";
 
 import {
   VelocityTransitionGroup,
@@ -11,7 +11,7 @@ import {
   velocityHelpers
 } from "velocity-react";
 
-// A FlatButton emphasizes important functions on in the app.
+/* A FlatButton emphasizes important functions on in the app. ****************/
 
 class FlatButton extends Component {
   constructor() {
@@ -24,22 +24,19 @@ class FlatButton extends Component {
   }
   componentDidMount() {}
   handleMouseOver() {
-    this.setState({
-      isOver: true
-    });
+    this.setState({ isOver: true });
   }
   handleMouseOut() {
-    this.setState({
-      isOver: false
-    });
+    this.setState({ isOver: false });
   }
   render() {
-    const { t, disabled, buttonText, iconClass } = this.props;
+    const { t, disabled, buttonText, iconClass, handleOnClick } = this.props;
     const { isOver } = this.state;
     return (
       <div
-        className={`${styles.FlatButton} ${disabled ? styles.disabled : ""} ${isOver ? styles.IsOver : ""}`}
-        onClick={disabled ? "" : this.props.handleOnClick}
+        className={`${styles.FlatButton} ${disabled ? styles.disabled : ""}
+          ${isOver ? styles.IsOver : ""}`}
+        onClick={disabled ? () => false : handleOnClick}
         onMouseOver={this.handleMouseOver}
         onMouseOut={this.handleMouseOut}
       >

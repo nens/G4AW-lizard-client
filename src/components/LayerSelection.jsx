@@ -2,8 +2,9 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import ReactDOM from "react-dom";
 import Ink from "react-ink";
-import styles from "./styles/LayerSelection.css";
 import CSSTransitionGroup from "react-transition-group/CSSTransitionGroup";
+
+import styles from "./styles/LayerSelection";
 
 const NUM_PER_PAGE = 3;
 

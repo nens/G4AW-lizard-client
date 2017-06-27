@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import ReactDOM from "react-dom";
-import CollapsibleBar from "./CollapsibleBar";
-import styles from "./styles/DetailViewSection.css";
+import { CollapsibleBar } from ".";
+import styles from "./styles/DetailViewSection";
 
 /*
 DetailViewSection

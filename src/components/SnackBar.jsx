@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import ReactDOM from "react-dom";
-import styles from "./styles/SnackBar.css";
-
 import { VelocityComponent } from "velocity-react";
+
+import styles from "./styles/SnackBar";
 
 // A SnackBar component provides brief feedback about an operation through
 // a message at the bottom of the screen.

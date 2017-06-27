@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import ReactDOM from "react-dom";
-import styles from "./styles/DetailViewTable.css";
+import styles from "./styles/DetailViewTable";
 import YesIconSvg from "./svg/YesIcon.svg";
 import NoIconSvg from "./svg/NoIcon.svg";
 
