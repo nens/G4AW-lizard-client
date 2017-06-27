@@ -18,6 +18,7 @@ import styles from "./styles/MapComponent.css";
 
 import { VIEWPORT_PADDING } from "./Constants";
 import { getRaster } from "../actions/RasterActions";
+import { getAttributesFromGeoserver } from "../actions/ParcelActions";
 
 const hoogteUuid = "e9ed5725-d94a-4bcb-9dde-5d655da0070e";
 
@@ -32,23 +33,7 @@ class MapComponent extends Component {
     const zoom = leaflet.getZoom();
   }
   render() {
-    const { visibleRasters, getParcel, searchResults } = this.props;
-
-    const searchResultsAsMarkers = searchResults
-      ? searchResults.map((r, i) => {
-          const parcel = getParcel(r);
-          const coords = parcel.geometry.coordinates[0][0];
-          const lat = coords[0];
-          const lon = coords[1];
-          return (
-            <Marker key={i} position={[lat, lon]}>
-              <Popup>
-                <h4>{parcel.name}</h4>
-              </Popup>
-            </Marker>
-          );
-        })
-      : [];
+    const { visibleRasters, getParcel, searchResults, getDetails } = this.props;
 
     const searchResultsAsPolygons = searchResults
       ? searchResults.map((r, i) => {
@@ -59,11 +44,8 @@ class MapComponent extends Component {
               stroke="1"
               key={i}
               positions={parcel.geometry.coordinates}
-            >
-              <Popup>
-                <h4>{parcel.name}</h4>
-              </Popup>
-            </Polygon>
+              onClick={() => getDetails(r)}
+            />
           );
         })
       : [];
@@ -134,7 +116,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    getRaster: uuid => getRaster(uuid, dispatch)
+    getRaster: uuid => getRaster(uuid, dispatch),
+    getDetails: id => getAttributesFromGeoserver(dispatch, id)
   };
 }
 
