@@ -31,7 +31,7 @@ export default function(state = initialSearchState, action) {
         ...state,
         isFetching: false,
         results: null,
-        error: "Terror!"
+        error: action.error
       };
     case ActionTypes.CLEAR_SEARCH_RESULTS:
       return {
