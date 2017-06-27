@@ -15,7 +15,7 @@ function getGeocoderUrl(coords) {
   return `https://api.mapbox.com/geocoding/v5/mapbox.places/${coords.longitude},${coords.latitude}.json?access_token=${config.mapboxAccessToken}`;
 }
 
-function showSnackbarGeolocationSuccess(dispatch) {
+function showSnackBarGeolocationSuccess(dispatch) {
   const options = {
     message: "Successfully retrieved your location",
     subMessage: "Your search-results will be based on your current location",
@@ -24,7 +24,7 @@ function showSnackbarGeolocationSuccess(dispatch) {
   showSnackBar(dispatch, options);
 }
 
-function showSnackbarGeolocationError(dispatch) {
+function showSnackBarGeolocationError(dispatch) {
   const options = {
     message: "There was an error while retrieving your location",
     subMessage: "Your search-results can not be based on your location",
@@ -34,7 +34,7 @@ function showSnackbarGeolocationError(dispatch) {
   showSnackBar(dispatch, options);
 }
 
-function showSnackbarGeolocationTurnedOff(dispatch) {
+function showSnackBarGeolocationTurnedOff(dispatch) {
   const options = {
     message: "Turned off geolocation awareness",
     subMessage: "Your search-results will no longer be based on your location",
@@ -52,7 +52,7 @@ export function setGeolocationSupport(dispatch) {
 
 export function clearGeolocation(dispatch) {
   dispatch({ type: CLEAR_GEOLOCATION });
-  showSnackbarGeolocationTurnedOff(dispatch);
+  showSnackBarGeolocationTurnedOff(dispatch);
 }
 
 export function performGeolocation(dispatch) {
@@ -63,7 +63,7 @@ export function performGeolocation(dispatch) {
         fetch(getGeocoderUrl(success.coords), { mode: "cors" })
           .then(response => response.json())
           .then(data => {
-            showSnackbarGeolocationSuccess(dispatch);
+            showSnackBarGeolocationSuccess(dispatch);
             const placeName = data.features[0].place_name;
             const result = { ...success.coords, placeName };
             dispatch({ type: RECEIVE_GEOLOCATION_SUCCESS, result });
@@ -71,7 +71,7 @@ export function performGeolocation(dispatch) {
       },
       error => {
         console.error(error);
-        showSnackbarGeolocationError(dispatch);
+        showSnackBarGeolocationError(dispatch);
         dispatch({ type: RECEIVE_GEOLOCATION_ERROR, error });
       },
       config.geolocationOptions
