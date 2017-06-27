@@ -4,6 +4,7 @@ import ReactDOM from "react-dom";
 import CollapsibleBar from "./CollapsibleBar";
 import styles from "./styles/DetailViewSection.css";
 
+import { VelocityComponent } from "velocity-react";
 /*
 DetailViewSection
 -----------------
@@ -38,7 +39,6 @@ export default class DetailViewSection extends Component {
       isOpen
     } = this.props;
 
-    const toggleSection = this.toggleSection;
     const content = this.state.isOpen ? children : null;
 
     return (
@@ -48,9 +48,14 @@ export default class DetailViewSection extends Component {
           title={title}
           subTitle={subTitle}
           colorCode={colorCode}
-          handleClick={toggleSection}
+          handleClick={this.toggleSection}
         />
-        {content}
+        <VelocityComponent
+          duration={250}
+          animation={{ translateY: content ? "-10px" : "10px" }}
+        >
+          {content || <div />}
+        </VelocityComponent>
       </div>
     );
   }
