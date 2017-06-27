@@ -75,7 +75,7 @@ function ListSearchLanding({ t, username }) {
   return (
     <div className={styles.ListSearchLanding} id="ListSearchLanding">
       <h1 className={styles.Welcome}>
-        {t("Welcome") + ", " + (username || "Guest")}
+        {t(`Welcome, ${username || "Guest"}`)}
       </h1>
       <GeolocateButtonBig t={t} />
       <LoginLogoutButton />
@@ -96,7 +96,7 @@ function ListSearchResults({
     >
       <HeaderBar
         icon="list"
-        title={"Search results (" + searchResults.length + ")"}
+        title={`Search results (${searchResults.length})`}
       />
       <div className={styles.SearchResultsList}>
         {searchResults.map((result, i) => {
