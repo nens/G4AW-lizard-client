@@ -1,8 +1,24 @@
-import runCollapsibleBar from "./CollapsibleBarStories";
-runCollapsibleBar();
+// Stories for the Views:
 
 import runDetailView from "./DetailViewStories";
 runDetailView();
+
+import runMainView from "./MainViewStories";
+runMainView();
+
+import runMapSearchView from "./MapSearchViewStories";
+runMapSearchView();
+
+import runListSearchView from "./ListSearchViewStories";
+runListSearchView();
+
+import runPhotoView from "./PhotoViewStories";
+runPhotoView();
+
+// Stories for the rest of the components:
+
+import runCollapsibleBar from "./CollapsibleBarStories";
+runCollapsibleBar();
 
 import runDetailViewHeader from "./DetailViewHeaderStories";
 runDetailViewHeader();
@@ -47,23 +63,11 @@ runLayerSelection();
 import runLegend from "./LegendStories";
 runLegend();
 
-import runListSearchView from "./ListSearchViewStories";
-runListSearchView();
-
 import runLoginLogoutButton from "./LoginLogoutButtonStories";
 runLoginLogoutButton();
 
-import runMainView from "./MainViewStories";
-runMainView();
-
-import runMapSearchView from "./MapSearchViewStories";
-runMapSearchView();
-
 import runModal from "./ModalStories";
 runModal();
-
-import runPhotoView from "./PhotoViewStories";
-runPhotoView();
 
 import runRaisedButton from "./RaisedButtonStories";
 runRaisedButton();
