@@ -24,7 +24,6 @@ import Modal from "./Modal";
 import PulsatingMarker from "./PulsatingMarker";
 import RaisedButton from "./RaisedButton";
 import SearchBar from "./SearchBar";
-import SearchResultCard from "./SearchResultCard";
 import SearchResultCardItem from "./SearchResultCardItem";
 import SearchResultListItem from "./SearchResultListItem";
 import SimpleLineChart from "./SimpleLineChart";
