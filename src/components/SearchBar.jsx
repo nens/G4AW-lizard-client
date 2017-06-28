@@ -22,6 +22,9 @@ class SearchBarComponent extends Component {
   handleSearch(e) {
     const { setSearchInput, search } = this.props;
     setSearchInput(e.target.value);
+    if (e.target.value.length === 0) {
+      this.props.clear();
+    }
     if (e.target.value.length > 0 && e.key === "Enter") {
       search(e.target.value);
     }
