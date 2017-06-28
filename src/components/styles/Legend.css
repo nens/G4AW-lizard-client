@@ -1,8 +1,9 @@
 .LegendWrapper {
   position: absolute;
-  bottom: 50px;
-  height: 200px;
+  bottom: 0px;
+  height: 190px;
   width: 100%;
+  z-index: 1000;
 }
 .Legend {
   height: 50px;
@@ -29,6 +30,7 @@
   cursor: pointer;
 }
 .LegendBody {
+  background-color: white;
   display: flex;
   justify-content: center;
   color: #333;

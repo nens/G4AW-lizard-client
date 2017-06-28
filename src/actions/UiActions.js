@@ -15,7 +15,7 @@ export function changeView(dispatch, newView) {
 export function showSnackBar(dispatch, options) {
   const state = theStore.getState();
 
-  if (state.ui.showSnackBar === true) {
+  if (state.ui.showSnackBar === true && options.autoHideDuration) {
     dispatch({ type: HIDE_SNACKBAR });
     setTimeout(() => {
       dispatch({ type: SHOW_SNACKBAR, options });

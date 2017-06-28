@@ -4,15 +4,22 @@ import Ink from "react-ink";
 import PropTypes from "prop-types";
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
-
-import { MapComponent, SearchBar, ViewSwitchButton } from "..";
+import { MapComponent, Legend, SearchBar, ViewSwitchButton } from "..";
 import { showSnackBar, hideSnackBar } from "../../actions";
 import styles from "../styles/MapSearchView.css";
 import { WIDTH, HEIGHT } from "../../tools/dimensions";
+import { i18nDecorator, LEGEND_DATA } from "../../../stories/helpers";
 
 /* A MapSearchView shows searchresults on the map ****************************/
 
 class MapSearchViewComponent extends Component {
+  componentDidMount() {
+    this.props.showSnackBar({
+      message: "Map view",
+      subMessage: "You're now in Map view"
+      // autoHideDuration: 3000
+    });
+  }
   render() {
     const { searchResults } = this.props;
     return (
@@ -23,6 +30,14 @@ class MapSearchViewComponent extends Component {
         <MapComponent searchResults={searchResults} />
         <SearchBar />
         <ViewSwitchButton viewIsMap />
+        <Legend
+          handleToggleLegend={() => console.log("open/close")}
+          handlePreviousLayer={() => console.log("handlePrevLayer")}
+          handleNextLayer={() => console.log("handleNextLayer")}
+          activeLegendIdx={2}
+          data={LEGEND_DATA}
+          isOpen={true}
+        />
       </div>
     );
   }

@@ -17,7 +17,7 @@ class Legend extends Component {
     const legendData = currentLayer.legend;
 
     return (
-      <div className={styles.LegendWrapper}>
+      <div className={styles.LegendWrapper} id="Legend">
         <div className={styles.Legend}>
           <LegendTopBar layerTitle={layerTitle} {...this.props} />
           {isOpen ? <LegendBody legendData={legendData} /> : null}
@@ -91,8 +91,8 @@ class LegendBody extends Component {
   render() {
     return (
       <Scrollbars style={{ width: "100%", height: 140 }}>
-        <div className={styles.LegendBody}>
-          <table className={styles.LegendTable}>
+        <div className={styles.LegendBody} id="LegendBody">
+          <table className={styles.LegendTable} id="LegendTable">
             <tbody>
               {this.props.legendData.map((l, i) => (
                 <tr key={i}>
