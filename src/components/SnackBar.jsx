@@ -38,7 +38,7 @@ SnackBar.propTypes = {
 };
 
 SnackBar.defaultProps = {
-  actionText: "OK" // It just werks
+  actionText: "OK"
 };
 
 class SnackBarContent extends Component {
