@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import ReactDOM from "react-dom";
-import styles from "./styles/Modal.css";
+import styles from "./styles/Modal";
 
 import { WIDTH, HEIGHT } from "../tools/dimensions";
 

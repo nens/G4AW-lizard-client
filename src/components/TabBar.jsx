@@ -2,13 +2,13 @@ import Ink from "react-ink";
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import ReactDOM from "react-dom";
-import styles from "./styles/TabBar.css";
-
 import {
   VelocityTransitionGroup,
   VelocityComponent,
   velocityHelpers
 } from "velocity-react";
+
+import styles from "./styles/TabBar";
 
 // A TabBar component.
 

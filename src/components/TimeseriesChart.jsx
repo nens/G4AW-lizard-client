@@ -3,8 +3,6 @@ import { translate } from "react-i18next";
 import React, { Component, PropTypes } from "react";
 import ReactDOM from "react-dom";
 import { size, first, last } from "lodash";
-import { getTimeseries } from "../actions/TimeseriesActions";
-
 import {
   LineChart,
   Line,
@@ -14,6 +12,8 @@ import {
   Tooltip,
   Legend
 } from "recharts";
+
+import { getTimeseries } from "../actions";
 
 const PARCEL_ID = 123;
 

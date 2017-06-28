@@ -3,14 +3,19 @@ import { translate } from "react-i18next";
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import ReactDOM from "react-dom";
+
 import styles from "./styles/SearchBar.css";
+
 import GeolocateButtonSmall from "./GeolocateButtonSmall";
+
 import {
   doSearch,
   clearResults,
-  setSearchInputText
-} from "../actions/SearchActions";
-import { performGeolocation } from "../actions/GeolocationActions";
+  setSearchInputText,
+  performGeolocation
+} from "../actions";
+
+/* the main omponent -- a search bar for MapSearchView/ListSearchView ********/
 
 class SearchBarComponent extends Component {
   constructor() {

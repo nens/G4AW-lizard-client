@@ -3,13 +3,9 @@ import { translate } from "react-i18next";
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import ReactDOM from "react-dom";
-
 import MDSpinner from "react-md-spinner";
 
-import {
-  performGeolocation,
-  clearGeolocation
-} from "../actions/GeolocationActions";
+import { performGeolocation, clearGeolocation } from "../actions";
 
 import styles from "./styles/SearchBar.css";
 
