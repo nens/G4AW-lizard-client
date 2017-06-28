@@ -1,0 +1,64 @@
+.SearchResultListItem {
+  padding: 15px;
+  margin: 15px 10px 0 0;
+  width: 120%;
+  background: #FFFFFF;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.07);
+  cursor: pointer;
+  position: relative;
+}
+
+.SearchCardIcon {
+  margin: 0 0 15px 0;
+  position: absolute;
+  right: 10px;
+}
+
+.Title {
+  color: #5D5D5D;
+  font-size: 14px;
+}
+
+.SubTitle {
+  color: #a1a1a1;
+  font-size: 12px;
+  width: 100%;
+  border-top: 1px solid #d7d7d7;
+  margin: 10px 0 0 0;
+  padding: 10px 0 0 0;
+}
+
+.Mouseover {
+  border: 2px solid #4CC1FC;
+}
+
+.Mouseout {
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.07);
+}
+
+.Enter {
+  opacity: 0.01;
+}
+
+.EnterActive {
+  opacity: 1;
+  transition: opacity 500ms ease-in;
+}
+
+.Leave {
+  opacity: 1;
+}
+
+.LeaveActive {
+  opacity: 0.01;
+  transition: opacity 300ms ease-in;
+}
+
+.Appear {
+  opacity: 0.01;
+}
+
+.AppearActive {
+  opacity: 1;
+  transition: opacity .5s ease-in;
+}

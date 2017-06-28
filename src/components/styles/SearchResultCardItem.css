@@ -1,12 +1,13 @@
-.SearchResultCard {
+.SearchResultCardItem {
   padding: 15px;
-  margin: 15px 10px 0 0;
+  margin: 10px;
   width: 120px;
   min-height: 100px;
   background: #FFFFFF;
-  box-shadow: 0 2px 4px 0 rgba(0,0,0,0.07);
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.07);
   cursor: pointer;
   position: relative;
+  display: inline-block;
 }
 
 .SearchCardIcon {
@@ -30,13 +31,10 @@
 .Mouseover {
   border: 2px solid #4CC1FC;
 }
+
 .Mouseout {
-  box-shadow: 0 2px 4px 0 rgba(0,0,0,0.07);
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.07);
 }
-
-
-
-
 
 .Enter {
   opacity: 0.01;
@@ -55,6 +53,7 @@
   opacity: 0.01;
   transition: opacity 300ms ease-in;
 }
+
 .Appear {
   opacity: 0.01;
 }

@@ -1,8 +1,9 @@
 import { theStore } from "../store/Store";
 import {
   CHANGE_VIEW,
+  HIDE_SNACKBAR,
   SHOW_SNACKBAR,
-  HIDE_SNACKBAR
+  TOGGLE_SEARCHRESULTS_LIST_CARD_MODE
 } from "../constants/ActionTypes";
 
 let timerAutoHideId;
@@ -34,4 +35,8 @@ export function showSnackBar(dispatch, options) {
 
 export function hideSnackBar(dispatch) {
   dispatch({ type: HIDE_SNACKBAR });
+}
+
+export function toggleSearchResultsListOrCardMode(dispatch) {
+  dispatch({ type: TOGGLE_SEARCHRESULTS_LIST_CARD_MODE });
 }
