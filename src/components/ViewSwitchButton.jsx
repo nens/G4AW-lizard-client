@@ -4,13 +4,12 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import ReactDOM from "react-dom";
 import Ink from "react-ink";
-import styles from "./styles/ViewSwitchButton.css";
 
-import { changeView } from "../actions/UiActions";
+import styles from "./styles/ViewSwitchButton";
 
-/*
-A ViewSwitchButton switches between map and omnibox contexts.
-*/
+import { changeView } from "../actions";
+
+/* A ViewSwitchButton switches between map and omnibox contexts. *************/
 
 class ViewSwitchButtonComponent extends Component {
   render() {

@@ -1,4 +1,7 @@
 import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import React, { Component } from "react";
+import ReactDOM from "react-dom";
 import bbox from "@turf/bbox";
 import flip from "@turf/flip";
 import { feature, featureCollection } from "@turf/helpers";
@@ -11,14 +14,10 @@ import {
   Polygon,
   WMSTileLayer
 } from "react-leaflet";
-import PropTypes from "prop-types";
-import React, { Component } from "react";
-import ReactDOM from "react-dom";
-import styles from "./styles/MapComponent.css";
 
-import { VIEWPORT_PADDING } from "./Constants";
-import { getRaster } from "../actions/RasterActions";
-import { getAttributesFromGeoserver } from "../actions/ParcelActions";
+import styles from "./styles/MapComponent";
+
+import { getRaster, getAttributesFromGeoserver } from "../actions";
 
 const hoogteUuid = "e9ed5725-d94a-4bcb-9dde-5d655da0070e";
 

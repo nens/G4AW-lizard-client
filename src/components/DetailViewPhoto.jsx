@@ -2,10 +2,11 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import ReactDOM from "react-dom";
-import { translate } from "react-i18next";
-import { changeView } from "../actions/UiActions";
-import styles from "./styles/DetailViewPhoto.css";
 import MDSpinner from "react-md-spinner";
+import { translate } from "react-i18next";
+
+import { changeView } from "../actions";
+import styles from "./styles/DetailViewPhoto";
 import {
   WIDTH,
   DETAIL_VIEW_PHOTO_MARGIN,
@@ -17,7 +18,7 @@ import {
 // to be used in the DetailView ///////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
 
-export class DetailViewPhoto extends Component {
+class DetailViewPhoto extends Component {
   constructor() {
     super();
     this.state = {

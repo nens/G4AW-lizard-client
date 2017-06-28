@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
-import InputField from "./InputField";
+import InputField from ".";
 
 ///////////////////////////////////////////////////////////////////////////////
 // The main Component; non-generic component for the login modals content, ////

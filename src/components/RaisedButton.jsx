@@ -3,7 +3,8 @@ import Ink from "react-ink";
 import PropTypes from "prop-types";
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
-import styles from "./styles/RaisedButton.css";
+
+import styles from "./styles/RaisedButton";
 
 import {
   VelocityTransitionGroup,

@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import ReactDOM from "react-dom";
 import { Scrollbars } from "react-custom-scrollbars";
-import styles from "./styles/Legend.css";
+
+import styles from "./styles/Legend";
 
 ///////////////////////////////////////////////////////////////////////////////
 // The main Component; a legend (for discrete rasters). ///////////////////////

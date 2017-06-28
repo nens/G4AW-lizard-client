@@ -4,7 +4,10 @@ import { CSSTransitionGroup } from "react-transition-group";
 import PropTypes from "prop-types";
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
-import styles from "./styles/SearchResultCard.css";
+
+import styles from "./styles/SearchResultCard";
+
+/* A card representing a single search-result (=parcel) **********************/
 
 class SearchResultCard extends Component {
   constructor() {

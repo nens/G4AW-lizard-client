@@ -2,18 +2,15 @@ import { translate } from "react-i18next";
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import { connect } from "react-redux";
-import styles from "./styles/ListSearchView.css";
-/// SVG imports:
+import MDSpinner from "react-md-spinner";
+
+import styles from "./styles/ListSearchView";
+
 import GeolocationUnsupportedSVG from "./svg/GeolocationUnsupportedSVG.svg";
 import GeolocationSupportedSVG from "./svg/GeolocationSupportedSVG.svg";
 import GeolocationAvailableSVG from "./svg/GeolocationAvailableSVG.svg";
 
-import MDSpinner from "react-md-spinner";
-
-import {
-  performGeolocation,
-  clearGeolocation
-} from "../actions/GeolocationActions";
+import { performGeolocation, clearGeolocation } from "../actions";
 
 /* The main component: a big button for toggling geolocation-awareness ********/
 

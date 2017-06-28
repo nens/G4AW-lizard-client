@@ -4,17 +4,18 @@ import { connect } from "react-redux";
 import { translate } from "react-i18next";
 import MDSpinner from "react-md-spinner";
 
-import styles from "../styles/DetailView.css";
-import DetailViewHeader from "../DetailViewHeader";
-import DetailViewSection from "../DetailViewSection";
-import DetailViewTable from "../DetailViewTable";
-import DetailViewTableSection from "../DetailViewTableSection";
-import DetailViewPhotoSection from "../DetailViewPhotoSection";
+import styles from "../styles/DetailView";
+
+import {
+  DetailViewHeader,
+  DetailViewSection,
+  DetailViewTable,
+  DetailViewTableSection,
+  DetailViewPhotoSection
+} from "..";
 
 import { changeView } from "../../actions/UiActions";
-
 import { THUMBNAIL_LIST, LOREM } from "../../../stories/helpers";
-
 import { WIDTH } from "../../tools/dimensions";
 
 const DEFAULT_ZOOM = 11; // Used for map in header of the page
