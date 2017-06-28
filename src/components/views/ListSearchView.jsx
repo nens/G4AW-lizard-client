@@ -35,12 +35,6 @@ import MDSpinner from "react-md-spinner";
 ///////////////////////////////////////////////////////////////////////////////
 
 class ListSearchViewComponent extends Component {
-  constructor() {
-    super();
-    this.state = {
-      isListView: false
-    };
-  }
   render() {
     const {
       geolocationData, // via: mapStateToProps,
@@ -63,7 +57,6 @@ class ListSearchViewComponent extends Component {
         <ListSearchResults
           getDetails={getDetails}
           getParcel={getParcel}
-          isListView={this.state.isListView}
           searchResults={searchResults}
           searchResultsAsList={searchResultsAsList}
           toggleSearchResultsListOrCardMode={toggleSearchResultsListOrCardMode}
@@ -105,7 +98,6 @@ function ListSearchLanding({ t, username }) {
 function ListSearchResults({
   getDetails,
   getParcel,
-  isListView,
   parentState,
   searchResults,
   searchResultsAsList,
