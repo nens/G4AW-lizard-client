@@ -7,22 +7,25 @@ import { connect } from "react-redux";
 
 import styles from "../styles/ListSearchView.css";
 
-import LoginLogoutButton from "../LoginLogoutButton";
-import RaisedButton from "../RaisedButton";
-import SearchBar from "../SearchBar";
-import GeolocateButtonBig from "../GeolocateButtonBig";
-import ViewSwitchButton from "../ViewSwitchButton";
-import HeaderBar from "../HeaderBar";
-import SearchResultCardItem from "../SearchResultCardItem";
-import SearchResultListItem from "../SearchResultListItem";
+import {
+  GeolocateButtonBig,
+  HeaderBar,
+  LoginLogoutButton,
+  RaisedButton,
+  SearchBar,
+  SearchResultCardItem,
+  SearchResultListItem,
+  ViewSwitchButton
+} from "..";
+
 import {
   showSnackBar,
   hideSnackBar,
-  toggleSearchResultsListOrCardMode
-} from "../../actions/UiActions";
+  getAttributesFromGeoserver,
+  performGeolocation
+} from "../../actions/";
+
 import { replaceUnderscores } from "../../tools/string-formatting";
-import { getAttributesFromGeoserver } from "../../actions/ParcelActions";
-import { performGeolocation } from "../../actions/GeolocationActions";
 
 import MDSpinner from "react-md-spinner";
 

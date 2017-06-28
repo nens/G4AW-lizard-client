@@ -2,7 +2,8 @@ import PropTypes from "prop-types";
 import React, { PureComponent } from "react";
 import { Marker } from "react-leaflet";
 import ReactDOM from "react-dom";
-import styles from "./styles/PulsatingMarker.css";
+
+import styles from "./styles/PulsatingMarker";
 
 // A PulsatingMarker
 

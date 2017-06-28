@@ -1,9 +1,8 @@
-import styles from "./styles/ToggleSwitch.css";
 import React, { Component, PropTypes } from "react";
 
-///////////////////////////////////////////////////////////////////////////////
-// The main Component; a reusable ToggleSwitch ////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////
+import styles from "./styles/ToggleSwitch";
+
+/* The main Component; a reusable ToggleSwitch *******************************/
 
 class ToggleSwitch extends Component {
   constructor(props) {

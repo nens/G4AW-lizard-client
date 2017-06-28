@@ -2,8 +2,6 @@ import { translate } from "react-i18next";
 import React, { Component, PropTypes } from "react";
 import ReactDOM from "react-dom";
 import moment from "moment";
-import styles from "./styles/SimpleLineChart.css";
-
 import {
   LineChart,
   Line,
@@ -13,6 +11,8 @@ import {
   Tooltip,
   Legend
 } from "recharts";
+
+import styles from "./styles/SimpleLineChart";
 
 class SimpleLineChart extends Component {
   componentDidMount() {}

@@ -20,7 +20,7 @@ var config = {
     umdNamedDefine: true
   },
   resolve: {
-    extensions: [".js", ".jsx"]
+    extensions: [".js", ".jsx", ".css"]
   },
   devServer: {
     hot: true,

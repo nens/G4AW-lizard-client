@@ -3,8 +3,9 @@ import { translate } from "react-i18next";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import ReactDOM from "react-dom";
-import styles from "./styles/LoginLogoutButton.css";
 import Ink from "react-ink";
+
+import styles from "./styles/LoginLogoutButton";
 
 class LoginLogoutButtonComponent extends Component {
   render() {

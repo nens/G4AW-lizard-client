@@ -2,28 +2,17 @@ import { translate } from "react-i18next";
 import { connect } from "react-redux";
 import Ink from "react-ink";
 import PropTypes from "prop-types";
-import RaisedButton from "../RaisedButton";
-import MapComponent from "../MapComponent";
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
-import SearchBar from "../SearchBar";
-import { showSnackBar, hideSnackBar } from "../../actions/UiActions";
-import ViewSwitchButton from "../ViewSwitchButton";
+
+import { MapComponent, SearchBar, ViewSwitchButton } from "..";
+import { showSnackBar, hideSnackBar } from "../../actions";
 import styles from "../styles/MapSearchView.css";
 import { WIDTH, HEIGHT } from "../../tools/dimensions";
 
-///////////////////////////////////////////////////////////////////////////////
-// A MapSearchView shows searchresults on the map /////////////////////////////
-///////////////////////////////////////////////////////////////////////////////
+/* A MapSearchView shows searchresults on the map ****************************/
 
 class MapSearchViewComponent extends Component {
-  componentDidMount() {
-    this.props.showSnackBar({
-      message: "Map view",
-      subMessage: "This is the map view",
-      autoHideDuration: 4000
-    });
-  }
   render() {
     const { searchResults } = this.props;
     return (
@@ -39,17 +28,13 @@ class MapSearchViewComponent extends Component {
   }
 }
 
-///////////////////////////////////////////////////////////////////////////////
-// type-checking: /////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////
+/* type-checking *************************************************************/
 
 MapSearchViewComponent.propTypes = {
   searchResults: PropTypes.array
 };
 
-///////////////////////////////////////////////////////////////////////////////
-// react-redux coupling ///////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////
+/* react-redux coupling ******************************************************/
 
 function mapStateToProps(state) {
   console.log(state);

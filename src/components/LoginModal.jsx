@@ -2,9 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import ReactDOM from "react-dom";
 
-import Modal from "./Modal";
-import LoginModalContent from "./LoginModalContent";
-import LoginModalButtons from "./LoginModalButtons";
+import { Modal, LoginModalButtons, LoginModalContent } from ".";
 
 ///////////////////////////////////////////////////////////////////////////////
 // The main Component; a component representing the non-generic login modal: //

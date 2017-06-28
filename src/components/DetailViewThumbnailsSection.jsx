@@ -2,8 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import ReactDOM from "react-dom";
 import { translate } from "react-i18next";
-import DetailViewSection from "./DetailViewSection";
-import DetailViewThumbnails from "./DetailViewThumbnails";
+import { DetailViewSection, DetailViewThumbnails } from ".";
 
 ///////////////////////////////////////////////////////////////////////////////
 // The main Component: the DetailViewThumbnailsSection ////////////////////////
