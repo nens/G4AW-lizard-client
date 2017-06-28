@@ -22,6 +22,7 @@ import {
   showSnackBar,
   hideSnackBar,
   getAttributesFromGeoserver,
+  toggleSearchResultsListOrCardMode,
   performGeolocation
 } from "../../actions/";
 
