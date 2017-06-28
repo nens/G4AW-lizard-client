@@ -3,6 +3,8 @@ import PropTypes from "prop-types";
 import ReactDOM from "react-dom";
 import styles from "./styles/CollapsibleBar.css";
 
+import { VelocityComponent } from "velocity-react";
+
 // A CollapsibleBar component.
 
 class CollapsibleBar extends Component {
@@ -16,12 +18,21 @@ class CollapsibleBar extends Component {
       isOpen
     } = this.props;
     return (
-      <div className={styles.CollapsibleBar} onClick={handleClick}>
-        <span>
+      <div
+        className={styles.CollapsibleBar}
+        onClick={handleClick}
+        id="CollapsibleBar"
+      >
+        <VelocityComponent
+          duration={250}
+          animation={{
+            rotateZ: isOpen ? "90deg" : "0deg"
+          }}
+        >
           <i className={`${styles.Arrow} material-icons`} id="Arrow">
-            {isOpen ? "keyboard_arrow_down" : "keyboard_arrow_right"}
+            keyboard_arrow_right
           </i>
-        </span>
+        </VelocityComponent>
         <span className={styles.Title}>{title}</span>
         {subTitle
           ? <span className={styles.Subtitle}>{subTitle}</span>
