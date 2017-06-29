@@ -3,6 +3,7 @@ import {
   CHANGE_VIEW,
   HIDE_SNACKBAR,
   SHOW_SNACKBAR,
+  TOGGLE_LEGEND,
   TOGGLE_SEARCHRESULTS_LIST_CARD_MODE
 } from "../constants/ActionTypes";
 
@@ -39,4 +40,8 @@ export function hideSnackBar(dispatch) {
 
 export function toggleSearchResultsListOrCardMode(dispatch) {
   dispatch({ type: TOGGLE_SEARCHRESULTS_LIST_CARD_MODE });
+}
+
+export function toggleLegend(dispatch) {
+  dispatch({ type: TOGGLE_LEGEND });
 }
