@@ -15,7 +15,7 @@ import {
   WMSTileLayer
 } from "react-leaflet";
 
-import styles from "./styles/MapComponent";
+import styles from "./styles/MapComponent.css";
 
 import { getRaster, getAttributesFromGeoserver } from "../actions";
 

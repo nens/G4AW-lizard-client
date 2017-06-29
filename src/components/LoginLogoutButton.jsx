@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 import ReactDOM from "react-dom";
 import Ink from "react-ink";
 
-import styles from "./styles/LoginLogoutButton";
+import styles from "./styles/LoginLogoutButton.css";
 
 class LoginLogoutButtonComponent extends Component {
   render() {

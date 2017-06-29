@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 import ReactDOM from "react-dom";
 import Ink from "react-ink";
 
-import styles from "./styles/ViewSwitchButton";
+import styles from "./styles/ViewSwitchButton.css";
 
 import { changeView } from "../actions";
 

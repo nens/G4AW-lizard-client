@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { translate } from "react-i18next";
 import MDSpinner from "react-md-spinner";
 
-import styles from "../styles/DetailView";
+import styles from "../styles/DetailView.css";
 
 import {
   DetailViewHeader,

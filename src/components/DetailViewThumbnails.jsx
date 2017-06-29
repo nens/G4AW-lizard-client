@@ -3,7 +3,7 @@ import Ink from "react-ink";
 import PropTypes from "prop-types";
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
-import styles from "./styles/PhotoGallery";
+import styles from "./styles/PhotoGallery.css";
 
 // The main Component: a PhotoGallery emphasizes important functions on in the app.
 

@@ -4,7 +4,7 @@ import ReactDOM from "react-dom";
 import Ink from "react-ink";
 import CSSTransitionGroup from "react-transition-group/CSSTransitionGroup";
 
-import styles from "./styles/LayerSelection";
+import styles from "./styles/LayerSelection.css";
 
 const NUM_PER_PAGE = 3;
 

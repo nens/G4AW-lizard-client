@@ -4,7 +4,7 @@ import ReactDOM from "react-dom";
 import { connect } from "react-redux";
 import MDSpinner from "react-md-spinner";
 
-import styles from "./styles/ListSearchView";
+import styles from "./styles/ListSearchView.css";
 
 import GeolocationUnsupportedSVG from "./svg/GeolocationUnsupportedSVG.svg";
 import GeolocationSupportedSVG from "./svg/GeolocationSupportedSVG.svg";
