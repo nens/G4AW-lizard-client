@@ -44,9 +44,10 @@ class LegendTopBar extends Component {
     return (
       <div className={styles.LegendTopBar}>
         <PrevLayerButton handleClick={handlePreviousLayer} />
-        <div>{layerTitle}</div>
+        <div>
+          {layerTitle}
+        </div>
         <NextLayerButton handleClick={handleNextLayer} />
-        <ToggleLegendButton isOpen={isOpen} handleClick={handleToggleLegend} />
       </div>
     );
   }
@@ -90,16 +91,20 @@ class ToggleLegendButton extends Component {
 class LegendBody extends Component {
   render() {
     return (
-      <Scrollbars style={{ width: "100%", height: 140 }}>
+      <Scrollbars style={{ width: "100%", height: 240 }}>
         <div className={styles.LegendBody} id="LegendBody">
           <table className={styles.LegendTable} id="LegendTable">
             <tbody>
-              {this.props.legendData.map((l, i) => (
+              {this.props.legendData.map((l, i) =>
                 <tr key={i}>
-                  <td><LegendColorLabel color={l.color} /></td>
-                  <td>{l.label}</td>
+                  <td>
+                    <LegendColorLabel color={l.color} />
+                  </td>
+                  <td>
+                    {l.label}
+                  </td>
                 </tr>
-              ))}
+              )}
             </tbody>
           </table>
         </div>
