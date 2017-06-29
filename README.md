@@ -145,8 +145,8 @@ import styles from ../styles/MainExportedComponent.css;
 
 // Exported (main) component first:
 class MainExportedComponent extends Component {
+
   // Constructor first (it's optional, but if needed, place it here)
-  
   constructor() {
     // Dont forget super():
     super();
