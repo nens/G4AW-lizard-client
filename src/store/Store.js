@@ -18,6 +18,7 @@ export const initialUiState = {
   currentView: "ListSearchView",
   searchResultsAsList: false,
   showSnackBar: false,
+  showLegend: false,
   snackBarOptions: {
     message: null,
     subMessage: null
