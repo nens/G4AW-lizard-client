@@ -172,13 +172,16 @@ class MainExportedComponent extends Component {
   
   // Render as last function:
   render() {
-    // Use an id with the component name for easier identification in devtools:
-    // The top element style should have the same className as the component is named:
+    // Use an id attribute with the component name for easier identification in devtools.
+    // The top element style should have the same className as the component is named.
+    // Also, close empty JSX elements: <x />.
     return (
       <div 
         className={styles.MainExportedComponent}
-        id="MainExportedComponent"
-      />
+        id="MainExportedComponent">
+        <SomeButton />
+        <SomeSmallDumbUIElementUsedInTheAboveComponent />
+      </div>
     );
   }
 }
