@@ -3,8 +3,8 @@ import PropTypes from "prop-types";
 import ReactDOM from "react-dom";
 import { CollapsibleBar } from ".";
 import styles from "./styles/DetailViewSection.css";
-
 import { VelocityComponent } from "velocity-react";
+
 /*
 DetailViewSection
 -----------------
