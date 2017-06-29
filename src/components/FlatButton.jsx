@@ -3,7 +3,7 @@ import Ink from "react-ink";
 import PropTypes from "prop-types";
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
-import styles from "./styles/FlatButton";
+import styles from "./styles/FlatButton.css";
 
 import {
   VelocityTransitionGroup,

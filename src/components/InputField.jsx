@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import ReactDOM from "react-dom";
-import styles from "./styles/InputField";
+import styles from "./styles/InputField.css";
 
 // A InputField component.
 

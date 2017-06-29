@@ -6,7 +6,7 @@ import MDSpinner from "react-md-spinner";
 import { translate } from "react-i18next";
 
 import { changeView } from "../actions";
-import styles from "./styles/DetailViewPhoto";
+import styles from "./styles/DetailViewPhoto.css";
 import {
   WIDTH,
   DETAIL_VIEW_PHOTO_MARGIN,

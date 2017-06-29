@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from "react";
 
-import styles from "./styles/ToggleSwitch";
+import styles from "./styles/ToggleSwitch.css";
 
 /* The main Component; a reusable ToggleSwitch *******************************/
 
