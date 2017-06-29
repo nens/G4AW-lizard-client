@@ -1,0 +1,17 @@
+
+.subHeaderContainer {
+  /*justify-content: center;*/
+  text-align: center;
+  margin: 20px 0 20px 0;
+  /*background-color: red;*/
+  height: 50px;
+}
+
+.subHeaderText {
+  font-weight: 500;
+  color: #A0A0A0;
+  display: inline;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-bottom: 2px solid #CECECE;
+}

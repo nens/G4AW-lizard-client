@@ -5,6 +5,7 @@ import session from "./Session";
 import timeseries from "./Timeseries";
 import geolocation from "./Geolocation";
 import ui from "./Ui";
+import baselayer from "./Baselayer";
 
 export default {
   ui,
@@ -13,5 +14,6 @@ export default {
   search,
   session,
   timeseries,
-  parcels
+  parcels,
+  baselayer
 };

@@ -3,8 +3,12 @@ import PropTypes from "prop-types";
 import ReactDOM from "react-dom";
 import Ink from "react-ink";
 import CSSTransitionGroup from "react-transition-group/CSSTransitionGroup";
+import { translate } from "react-i18next";
+import { connect } from "react-redux";
 
 import styles from "./styles/LayerSelection.css";
+
+import { changeBaselayer } from "../actions";
 
 const NUM_PER_PAGE = 3;
 
@@ -12,33 +16,11 @@ const NUM_PER_PAGE = 3;
 // A LayerSelection component. ////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
 
-class LayerSelection extends Component {
-  constructor() {
-    super();
-    this.state = {
-      page: 1,
-      duration: 500
-    };
-    this.handlePrevClick = this.handlePrevClick.bind(this);
-    this.handleNextClick = this.handleNextClick.bind(this);
-  }
-  componentDidMount() {}
-  handlePrevClick() {
-    this.setState({ page: Math.max(1, this.state.page - 1) });
-  }
-  handleNextClick() {
-    const numPages = Math.ceil(this.props.layers.length / NUM_PER_PAGE);
-    this.setState({ page: Math.min(numPages, this.state.page + 1) });
-  }
+class LayerSelectionComponent extends Component {
   render() {
-    const _props = { ...this.props, page: this.state.page };
     return (
       <div className={styles.LayerSelection}>
-        <div className={styles.PrevNext}>
-          <PrevButton handleClick={this.handlePrevClick} />
-          <NextButton handleClick={this.handleNextClick} />
-        </div>
-        <LayerDivs {..._props} />
+        <LayerDivs {...this.props} />
       </div>
     );
   }
@@ -48,7 +30,7 @@ class LayerSelection extends Component {
 // type-checking //////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
 
-LayerSelection.propTypes = {
+LayerSelectionComponent.propTypes = {
   layers: PropTypes.array,
   handleLayerSelect: PropTypes.func
 };
@@ -59,15 +41,13 @@ LayerSelection.propTypes = {
 
 class LayerDivs extends Component {
   render() {
-    const { layers, handleLayerSelect, page } = this.props;
-    const numLayers = layers.length;
-    const numPages = Math.ceil(numLayers / NUM_PER_PAGE);
-    const layerdivs = layers
-      .slice(page - 1, page + 2)
-      .map((layer, i) => getTransitionGroup(i, layer, handleLayerSelect));
+    const { layers, handleLayerSelect } = this.props;
+    const layerDivs = layers.map((layer, i) =>
+      getTransitionGroup(i, layer, () => handleLayerSelect(i))
+    );
     return (
       <div className={styles.Wrapper}>
-        {layerdivs}
+        {layerDivs}
       </div>
     );
   }
@@ -134,4 +114,20 @@ function getTransitionGroup(i, layer, handleLayerSelect) {
   );
 }
 
-export default LayerSelection;
+/* react-redux coupling ******************************************************/
+
+function mapStateToProps(state) {
+  return {};
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    handleLayerSelect: index => changeBaselayer(dispatch, index)
+  };
+}
+
+const LayerSelection = connect(mapStateToProps, mapDispatchToProps)(
+  LayerSelectionComponent
+);
+
+export default translate()(LayerSelection);

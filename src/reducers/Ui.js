@@ -20,6 +20,8 @@ export default function(state = initialUiState, action) {
       return { ...state, selectedParcel: action.parcelId };
     case ActionTypes.CHANGE_VIEW:
       return { ...state, currentView: action.newView };
+    case ActionTypes.CHANGE_SETTINGS_TAB:
+      return { ...state, currentSettingsTab: action.newSettingsTab };
     default:
       return state;
   }

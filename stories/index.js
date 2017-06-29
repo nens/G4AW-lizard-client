@@ -84,8 +84,8 @@ runSimpleLineChart();
 import runSnackBar from "./SnackBarStories";
 runSnackBar();
 
-import runTabBar from "./TabBarStories";
-runTabBar();
+// import runTabBar from "./TabBarStories";
+// runTabBar();
 
 import runTimeseriesChart from "./TimeseriesChartStories";
 runTimeseriesChart();
