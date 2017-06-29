@@ -141,6 +141,8 @@ At least keep an eye on the [ordering section](https://github.com/airbnb/javascr
 import PropTypes from "prop-types";
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
+
+// Name the CSS file identically except for the .css extension:
 import styles from ../styles/MainExportedComponent.css;
 
 // Exported (main) component first:
@@ -170,8 +172,13 @@ class MainExportedComponent extends Component {
   
   // Render as last function:
   render() {
+    // Use an id with the component name for easier identification in devtools:
+    // The top element style should have the same className as the component is named:
     return (
-      <div/>
+      <div 
+        className={styles.MainExportedComponent}
+        id="MainExportedComponent"
+      />
     );
   }
 }
@@ -183,7 +190,7 @@ class MainExportedComponent extends Component {
 // As a function:
 function SomeButton() {
   return (
-    <div className={styles.SomeButton}>
+    <div className={styles.SomeButton} id="SomeButton">
       <i className={`${styles.Icon} material-icons`}>settings</i>
     </div>
   );
@@ -194,6 +201,7 @@ class SomeSmallDumbUIElementUsedInTheAboveComponent extends Component {
   render() {
     return (
       <div
+        id="SomeSmallDumbUIElementUsedInTheAboveComponent"
         className={styles.SomeSmallDumbUIElementUsedInTheAboveComponent}
       />
     );
