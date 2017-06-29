@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import ReactDOM from "react-dom";
-import styles from "./styles/FooterBar";
+import styles from "./styles/FooterBar.css";
 
 // A FooterBar component.
 

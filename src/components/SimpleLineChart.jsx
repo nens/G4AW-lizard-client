@@ -12,7 +12,7 @@ import {
   Legend
 } from "recharts";
 
-import styles from "./styles/SimpleLineChart";
+import styles from "./styles/SimpleLineChart.css";
 
 class SimpleLineChart extends Component {
   componentDidMount() {}

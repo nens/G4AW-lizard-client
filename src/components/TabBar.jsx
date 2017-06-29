@@ -8,7 +8,7 @@ import {
   velocityHelpers
 } from "velocity-react";
 
-import styles from "./styles/TabBar";
+import styles from "./styles/TabBar.css";
 
 // A TabBar component.
 
