@@ -227,13 +227,6 @@ function mapDispatchToProps(dispatch) {
 // Vanilla export:
 export default MainExportedComponent;
 ```
-  
-
-}
-
-exported component class
-
-
 
 
 
