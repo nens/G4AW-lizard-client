@@ -137,8 +137,10 @@ At least keep an eye on the [ordering section](https://github.com/airbnb/javascr
 ### Preferred React component structure
 
 ```js
-// Imports on top:
-import x from x;
+// Imports on top, sorted alphabetically:
+import PropTypes from "prop-types";
+import React, { Component } from "react";
+import ReactDOM from "react-dom";
 import styles from ../styles/MainExportedComponent.css;
 
 // Exported (main) component first:
@@ -199,10 +201,10 @@ class SomeSmallDumbUIElementUsedInTheAboveComponent extends Component {
 }
 
 
-// Define propTypes:
+// Define propTypes, sorted alphabetically:
 MainExportedComponent.propTypes = {}
 
-// Define default props
+// Define default props, sorted alphabetically:
 MainExportedComponent.defaultProps = {}
 
 
