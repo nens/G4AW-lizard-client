@@ -16,6 +16,7 @@ createStoreWithMiddleware = applyMiddleware(thunkMiddleware, logger)(
 
 export const initialUiState = {
   currentView: "ListSearchView",
+  currentSettingsTab: "Settings",
   searchResultsAsList: false,
   showSnackBar: false,
   snackBarOptions: {
@@ -44,6 +45,41 @@ export const initialGeolocationState = {
   error: null
 };
 
+export const initialBaselayerState = {
+  layers: [
+    {
+      title: "Topography",
+      attribution: "",
+      url: "https://{s}.tiles.mapbox.com/v3/nelenschuurmans.iaa98k8k/{z}/{x}/{y}.png",
+      mapThumb: "https://a.tiles.mapbox.com/v3/nelenschuurmans.iaa98k8k/11/1632/963.png",
+      opacity: 1,
+      layerType: "tms",
+      layerOptions: {},
+      active: true
+    },
+    {
+      title: "Satellite",
+      attribution: "",
+      url: "https://{s}.tiles.mapbox.com/v3/nelenschuurmans.iaa79205/{z}/{x}/{y}.png",
+      mapThumb: "https://a.tiles.mapbox.com/v3/nelenschuurmans.iaa79205/11/1632/963.png",
+      opacity: 1,
+      layerType: "tms",
+      layerOptions: {},
+      active: false
+    },
+    {
+      title: "Neutral",
+      attribution: "",
+      url: "https://{s}.tiles.mapbox.com/v3/nelenschuurmans.l15e647c/{z}/{x}/{y}.png",
+      mapThumb: "https://a.tiles.mapbox.com/v3/nelenschuurmans.l15e647c/11/1632/963.png",
+      opacity: 1,
+      layerType: "tms",
+      layerOptions: {},
+      active: false
+    }
+  ]
+};
+
 export const initialParcelsState = {};
 
 export const initialPhotosForParcelState = {};
@@ -64,7 +100,8 @@ const initialState = {
   session: initialSessionState,
   search: initialSearchState,
   timeseries: initialTimeseriesState,
-  rasters: initialRastersState
+  rasters: initialRastersState,
+  baselayer: initialBaselayerState
 };
 
 /**

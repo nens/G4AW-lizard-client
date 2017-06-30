@@ -5,7 +5,13 @@ import PropTypes from "prop-types";
 import ReactDOM from "react-dom";
 
 import SnackBar from "../SnackBar";
-import { MapSearchView, ListSearchView, DetailView, PhotoView } from ".";
+import {
+  MapSearchView,
+  ListSearchView,
+  DetailView,
+  PhotoView,
+  SettingsView
+} from ".";
 
 import { PHOTO_LIST } from "../../../stories/helpers";
 
@@ -43,8 +49,8 @@ class MainViewComponent extends Component {
         component = <PhotoView photo={photo} />;
         break;
       case "SettingsView":
-        console.log("[E] Should render component: SettingsView (WIP!)");
-        return null;
+        component = <SettingsView />;
+        break;
       default:
         console.log(
           "[E] Cannot render unknown view '" + this.props.currentView + "'!"

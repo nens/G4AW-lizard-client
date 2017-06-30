@@ -54,6 +54,7 @@ in the lifecycle of a key-value pair in the stores' raster section:
 ******************************************************************************/
 
 export const CHANGE_VIEW = "CHANGE_VIEW";
+export const CHANGE_SETTINGS_TAB = "CHANGE_SETTINGS_TAB";
 
 // Session constants (fetch /bootstrap/lizard, receive it)
 export const FETCH_BOOTSTRAP = "FETCH_BOOTSTRAP";
@@ -93,3 +94,6 @@ export const SHOW_SNACKBAR = "SHOW_SNACKBAR";
 export const HIDE_SNACKBAR = "HIDE_SNACKBAR";
 export const TOGGLE_SEARCHRESULTS_LIST_CARD_MODE =
   "TOGGLE_SEARCHRESULTS_LIST_CARD_MODE";
+
+// Baselayer actions
+export const CHANGE_BASELAYER = "CHANGE_BASELAYER";

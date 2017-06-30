@@ -32,7 +32,7 @@ const TABULAR_DATA_KEYS = [
 // The main Component; the View for displaying the details of a single parcel /
 ///////////////////////////////////////////////////////////////////////////////
 
-export class DetailViewComponent extends Component {
+class DetailViewComponent extends Component {
   formatTabularData(parcel) {
     return TABULAR_DATA_KEYS.map(requiredKey => {
       return { key: requiredKey, value: parcel[requiredKey] || "..." };

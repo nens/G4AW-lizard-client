@@ -2,7 +2,11 @@ import { Map, TileLayer, WMSTileLayer } from "react-leaflet";
 import PropTypes from "prop-types";
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
+import { connect } from "react-redux";
+
 import styles from "./styles/DetailViewHeader.css";
+
+import find from "lodash/find";
 
 ///////////////////////////////////////////////////////////////////////////////
 // The main Component: the DetailViewHeader ///////////////////////////////////
@@ -91,11 +95,10 @@ class DetailViewHeaderImg extends Component {
   }
 }
 
-class DetailViewHeaderMap extends Component {
+class DetailViewHeaderMapComponent extends Component {
   render() {
-    const { lat, lon, zoom } = this.props.latlonzoom;
-    const mapboxUrl =
-      "https://{s}.tiles.mapbox.com/v3/nelenschuurmans.iaa98k8k/{z}/{x}/{y}.png";
+    const { latlonzoom, getBaselayerUrl } = this.props;
+    const { lat, lon, zoom } = latlonzoom;
     return (
       <Map
         ref="mapElement"
@@ -104,10 +107,25 @@ class DetailViewHeaderMap extends Component {
         zoomControl={false}
         style={{ height: "100%", zIndex: -1 }}
       >
-        <TileLayer url={mapboxUrl} />
+        <TileLayer url={getBaselayerUrl()} />
       </Map>
     );
   }
 }
+
+/* react-redux coupling ******************************************************/
+
+function mapStateToProps(state) {
+  return {
+    getBaselayerUrl: () => {
+      const activeBaselayer = find(state.baselayer.layers, { active: true });
+      return activeBaselayer.url;
+    }
+  };
+}
+
+const DetailViewHeaderMap = connect(mapStateToProps, null)(
+  DetailViewHeaderMapComponent
+);
 
 export default DetailViewHeader;

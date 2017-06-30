@@ -26,6 +26,9 @@ import RaisedButton from "./RaisedButton";
 import SearchBar from "./SearchBar";
 import SearchResultCardItem from "./SearchResultCardItem";
 import SearchResultListItem from "./SearchResultListItem";
+import SettingsViewGeneral from "./SettingsViewGeneral";
+import SettingsViewHelp from "./SettingsViewHelp";
+import SettingsViewUser from "./SettingsViewUser";
 import SimpleLineChart from "./SimpleLineChart";
 import SnackBar from "./SnackBar";
 import TabBar from "./TabBar";
@@ -62,6 +65,9 @@ export {
   SearchBar,
   SearchResultCardItem,
   SearchResultListItem,
+  SettingsViewGeneral,
+  SettingsViewUser,
+  SettingsViewHelp,
   SimpleLineChart,
   SnackBar,
   TabBar,

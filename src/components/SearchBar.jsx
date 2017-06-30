@@ -8,6 +8,8 @@ import styles from "./styles/SearchBar.css";
 
 import GeolocateButtonSmall from "./GeolocateButtonSmall";
 
+import { changeView } from "../actions";
+
 import {
   doSearch,
   clearResults,
@@ -40,10 +42,10 @@ class SearchBarComponent extends Component {
     this.props.clear();
   }
   render() {
-    const { searchInput, searchIsFetching } = this.props;
+    const { searchInput, searchIsFetching, changeToSettingsView } = this.props;
     return (
       <div className={styles.SearchBar}>
-        <SettingsButton />
+        <SettingsButton handleClick={changeToSettingsView} />
         <SearchField
           searchInput={searchInput}
           searchIsFetching={searchIsFetching}
@@ -58,9 +60,9 @@ class SearchBarComponent extends Component {
 
 /* local sub-components ******************************************************/
 
-function SettingsButton() {
+function SettingsButton({ handleClick }) {
   return (
-    <div className={styles.SettingsButton}>
+    <div className={styles.SettingsButton} onClick={handleClick}>
       <i className={`${styles.SettingsIcon} material-icons`}>settings</i>
     </div>
   );
@@ -116,12 +118,9 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    setSearchInput: q => {
-      dispatch(setSearchInputText(q));
-    },
-    clear: () => {
-      dispatch(clearResults());
-    },
+    changeToSettingsView: () => changeView(dispatch, "SettingsView"),
+    setSearchInput: q => dispatch(setSearchInputText(q)),
+    clear: () => dispatch(clearResults()),
     search: q => {
       if (q) {
         doSearch(dispatch, q);

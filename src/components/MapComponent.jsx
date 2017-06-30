@@ -19,6 +19,8 @@ import styles from "./styles/MapComponent.css";
 
 import { getRaster, getAttributesFromGeoserver } from "../actions";
 
+import find from "lodash/find";
+
 const hoogteUuid = "e9ed5725-d94a-4bcb-9dde-5d655da0070e";
 
 class MapComponent extends Component {
@@ -32,7 +34,13 @@ class MapComponent extends Component {
     const zoom = leaflet.getZoom();
   }
   render() {
-    const { visibleRasters, getParcel, searchResults, getDetails } = this.props;
+    const {
+      visibleRasters,
+      getParcel,
+      searchResults,
+      getDetails,
+      getBaselayerUrl
+    } = this.props;
 
     const searchResultsAsPolygons = searchResults
       ? searchResults.map((r, i) => {
@@ -86,7 +94,7 @@ class MapComponent extends Component {
           className={styles.MapElement}
         >
           <TileLayer
-            url="https://{s}.tiles.mapbox.com/v3/nelenschuurmans.iaa98k8k/{z}/{x}/{y}.png"
+            url={getBaselayerUrl()}
             attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
           />
           {visibleRasters.map(raster => (
@@ -109,7 +117,11 @@ function mapStateToProps(state) {
     getParcel: idx => state.parcels[idx],
     visibleRasters: Object.values(state.rasters)
       .filter(raster => !!raster.data)
-      .map(raster => raster.data)
+      .map(raster => raster.data),
+    getBaselayerUrl: () => {
+      const activeBaselayer = find(state.baselayer.layers, { active: true });
+      return activeBaselayer.url;
+    }
   };
 }
 
