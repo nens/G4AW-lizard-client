@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import { translate } from "react-i18next";
 import PropTypes from "prop-types";
 import ReactDOM from "react-dom";
-
 import SnackBar from "../SnackBar";
 import { MapSearchView, ListSearchView, DetailView, PhotoView } from ".";
 
@@ -19,7 +18,7 @@ import {
 } from "../../actions/";
 
 class MainViewComponent extends Component {
-  componentWillMount() {
+  componentDidMount() {
     // Startup functions.
     this.props.fetchBootstrap(this.props.sessionState);
     this.props.setGeolocationSupport();
@@ -47,7 +46,7 @@ class MainViewComponent extends Component {
         return null;
       default:
         console.log(
-          "[E] Cannot render unknown view '" + this.props.currentView + "'!"
+          `[E] Cannot render unknown view "${this.props.currentView}"!`
         );
         return null;
     }
