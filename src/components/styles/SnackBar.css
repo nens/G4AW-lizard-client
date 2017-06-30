@@ -1,8 +1,10 @@
 .SnackBar {
   position: fixed;
-  bottom: 0px;
-  padding: 20px;
-  width: 75%;
+  bottom: 0;
+  left: 0;
+  padding: 20px 0 20px 0;
+  margin: 0 10px 0 10px;
+  width: calc(100% - 20px);
   background-color: #000;
   color: #fff;
   z-index: 2005;
@@ -15,21 +17,23 @@
 .ActionButtonDefault {
   float: right;
   font-weight: bold;
-  color: #00B6A9;
+  color: #00b6a9;
   cursor: pointer;
+  padding: 0 20px 0 0;
 }
 .ActionButtonError {
   float: right;
   font-weight: bold;
-  color: #EA2152;
+  color: #ea2152;
   cursor: pointer;
+  padding: 0 20px 0 0;
 }
 .Message {
-  padding: 0;
+  padding: 0 0 0 10px;
   margin: 0;
 }
 .SubMessage {
-  padding: 0;
+  padding: 0 0 0 10px;
   margin: 5px 0 0 0;
   font-size: .8em;
   font-weight: 100;
