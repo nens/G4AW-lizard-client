@@ -61,11 +61,13 @@ export function performGeolocation(dispatch) {
     navigator.geolocation.getCurrentPosition(
       success => {
         fetch(getGeocoderUrl(success.coords), { mode: "cors" })
-          .then(response => response.json())
-          .then(data => {
+          .then((response, success) => response.json())
+          .then((data, success) => {
             showSnackBarGeolocationSuccess(dispatch);
             const placeName = data.features[0].place_name;
-            const result = { ...success.coords, placeName };
+            const lat = data.query[0];
+            const lng = data.query[1];
+            const result = { lat, lng, placeName };
             dispatch({ type: RECEIVE_GEOLOCATION_SUCCESS, result });
           });
       },
