@@ -5,3 +5,4 @@ export * from "./ParcelActions";
 export * from "./UiActions";
 export * from "./GeolocationActions";
 export * from "./SessionActions";
+export * from "./BaselayerActions";

@@ -2,6 +2,9 @@ import Ink from "react-ink";
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import ReactDOM from "react-dom";
+import { translate } from "react-i18next";
+import { connect } from "react-redux";
+
 import {
   VelocityTransitionGroup,
   VelocityComponent,
@@ -10,20 +13,59 @@ import {
 
 import styles from "./styles/TabBar.css";
 
-// A TabBar component.
+import { changeSettingsTab, changeView } from "../actions";
+
+import { HeaderBar } from ".";
+
+/* The main component: a tabbar where the user can switch between the three
+   different settings tabs: "Settings", "User" and "Help" ********************/
+
+class TabBarComponent extends Component {
+  render() {
+    const {
+      currentSettingsTab,
+      changeSettingsTab,
+      changeToListSearchView
+    } = this.props;
+    return (
+      <div className={styles.TabWrapper}>
+        <div className={styles.TabBar}>
+          <SettingsViewBackArrow handleClick={changeToListSearchView} />
+          <Tab title="Settings" {...this.props} />
+          <Tab title="User" {...this.props} />
+          <Tab title="Help" {...this.props} />
+        </div>
+      </div>
+    );
+  }
+}
+
+/* Local sub-components ******************************************************/
+
+class SettingsViewBackArrow extends Component {
+  render() {
+    const { handleClick } = this.props;
+    return (
+      <div className={styles.ArrowBackIcon} onClick={handleClick}>
+        <i className="material-icons">arrow_back</i>
+      </div>
+    );
+  }
+}
 
 class Tab extends Component {
-  constructor() {
-    super();
-    this.state = {};
+  getClassName() {
+    return `${styles.Tab}
+            ${this.props.currentSettingsTab === this.props.title
+              ? styles.Active
+              : null}`;
   }
-  componentDidMount() {}
   render() {
-    const { title, idx, isSelected, handleTabClick } = this.props;
+    const { title, currentSettingsTab, changeSettingsTab } = this.props;
     return (
       <div
-        className={`${styles.Tab} ${idx === isSelected ? styles.Active : ""}`}
-        onClick={() => handleTabClick(idx)}
+        onClick={() => changeSettingsTab(title)}
+        className={this.getClassName()}
       >
         {title}
         <Ink />
@@ -32,50 +74,20 @@ class Tab extends Component {
   }
 }
 
-Tab.propTypes = {
-  title: PropTypes.string,
-  active: PropTypes.bool
-};
+/* React-redux coupling ******************************************************/
 
-class TabBar extends Component {
-  constructor() {
-    super();
-    this.state = {};
-    this.handleTabClick = this.handleTabClick.bind(this);
-  }
-  componentDidMount() {}
-  handleTabClick(idx) {
-    this.props.handleTabClick(idx);
-  }
-  render() {
-    let tabContent = <div />;
-    const { children, handleTabClick, isSelected } = this.props;
-
-    if (children && isSelected < children.length) {
-      tabContent = <div> {children[isSelected].props.children} </div>;
-    }
-
-    const childrenWithProps = React.Children.map(children, (child, i) => {
-      return React.cloneElement(child, {
-        idx: i,
-        isSelected: isSelected,
-        handleTabClick: this.handleTabClick
-      });
-    });
-
-    return (
-      <div className={styles.TabWrapper}>
-        <div className={styles.TabBar}>{childrenWithProps}</div>
-        <div className={styles.TabContent}>{tabContent}</div>
-      </div>
-    );
-  }
+function mapStateToProps(state) {
+  return {
+    currentSettingsTab: state.ui.currentSettingsTab
+  };
 }
 
-TabBar.propTypes = {
-  children: PropTypes.array,
-  handleTabClick: PropTypes.func,
-  isSelected: PropTypes.number
-};
+function mapDispatchToProps(dispatch) {
+  return {
+    changeSettingsTab: newTab => changeSettingsTab(dispatch, newTab),
+    changeToListSearchView: () => changeView(dispatch, "ListSearchView")
+  };
+}
 
-export { TabBar, Tab };
+const TabBar = connect(mapStateToProps, mapDispatchToProps)(TabBarComponent);
+export default translate()(TabBar);

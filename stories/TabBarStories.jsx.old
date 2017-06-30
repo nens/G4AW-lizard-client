@@ -13,12 +13,8 @@ export default function runTabBar() {
         <Tab title="Settings">
           <HeaderBar title="Map Settings" />
         </Tab>
-        <Tab title="Account">
-          Tab two
-        </Tab>
-        <Tab title="Help">
-          Tab three
-        </Tab>
+        <Tab title="Account" />
+        <Tab title="Help" />
       </TabBar>
     ))
     .add("Tab 2 of 3 open", () => (

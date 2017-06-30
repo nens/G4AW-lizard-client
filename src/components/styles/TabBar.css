@@ -1,5 +1,4 @@
 .TabWrapper {
-
 }
 .TabBar {
   background-color: #00A899;
@@ -7,7 +6,6 @@
   justify-content: space-around;
   width: 100%;
 }
-
 .Tab {
   color: #ffffff;
   cursor: pointer;
@@ -20,11 +18,18 @@
   text-transform: uppercase;
   width: 100%;
   padding: 10px 0 0 0;
-  margin: 0 0 10px 0;
+  margin: 50px 0 10px 0;
 }
-
 .Active {
   color: #ffffff;
   font-weight: 300;
   border-bottom: 2px solid yellow;
 }
+.ArrowBackIcon {
+  position: absolute;
+  cursor: pointer;
+  top: 20px;
+  left: 20px;
+  color: white;
+}
+

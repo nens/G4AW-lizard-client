@@ -134,6 +134,115 @@ Please follow [the Airbnb React/JSX style guide](https://github.com/airbnb/javas
 At least keep an eye on the [ordering section](https://github.com/airbnb/javascript/tree/master/react#ordering) as this helps the team and others read components quicker.
 
 
+### Preferred React component structure
+
+```js
+// Imports on top, sorted alphabetically:
+import PropTypes from "prop-types";
+import React, { Component } from "react";
+import ReactDOM from "react-dom";
+
+// Name the CSS file identically except for the .css extension:
+import styles from ../styles/MainExportedComponent.css;
+
+// Exported (main) component first:
+class MainExportedComponent extends Component {
+
+  // Constructor first (it's optional, but if needed, place it here)
+  constructor() {
+    // Dont forget super():
+    super();
+    
+    // State initialisation in the constructor
+    this.state = {
+      someStateVar: somevalue,
+    };
+    
+    // Explicitly bind functions here:
+    this.someHandler = this.someHandler.bind(this);
+    ...
+  }
+
+  // React lifecycle functions if needed:
+  componentDidMount() {}
+  componentWillReceiveProps() {}
+  
+  // Custom functions:
+  someHandler(e) {}
+  
+  // Render as last function:
+  render() {
+    // Use an id attribute with the component name for easier identification in devtools.
+    // The top element style should have the same className as the component is named.
+    // Also, close empty JSX elements: <x />.
+    return (
+      <div 
+        className={styles.MainExportedComponent}
+        id="MainExportedComponent">
+        <SomeButton />
+        <SomeSmallDumbUIElementUsedInTheAboveComponent />
+      </div>
+    );
+  }
+}
+
+// Define dumb / representational components below the main component.
+// Dumb in the sense that they react to props and don't keep any state.
+// They may be functions or classes:
+
+// As a function:
+function SomeButton() {
+  return (
+    <div className={styles.SomeButton} id="SomeButton">
+      <i className={`${styles.Icon} material-icons`}>settings</i>
+    </div>
+  );
+}
+
+// As a Component class:
+class SomeSmallDumbUIElementUsedInTheAboveComponent extends Component {
+  render() {
+    return (
+      <div
+        id="SomeSmallDumbUIElementUsedInTheAboveComponent"
+        className={styles.SomeSmallDumbUIElementUsedInTheAboveComponent}
+      />
+    );
+  }
+}
+
+
+// Define propTypes, sorted alphabetically:
+MainExportedComponent.propTypes = {}
+
+// Define default props, sorted alphabetically:
+MainExportedComponent.defaultProps = {}
+
+
+// In the case of react-redux, define the mapping functions here:
+function mapStateToProps(state) {
+  return {};
+}
+function mapDispatchToProps(dispatch) {
+  return {};
+}
+
+
+// Export the main component.
+// This is also the place for connecting HoC's such as i18next's translate() or Redux' connect():
+
+// connect() example:
+// export connect(mapStateToProps, mapDispatchToProps)(MainExportedComponent);
+
+// translate() example:
+// export translate()(MainExportedComponent);
+
+// Vanilla export:
+export default MainExportedComponent;
+```
+
+
+
 ### Browser development extensions
 
 This front-end uses React and Redux. These extensions may help:

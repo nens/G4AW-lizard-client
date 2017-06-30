@@ -1,6 +1,7 @@
 import { theStore } from "../store/Store";
 import {
   CHANGE_VIEW,
+  CHANGE_SETTINGS_TAB,
   HIDE_SNACKBAR,
   SHOW_SNACKBAR,
   TOGGLE_LEGEND,
@@ -11,6 +12,10 @@ let timerAutoHideId;
 
 export function changeView(dispatch, newView) {
   dispatch({ type: CHANGE_VIEW, newView });
+}
+
+export function changeSettingsTab(dispatch, newSettingsTab) {
+  dispatch({ type: CHANGE_SETTINGS_TAB, newSettingsTab });
 }
 
 export function showSnackBar(dispatch, options) {
