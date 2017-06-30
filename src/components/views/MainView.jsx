@@ -45,7 +45,7 @@ class MainViewComponent extends Component {
     this.props.showSnackBar({
       message: navigator.onLine ? "App online" : "No connection",
       subMessage: navigator.onLine
-        ? "Your connection seems looks good"
+        ? "Connected to the internet"
         : "Please check your connection",
       isError: navigator.onLine ? false : true
     });
