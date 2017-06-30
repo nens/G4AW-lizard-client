@@ -28,7 +28,9 @@ class GeolocateButtonBigComponent extends Component {
       clearGeolocation // via: mapDispatchToProps
     } = this.props;
 
-    let welcomeText, child, onClick = () => false;
+    let welcomeText,
+      child,
+      onClick = () => false;
 
     if (!isGeolocationSupported) {
       welcomeText = t("Geolocation is not supported by your device");
@@ -74,9 +76,7 @@ function GeolocateSpinner() {
       <MDSpinner
         singleColor="#CECECE"
         style={{
-          position: "absolute",
-          top: "370px",
-          left: "47%"
+          position: "relative"
         }}
       />
     </div>
@@ -89,9 +89,11 @@ function mapStateToProps(state) {
   return {
     isGeolocationSupported: state.geolocation.isGeolocationSupported,
     isFetching: state.geolocation.isFetching,
-    isNotStartedFetching: !(state.geolocation.isFetching ||
+    isNotStartedFetching: !(
+      state.geolocation.isFetching ||
       state.geolocation.data ||
-      state.geolocation.error),
+      state.geolocation.error
+    ),
     hasData: !state.geolocation.isFetching && state.geolocation.data,
     hasError: !state.geolocation.isFetching && state.geolocation.error,
     geolocationData: state.geolocation.data
