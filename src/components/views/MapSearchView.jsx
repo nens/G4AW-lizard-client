@@ -24,6 +24,7 @@ class MapSearchViewComponent extends Component {
     const { searchResults, showLegend, toggleLegend } = this.props;
     return (
       <div
+        id="MapSearchView"
         className={styles.MapSearchView}
         style={{ width: WIDTH, height: HEIGHT }}
       >
@@ -31,19 +32,14 @@ class MapSearchViewComponent extends Component {
         <SearchBar />
         <ViewSwitchButton viewIsMap />
 
-        <VelocityComponent
-          duration={250}
-          animation={{ translateY: showLegend ? 0 : 750 }}
-        >
-          <Legend
-            handleToggleLegend={() => console.log("open/close")}
-            handlePreviousLayer={() => console.log("handlePrevLayer")}
-            handleNextLayer={() => console.log("handleNextLayer")}
-            activeLegendIdx={2}
-            data={LEGEND_DATA}
-            isOpen={showLegend}
-          />
-        </VelocityComponent>
+        <Legend
+          handleToggleLegend={() => console.log("open/close")}
+          handlePreviousLayer={() => console.log("handlePrevLayer")}
+          handleNextLayer={() => console.log("handleNextLayer")}
+          activeLegendIdx={2}
+          data={LEGEND_DATA}
+          isOpen={showLegend}
+        />
 
         <FooterBar>
           <div />

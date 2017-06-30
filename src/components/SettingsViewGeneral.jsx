@@ -15,7 +15,7 @@ class SettingsViewGeneralComponent extends Component {
   render() {
     return (
       <div>
-        <HeaderBar title="Select map layers" icon="filter_list" />
+        <HeaderBar title="Select map layers" />
         <BackgroundLayerChooser {...this.props} />
       </div>
     );
@@ -29,8 +29,8 @@ class BackgroundLayerChooser extends Component {
     const { baselayers } = this.props;
     return (
       <div>
-        <div className={styles.subHeaderContainer}>
-          <h3 className={styles.subHeaderText}>BACKGROUND LAYERS</h3>
+        <div className={styles.SubHeaderContainer}>
+          <h3 className={styles.SubHeaderText}>BACKGROUND LAYERS</h3>
         </div>
         <LayerSelection layers={baselayers} />
       </div>

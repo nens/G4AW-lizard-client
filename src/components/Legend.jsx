@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import ReactDOM from "react-dom";
+import { VelocityComponent } from "velocity-react";
+import { VelocityTransitionGroup } from "velocity-react";
+import "velocity-animate/velocity.ui";
 import { Scrollbars } from "react-custom-scrollbars";
 import styles from "./styles/Legend.css";
 
@@ -11,14 +14,19 @@ class Legend extends Component {
     const layerTitle = currentLayer.title;
     const legendData = currentLayer.legend;
 
-    return (
-      <div className={styles.LegendWrapper} id="Legend">
-        <div className={styles.Legend}>
-          <LegendTopBar layerTitle={layerTitle} {...this.props} />
-          {isOpen ? <LegendBody legendData={legendData} /> : null}
-        </div>
-      </div>
-    );
+    return isOpen
+      ? <VelocityTransitionGroup
+          runOnMount={true}
+          enter={{ animation: "transition.slideUpBigIn" }}
+        >
+          <div className={styles.LegendWrapper} id="Legend">
+            <div className={styles.Legend}>
+              <LegendTopBar layerTitle={layerTitle} {...this.props} />
+              <LegendBody legendData={legendData} />
+            </div>
+          </div>
+        </VelocityTransitionGroup>
+      : null;
   }
 }
 
