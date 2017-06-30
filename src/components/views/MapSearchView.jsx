@@ -20,13 +20,6 @@ import { VelocityComponent } from "velocity-react";
 /* A MapSearchView shows searchresults on the map ****************************/
 
 class MapSearchViewComponent extends Component {
-  componentDidMount() {
-    this.props.showSnackBar({
-      message: "Map view",
-      subMessage: "You're now in Map view",
-      autoHideDuration: 3000
-    });
-  }
   render() {
     const { searchResults, showLegend, toggleLegend } = this.props;
     return (
