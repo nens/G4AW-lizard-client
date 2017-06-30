@@ -13,12 +13,13 @@ class LoginLogoutButtonComponent extends Component {
 
     return (
       <div
+        id="LoginLogoutButton"
         className={styles.LoginLogoutButton}
         onClick={
           bootstrap
             ? bootstrap.authenticated
-                ? bootstrap.doLogout.bind(bootstrap)
-                : bootstrap.doLogin.bind(bootstrap)
+              ? bootstrap.doLogout.bind(bootstrap)
+              : bootstrap.doLogin.bind(bootstrap)
             : null
         }
       >
