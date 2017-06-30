@@ -28,7 +28,10 @@ class DetailViewHeader extends Component {
     } = this.props;
 
     return (
-      <div className={this.getComponentClassName(halfMode)}>
+      <div
+        className={this.getComponentClassName(halfMode)}
+        id="DetailViewHeader"
+      >
         <DetailViewHeaderTitle
           halfMode={halfMode}
           title={title}
@@ -102,6 +105,9 @@ class DetailViewHeaderImg extends Component {
 }
 
 class DetailViewHeaderMapComponent extends Component {
+  componentDidMount() {
+    this.refs.mapElement.leafletElement.invalidateSize();
+  }
   render() {
     const { latlonzoom, getBaselayerUrl } = this.props;
     const { lat, lon, zoom } = latlonzoom;
