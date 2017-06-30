@@ -1,10 +1,12 @@
 import { translate } from "react-i18next";
+import { VelocityTransitionGroup } from "velocity-react";
+import { VelocityComponent } from "velocity-react";
+import "velocity-animate/velocity.ui";
 import Ink from "react-ink";
 import PropTypes from "prop-types";
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import { connect } from "react-redux";
-
 import styles from "../styles/ListSearchView.css";
 
 import {
@@ -29,10 +31,6 @@ import {
 import { replaceUnderscores } from "../../tools/string-formatting";
 
 import MDSpinner from "react-md-spinner";
-
-///////////////////////////////////////////////////////////////////////////////
-// ListSearchViewComponent: Shows/enables search-results in a list mode.     //
-///////////////////////////////////////////////////////////////////////////////
 
 class ListSearchViewComponent extends Component {
   render() {
@@ -79,10 +77,6 @@ class ListSearchViewComponent extends Component {
   }
 }
 
-///////////////////////////////////////////////////////////////////////////////
-// Local sub-components ///////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////
-
 function ListSearchLanding({ t, username }) {
   return (
     <div className={styles.ListSearchLanding} id="ListSearchLanding">
@@ -104,48 +98,56 @@ function ListSearchResults({
   toggleSearchResultsListOrCardMode
 }) {
   return (
-    <div
-      id="SearchResultCardContainer"
-      className={styles.SearchResultCardContainer}
+    <VelocityTransitionGroup
+      runOnMount={true}
+      enter={{ animation: "transition.slideUpIn" }}
     >
-      <HeaderBar
-        icon={searchResultsAsList ? "view_module" : "list"}
-        handleClick={toggleSearchResultsListOrCardMode}
-        title={`Search results (${searchResults.length})`}
-      />
-      {searchResultsAsList
-        ? <div className={styles.SearchResultsAsList} id="SearchResultsAsList">
-            {searchResults.map((result, i) => {
-              const parcel = getParcel(result);
-              return (
-                <SearchResultListItem
-                  handleClick={() => getDetails(result)}
-                  key={result}
-                  title={replaceUnderscores(parcel.name)}
-                  ripple={true}
-                  indicatorColor="#FEDF56"
-                />
-              );
-            })}
-          </div>
-        : <div
-            className={styles.SearchResultsAsCards}
-            id="SearchResultsAsCards"
-          >
-            {searchResults.map((result, i) => {
-              const parcel = getParcel(result);
-              return (
-                <SearchResultCardItem
-                  handleClick={() => getDetails(result)}
-                  key={result}
-                  title={replaceUnderscores(parcel.name)}
-                  ripple={true}
-                  indicatorColor="#FEDF56"
-                />
-              );
-            })}
-          </div>}
-    </div>
+      <div
+        id="SearchResultCardContainer"
+        className={styles.SearchResultCardContainer}
+      >
+        <HeaderBar
+          icon={searchResultsAsList ? "view_module" : "list"}
+          handleClick={toggleSearchResultsListOrCardMode}
+          title={`Search results (${searchResults.length})`}
+        />
+        {searchResultsAsList
+          ? <div
+              className={styles.SearchResultsAsList}
+              id="SearchResultsAsList"
+            >
+              {searchResults.map((result, i) => {
+                const parcel = getParcel(result);
+                return (
+                  <SearchResultListItem
+                    handleClick={() => getDetails(result)}
+                    key={result}
+                    title={replaceUnderscores(parcel.name)}
+                    ripple={true}
+                    indicatorColor="#FEDF56"
+                  />
+                );
+              })}
+            </div>
+          : <div
+              className={styles.SearchResultsAsCards}
+              id="SearchResultsAsCards"
+            >
+              {searchResults.map((result, i) => {
+                const parcel = getParcel(result);
+                return (
+                  <SearchResultCardItem
+                    handleClick={() => getDetails(result)}
+                    key={result}
+                    title={replaceUnderscores(parcel.name)}
+                    ripple={true}
+                    indicatorColor="#FEDF56"
+                  />
+                );
+              })}
+            </div>}
+      </div>
+    </VelocityTransitionGroup>
   );
 }
 
@@ -165,10 +167,6 @@ class ListSearchViewSpinner extends Component {
     );
   }
 }
-
-///////////////////////////////////////////////////////////////////////////////
-// react-redux coupling ///////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////
 
 function mapStateToProps(state) {
   return {

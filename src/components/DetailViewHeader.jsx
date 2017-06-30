@@ -65,8 +65,14 @@ class DetailViewHeaderTitle extends Component {
     const { halfMode, title, subTitle } = this.props;
     return (
       <div className={styles.Titles}>
-        <p className={styles.Title}>{title}</p>
-        {halfMode ? "" : <span className={styles.SubTitle}>{subTitle}</span>}
+        <p className={styles.Title}>
+          {title}
+        </p>
+        {halfMode
+          ? ""
+          : <span className={styles.SubTitle}>
+              {subTitle}
+            </span>}
       </div>
     );
   }

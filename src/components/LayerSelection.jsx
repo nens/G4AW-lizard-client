@@ -106,7 +106,9 @@ function getTransitionGroup(i, layer, handleLayerSelect) {
         }}
       >
         <div className={styles.TitleWrapper}>
-          <span className={styles.Title}>{layer.title}</span>
+          <span className={styles.Title}>
+            {layer.title}
+          </span>
         </div>
         <Ink />
       </div>

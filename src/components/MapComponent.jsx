@@ -97,14 +97,14 @@ class MapComponent extends Component {
             url={getBaselayerUrl()}
             attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
           />
-          {visibleRasters.map(raster => (
+          {visibleRasters.map(raster =>
             <WMSTileLayer
               url={raster.wms_info.endpoint}
               key={raster.uuid}
               layers={raster.wms_info.layer}
               styles={raster.options.styles}
             />
-          ))}
+          )}
           {searchResultsAsPolygons}
         </Map>
       </div>

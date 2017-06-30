@@ -2,12 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import ReactDOM from "react-dom";
 import { Scrollbars } from "react-custom-scrollbars";
-
 import styles from "./styles/Legend.css";
-
-///////////////////////////////////////////////////////////////////////////////
-// The main Component; a legend (for discrete rasters). ///////////////////////
-///////////////////////////////////////////////////////////////////////////////
 
 class Legend extends Component {
   render() {
@@ -17,7 +12,7 @@ class Legend extends Component {
     const legendData = currentLayer.legend;
 
     return (
-      <div className={styles.LegendWrapper}>
+      <div className={styles.LegendWrapper} id="Legend">
         <div className={styles.Legend}>
           <LegendTopBar layerTitle={layerTitle} {...this.props} />
           {isOpen ? <LegendBody legendData={legendData} /> : null}
@@ -26,10 +21,6 @@ class Legend extends Component {
     );
   }
 }
-
-///////////////////////////////////////////////////////////////////////////////
-// local sub-components ///////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////
 
 class LegendTopBar extends Component {
   render() {
@@ -44,9 +35,10 @@ class LegendTopBar extends Component {
     return (
       <div className={styles.LegendTopBar}>
         <PrevLayerButton handleClick={handlePreviousLayer} />
-        <div>{layerTitle}</div>
+        <div>
+          {layerTitle}
+        </div>
         <NextLayerButton handleClick={handleNextLayer} />
-        <ToggleLegendButton isOpen={isOpen} handleClick={handleToggleLegend} />
       </div>
     );
   }
@@ -90,16 +82,20 @@ class ToggleLegendButton extends Component {
 class LegendBody extends Component {
   render() {
     return (
-      <Scrollbars style={{ width: "100%", height: 140 }}>
-        <div className={styles.LegendBody}>
-          <table className={styles.LegendTable}>
+      <Scrollbars style={{ width: "100%", height: 240 }}>
+        <div className={styles.LegendBody} id="LegendBody">
+          <table className={styles.LegendTable} id="LegendTable">
             <tbody>
-              {this.props.legendData.map((l, i) => (
+              {this.props.legendData.map((l, i) =>
                 <tr key={i}>
-                  <td><LegendColorLabel color={l.color} /></td>
-                  <td>{l.label}</td>
+                  <td>
+                    <LegendColorLabel color={l.color} />
+                  </td>
+                  <td>
+                    {l.label}
+                  </td>
                 </tr>
-              ))}
+              )}
             </tbody>
           </table>
         </div>
@@ -118,10 +114,6 @@ class LegendColorLabel extends Component {
     );
   }
 }
-
-///////////////////////////////////////////////////////////////////////////////
-// type-checking //////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////
 
 Legend.propTypes = {
   data: PropTypes.any,

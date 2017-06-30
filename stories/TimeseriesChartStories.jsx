@@ -7,5 +7,5 @@ import TimeseriesChart from "../src/components/TimeseriesChart";
 export default function runTimeseriesChart() {
   storiesOf("TimeseriesChart", module)
     .addDecorator(i18nDecorator)
-    .add("static example", () => <TimeseriesGraph />);
+    .add("static example", () => <TimeseriesChart />);
 }

@@ -19,6 +19,7 @@ export const initialUiState = {
   currentSettingsTab: "Settings",
   searchResultsAsList: false,
   showSnackBar: false,
+  showLegend: false,
   snackBarOptions: {
     message: null,
     subMessage: null
@@ -50,8 +51,10 @@ export const initialBaselayerState = {
     {
       title: "Topography",
       attribution: "",
-      url: "https://{s}.tiles.mapbox.com/v3/nelenschuurmans.iaa98k8k/{z}/{x}/{y}.png",
-      mapThumb: "https://a.tiles.mapbox.com/v3/nelenschuurmans.iaa98k8k/11/1632/963.png",
+      url:
+        "https://{s}.tiles.mapbox.com/v3/nelenschuurmans.iaa98k8k/{z}/{x}/{y}.png",
+      mapThumb:
+        "https://a.tiles.mapbox.com/v3/nelenschuurmans.iaa98k8k/11/1632/963.png",
       opacity: 1,
       layerType: "tms",
       layerOptions: {},
@@ -60,8 +63,10 @@ export const initialBaselayerState = {
     {
       title: "Satellite",
       attribution: "",
-      url: "https://{s}.tiles.mapbox.com/v3/nelenschuurmans.iaa79205/{z}/{x}/{y}.png",
-      mapThumb: "https://a.tiles.mapbox.com/v3/nelenschuurmans.iaa79205/11/1632/963.png",
+      url:
+        "https://{s}.tiles.mapbox.com/v3/nelenschuurmans.iaa79205/{z}/{x}/{y}.png",
+      mapThumb:
+        "https://a.tiles.mapbox.com/v3/nelenschuurmans.iaa79205/11/1632/963.png",
       opacity: 1,
       layerType: "tms",
       layerOptions: {},
@@ -70,8 +75,10 @@ export const initialBaselayerState = {
     {
       title: "Neutral",
       attribution: "",
-      url: "https://{s}.tiles.mapbox.com/v3/nelenschuurmans.l15e647c/{z}/{x}/{y}.png",
-      mapThumb: "https://a.tiles.mapbox.com/v3/nelenschuurmans.l15e647c/11/1632/963.png",
+      url:
+        "https://{s}.tiles.mapbox.com/v3/nelenschuurmans.l15e647c/{z}/{x}/{y}.png",
+      mapThumb:
+        "https://a.tiles.mapbox.com/v3/nelenschuurmans.l15e647c/11/1632/963.png",
       opacity: 1,
       layerType: "tms",
       layerOptions: {},

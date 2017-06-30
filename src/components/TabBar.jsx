@@ -56,7 +56,9 @@ class SettingsViewBackArrow extends Component {
 class Tab extends Component {
   getClassName() {
     return `${styles.Tab}
-            ${this.props.currentSettingsTab === this.props.title ? styles.Active : null}`;
+            ${this.props.currentSettingsTab === this.props.title
+              ? styles.Active
+              : null}`;
   }
   render() {
     const { title, currentSettingsTab, changeSettingsTab } = this.props;

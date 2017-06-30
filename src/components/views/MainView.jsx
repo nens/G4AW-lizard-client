@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import { translate } from "react-i18next";
 import PropTypes from "prop-types";
 import ReactDOM from "react-dom";
-
 import SnackBar from "../SnackBar";
 import {
   MapSearchView,
@@ -25,11 +24,31 @@ import {
 } from "../../actions/";
 
 class MainViewComponent extends Component {
-  componentWillMount() {
+  constructor() {
+    super();
+    this.handleOnlineOffline = this.handleOnlineOffline.bind(this);
+  }
+  componentDidMount() {
     // Startup functions.
     this.props.fetchBootstrap(this.props.sessionState);
     this.props.setGeolocationSupport();
-    window.addEventListener("resize", updateDimensions);
+    window.addEventListener("resize", updateDimensions, true);
+    window.addEventListener("online", this.handleOnlineOffline, true);
+    window.addEventListener("offline", this.handleOnlineOffline, true);
+  }
+  componentWillUnmount() {
+    window.removeEventListener("resize", updateDimensions, true);
+    window.removeEventListener("online", this.handleOnlineOffline, true);
+    window.removeEventListener("offline", this.handleOnlineOffline, true);
+  }
+  handleOnlineOffline(e) {
+    this.props.showSnackBar({
+      message: navigator.onLine ? "App online" : "No connection",
+      subMessage: navigator.onLine
+        ? "Your connection seems looks good"
+        : "Please check your connection",
+      isError: navigator.onLine ? false : true
+    });
   }
   render() {
     const { snackBarIsOpen, snackBarOptions, hideSnackBar } = this.props;
@@ -53,7 +72,7 @@ class MainViewComponent extends Component {
         break;
       default:
         console.log(
-          "[E] Cannot render unknown view '" + this.props.currentView + "'!"
+          `[E] Cannot render unknown view "${this.props.currentView}"!`
         );
         return null;
     }

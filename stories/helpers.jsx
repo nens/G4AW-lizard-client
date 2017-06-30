@@ -4,13 +4,12 @@ import { Provider } from "react-redux";
 import i18n from "../src/i18n"; // initialized i18next instance
 import { theStore } from "../src/store/Store";
 
-export const i18nDecorator = getStory => (
+export const i18nDecorator = getStory =>
   <I18nextProvider i18n={i18n}>
     <Provider store={theStore}>
       {getStory()}
     </Provider>
-  </I18nextProvider>
-);
+  </I18nextProvider>;
 
 export const THUMBNAIL_LIST = [
   {
@@ -18,11 +17,13 @@ export const THUMBNAIL_LIST = [
     date: 1495803155030
   },
   {
-    url: "https://upload.wikimedia.org/wikipedia/commons/c/cc/Parched_rice_field_Can_Tho.JPG",
+    url:
+      "https://upload.wikimedia.org/wikipedia/commons/c/cc/Parched_rice_field_Can_Tho.JPG",
     date: 1495803540255
   },
   {
-    url: "https://upload.wikimedia.org/wikipedia/commons/b/b9/Around_Nha_Trang%2C_rice_fields_%286224431058%29.jpg",
+    url:
+      "https://upload.wikimedia.org/wikipedia/commons/b/b9/Around_Nha_Trang%2C_rice_fields_%286224431058%29.jpg",
     date: 1495803541255
   },
   {
@@ -30,11 +31,13 @@ export const THUMBNAIL_LIST = [
     date: 1495803155030
   },
   {
-    url: "https://upload.wikimedia.org/wikipedia/commons/c/cc/Parched_rice_field_Can_Tho.JPG",
+    url:
+      "https://upload.wikimedia.org/wikipedia/commons/c/cc/Parched_rice_field_Can_Tho.JPG",
     date: 1495803540255
   },
   {
-    url: "https://upload.wikimedia.org/wikipedia/commons/b/b9/Around_Nha_Trang%2C_rice_fields_%286224431058%29.jpg",
+    url:
+      "https://upload.wikimedia.org/wikipedia/commons/b/b9/Around_Nha_Trang%2C_rice_fields_%286224431058%29.jpg",
     date: 1495803541255
   },
   {
@@ -42,11 +45,13 @@ export const THUMBNAIL_LIST = [
     date: 1495803155030
   },
   {
-    url: "https://upload.wikimedia.org/wikipedia/commons/c/cc/Parched_rice_field_Can_Tho.JPG",
+    url:
+      "https://upload.wikimedia.org/wikipedia/commons/c/cc/Parched_rice_field_Can_Tho.JPG",
     date: 1495803540255
   },
   {
-    url: "https://upload.wikimedia.org/wikipedia/commons/b/b9/Around_Nha_Trang%2C_rice_fields_%286224431058%29.jpg",
+    url:
+      "https://upload.wikimedia.org/wikipedia/commons/b/b9/Around_Nha_Trang%2C_rice_fields_%286224431058%29.jpg",
     date: 1495803541255
   },
   {
@@ -54,11 +59,13 @@ export const THUMBNAIL_LIST = [
     date: 1495803155030
   },
   {
-    url: "https://upload.wikimedia.org/wikipedia/commons/c/cc/Parched_rice_field_Can_Tho.JPG",
+    url:
+      "https://upload.wikimedia.org/wikipedia/commons/c/cc/Parched_rice_field_Can_Tho.JPG",
     date: 1495803540255
   },
   {
-    url: "https://upload.wikimedia.org/wikipedia/commons/b/b9/Around_Nha_Trang%2C_rice_fields_%286224431058%29.jpg",
+    url:
+      "https://upload.wikimedia.org/wikipedia/commons/b/b9/Around_Nha_Trang%2C_rice_fields_%286224431058%29.jpg",
     date: 1495803541255
   },
   {
@@ -66,11 +73,13 @@ export const THUMBNAIL_LIST = [
     date: 1495803155030
   },
   {
-    url: "https://upload.wikimedia.org/wikipedia/commons/c/cc/Parched_rice_field_Can_Tho.JPG",
+    url:
+      "https://upload.wikimedia.org/wikipedia/commons/c/cc/Parched_rice_field_Can_Tho.JPG",
     date: 1495803540255
   },
   {
-    url: "https://upload.wikimedia.org/wikipedia/commons/b/b9/Around_Nha_Trang%2C_rice_fields_%286224431058%29.jpg",
+    url:
+      "https://upload.wikimedia.org/wikipedia/commons/b/b9/Around_Nha_Trang%2C_rice_fields_%286224431058%29.jpg",
     date: 1495803541255
   },
   {
@@ -78,11 +87,13 @@ export const THUMBNAIL_LIST = [
     date: 1495803155030
   },
   {
-    url: "https://upload.wikimedia.org/wikipedia/commons/c/cc/Parched_rice_field_Can_Tho.JPG",
+    url:
+      "https://upload.wikimedia.org/wikipedia/commons/c/cc/Parched_rice_field_Can_Tho.JPG",
     date: 1495803540255
   },
   {
-    url: "https://upload.wikimedia.org/wikipedia/commons/b/b9/Around_Nha_Trang%2C_rice_fields_%286224431058%29.jpg",
+    url:
+      "https://upload.wikimedia.org/wikipedia/commons/b/b9/Around_Nha_Trang%2C_rice_fields_%286224431058%29.jpg",
     date: 1495803541255
   }
 ];
@@ -93,11 +104,13 @@ export const PHOTO_LIST = [
     date: 1495803155030
   },
   {
-    url: "https://upload.wikimedia.org/wikipedia/commons/c/cc/Parched_rice_field_Can_Tho.JPG",
+    url:
+      "https://upload.wikimedia.org/wikipedia/commons/c/cc/Parched_rice_field_Can_Tho.JPG",
     date: 1495803540255
   },
   {
-    url: "https://upload.wikimedia.org/wikipedia/commons/b/b9/Around_Nha_Trang%2C_rice_fields_%286224431058%29.jpg",
+    url:
+      "https://upload.wikimedia.org/wikipedia/commons/b/b9/Around_Nha_Trang%2C_rice_fields_%286224431058%29.jpg",
     date: 1495803541255
   }
 ];
@@ -168,8 +181,10 @@ export const DEMO_LAYERS = [
   {
     title: "Satellite",
     attribution: "",
-    url: "https://{s}.tiles.mapbox.com/v3/nelenschuurmans.iaa79205/{z}/{x}/{y}.png",
-    mapThumb: "https://a.tiles.mapbox.com/v3/nelenschuurmans.iaa79205/11/1632/963.png",
+    url:
+      "https://{s}.tiles.mapbox.com/v3/nelenschuurmans.iaa79205/{z}/{x}/{y}.png",
+    mapThumb:
+      "https://a.tiles.mapbox.com/v3/nelenschuurmans.iaa79205/11/1632/963.png",
     opacity: 1,
     layerType: "tms",
     layerOptions: {},
@@ -178,8 +193,10 @@ export const DEMO_LAYERS = [
   {
     title: "Topo",
     attribution: "",
-    url: "https://{s}.tiles.mapbox.com/v3/nelenschuurmans.iaa98k8k/{z}/{x}/{y}.png",
-    mapThumb: "https://a.tiles.mapbox.com/v3/nelenschuurmans.iaa98k8k/11/1632/963.png",
+    url:
+      "https://{s}.tiles.mapbox.com/v3/nelenschuurmans.iaa98k8k/{z}/{x}/{y}.png",
+    mapThumb:
+      "https://a.tiles.mapbox.com/v3/nelenschuurmans.iaa98k8k/11/1632/963.png",
     opacity: 1,
     layerType: "tms",
     layerOptions: {},
@@ -284,7 +301,7 @@ export const LEGEND_DATA = [
     legend: [
       {
         label: "Low risk",
-        color: "#fff"
+        color: "#ffffff"
       },
       {
         label: "Medium risk",
@@ -297,6 +314,18 @@ export const LEGEND_DATA = [
       {
         label: "Extreme risk",
         color: "#00385F"
+      },
+      {
+        label: "Extremer risk",
+        color: "#00385F"
+      },
+      {
+        label: "Even more extreme risk",
+        color: "#00386F"
+      },
+      {
+        label: "Extremest risk",
+        color: "#ff0000"
       }
     ]
   }

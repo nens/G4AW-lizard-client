@@ -4,6 +4,7 @@ import {
   CHANGE_SETTINGS_TAB,
   HIDE_SNACKBAR,
   SHOW_SNACKBAR,
+  TOGGLE_LEGEND,
   TOGGLE_SEARCHRESULTS_LIST_CARD_MODE
 } from "../constants/ActionTypes";
 
@@ -20,7 +21,7 @@ export function changeSettingsTab(dispatch, newSettingsTab) {
 export function showSnackBar(dispatch, options) {
   const state = theStore.getState();
 
-  if (state.ui.showSnackBar === true) {
+  if (state.ui.showSnackBar === true && options.autoHideDuration) {
     dispatch({ type: HIDE_SNACKBAR });
     setTimeout(() => {
       dispatch({ type: SHOW_SNACKBAR, options });
@@ -44,4 +45,8 @@ export function hideSnackBar(dispatch) {
 
 export function toggleSearchResultsListOrCardMode(dispatch) {
   dispatch({ type: TOGGLE_SEARCHRESULTS_LIST_CARD_MODE });
+}
+
+export function toggleLegend(dispatch) {
+  dispatch({ type: TOGGLE_LEGEND });
 }

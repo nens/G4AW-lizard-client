@@ -35,8 +35,7 @@ runDetailViewSection();
 import runDetailViewThumbnails from "./DetailViewThumbnailsStories";
 runDetailViewThumbnails();
 
-import runDetailViewThumbnailsSection
-  from "./DetailViewThumbnailsSectionStories";
+import runDetailViewThumbnailsSection from "./DetailViewThumbnailsSectionStories";
 runDetailViewThumbnailsSection();
 
 import runDetailViewTable from "./DetailViewTableStories";

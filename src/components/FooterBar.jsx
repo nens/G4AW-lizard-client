@@ -14,7 +14,7 @@ class FooterBar extends Component {
   render() {
     const { children } = this.props;
     return (
-      <div className={styles.FooterBarWrapper}>
+      <div className={styles.FooterBarWrapper} id="FooterBar">
         <div className={styles.FooterBar}>
           {children}
         </div>

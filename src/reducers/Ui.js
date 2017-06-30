@@ -3,6 +3,8 @@ import { initialUiState } from "../store/Store";
 
 export default function(state = initialUiState, action) {
   switch (action.type) {
+    case ActionTypes.TOGGLE_LEGEND:
+      return { ...state, showLegend: !state.showLegend };
     case ActionTypes.TOGGLE_SEARCHRESULTS_LIST_CARD_MODE:
       return { ...state, searchResultsAsList: !state.searchResultsAsList };
     case ActionTypes.SHOW_SNACKBAR:

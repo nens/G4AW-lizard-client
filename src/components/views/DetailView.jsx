@@ -2,8 +2,9 @@ import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import { connect } from "react-redux";
 import { translate } from "react-i18next";
+import { VelocityTransitionGroup } from "velocity-react";
+import "velocity-animate/velocity.ui";
 import MDSpinner from "react-md-spinner";
-
 import styles from "../styles/DetailView.css";
 
 import {
@@ -39,12 +40,14 @@ class DetailViewComponent extends Component {
     });
   }
   getLatLonZoom(coords) {
-    let latSum = 0, lonSum = 0;
+    let latSum = 0,
+      lonSum = 0;
     coords.forEach(function(coord) {
       latSum += coord[0];
       lonSum += coord[1];
     });
-    const latAvg = latSum / coords.length, lonAvg = lonSum / coords.length;
+    const latAvg = latSum / coords.length,
+      lonAvg = lonSum / coords.length;
     return { lat: latAvg, lon: lonAvg, zoom: DEFAULT_ZOOM };
   }
   render() {
@@ -65,43 +68,54 @@ class DetailViewComponent extends Component {
       return null;
     }
     return (
-      <div id="DetailView" className={styles.DetailView}>
-        <DetailViewHeader
-          title={parcel.Farmer}
-          subTitle={parcel.FieldAdr}
-          halfMode={false}
-          latlonzoom={latlonzoom}
-          handleBackButtonClick={changeToListSearchView}
-        />
-        {parcel.isFetchingGeoserver
-          ? <DetailViewSpinner />
-          : <div>
-              <p style={{ padding: "20px" }}>{LOREM}</p>
-              <DetailViewTable data={tabularData} />
-              <br />
-              <DetailViewSection
-                isOpen
-                title={t("Rice Growth")}
-                subTitle={t("ving bhin data")}
-                colorCode={"#ff0000"}
-              >
-                <p style={{ padding: "20px" }}>{LOREM}</p>
-              </DetailViewSection>
-              <DetailViewSection
-                isOpen={false}
-                title={t("Flood Risk")}
-                subTitle={t("ving bhin data")}
-              >
-                <p style={{ padding: "20px" }}>{LOREM}</p>
-              </DetailViewSection>
-              <DetailViewPhotoSection
-                isOpen={false}
-                photo={photo}
-                width={WIDTH}
-                handleClick={changeToPhotoView}
-              />
-            </div>}
-      </div>
+      <VelocityTransitionGroup
+        runOnMount={true}
+        enter={{ animation: "transition.slideUpBigIn" }}
+      >
+        <div id="DetailView" className={styles.DetailView}>
+          <DetailViewHeader
+            title={parcel.Farmer}
+            subTitle={parcel.FieldAdr}
+            halfMode={false}
+            latlonzoom={latlonzoom}
+            handleBackButtonClick={changeToListSearchView}
+          />
+          {parcel.isFetchingGeoserver
+            ? <DetailViewSpinner />
+            : <div>
+                <p style={{ padding: "20px" }}>
+                  {LOREM}
+                </p>
+                <DetailViewTable data={tabularData} />
+                <br />
+                <DetailViewSection
+                  isOpen
+                  title={t("Rice Growth")}
+                  subTitle={t("ving bhin data")}
+                  colorCode={"#ff0000"}
+                >
+                  <p style={{ padding: "20px" }}>
+                    {LOREM}
+                  </p>
+                </DetailViewSection>
+                <DetailViewSection
+                  isOpen={false}
+                  title={t("Flood Risk")}
+                  subTitle={t("ving bhin data")}
+                >
+                  <p style={{ padding: "20px" }}>
+                    {LOREM}
+                  </p>
+                </DetailViewSection>
+                <DetailViewPhotoSection
+                  isOpen={false}
+                  photo={photo}
+                  width={WIDTH}
+                  handleClick={changeToPhotoView}
+                />
+              </div>}
+        </div>
+      </VelocityTransitionGroup>
     );
   }
 }
