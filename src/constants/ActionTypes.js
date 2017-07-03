@@ -98,3 +98,6 @@ export const TOGGLE_LEGEND = "TOGGLE_LEGEND";
 
 // Baselayer actions
 export const CHANGE_BASELAYER = "CHANGE_BASELAYER";
+
+//Foregroundlayer actions:
+export const CHANGE_FOREGROUNDLAYER = "CHANGE_FOREGROUNDLAYER";
