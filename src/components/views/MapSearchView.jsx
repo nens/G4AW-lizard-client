@@ -61,7 +61,6 @@ MapSearchViewComponent.propTypes = {
 /* react-redux coupling ******************************************************/
 
 function mapStateToProps(state) {
-  console.log(state);
   return {
     getParcel: idx => state.parcels[idx],
     isFetching: state.search.isFetching,
