@@ -16,6 +16,7 @@ createStoreWithMiddleware = applyMiddleware(thunkMiddleware, logger)(
 
 export const initialUiState = {
   currentView: "ListSearchView",
+  searchView: "ListSearchView",
   currentSettingsTab: "Settings",
   searchResultsAsList: false,
   showSnackBar: false,
