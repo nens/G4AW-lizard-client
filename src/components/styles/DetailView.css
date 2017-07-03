@@ -11,3 +11,9 @@
   position: relative;
   height: 0px;
 }
+
+.MapZoomToParcel {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
