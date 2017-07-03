@@ -17,7 +17,11 @@ import {
 
 import styles from "./styles/MapComponent.css";
 
-import { getRaster, getAttributesFromGeoserver } from "../actions";
+import {
+  getRaster,
+  getAttributesFromGeoserver,
+  updateMapLocation
+} from "../actions";
 
 import find from "lodash/find";
 
@@ -30,8 +34,18 @@ class MapComponent extends Component {
   }
   handlePanOrZoomEnd(e) {
     const leaflet = this.refs.mapElement.leafletElement;
+    const { _northEast, _southWest } = leaflet.getBounds();
     const { lat, lng } = leaflet.getCenter();
     const zoom = leaflet.getZoom();
+    this.props.updateMapLocation({
+      bbox: {
+        _northEast,
+        _southWest
+      },
+      lat,
+      lng,
+      zoom
+    });
   }
   render() {
     const {
@@ -41,7 +55,8 @@ class MapComponent extends Component {
       getDetails,
       getBaselayerUrl,
       foregroundlayerUrl,
-      getActiveForegroundlayer
+      getActiveForegroundlayer,
+      currentBoundingBox
     } = this.props;
 
     const searchResultsAsPolygons = searchResults
@@ -75,8 +90,22 @@ class MapComponent extends Component {
       const corner1 = L.latLng(boundingBox[1], boundingBox[0]);
       const corner2 = L.latLng(boundingBox[3], boundingBox[2]);
       bounds = L.latLngBounds(corner1, corner2);
+    } else if (parcels.length === 0 && currentBoundingBox) {
+      // If no parcels to be shown but the user moved the map before, show
+      // that area.
+      const boundingBox = currentBoundingBox;
+      const corner1 = L.latLng(
+        boundingBox._northEast.lat,
+        boundingBox._northEast.lng
+      );
+      const corner2 = L.latLng(
+        boundingBox._southWest.lat,
+        boundingBox._southWest.lng
+      );
+      bounds = L.latLngBounds(corner1, corner2);
     } else {
-      // otherwise, set the bounds of the Map to the bounding box of Vietnam
+      // Otherwise, set the bounds of the Map to the bounding box of Vietnam.
+      // This is only on first load.
       // TODO: Read this default bbox from lizard/bootstrap or something
       // instead of hardcoding...
       bounds = L.latLngBounds(
@@ -115,6 +144,10 @@ class MapComponent extends Component {
 function mapStateToProps(state) {
   return {
     getParcel: idx => state.parcels[idx],
+    visibleRasters: Object.values(state.rasters)
+      .filter(raster => !!raster.data)
+      .map(raster => raster.data),
+    currentBoundingBox: state.map.settings.bbox,
     getBaselayerUrl: () => {
       const activeBaselayer = find(state.baselayer.layers, { active: true });
       return activeBaselayer.url;
@@ -129,7 +162,8 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     getRaster: uuid => getRaster(uuid, dispatch),
-    getDetails: id => getAttributesFromGeoserver(dispatch, id)
+    getDetails: id => getAttributesFromGeoserver(dispatch, id),
+    updateMapLocation: settings => updateMapLocation(dispatch, settings)
   };
 }
 

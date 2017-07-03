@@ -1,0 +1,9 @@
+.SettingsViewHelpComponent {
+  width: 100%;
+  padding: 20px;
+  font-size: .9em;
+}
+.SettingsViewHelpComponent a {
+  color: #333;
+  text-decoration: underline;
+}

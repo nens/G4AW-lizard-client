@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import { connect } from "react-redux";
 import { translate } from "react-i18next";
+import { VelocityTransitionGroup } from "velocity-react";
+import "velocity-animate/velocity.ui";
 
 import {
   TabBar,
@@ -29,10 +31,15 @@ class SettingsViewComponent extends Component {
     if (!currentSettingsTab) return null;
     const component = this.getContent(currentSettingsTab);
     return (
-      <div>
-        <TabBar />
-        {component}
-      </div>
+      <VelocityTransitionGroup
+        runOnMount={true}
+        enter={{ animation: "transition.slideDownIn" }}
+      >
+        <div>
+          <TabBar />
+          {component}
+        </div>
+      </VelocityTransitionGroup>
     );
   }
 }

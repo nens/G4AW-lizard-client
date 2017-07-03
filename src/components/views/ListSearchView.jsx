@@ -11,6 +11,7 @@ import styles from "../styles/ListSearchView.css";
 
 import {
   GeolocateButtonBig,
+  FlatButton,
   HeaderBar,
   LoginLogoutButton,
   RaisedButton,

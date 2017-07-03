@@ -27,6 +27,15 @@ export const initialUiState = {
   }
 };
 
+export const initialMapState = {
+  settings: {
+    bbox: null,
+    lat: null,
+    lng: null,
+    zoom: null
+  }
+};
+
 export const initialSessionState = {
   // Authentication and user information
   isFetching: false, // Sent a request to bootstrap
@@ -132,15 +141,18 @@ const initialState = {
   //photosForParcel: initialPhotosForParcelState, //TODO
   //settings: initialSettingsState, // TODO
 
+  baselayer: initialBaselayerState,
   geolocation: initialGeolocationState,
+  map: initialMapState,
   parcels: initialParcelsState,
-  ui: initialUiState,
-  session: initialSessionState,
+  rasters: initialRastersState,
   search: initialSearchState,
+  session: initialSessionState,
   timeseries: initialTimeseriesState,
   rasters: initialRastersState,
   baselayer: initialBaselayerState,
-  foregroundlayer: initialForegroundlayerState
+  foregroundlayer: initialForegroundlayerState,
+  ui: initialUiState
 };
 
 /**
