@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import { connect } from "react-redux";
 import { translate } from "react-i18next";
+import bbox from "@turf/bbox";
+import flip from "@turf/flip";
+import { feature, featureCollection } from "@turf/helpers";
 import { VelocityTransitionGroup } from "velocity-react";
 import "velocity-animate/velocity.ui";
 import MDSpinner from "react-md-spinner";
@@ -12,10 +15,12 @@ import {
   DetailViewSection,
   DetailViewTable,
   DetailViewTableSection,
-  DetailViewPhotoSection
+  DetailViewPhotoSection,
+  FlatButton
 } from "..";
 
 import { changeView } from "../../actions/UiActions";
+import { updateMapLocationBbox } from "../../actions/MapActions";
 import { THUMBNAIL_LIST, LOREM } from "../../../stories/helpers";
 import { WIDTH } from "../../tools/dimensions";
 
@@ -34,6 +39,10 @@ const TABULAR_DATA_KEYS = [
 ///////////////////////////////////////////////////////////////////////////////
 
 class DetailViewComponent extends Component {
+  constructor() {
+    super();
+    this.handleViewOnMapClick = this.handleViewOnMapClick.bind(this);
+  }
   formatTabularData(parcel) {
     return TABULAR_DATA_KEYS.map(requiredKey => {
       return { key: requiredKey, value: parcel[requiredKey] || "..." };
@@ -50,12 +59,29 @@ class DetailViewComponent extends Component {
       lonAvg = lonSum / coords.length;
     return { lat: latAvg, lon: lonAvg, zoom: DEFAULT_ZOOM };
   }
+  handleViewOnMapClick(parcel) {
+    if (parcel && parcel.geometry) {
+      const boundingBox = bbox(feature(parcel.geometry));
+      this.props.updateMapLocationBbox({
+        _northEast: {
+          lat: boundingBox[0],
+          lng: boundingBox[1]
+        },
+        _southWest: {
+          lat: boundingBox[2],
+          lng: boundingBox[3]
+        }
+      });
+      this.props.changeToMapSearchView();
+    }
+  }
   render() {
     const {
       parcel, // via: mapStateToProps
       changeView, // via: mapDispatchToProps
-      changeToPhotoView, // via: mapDispatchToProps,
-      changeToListSearchView, // via: mapDispatchToProps,
+      changeToPhotoView, // via: mapDispatchToProps
+      changeToListSearchView, // via: mapDispatchToProps
+      changeToMapSearchView, // via: mapDispatchToProps
       photo, // via: parent
       t
     } = this.props;
@@ -86,6 +112,12 @@ class DetailViewComponent extends Component {
                 <p style={{ padding: "20px" }}>
                   {LOREM}
                 </p>
+                <div className={styles.MapZoomToParcel}>
+                  <FlatButton
+                    buttonText="View on map"
+                    handleOnClick={() => this.handleViewOnMapClick(parcel)}
+                  />
+                </div>
                 <DetailViewTable data={tabularData} />
                 <br />
                 <DetailViewSection
@@ -155,7 +187,9 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     changeToPhotoView: () => changeView(dispatch, "PhotoView"),
-    changeToListSearchView: () => changeView(dispatch, "ListSearchView")
+    changeToListSearchView: () => changeView(dispatch, "ListSearchView"),
+    changeToMapSearchView: () => changeView(dispatch, "MapSearchView"),
+    updateMapLocationBbox: bbox => updateMapLocationBbox(dispatch, bbox)
   };
 }
 
