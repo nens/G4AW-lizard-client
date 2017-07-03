@@ -1,12 +1,26 @@
 {
+  "3CForce": "",
   "Click here to explore the map": "Click here to explore the map",
   "Click here to view the search results": "Click here to view the search results",
+  "Farmer": "",
+  "FieldAdr": "",
   "Flood Risk": "Flood Risk",
+  "Geolocation is not supported by your device": "",
+  "Guest": "",
+  "Hectare": "",
   "Images": "Images",
+  "LocTroi": "",
+  "Location data is being fetched": {
+    "": {
+      "": ""
+    }
+  },
   "Login": "Login",
   "Logout": "Logout",
+  "Most recent image": "",
   "Rice Growth": "Rice Growth",
   "Tap to see the field nearby": "Tap to see the field nearby",
   "Welcome": "Welcome",
+  "name": "",
   "ving bhin data": "ving bhin data"
 }
