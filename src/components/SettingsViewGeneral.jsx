@@ -32,7 +32,7 @@ class BaselayerChooser extends Component {
     return (
       <div>
         <div className={styles.SubHeaderContainer}>
-          <h3 className={styles.SubHeaderText}>BACKGROUND LAYERS</h3>
+          <h3 className={styles.SubHeaderText}>Background layers</h3>
         </div>
         <LayerSelection layers={baselayers} mode="baselayer" />
         <br />
@@ -46,8 +46,8 @@ class ForegroundlayerChooser extends Component {
     const { foregroundlayers } = this.props;
     return (
       <div>
-        <div className={styles.subHeaderContainer}>
-          <h3 className={styles.subHeaderText}>FOREGROUND LAYERS</h3>
+        <div className={styles.SubHeaderContainer}>
+          <h3 className={styles.SubHeaderText}>Foreground Layers</h3>
         </div>
         <LayerSelection layers={foregroundlayers} mode="foregroundlayer" />
         <br />
