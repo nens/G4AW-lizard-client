@@ -50,7 +50,7 @@ class GeolocateButtonBigComponent extends Component {
     return (
       <div>
         <h5 id="welcomeText" className={styles.GetStarted}>
-          {t(welcomeText)}
+          {welcomeText}
         </h5>
         <GeolocateButtonContent {...{ onClick, child }} />
       </div>

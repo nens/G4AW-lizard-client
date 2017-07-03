@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import { connect } from "react-redux";
-import { translate } from "react-i18next";
+import { translate, t } from "react-i18next";
 import bbox from "@turf/bbox";
 import flip from "@turf/flip";
 import { feature, featureCollection } from "@turf/helpers";
@@ -25,14 +25,17 @@ import { THUMBNAIL_LIST, LOREM } from "../../../stories/helpers";
 import { WIDTH } from "../../tools/dimensions";
 
 const DEFAULT_ZOOM = 11; // Used for map in header of the page
-const TABULAR_DATA_KEYS = [
-  "name",
-  "3CForce",
-  "Farmer",
-  "FieldAdr",
-  "Hectare",
-  "LocTroi"
-];
+
+function getTabularDataKeys(t) {
+  return [
+    t("name"),
+    t("3CForce"),
+    t("Farmer"),
+    t("FieldAdr"),
+    t("Hectare"),
+    t("LocTroi")
+  ];
+}
 
 ///////////////////////////////////////////////////////////////////////////////
 // The main Component; the View for displaying the details of a single parcel /
@@ -43,8 +46,8 @@ class DetailViewComponent extends Component {
     super();
     this.handleViewOnMapClick = this.handleViewOnMapClick.bind(this);
   }
-  formatTabularData(parcel) {
-    return TABULAR_DATA_KEYS.map(requiredKey => {
+  formatTabularData(parcel, t) {
+    return getTabularDataKeys(t).map(requiredKey => {
       return { key: requiredKey, value: parcel[requiredKey] || "..." };
     });
   }
@@ -91,7 +94,7 @@ class DetailViewComponent extends Component {
     let tabularData, latlonzoom;
     if (parcel && parcel.hasGeoserverData) {
       latlonzoom = this.getLatLonZoom(parcel.geometry.coordinates[0]);
-      tabularData = this.formatTabularData(parcel);
+      tabularData = this.formatTabularData(parcel, t);
     } else {
       return null;
     }

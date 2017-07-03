@@ -1,12 +1,26 @@
 {
+  "3CForce": "3C Lực lượng",
   "Click here to explore the map": "Nhấp vào đây để khám phá bản đồ",
   "Click here to view the search results": "Nhấp vào đây để xem kết quả tìm kiếm",
+  "Farmer": "nông dân",
+  "FieldAdr": "Mã số ruộng",
   "Flood Risk": "Nguy cơ lũ lụt",
+  "Geolocation is not supported by your device": "",
+  "Guest": "Đánh",
+  "Hectare": "Ha",
   "Images": "Hình ảnh",
+  "LocTroi": "LocTroi",
+  "Location data is being fetched": {
+    "": {
+      "": ""
+    }
+  },
   "Login": "đăng nhập",
   "Logout": "đăng xuất",
+  "Most recent image": "Đặt hình ảnh",
   "Rice Growth": "Tăng trưởng gạo",
   "Tap to see the field nearby": "Nhấp để xem bưu kiện gần đó",
   "Welcome": "Chào mừng",
+  "name": "trích yếu",
   "ving bhin data": "ving bhin data"
 }
