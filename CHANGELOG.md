@@ -2,6 +2,49 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.3.3"></a>
+## [0.3.3](https://github.com/nens/G4AW-lizard-client/compare/v0.3.2...v0.3.3) (2017-07-03)
+
+
+
+<a name="0.3.2"></a>
+## [0.3.2](https://github.com/nens/G4AW-lizard-client/compare/v0.3.1...v0.3.2) (2017-07-03)
+
+
+### Bug Fixes
+
+* Add actionType for SET_SEARCH_INPUT_TEXT ([bebdecc](https://github.com/nens/G4AW-lizard-client/commit/bebdecc))
+* Add open effect to DetailViewSection ([d4ac350](https://github.com/nens/G4AW-lizard-client/commit/d4ac350))
+* Add rotation effect to caret ([310cf53](https://github.com/nens/G4AW-lizard-client/commit/310cf53))
+* Add Turf.js helpers to get bbox from searchresults. ([2cc2dc0](https://github.com/nens/G4AW-lizard-client/commit/2cc2dc0))
+* Adds background color to app-wide css in index.html ([fea6494](https://github.com/nens/G4AW-lizard-client/commit/fea6494))
+* Adds position relative to DetailView component (fixes [#73](https://github.com/nens/G4AW-lizard-client/issues/73)) ([6764de4](https://github.com/nens/G4AW-lizard-client/commit/6764de4))
+* Adds reducer SET_SEARCH_INPUT_TEXT and adds Object.assign() to each reducer (!) ([9d6bd81](https://github.com/nens/G4AW-lizard-client/commit/9d6bd81))
+* Call props.clear() when inputfield length becomes 0 in input eventhandler. ([1fe9652](https://github.com/nens/G4AW-lizard-client/commit/1fe9652))
+* **SnackBar:** This (temporarily) calls the SnackBar notification system on componentDidMount() of both list/map views. For demo, will be removed later. ([eaf2066](https://github.com/nens/G4AW-lizard-client/commit/eaf2066))
+* Extend initial state with inputText (an empty string) ([3731f86](https://github.com/nens/G4AW-lizard-client/commit/3731f86))
+* Improves the ListSearchView css and map() ([e1f8c42](https://github.com/nens/G4AW-lizard-client/commit/e1f8c42))
+* isOpen ([11fd3e2](https://github.com/nens/G4AW-lizard-client/commit/11fd3e2))
+* name of module changed ([ce82b7e](https://github.com/nens/G4AW-lizard-client/commit/ce82b7e))
+* Removed JSX comment, moved `let bounds` down. ([50a39c6](https://github.com/nens/G4AW-lizard-client/commit/50a39c6))
+* Removed obvious comments ([153694d](https://github.com/nens/G4AW-lizard-client/commit/153694d))
+* Replaced Object.assign()s with ...state destructurer ([570cfc5](https://github.com/nens/G4AW-lizard-client/commit/570cfc5))
+* **README:** Add section about translating in non-react components ([e7a1cda](https://github.com/nens/G4AW-lizard-client/commit/e7a1cda))
+* **SearchActions:** Adds an action setSearchInputText(). ([4168ff5](https://github.com/nens/G4AW-lizard-client/commit/4168ff5))
+* **SearchBar:** Wires SearchBar components input to redux. ([39d0c4d](https://github.com/nens/G4AW-lizard-client/commit/39d0c4d))
+* **SnackBar:** Adds initial state for SnackBar reducer. ([326756f](https://github.com/nens/G4AW-lizard-client/commit/326756f))
+* rm comment ([4c43a2a](https://github.com/nens/G4AW-lizard-client/commit/4c43a2a))
+* Show parcels and set bbox to cover them. Or zoom out to country if no results found. ([85d1960](https://github.com/nens/G4AW-lizard-client/commit/85d1960))
+* **SnackBar:** Adds reducer for SnackBar hide/show. ([6ce688b](https://github.com/nens/G4AW-lizard-client/commit/6ce688b))
+* **SnackBar:** Adds redux actionType and functions for show/hide with optional delay. ([892263a](https://github.com/nens/G4AW-lizard-client/commit/892263a))
+* **SnackBar:** Adds SnackBar state shape to G4AW-state-plan.md. ([8b4166b](https://github.com/nens/G4AW-lizard-client/commit/8b4166b))
+* **SnackBar:** SnackBar is always rendered in the mainview depending on the state of its redux variable. ([d6faa2f](https://github.com/nens/G4AW-lizard-client/commit/d6faa2f))
+* SnackBar now closes before opening if it was open already ([9cf9d0d](https://github.com/nens/G4AW-lizard-client/commit/9cf9d0d))
+* **SnackBar:** Updated SnackBar notification component and its styling. ([600b4c6](https://github.com/nens/G4AW-lizard-client/commit/600b4c6))
+* **Storybook:** Repairs the React Storybooks for SnackBar component. ([e57d9f4](https://github.com/nens/G4AW-lizard-client/commit/e57d9f4))
+
+
+
 <a name="0.3.1"></a>
 ## [0.3.1](https://github.com/nens/G4AW-lizard-client/compare/v0.3.0...v0.3.1) (2017-06-19)
 

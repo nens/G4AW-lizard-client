@@ -77,12 +77,14 @@ class DetailViewComponent extends Component {
   }
   render() {
     const {
-      parcel, // via: mapStateToProps
-      changeView, // via: mapDispatchToProps
-      changeToPhotoView, // via: mapDispatchToProps
       changeToListSearchView, // via: mapDispatchToProps
       changeToMapSearchView, // via: mapDispatchToProps
+      changeToPhotoView, // via: mapDispatchToProps
+      changeToSearchView, // via: mapDispatchToProps,
+      changeView, // via: mapDispatchToProps
+      parcel, // via: mapStateToProps
       photo, // via: parent
+      searchView, // via: mapStateToProps
       t
     } = this.props;
 
@@ -104,7 +106,7 @@ class DetailViewComponent extends Component {
             subTitle={parcel.FieldAdr}
             halfMode={false}
             latlonzoom={latlonzoom}
-            handleBackButtonClick={changeToListSearchView}
+            handleBackButtonClick={() => changeToSearchView(searchView)}
           />
           {parcel.isFetchingGeoserver
             ? <DetailViewSpinner />
@@ -180,15 +182,17 @@ class DetailViewSpinner extends Component {
 function mapStateToProps(state) {
   return {
     currentView: state.ui.currentView,
+    searchView: state.ui.searchView,
     parcel: state.parcels && state.parcels[state.ui.selectedParcel]
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    changeToPhotoView: () => changeView(dispatch, "PhotoView"),
     changeToListSearchView: () => changeView(dispatch, "ListSearchView"),
     changeToMapSearchView: () => changeView(dispatch, "MapSearchView"),
+    changeToPhotoView: () => changeView(dispatch, "PhotoView"),
+    changeToSearchView: searchView => changeView(dispatch, searchView),
     updateMapLocationBbox: bbox => updateMapLocationBbox(dispatch, bbox)
   };
 }
