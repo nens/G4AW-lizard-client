@@ -8,7 +8,7 @@ import { connect } from "react-redux";
 
 import styles from "./styles/LayerSelection.css";
 
-import { changeBaselayer } from "../actions";
+import { changeBaselayer, changeForegroundlayer } from "../actions";
 
 const NUM_PER_PAGE = 3;
 
@@ -31,17 +31,36 @@ class LayerSelectionComponent extends Component {
 ///////////////////////////////////////////////////////////////////////////////
 
 LayerSelectionComponent.propTypes = {
-  layers: PropTypes.array,
-  handleLayerSelect: PropTypes.func
+  layers: PropTypes.array
 };
 
 ///////////////////////////////////////////////////////////////////////////////
 // local sub-components ///////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
 
+// class LayerDivs extends Component {
+//   render() {
+//     const { layers, handleBaselayerSelect } = this.props;
+//     const layerDivs = layers.map((layer, i) =>
+//       getTransitionGroup(i, layer, () => handleBaselayerSelect(i))
+//     );
+//     return (
+//       <div className={styles.Wrapper}>
+//         {layerDivs}
+//       </div>
+//     );
+//   }
+// }
+
 class LayerDivs extends Component {
   render() {
-    const { layers, handleLayerSelect } = this.props;
+    const { layers, mode } = this.props;
+
+    const handleLayerSelect =
+      mode === "baselayer"
+        ? this.props.handleBaselayerSelect
+        : this.props.handleForegroundlayerSelect;
+
     const layerDivs = layers.map((layer, i) =>
       getTransitionGroup(i, layer, () => handleLayerSelect(i))
     );
@@ -53,31 +72,31 @@ class LayerDivs extends Component {
   }
 }
 
-class PrevButton extends Component {
-  render() {
-    const { handleClick } = this.props;
-    return (
-      <div className={styles.Prev} onClick={handleClick}>
-        <i className={`${styles.LeftArrowIcon} material-icons`}>
-          keyboard_arrow_left
-        </i>
-      </div>
-    );
-  }
-}
+// class PrevButton extends Component {
+//   render() {
+//     const { handleClick } = this.props;
+//     return (
+//       <div className={styles.Prev} onClick={handleClick}>
+//         <i className={`${styles.LeftArrowIcon} material-icons`}>
+//           keyboard_arrow_left
+//         </i>
+//       </div>
+//     );
+//   }
+// }
 
-class NextButton extends Component {
-  render() {
-    const { handleClick } = this.props;
-    return (
-      <div className={styles.Next} onClick={handleClick}>
-        <i className={`${styles.RightArrowIcon} material-icons`}>
-          keyboard_arrow_right
-        </i>
-      </div>
-    );
-  }
-}
+// class NextButton extends Component {
+//   render() {
+//     const { handleClick } = this.props;
+//     return (
+//       <div className={styles.Next} onClick={handleClick}>
+//         <i className={`${styles.RightArrowIcon} material-icons`}>
+//           keyboard_arrow_right
+//         </i>
+//       </div>
+//     );
+//   }
+// }
 
 function getTransitionGroup(i, layer, handleLayerSelect) {
   return (
@@ -124,7 +143,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    handleLayerSelect: index => changeBaselayer(dispatch, index)
+    handleBaselayerSelect: i => changeBaselayer(dispatch, i),
+    handleForegroundlayerSelect: i => changeForegroundlayer(dispatch, i)
   };
 }
 
