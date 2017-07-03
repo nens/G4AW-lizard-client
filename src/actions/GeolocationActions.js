@@ -61,8 +61,8 @@ export function performGeolocation(dispatch) {
     navigator.geolocation.getCurrentPosition(
       success => {
         fetch(getGeocoderUrl(success.coords), { mode: "cors" })
-          .then((response, success) => response.json())
-          .then((data, success) => {
+          .then(response => response.json())
+          .then(data => {
             showSnackBarGeolocationSuccess(dispatch);
             const placeName = data.features[0].place_name;
             const lat = data.query[0];
