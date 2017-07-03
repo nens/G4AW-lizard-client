@@ -38,20 +38,6 @@ LayerSelectionComponent.propTypes = {
 // local sub-components ///////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
 
-// class LayerDivs extends Component {
-//   render() {
-//     const { layers, handleBaselayerSelect } = this.props;
-//     const layerDivs = layers.map((layer, i) =>
-//       getTransitionGroup(i, layer, () => handleBaselayerSelect(i))
-//     );
-//     return (
-//       <div className={styles.Wrapper}>
-//         {layerDivs}
-//       </div>
-//     );
-//   }
-// }
-
 class LayerDivs extends Component {
   render() {
     const { layers, mode } = this.props;
@@ -71,32 +57,6 @@ class LayerDivs extends Component {
     );
   }
 }
-
-// class PrevButton extends Component {
-//   render() {
-//     const { handleClick } = this.props;
-//     return (
-//       <div className={styles.Prev} onClick={handleClick}>
-//         <i className={`${styles.LeftArrowIcon} material-icons`}>
-//           keyboard_arrow_left
-//         </i>
-//       </div>
-//     );
-//   }
-// }
-
-// class NextButton extends Component {
-//   render() {
-//     const { handleClick } = this.props;
-//     return (
-//       <div className={styles.Next} onClick={handleClick}>
-//         <i className={`${styles.RightArrowIcon} material-icons`}>
-//           keyboard_arrow_right
-//         </i>
-//       </div>
-//     );
-//   }
-// }
 
 function getTransitionGroup(i, layer, handleLayerSelect) {
   return (
