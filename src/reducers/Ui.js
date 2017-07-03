@@ -1,6 +1,8 @@
 import * as ActionTypes from "../constants/ActionTypes";
 import { initialUiState } from "../store/Store";
 
+import includes from "lodash/includes";
+
 export default function(state = initialUiState, action) {
   switch (action.type) {
     case ActionTypes.TOGGLE_LEGEND:
@@ -21,7 +23,17 @@ export default function(state = initialUiState, action) {
     case ActionTypes.GET_ATTRIBUTES_FROM_GEOSERVER:
       return { ...state, selectedParcel: action.parcelId };
     case ActionTypes.CHANGE_VIEW:
-      return { ...state, currentView: action.newView };
+      const newSearchView = includes(
+        ["ListSearchView", "MapSearchView"],
+        action.newView
+      )
+        ? action.newView
+        : state.searchView;
+      return {
+        ...state,
+        currentView: action.newView,
+        searchView: newSearchView
+      };
     case ActionTypes.CHANGE_SETTINGS_TAB:
       return { ...state, currentSettingsTab: action.newSettingsTab };
     default:

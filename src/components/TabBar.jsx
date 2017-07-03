@@ -25,12 +25,15 @@ class TabBarComponent extends Component {
     const {
       currentSettingsTab,
       changeSettingsTab,
-      changeToListSearchView
+      searchView,
+      changeToSearchView
     } = this.props;
     return (
       <div className={styles.TabWrapper}>
         <div className={styles.TabBar}>
-          <SettingsViewBackArrow handleClick={changeToListSearchView} />
+          <SettingsViewBackArrow
+            handleClick={() => changeToSearchView(searchView)}
+          />
           <Tab title="Settings" {...this.props} />
           <Tab title="User" {...this.props} />
           <Tab title="Help" {...this.props} />
@@ -78,6 +81,7 @@ class Tab extends Component {
 
 function mapStateToProps(state) {
   return {
+    searchView: state.ui.searchView,
     currentSettingsTab: state.ui.currentSettingsTab
   };
 }
@@ -85,7 +89,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     changeSettingsTab: newTab => changeSettingsTab(dispatch, newTab),
-    changeToListSearchView: () => changeView(dispatch, "ListSearchView")
+    changeToSearchView: searchView => changeView(dispatch, searchView)
   };
 }
 
