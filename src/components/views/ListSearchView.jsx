@@ -78,10 +78,11 @@ class ListSearchViewComponent extends Component {
 }
 
 function ListSearchLanding({ t, username }) {
+  const msg = `${t("Welcome")}, ${username || t("Guest")}`;
   return (
     <div className={styles.ListSearchLanding} id="ListSearchLanding">
       <h1 className={styles.Welcome}>
-        {t(`Welcome, ${username || "Guest"}`)}
+        {msg}
       </h1>
       <GeolocateButtonBig t={t} />
       <LoginLogoutButton />

@@ -2,5 +2,8 @@
   "Login": "Inloggen",
   "No geolocation support": "Geen geolocatie ondersteuning",
   "Tap here or start searching to get started": "Tap hier of begin hier boven met typen",
-  "Welcome": "Welkom"
+  "Welcome": "Welkom",
+  "Location data is being fetched": {
+    "": {}
+  }
 }
