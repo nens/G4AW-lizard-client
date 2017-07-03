@@ -16,7 +16,9 @@ class SettingsViewGeneralComponent extends Component {
     return (
       <div>
         <HeaderBar title="Select map layers" />
-        <BackgroundLayerChooser {...this.props} />
+        <BaselayerChooser {...this.props} />
+        <br />
+        <ForegroundlayerChooser {...this.props} />
       </div>
     );
   }
@@ -24,7 +26,7 @@ class SettingsViewGeneralComponent extends Component {
 
 /* local sub-components ******************************************************/
 
-class BackgroundLayerChooser extends Component {
+class BaselayerChooser extends Component {
   render() {
     const { baselayers } = this.props;
     return (
@@ -32,7 +34,23 @@ class BackgroundLayerChooser extends Component {
         <div className={styles.SubHeaderContainer}>
           <h3 className={styles.SubHeaderText}>BACKGROUND LAYERS</h3>
         </div>
-        <LayerSelection layers={baselayers} />
+        <LayerSelection layers={baselayers} mode="baselayer" />
+        <br />
+      </div>
+    );
+  }
+}
+
+class ForegroundlayerChooser extends Component {
+  render() {
+    const { foregroundlayers } = this.props;
+    return (
+      <div>
+        <div className={styles.subHeaderContainer}>
+          <h3 className={styles.subHeaderText}>FOREGROUND LAYERS</h3>
+        </div>
+        <LayerSelection layers={foregroundlayers} mode="foregroundlayer" />
+        <br />
       </div>
     );
   }
@@ -42,7 +60,8 @@ class BackgroundLayerChooser extends Component {
 
 function mapStateToProps(state) {
   return {
-    baselayers: state.baselayer.layers
+    baselayers: state.baselayer.layers,
+    foregroundlayers: state.foregroundlayer.layers
   };
 }
 

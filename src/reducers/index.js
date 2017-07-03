@@ -7,6 +7,7 @@ import search from "./Search";
 import session from "./Session";
 import timeseries from "./Timeseries";
 import ui from "./Ui";
+import foregroundlayer from "./Foregroundlayer";
 
 export default {
   baselayer,
@@ -17,5 +18,8 @@ export default {
   search,
   session,
   timeseries,
+  parcels,
+  baselayer,
+  foregroundlayer,
   ui
 };

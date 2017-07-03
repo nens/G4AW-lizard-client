@@ -102,3 +102,6 @@ export const UPDATE_MAP_LOCATION_BBOX = "UPDATE_MAP_LOCATION_BBOX";
 
 // Baselayer actions
 export const CHANGE_BASELAYER = "CHANGE_BASELAYER";
+
+//Foregroundlayer actions:
+export const CHANGE_FOREGROUNDLAYER = "CHANGE_FOREGROUNDLAYER";

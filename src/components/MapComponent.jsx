@@ -54,6 +54,8 @@ class MapComponent extends Component {
       searchResults,
       getDetails,
       getBaselayerUrl,
+      foregroundlayerUrl,
+      getActiveForegroundlayer,
       currentBoundingBox
     } = this.props;
 
@@ -126,14 +128,12 @@ class MapComponent extends Component {
             url={getBaselayerUrl()}
             attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
           />
-          {visibleRasters.map(raster =>
-            <WMSTileLayer
-              url={raster.wms_info.endpoint}
-              key={raster.uuid}
-              layers={raster.wms_info.layer}
-              styles={raster.options.styles}
-            />
-          )}
+          <WMSTileLayer
+            url={foregroundlayerUrl}
+            layers={getActiveForegroundlayer().slug}
+            transparent="True"
+            format="image/png"
+          />
           {searchResultsAsPolygons}
         </Map>
       </div>
@@ -151,6 +151,10 @@ function mapStateToProps(state) {
     getBaselayerUrl: () => {
       const activeBaselayer = find(state.baselayer.layers, { active: true });
       return activeBaselayer.url;
+    },
+    foregroundlayerUrl: state.foregroundlayer.url,
+    getActiveForegroundlayer: () => {
+      return find(state.foregroundlayer.layers, { active: true });
     }
   };
 }
