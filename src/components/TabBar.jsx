@@ -23,10 +23,11 @@ import { HeaderBar } from ".";
 class TabBarComponent extends Component {
   render() {
     const {
-      currentSettingsTab,
+      currentSettingsTabIdx,
       changeSettingsTab,
       searchView,
-      changeToSearchView
+      changeToSearchView,
+      t
     } = this.props;
     return (
       <div className={styles.TabWrapper}>
@@ -34,9 +35,9 @@ class TabBarComponent extends Component {
           <SettingsViewBackArrow
             handleClick={() => changeToSearchView(searchView)}
           />
-          <Tab title="Settings" {...this.props} />
-          <Tab title="User" {...this.props} />
-          <Tab title="Help" {...this.props} />
+          <Tab idx={0} title={t("Settings")} {...this.props} />
+          <Tab idx={1} title={t("User")} {...this.props} />
+          <Tab idx={2} title={t("Help")} {...this.props} />
         </div>
       </div>
     );
@@ -59,15 +60,15 @@ class SettingsViewBackArrow extends Component {
 class Tab extends Component {
   getClassName() {
     return `${styles.Tab}
-            ${this.props.currentSettingsTab === this.props.title
+            ${this.props.currentSettingsTabIdx === this.props.idx
               ? styles.Active
               : null}`;
   }
   render() {
-    const { title, currentSettingsTab, changeSettingsTab } = this.props;
+    const { title, changeSettingsTab, idx } = this.props;
     return (
       <div
-        onClick={() => changeSettingsTab(title)}
+        onClick={() => changeSettingsTab(idx)}
         className={this.getClassName()}
       >
         {title}
@@ -82,7 +83,7 @@ class Tab extends Component {
 function mapStateToProps(state) {
   return {
     searchView: state.ui.searchView,
-    currentSettingsTab: state.ui.currentSettingsTab
+    currentSettingsTabIdx: state.ui.currentSettingsTabIdx
   };
 }
 

@@ -13,23 +13,23 @@ import {
 } from "..";
 
 class SettingsViewComponent extends Component {
-  getContent(currentSettingsTab) {
-    switch (currentSettingsTab) {
-      case "Settings":
+  getContent(currentSettingsTabIdx) {
+    switch (currentSettingsTabIdx) {
+      case 0:
         return <SettingsViewGeneral />;
-      case "User":
+      case 1:
         return <SettingsViewUser />;
-      case "Help":
+      case 2:
         return <SettingsViewHelp />;
       default:
-        console.error("Unknown case: ", currentSettingsTab);
+        console.error("Unknown case: ", currentSettingsTabIdx);
         return null;
     }
   }
   render() {
-    const { currentSettingsTab } = this.props;
-    if (!currentSettingsTab) return null;
-    const component = this.getContent(currentSettingsTab);
+    const { currentSettingsTabIdx } = this.props;
+    if (currentSettingsTabIdx === undefined) return null;
+    const component = this.getContent(currentSettingsTabIdx);
     return (
       <VelocityTransitionGroup
         runOnMount={true}
@@ -46,7 +46,7 @@ class SettingsViewComponent extends Component {
 
 function mapStateToProps(state) {
   return {
-    currentSettingsTab: state.ui.currentSettingsTab
+    currentSettingsTabIdx: state.ui.currentSettingsTabIdx
   };
 }
 
