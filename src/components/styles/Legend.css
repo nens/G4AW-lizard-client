@@ -6,6 +6,7 @@
   z-index: 1000;
   background-color: #fff;
   left: 0px;
+  overflow: hidden;
 }
 .Legend {
   height: 50px;
@@ -53,9 +54,15 @@
 .LegendTable tr {
   border-bottom: 1px solid #d7d7d7;
 }
-
 .LegendColor {
   border: 1px solid #d7d7d7;
   width: 30px;
   height: 10px;
+}
+.PlaceholderText {
+  position: relative;
+  top: 100px;
+  color: #A0A0A0;
+  text-align: center;
+  overflow: hidden;
 }

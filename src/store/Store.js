@@ -114,7 +114,8 @@ export const initialForegroundlayerState = {
       active: true,
       slug: "latest_weekly_LT",
       mapThumb:
-        "https://maps1.project.lizard.net/geoserver/Q0007_sat4rice_2018/wms?service=WMS&request=GetMap&layers=latest_weekly_LT&styles=&format=image%2Fpng&transparent=True&version=1.1.1&height=256&width=256&srs=EPSG%3A3857&bbox=11707095.252157595,1165511.8072923678,11707706.748383878,1166123.3035186497"
+        "https://maps1.project.lizard.net/geoserver/Q0007_sat4rice_2018/wms?service=WMS&request=GetMap&layers=latest_weekly_LT&styles=&format=image%2Fpng&transparent=True&version=1.1.1&height=256&width=256&srs=EPSG%3A3857&bbox=11709388.36300615,1164288.814839805,11709541.23706272,1164441.6888963755",
+      colormap: []
     },
     {
       title: "Growth stages",
@@ -122,7 +123,18 @@ export const initialForegroundlayerState = {
       active: false,
       slug: "latest_weekly_growth_stages",
       mapThumb:
-        "https://maps1.project.lizard.net/geoserver/Q0007_sat4rice_2018/wms?service=WMS&request=GetMap&layers=latest_weekly_growth_stages&styles=&format=image%2Fpng&transparent=True&version=1.1.1&height=256&width=256&srs=EPSG%3A3857&bbox=11707095.252157595,1165511.8072923678,11707706.748383878,1166123.3035186497"
+        "https://maps1.project.lizard.net/geoserver/Q0007_sat4rice_2018/wms?service=WMS&request=GetMap&layers=latest_weekly_growth_stages&styles=&format=image%2Fpng&transparent=True&version=1.1.1&height=256&width=256&srs=EPSG%3A3857&bbox=11709388.36300615,1164288.814839805,11709541.23706272,1164441.6888963755",
+      colormap: [
+        { Fallow: [170, 179, 182, 255] },
+        { "Bare field": [110, 116, 118, 255] },
+        { Seedling: [0, 147, 211, 255] },
+        { Tillering: [69, 155, 0, 255] },
+        { Booting: [52, 195, 0, 255] },
+        { Flowering: [37, 58, 32, 255] },
+        { Milking: [255, 175, 6, 255] },
+        { Ripening: [255, 120, 19, 255] },
+        { Harvest: [232, 69, 6, 255] }
+      ]
     },
     {
       title: "Pest presence",
@@ -130,7 +142,17 @@ export const initialForegroundlayerState = {
       active: false,
       slug: "latest_weekly_pest_presence",
       mapThumb:
-        "https://maps1.project.lizard.net/geoserver/Q0007_sat4rice_2018/wms?service=WMS&request=GetMap&layers=latest_weekly_pest_presence&styles=&format=image%2Fpng&transparent=True&version=1.1.1&height=256&width=256&srs=EPSG%3A3857&bbox=11707095.252157595,1165511.8072923678,11707706.748383878,1166123.3035186497"
+        "https://maps1.project.lizard.net/geoserver/Q0007_sat4rice_2018/wms?service=WMS&request=GetMap&layers=latest_weekly_pest_presence&styles=&format=image%2Fpng&transparent=True&version=1.1.1&height=256&width=256&srs=EPSG%3A3857&bbox=11709388.36300615,1164288.814839805,11709541.23706272,1164441.6888963755",
+      colormap: [
+        { "0%": [110, 240, 132, 100] },
+        { "10%": [228, 106, 108, 125] },
+        { "20%": [55, 126, 184, 125] },
+        { "30%": [77, 175, 74, 125] },
+        { "40%": [152, 78, 163, 125] },
+        { "50%": [255, 127, 0, 125] },
+        { "60%": [255, 255, 51, 125] },
+        { "70%": [166, 86, 40, 125] }
+      ]
     }
   ]
 };
