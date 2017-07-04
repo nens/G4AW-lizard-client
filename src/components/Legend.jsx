@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import ReactDOM from "react-dom";
 import { VelocityComponent } from "velocity-react";
@@ -7,7 +8,12 @@ import "velocity-animate/velocity.ui";
 import { Scrollbars } from "react-custom-scrollbars";
 import styles from "./styles/Legend.css";
 
-class Legend extends Component {
+import {
+  showNextForegroundlayer,
+  showPreviousForegroundlayer
+} from "../actions";
+
+class LegendComponent extends Component {
   render() {
     const { data, activeLegendIdx, isOpen } = this.props;
     const currentLayer = data[activeLegendIdx];
@@ -34,19 +40,19 @@ class LegendTopBar extends Component {
   render() {
     const {
       layerTitle,
-      handlePreviousLayer,
-      handleNextLayer,
       handleToggleLegend,
-      isOpen
+      isOpen,
+      showPreviousForegroundlayer,
+      showNextForegroundlayer
     } = this.props;
 
     return (
       <div className={styles.LegendTopBar}>
-        <PrevLayerButton handleClick={handlePreviousLayer} />
+        <PrevLayerButton handleClick={showPreviousForegroundlayer} />
         <div>
           {layerTitle}
         </div>
-        <NextLayerButton handleClick={handleNextLayer} />
+        <NextLayerButton handleClick={showNextForegroundlayer} />
       </div>
     );
   }
@@ -123,10 +129,25 @@ class LegendColorLabel extends Component {
   }
 }
 
-Legend.propTypes = {
+LegendComponent.propTypes = {
   data: PropTypes.any,
   handleToggleLegend: PropTypes.func,
   isOpen: PropTypes.bool
 };
+
+/* react-redux coupling ******************************************************/
+
+function mapStateToProps(state) {
+  return {};
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    showNextForegroundlayer: () => showNextForegroundlayer(dispatch),
+    showPreviousForegroundlayer: () => showPreviousForegroundlayer(dispatch)
+  };
+}
+
+const Legend = connect(mapStateToProps, mapDispatchToProps)(LegendComponent);
 
 export default Legend;
