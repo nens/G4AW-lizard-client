@@ -1,18 +1,18 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import ReactDOM from "react-dom";
-
+import { translate } from "react-i18next";
 import { Modal, LoginModalButtons, LoginModalContent } from ".";
 
 ///////////////////////////////////////////////////////////////////////////////
 // The main Component; a component representing the non-generic login modal: //
 ///////////////////////////////////////////////////////////////////////////////
 
-export default class LoginModal extends Component {
+class LoginModal extends Component {
   render() {
     const { handleCancel, handleLogin, isOpen } = this.props;
     return (
-      <Modal isOpen={isOpen} title="Login">
+      <Modal isOpen={isOpen} title={t("Login")}>
         <LoginModalContent />
         <LoginModalButtons
           handleCancel={handleCancel}
@@ -22,3 +22,5 @@ export default class LoginModal extends Component {
     );
   }
 }
+
+export default translate()(LoginModal);

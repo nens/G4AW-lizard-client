@@ -35,7 +35,7 @@ export default function(state = initialUiState, action) {
         searchView: newSearchView
       };
     case ActionTypes.CHANGE_SETTINGS_TAB:
-      return { ...state, currentSettingsTab: action.newSettingsTab };
+      return { ...state, currentSettingsTabIdx: action.newSettingsTabIdx };
     default:
       return state;
   }

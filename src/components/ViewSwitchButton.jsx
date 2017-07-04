@@ -31,11 +31,12 @@ ViewSwitchButtonComponent.propTypes = {
 
 class SwitchToMapButton extends Component {
   render() {
+    const { t } = this.props;
     return (
       <div>
         <i className={`material-icons ${styles.Icon}`}>track_changes</i>
         <span className={styles.Message}>
-          {this.props.t("Click here to explore the map")}
+          {t("Click here to explore the map")}
         </span>
       </div>
     );
@@ -44,11 +45,12 @@ class SwitchToMapButton extends Component {
 
 class SwitchToListButton extends Component {
   render() {
+    const { t } = this.props;
     return (
       <div>
         <i className={`material-icons ${styles.Icon}`}>apps</i>
         <span className={styles.Message}>
-          {this.props.t("Click here to view the search results")}
+          {t("Click here to view the search results")}
         </span>
       </div>
     );

@@ -42,16 +42,17 @@ class MainViewComponent extends Component {
     window.removeEventListener("offline", this.handleOnlineOffline, true);
   }
   handleOnlineOffline(e) {
-    this.props.showSnackBar({
-      message: navigator.onLine ? "App online" : "No connection",
+    const { showSnackBar, t } = this.props;
+    showSnackBar({
+      message: navigator.onLine ? t("App online") : t("No connection"),
       subMessage: navigator.onLine
-        ? "Connected to the internet"
-        : "Please check your connection",
+        ? t("Connected to the internet")
+        : t("Please check your connection"),
       isError: navigator.onLine ? false : true
     });
   }
   render() {
-    const { snackBarIsOpen, snackBarOptions, hideSnackBar } = this.props;
+    const { snackBarIsOpen, snackBarOptions, hideSnackBar, t } = this.props;
     const photo = this.props.getPhotoForSelectedParcel();
     let component = null;
     switch (this.props.currentView) {
@@ -83,7 +84,7 @@ class MainViewComponent extends Component {
           isOpen={snackBarIsOpen}
           message={snackBarOptions.message}
           subMessage={snackBarOptions.subMessage}
-          actionText="OK"
+          actionText={t("OK")}
           isError={snackBarOptions.isError}
           onActionTap={hideSnackBar}
         />

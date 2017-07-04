@@ -13,9 +13,10 @@ import styles from "./styles/SettingsView.css";
 
 class SettingsViewGeneralComponent extends Component {
   render() {
+    const { t } = this.props;
     return (
       <div>
-        <HeaderBar title="Select map layers" />
+        <HeaderBar title={t("Select map layers")} />
         <BaselayerChooser {...this.props} />
         <br />
         <ForegroundlayerChooser {...this.props} />
@@ -28,11 +29,13 @@ class SettingsViewGeneralComponent extends Component {
 
 class BaselayerChooser extends Component {
   render() {
-    const { baselayers } = this.props;
+    const { baselayers, t } = this.props;
     return (
       <div>
         <div className={styles.SubHeaderContainer}>
-          <h3 className={styles.SubHeaderText}>Background layers</h3>
+          <h3 className={styles.SubHeaderText}>
+            {t("Background layers")}
+          </h3>
         </div>
         <LayerSelection layers={baselayers} mode="baselayer" />
         <br />
@@ -43,11 +46,13 @@ class BaselayerChooser extends Component {
 
 class ForegroundlayerChooser extends Component {
   render() {
-    const { foregroundlayers } = this.props;
+    const { foregroundlayers, t } = this.props;
     return (
       <div>
         <div className={styles.SubHeaderContainer}>
-          <h3 className={styles.SubHeaderText}>Foreground Layers</h3>
+          <h3 className={styles.SubHeaderText}>
+            {t("Foreground Layers")}
+          </h3>
         </div>
         <LayerSelection layers={foregroundlayers} mode="foregroundlayer" />
         <br />

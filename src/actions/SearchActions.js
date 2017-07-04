@@ -1,3 +1,4 @@
+import i18next from "i18next";
 import {
   CLEAR_SEARCH_RESULTS,
   RECEIVE_SEARCH_RESULTS_SUCCESS,
@@ -47,11 +48,12 @@ function doSearch(dispatch, q, types = null, exclude = []) {
     results => dispatch(receiveResultsSuccess(results)),
     error => {
       const msg = "Search error: " + error;
+      const message = i18next.t("There was an error while searching for");
       dispatch(receiveResultsError(msg));
       showSnackBar(dispatch, {
         isError: true,
-        message: "There was an error while searching for '" + q + "'",
-        subMessage: "Please try again soon"
+        message: `${message} '${q}'`,
+        subMessage: i18next.t("Please try again later")
       });
     }
   );

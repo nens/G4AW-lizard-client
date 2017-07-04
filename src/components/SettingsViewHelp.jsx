@@ -10,9 +10,10 @@ import styles from "./styles/SettingsViewHelp.css";
 
 class SettingsViewHelpComponent extends Component {
   render() {
+    const { t } = this.props;
     return (
       <div>
-        <HeaderBar title="Data Collection Forms" />
+        <HeaderBar title={t("Data Collection Forms")} />
         <div className={styles.SettingsViewHelpComponent}>
           <div>
             <img width="100" src={KoboLogo} />
@@ -20,12 +21,12 @@ class SettingsViewHelpComponent extends Component {
           <ul>
             <li>
               <a href="https://ee.kobotoolbox.org/x/#YZnR" target="_blank">
-                Weekly form
+                {t("Weekly form")}
               </a>
             </li>
             <li>
               <a href="https://ee.kobotoolbox.org/x/#YZnu" target="_blank">
-                Once form
+                {t("Once form")}
               </a>
             </li>
           </ul>

@@ -14,8 +14,9 @@ export function changeView(dispatch, newView) {
   dispatch({ type: CHANGE_VIEW, newView });
 }
 
-export function changeSettingsTab(dispatch, newSettingsTab) {
-  dispatch({ type: CHANGE_SETTINGS_TAB, newSettingsTab });
+export function changeSettingsTab(dispatch, newSettingsTabIdx) {
+  console.log("action", newSettingsTabIdx);
+  dispatch({ type: CHANGE_SETTINGS_TAB, newSettingsTabIdx });
 }
 
 export function showSnackBar(dispatch, options) {

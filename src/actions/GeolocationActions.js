@@ -1,3 +1,4 @@
+import i18next from "i18next";
 import config from "../config";
 import {
   SET_GEOLOCATION_SUPPORT,
@@ -7,8 +8,6 @@ import {
   CLEAR_GEOLOCATION
 } from "../constants/ActionTypes";
 
-// TODO: translate english strings
-
 import { showSnackBar } from "./UiActions";
 
 function getGeocoderUrl(coords) {
@@ -17,8 +16,10 @@ function getGeocoderUrl(coords) {
 
 function showSnackBarGeolocationSuccess(dispatch) {
   const options = {
-    message: "Successfully retrieved your location",
-    subMessage: "Your search-results will be based on your current location",
+    message: i18next.t("Successfully retrieved your location"),
+    subMessage: i18next.t(
+      "Your search-results will be based on your current location"
+    ),
     autoHideDuration: 3000
   };
   showSnackBar(dispatch, options);
@@ -26,8 +27,10 @@ function showSnackBarGeolocationSuccess(dispatch) {
 
 function showSnackBarGeolocationError(dispatch) {
   const options = {
-    message: "There was an error while retrieving your location",
-    subMessage: "Your search-results can not be based on your location",
+    message: i18next.t("There was an error while retrieving your location"),
+    subMessage: i18next.t(
+      "Your search-results can not be based on your location"
+    ),
     autoHideDuration: 3000,
     isError: true
   };
@@ -36,8 +39,10 @@ function showSnackBarGeolocationError(dispatch) {
 
 function showSnackBarGeolocationTurnedOff(dispatch) {
   const options = {
-    message: "Turned off geolocation awareness",
-    subMessage: "Your search-results will no longer be based on your location",
+    message: i18next.t("Turned off geolocation awareness"),
+    subMessage: i18next.t(
+      "Your search-results will no longer be based on your location"
+    ),
     autoHideDuration: 3000
   };
   showSnackBar(dispatch, options);

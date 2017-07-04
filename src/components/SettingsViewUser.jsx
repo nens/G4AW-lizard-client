@@ -9,9 +9,10 @@ import { HeaderBar } from ".";
 
 class SettingsViewUserComponent extends Component {
   render() {
+    const { t } = this.props;
     return (
       <div>
-        <HeaderBar title="User menu" icon="filter_list" />
+        <HeaderBar title={t("User menu")} />
         <div>TODO...</div>
       </div>
     );
