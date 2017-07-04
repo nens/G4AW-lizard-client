@@ -1,3 +1,4 @@
+import i18next from "i18next";
 import {
   SHOW_SNACKBAR,
   GET_ATTRIBUTES_FROM_GEOSERVER,
@@ -58,10 +59,11 @@ function handleGeoserverError(
 }
 
 function showSnackBarParcelReceiveError(dispatch, placeName) {
+  const subMessage = i18next.t("No details found for");
   const options = {
     isError: true,
-    message: "There was an error while fetching the parcel details.",
-    subMessage: "No details found for " + placeName
+    message: i18next.t("There was an error while fetching the parcel details."),
+    subMessage: `${subMessage} placeName`
   };
   showSnackBar(dispatch, options);
 }

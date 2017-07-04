@@ -1,3 +1,4 @@
+import i18next from "i18next";
 import {
   FETCH_BOOTSTRAP,
   RECEIVE_BOOTSTRAP_SUCCESS,
@@ -36,8 +37,10 @@ export function fetchBootstrap(dispatch, sessionState) {
     bootstrap => {
       dispatch(receiveBootstrapSuccessAction(bootstrap));
       showSnackBar(dispatch, {
-        message: "The application initialized succesfully",
-        subMessage: "The required data was retrieved from the server",
+        message: i18next.t("The application initialized succesfully"),
+        subMessage: i18next.t(
+          "The required data was retrieved from the server"
+        ),
         autoHideDuration: 3000
       });
     },
@@ -46,8 +49,8 @@ export function fetchBootstrap(dispatch, sessionState) {
       console.error(error);
       showSnackBar(dispatch, {
         isError: true,
-        message: "There was an error initializing the application",
-        subMessage: "The application may not work as expected"
+        message: i18next.t("There was an error initializing the application"),
+        subMessage: i18next.t("The application may not work as expected")
       });
     }
   );
