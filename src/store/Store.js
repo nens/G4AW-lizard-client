@@ -1,3 +1,4 @@
+import i18next from "i18next";
 import { createStore, applyMiddleware, combineReducers } from "redux";
 import { createLogger } from "redux-logger";
 import thunkMiddleware from "redux-thunk";
@@ -17,7 +18,7 @@ createStoreWithMiddleware = applyMiddleware(thunkMiddleware, logger)(
 export const initialUiState = {
   currentView: "ListSearchView",
   searchView: "ListSearchView",
-  currentSettingsTab: "Settings",
+  currentSettingsTabIdx: 0,
   searchResultsAsList: false,
   showSnackBar: false,
   showLegend: false,
@@ -59,7 +60,7 @@ export const initialGeolocationState = {
 export const initialBaselayerState = {
   layers: [
     {
-      title: "Topography",
+      title: i18next.t("Topography"),
       attribution: "",
       url:
         "https://{s}.tiles.mapbox.com/v3/nelenschuurmans.iaa98k8k/{z}/{x}/{y}.png",
@@ -71,7 +72,7 @@ export const initialBaselayerState = {
       active: true
     },
     {
-      title: "Satellite",
+      title: i18next.t("Satellite"),
       attribution: "",
       url:
         "https://{s}.tiles.mapbox.com/v3/nelenschuurmans.iaa79205/{z}/{x}/{y}.png",
@@ -83,7 +84,7 @@ export const initialBaselayerState = {
       active: false
     },
     {
-      title: "Neutral",
+      title: i18next.t("Neutral"),
       attribution: "",
       url:
         "https://{s}.tiles.mapbox.com/v3/nelenschuurmans.l15e647c/{z}/{x}/{y}.png",
@@ -109,7 +110,7 @@ export const initialForegroundlayerState = {
   url: "https://maps1.project.lizard.net/geoserver/Q0007_sat4rice_2018/wms",
   layers: [
     {
-      title: "Rice fields",
+      title: i18next.t("Rice fields"),
       uuid: "01d932b",
       active: true,
       slug: "latest_weekly_LT",
@@ -117,7 +118,7 @@ export const initialForegroundlayerState = {
         "https://maps1.project.lizard.net/geoserver/Q0007_sat4rice_2018/wms?service=WMS&request=GetMap&layers=latest_weekly_LT&styles=&format=image%2Fpng&transparent=True&version=1.1.1&height=256&width=256&srs=EPSG%3A3857&bbox=11707095.252157595,1165511.8072923678,11707706.748383878,1166123.3035186497"
     },
     {
-      title: "Growth stages",
+      title: i18next.t("Growth stages"),
       uuid: "aaa1b7c",
       active: false,
       slug: "latest_weekly_growth_stages",
@@ -125,7 +126,7 @@ export const initialForegroundlayerState = {
         "https://maps1.project.lizard.net/geoserver/Q0007_sat4rice_2018/wms?service=WMS&request=GetMap&layers=latest_weekly_growth_stages&styles=&format=image%2Fpng&transparent=True&version=1.1.1&height=256&width=256&srs=EPSG%3A3857&bbox=11707095.252157595,1165511.8072923678,11707706.748383878,1166123.3035186497"
     },
     {
-      title: "Pest presence",
+      title: i18next.t("Pest presence"),
       uuid: "15d1155",
       active: false,
       slug: "latest_weekly_pest_presence",

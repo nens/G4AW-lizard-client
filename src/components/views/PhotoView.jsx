@@ -30,7 +30,7 @@ class PhotoViewComponent extends Component {
     });
   }
   render() {
-    const { photo, handleBackButtonClick } = this.props;
+    const { photo, handleBackButtonClick, t } = this.props;
     const { imageStatus } = this.state;
     const datetime = new Date(photo.date).toString();
     const dimensions = { width: WIDTH, height: HEIGHT };
@@ -52,6 +52,7 @@ class PhotoViewComponent extends Component {
           <PhotoViewBottomPanel
             ref={component => (this.bottomPanelComponent = component)}
             datetime={datetime}
+            t={t}
           />
         </div>
       </div>
@@ -109,18 +110,22 @@ class PhotoViewMidPanel extends Component {
 
 class PhotoViewBottomPanel extends Component {
   render() {
-    const { datetime } = this.props;
+    const { datetime, t } = this.props;
     return (
       <div className={styles.PhotoPropertiesPanel}>
         <div className={styles.PhotoProperties}>
-          <p className={styles.General}>General</p>
+          <p className={styles.General}>
+            {t("General")}
+          </p>
           <table className={styles.PropertiesTable}>
             <tbody>
               <tr>
                 <td className={styles.PropertiesTableFirstColumn}>
-                  Date taken
+                  {t("Date taken")}
                 </td>
-                <td>{datetime}</td>
+                <td>
+                  {datetime}
+                </td>
               </tr>
             </tbody>
           </table>
