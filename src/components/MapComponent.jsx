@@ -65,8 +65,10 @@ class MapComponent extends Component {
           const parcel = getParcel(r);
           return (
             <Polygon
-              color="#ff0000"
-              stroke="1"
+              color="#3DB249"
+              stroke={true}
+              weight={2}
+              dashArray="5, 5"
               key={i}
               positions={parcel.geometry.coordinates}
               onClick={() => getDetails(r)}
