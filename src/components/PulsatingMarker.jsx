@@ -9,15 +9,19 @@ import styles from "./styles/PulsatingMarker.css";
 
 class PulsatingMarker extends PureComponent {
   render() {
+    const { lat, lng } = this.props;
     return (
       <Marker
-        position={[13.0474, 107.7429]}
+        position={[lng, lat]}
         icon={L.divIcon({ className: styles.PulsatingMarker })}
       />
     );
   }
 }
 
-PulsatingMarker.propTypes = {};
+PulsatingMarker.propTypes = {
+  lat: PropTypes.number.required,
+  lng: PropTypes.number.required
+};
 
 export default PulsatingMarker;

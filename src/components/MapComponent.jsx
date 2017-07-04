@@ -5,10 +5,10 @@ import ReactDOM from "react-dom";
 import bbox from "@turf/bbox";
 import flip from "@turf/flip";
 import { feature, featureCollection } from "@turf/helpers";
+import { PulsatingMarker } from ".";
 import {
   Map,
   TileLayer,
-  Marker,
   GeoJSON,
   Popup,
   Polygon,
@@ -56,7 +56,8 @@ class MapComponent extends Component {
       getBaselayerUrl,
       foregroundlayerUrl,
       getActiveForegroundlayer,
-      currentBoundingBox
+      currentBoundingBox,
+      geolocation
     } = this.props;
 
     const searchResultsAsPolygons = searchResults
@@ -64,8 +65,10 @@ class MapComponent extends Component {
           const parcel = getParcel(r);
           return (
             <Polygon
-              color="#ff0000"
-              stroke="1"
+              color="#3DB249"
+              stroke={true}
+              weight={2}
+              dashArray="5, 5"
               key={i}
               positions={parcel.geometry.coordinates}
               onClick={() => getDetails(r)}
@@ -134,6 +137,12 @@ class MapComponent extends Component {
             transparent="True"
             format="image/png"
           />
+          {geolocation.data
+            ? <PulsatingMarker
+                lat={geolocation.data.lat}
+                lng={geolocation.data.lng}
+              />
+            : null}
           {searchResultsAsPolygons}
         </Map>
       </div>
@@ -152,6 +161,7 @@ function mapStateToProps(state) {
       const activeBaselayer = find(state.baselayer.layers, { active: true });
       return activeBaselayer.url;
     },
+    geolocation: state.geolocation,
     foregroundlayerUrl: state.foregroundlayer.url,
     getActiveForegroundlayer: () => {
       return find(state.foregroundlayer.layers, { active: true });
