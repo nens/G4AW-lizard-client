@@ -70,7 +70,7 @@ class MapComponent extends Component {
               weight={2}
               dashArray="5, 5"
               key={i}
-              positions={parcel.geometry.coordinates}
+              positions={flip(parcel.geometry).coordinates}
               onClick={() => getDetails(r)}
             />
           );
@@ -80,7 +80,7 @@ class MapComponent extends Component {
     const parcels = searchResults
       ? searchResults.map((r, i) => {
           const parcel = getParcel(r);
-          return flip(feature(parcel.geometry));
+          return feature(parcel.geometry);
         })
       : [];
 

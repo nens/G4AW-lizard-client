@@ -26,16 +26,82 @@ import { WIDTH } from "../../tools/dimensions";
 
 const DEFAULT_ZOOM = 11; // Used for map in header of the page
 
-function getTabularDataKeys(t) {
-  return [
-    t("name"),
-    t("3CForce"),
-    t("Farmer"),
-    t("FieldAdr"),
-    t("Hectare"),
-    t("LocTroi")
-  ];
-}
+const NO_DATA = "...";
+
+const GEOSERVER_PARCEL_KEYS = {
+  FarmID: "Mã số ruộng",
+  FieldOfficer: "Tên người thu thập",
+  Visit: "Ngày thăm ruộng",
+  SpecialSituation: "Vui lòng ghi ra những tình huống đặc biệt",
+  GrowthStage: "Giai đoạn",
+  CropCondition: "Tình trạng cây lúa",
+  SowDate: "Ngày gieo sạ (nếu sạ)",
+  HarvestDate: "Nếu đã thu hoạch, ngày thu hoạch",
+  "Yield(Kg/Ha)": "Năng suất (kg / ha)",
+  "Price(₫/Kg)": "Giá / kg gạo (VND)",
+  "HarvestedWeightInKg(wet)":
+    "Trọng lượng của lúa tươi được thu hoạch (kg) là bao nhiêu?",
+  "HarvestedWeightInKg(dry)": "Trọng lượng của gạo sấy được thu hoạch (kg)?",
+  MoistureContent: "Độ ẩm",
+  PestRisk: "Nguy cơ sâu bệnh",
+  BrownPlantHopperPresent: "Rầy nâu",
+  LeaffolderPresent: "Sâu cuốn lá",
+  BlastPresent: "Đạo ôn lá",
+  BlastRisk: "Đạo ôn lá rủi ro",
+  BrownPlantHopperRisk: "Rầy nâu rủi ro",
+  LeaffolderRisk: "Sâu cuốn lá rủi ro",
+  FloodRisk: "Nguy cơ lũ lụt",
+  PlantHeightInCm: "Chiều cao cây lúa (cm)",
+  "NumberOfStemsPerM²": "Trường hợp SẠ - Số nhánh lúa trên mét vuông",
+  FieldSizeInHa: "Kích thước đồng ruộng trong ha",
+  Variety: "Giống lúa"
+};
+
+const GEOSERVER_PARCEL_VALUES = {
+  Flowering: "Trổ",
+  "Rove beetle (Paederus fuscipes)": "Kiến 3 khoang",
+  Inundated: "Ngập nước",
+  No: "Không",
+  "Self-pumping": "Tự bơm",
+  "Irrigation system": "Hệ thống thủy lợi",
+  Tillering: "Đẻ nhánh",
+  Yes: "Vâng",
+  "Drough damage": "Thiệt hại do khô hạn",
+  "Less then 1 % of thefield": "< 1%",
+  "More than 50% of the field": "> 50%",
+  Age2: "tuổi 2",
+  "Between 1% and 5% of field": "> 1 - 5%",
+  "Pest/disease damage": "Thiệt hại do sâu bệnh",
+  "Green mirrid bug (Cyrtorhinus Lividipennis)": "Bọ xít mù xanh",
+  Age1: "tuổi 1",
+  Harvesting: "Thu hoạch",
+  Adult: "trưởng thành",
+  Booting: "Làm đòng",
+  Ripening: "Chín",
+  "Flood damage": "Thiệt hại do lũ",
+  "Salinity damage": "Thiệt hại do nhiễm mặn",
+  Milking: "Ngậm sữa",
+  Age5: "tuổi 5",
+  Age4: "tuổi 4",
+  "Between 25% and 50% of the field": "> 25 - 50%",
+  Dry: "Khô",
+  Age3: "tuổi 3",
+  "Acid soil damage": "Thiệt hại do nhiễm phèn",
+  Other: "Khác",
+  Seedling: "Sạ",
+  "River water": "Nước sông",
+  "Between 5% and 25% of the field": "> 5 - 25%",
+  Wet: "Ướt",
+  "Rain water": "Nước mưa",
+  Good: "Bình thường",
+  Spider: "Nhện",
+  High: "Cao",
+  Medium: " Trung bình",
+  Low: "Thấp",
+  True: "Thật",
+  False: "Sai",
+  "Needs attention": "Cần sự chú ý"
+};
 
 ///////////////////////////////////////////////////////////////////////////////
 // The main Component; the View for displaying the details of a single parcel /
@@ -46,17 +112,33 @@ class DetailViewComponent extends Component {
     super();
     this.handleViewOnMapClick = this.handleViewOnMapClick.bind(this);
   }
-  formatTabularData(parcel, t) {
-    return getTabularDataKeys(t).map(requiredKey => {
-      return { key: requiredKey, value: parcel[requiredKey] || "..." };
+  formatTabularData(parcel) {
+    let result = [],
+      vnKey,
+      enValue,
+      vnValue;
+    Object.keys(GEOSERVER_PARCEL_KEYS).forEach(enKey => {
+      vnKey = GEOSERVER_PARCEL_KEYS[enKey];
+      enValue = parcel[enKey];
+      if (enValue) {
+        if (GEOSERVER_PARCEL_VALUES.hasOwnProperty(enValue)) {
+          vnValue = GEOSERVER_PARCEL_VALUES[enValue];
+        } else {
+          vnValue = enValue;
+        }
+      } else {
+        vnValue = NO_DATA;
+      }
+      result.push({ key: vnKey, value: vnValue });
     });
+    return result;
   }
   getLatLonZoom(coords) {
     let latSum = 0,
       lonSum = 0;
     coords.forEach(function(coord) {
-      latSum += coord[0];
-      lonSum += coord[1];
+      latSum += coord[1];
+      lonSum += coord[0];
     });
     const latAvg = latSum / coords.length,
       lonAvg = lonSum / coords.length;
@@ -94,7 +176,7 @@ class DetailViewComponent extends Component {
     let tabularData, latlonzoom;
     if (parcel && parcel.hasGeoserverData) {
       latlonzoom = this.getLatLonZoom(parcel.geometry.coordinates[0]);
-      tabularData = this.formatTabularData(parcel, t);
+      tabularData = this.formatTabularData(parcel);
     } else {
       return null;
     }

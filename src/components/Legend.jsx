@@ -18,7 +18,6 @@ import {
 
 class LegendComponent extends Component {
   render() {
-    //const { data, activeLegendIdx, isOpen } = this.props;
     const {
       isOpen,
       getActiveForegroundlayer,

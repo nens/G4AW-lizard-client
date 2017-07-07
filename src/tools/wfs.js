@@ -1,15 +1,12 @@
-// const wfsUrl = "/proxy/http://geoserver9.lizard.net/geoserver/g4aw/wms"; // Proxied because of CORS errors
-// const parcelLayer = "g4aw:g4aw_vn_ricefield_vin_bihn";
-
 const wfsUrl =
-  "/proxy/http://maps1.project.lizard.net/geoserver/Q0007_sat4rice_2018/wms";
-const parcelLayer = "g4aw:latest_weekly_LT";
+  "/proxy/http://maps1.project.lizard.net/geoserver/Q0007_sat4rice_2018/wfs";
+const PARCEL_LAYER = "Q0007_sat4rice_2018:latest_weekly_LT";
 
 const getFeatureParams = {
   service: "WFS",
   request: "GetFeature",
   outputFormat: "application/json",
-  typeName: parcelLayer
+  typeName: PARCEL_LAYER
 };
 
 export function getParcelAttributes(parcelId) {

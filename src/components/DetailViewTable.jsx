@@ -31,9 +31,9 @@ DetailViewTable.propTypes = {
 class DetailViewTableRow extends Component {
   getIcon(str) {
     switch (str) {
-      case "yes":
+      case "Vâng": // "Yes"
         return <YesIcon />;
-      case "no":
+      case "Không": // "No"
         return <NoIcon />;
       default:
         return null;
@@ -43,10 +43,15 @@ class DetailViewTableRow extends Component {
     const { passedKey, row } = this.props;
     return (
       <tr key={passedKey} className={styles.Row}>
-        <td className={styles.ColKey}>{row.key}</td>
-        <td>{row.value}</td>
+        <td className={styles.ColKey}>
+          {row.key}
+        </td>
+        <td>
+          {row.value}
+        </td>
+
         <td className={styles.ColValue}>
-          {this.getIcon(row.value.toLowerCase())}
+          {this.getIcon(row.value)}
         </td>
       </tr>
     );
