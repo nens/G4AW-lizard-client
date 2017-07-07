@@ -21,7 +21,8 @@ class LegendComponent extends Component {
     const {
       isOpen,
       getActiveForegroundlayer,
-      getActiveForegroundlayerIdx
+      getActiveForegroundlayerIdx,
+      t
     } = this.props;
     const activeLegendIdx = getActiveForegroundlayerIdx();
     const currentLayer = getActiveForegroundlayer();
@@ -35,7 +36,7 @@ class LegendComponent extends Component {
           <div className={styles.LegendWrapper} id="Legend">
             <div className={styles.Legend}>
               <LegendTopBar layerTitle={layerTitle} {...this.props} />
-              <LegendBody colormap={currentLayer.colormap} />
+              <LegendBody colormap={currentLayer.colormap} t={t} />
             </div>
           </div>
         </VelocityTransitionGroup>
@@ -126,8 +127,8 @@ class LegendBody extends Component {
     );
   }
   render() {
-    const { colormap } = this.props;
-    const msg = "No legend to show for this layer";
+    const { colormap, t } = this.props;
+    const msg = t("No legend to show for this layer");
     return (
       <Scrollbars style={{ width: "100%", height: 260 }}>
         <div className={styles.LegendBody} id="LegendBody">
@@ -177,4 +178,4 @@ function mapDispatchToProps(dispatch) {
 
 const Legend = connect(mapStateToProps, mapDispatchToProps)(LegendComponent);
 
-export default Legend;
+export default translate()(Legend);
