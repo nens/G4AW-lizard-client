@@ -32,19 +32,6 @@ class MapSearchViewComponent extends Component {
         <SearchBar />
         <ViewSwitchButton viewIsMap />
 
-        {/*
-        <Legend
-          handleToggleLegend={() => console.log("open/close")}
-          handlePreviousLayer={() => console.log("handlePrevLayer")}
-          handleNextLayer={() => console.log("handleNextLayer")}
-          activeLegendIdx={2}
-
-          data={LEGEND_DATA}
-
-          isOpen={showLegend}
-        />
-        */}
-
         <Legend isOpen={showLegend} />
 
         <FooterBar>

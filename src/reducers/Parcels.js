@@ -3,38 +3,33 @@ import { initialParcelsState } from "../store/Store";
 
 import omit from "lodash/omit";
 
-// These are the fields currently returned, 20170517
+// These are the new fields currently returned, 2017-07-07
 const GEOSERVER_ATTRIBUTES = [
-  "IncomeTota",
-  "LocTroi",
-  "ProfitTota",
-  "3CForce",
-  "LaborSelf",
-  "WaterSourc",
-  "Farmer",
-  "IncomeHa",
-  "LaborHired",
-  "Method",
-  "SowingDay",
-  "YieldWet",
-  "Price",
-  "Variety",
-  "FarmerAdr",
-  "Phone",
-  "InputHa",
-  "InputTotal",
-  "FieldAdr",
-  "HarvestDay",
-  "ProfitHa",
-  "RiceCost",
-  "Pesticide",
-  "MoistPerc",
-  "Fertiliser",
-  "Irrigation",
   "FarmID",
-  "YieldDry",
-  "Hectare",
-  "Season"
+  "FieldOfficer",
+  "Visit",
+  "SpecialSituation",
+  "GrowthStage",
+  "CropCondition",
+  "SowDate",
+  "HarvestDate",
+  "Yield(Kg/Ha)",
+  "Price(₫/Kg)",
+  "HarvestedWeightInKg(wet)",
+  "HarvestedWeightInKg(dry)",
+  "MoistureContent",
+  "PestRisk",
+  "BrownPlantHopperPresent",
+  "LeaffolderPresent",
+  "BlastPresent",
+  "BlastRisk",
+  "BrownPlantHopperRisk",
+  "LeaffolderRisk",
+  "FloodRisk",
+  "PlantHeightInCm",
+  "NumberOfStemsPerM²",
+  "FieldSizeInHa",
+  "Variety"
 ];
 
 const initialParcel = {
