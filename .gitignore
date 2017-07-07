@@ -10,6 +10,7 @@
 /build
 lib
 *.bak
+dist
 
 # misc
 .DS_Store
