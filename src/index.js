@@ -1,11 +1,10 @@
+import i18n from "./i18n"; // initialized i18next instance
 import { AppContainer } from "react-hot-loader";
 import { HashRouter as Router, Route, Link } from "react-router-dom";
 import { I18nextProvider } from "react-i18next";
 import { Provider } from "react-redux";
 import { theStore } from "./store/Store";
-
 import App from "./components/App";
-import i18n from "./i18n"; // initialized i18next instance
 import React from "react";
 import ReactDOM from "react-dom";
 import valuesES2017 from "object.values";
