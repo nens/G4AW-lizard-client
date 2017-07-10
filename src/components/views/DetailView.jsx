@@ -23,7 +23,11 @@ import { changeView } from "../../actions/UiActions";
 import { updateMapLocationBbox } from "../../actions/MapActions";
 import { THUMBNAIL_LIST, LOREM } from "../../../stories/helpers";
 import { WIDTH } from "../../tools/dimensions";
-import { rgbaListToString } from "../../tools/string-formatting";
+import {
+  rgbaListToRgbaString,
+  hexColorToRGB,
+  rgbaListToHexColor
+} from "../../tools/string-formatting";
 
 const DEFAULT_ZOOM = 11; // Used for map in header of the page
 
@@ -243,41 +247,15 @@ class DetailViewComponent extends Component {
                     {riceGrowthLayer.colormap.map((kv, i) => {
                       const label = Object.keys(kv)[0];
                       const color = Object.values(kv)[0];
-                      const opacity = label === parcel.GrowthStage ? 1 : 0.1;
                       return (
-                        <div
+                        <ColoredSquare
                           key={i}
-                          className={styles.ColoredSquare}
                           title={`Growth stage: ${label}`}
-                          style={{
-                            backgroundColor: rgbaListToString(color),
-                            opacity: opacity
-                          }}
+                          backgroundColorHex={rgbaListToHexColor(color)}
+                          active={label === parcel.GrowthStage}
                         />
                       );
                     })}
-                  </div>
-                </DetailViewSection>
-                <DetailViewSection isOpen={false} title={t("Pest Risk")}>
-                  <div className={styles.ColoredSquaresContainer}>
-                    <div className={styles.ColoredSquaresHeader}>
-                      {parcel.PestRisk.toUpperCase()}
-                    </div>
-                    <ColoredSquare
-                      title="High blast risk"
-                      backgroundColor="#FFFFFF"
-                      active={parcel.BlastRisk === "High"}
-                    />
-                    <ColoredSquare
-                      title="High leaffolder risk"
-                      backgroundColor="#D7BA34"
-                      active={parcel.LeaffolderRisk === "High"}
-                    />
-                    <ColoredSquare
-                      title="High brown planthopper risk"
-                      backgroundColor="#703F1D"
-                      active={parcel.BrownPlantHopperRisk === "High"}
-                    />
                   </div>
                 </DetailViewSection>
                 <DetailViewSection isOpen={false} title={t("Flood Risk")}>
@@ -287,18 +265,40 @@ class DetailViewComponent extends Component {
                     </div>
                     <ColoredSquare
                       title="Low flood risk"
-                      backgroundColor="#FFFFFF"
+                      backgroundColorHex="#FFFFFF"
                       active={parcel.FloodRisk === "Low"}
                     />
                     <ColoredSquare
                       title="Medium flood risk"
-                      backgroundColor="#697DB0"
+                      backgroundColorHex="#697DB0"
                       active={parcel.FloodRisk === "Medium"}
                     />
                     <ColoredSquare
                       title="High flood risk"
-                      backgroundColor="#122476"
+                      backgroundColorHex="#122476"
                       active={parcel.FloodRisk === "High"}
+                    />
+                  </div>
+                </DetailViewSection>
+                <DetailViewSection isOpen={false} title={t("Pest Risk")}>
+                  <div className={styles.ColoredSquaresContainer}>
+                    <div className={styles.ColoredSquaresHeader}>
+                      {parcel.PestRisk.toUpperCase()}
+                    </div>
+                    <ColoredSquare
+                      title="High blast risk"
+                      backgroundColorHex="#FFFFFF"
+                      active={parcel.BlastRisk === "High"}
+                    />
+                    <ColoredSquare
+                      title="High leaffolder risk"
+                      backgroundColorHex="#D7BA34"
+                      active={parcel.LeaffolderRisk === "High"}
+                    />
+                    <ColoredSquare
+                      title="High brown planthopper risk"
+                      backgroundColorHex="#703F1D"
+                      active={parcel.BrownPlantHopperRisk === "High"}
                     />
                   </div>
                 </DetailViewSection>
@@ -319,13 +319,25 @@ class DetailViewComponent extends Component {
 // local sub-components ///////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
 
-function ColoredSquare({ title, backgroundColor, active }) {
-  const opacity = active ? 1 : 0.1;
+function ColoredSquare({
+  title,
+  backgroundColorHex,
+  active,
+  key = Math.round(Math.random() * 10000)
+}) {
+  // const opacity = active ? 1 : 0.1;
+  const rgba = hexColorToRGB(backgroundColorHex);
+  rgba.push(active ? 1 : 0.3);
+  console.log("*** rgba =", rgba);
+  const backgroundColor = rgbaListToRgbaString(rgba);
+  console.log("*** backgroundColor =", backgroundColor);
+  const border = `${active ? "3" : "1"}px solid ${active ? "#555" : "#D8D8D8"}`;
   return (
     <div
+      key={key}
       className={styles.ColoredSquare}
       title={title}
-      style={{ backgroundColor, opacity }}
+      style={{ backgroundColor, border }}
     />
   );
 }
