@@ -5,5 +5,11 @@
   "Welcome": "Welkom",
   "Location data is being fetched": {
     "": {}
-  }
+  },
+  "3CForce": "3CForce",
+  "Farmer": "Boer",
+  "FieldAdr": "Veld adres",
+  "Hectare": "Hectare",
+  "LocTroi": "LocTroi",
+  "name": "naam"
 }

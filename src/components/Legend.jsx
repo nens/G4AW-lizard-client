@@ -28,6 +28,8 @@ class LegendComponent extends Component {
     const currentLayer = getActiveForegroundlayer();
     const layerTitle = currentLayer.title;
 
+    // console.log("[dbg] currentLayer =", currentLayer);
+
     return isOpen
       ? <VelocityTransitionGroup
           runOnMount={true}

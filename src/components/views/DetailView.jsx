@@ -23,6 +23,7 @@ import { changeView } from "../../actions/UiActions";
 import { updateMapLocationBbox } from "../../actions/MapActions";
 import { THUMBNAIL_LIST, LOREM } from "../../../stories/helpers";
 import { WIDTH } from "../../tools/dimensions";
+import { rgbaListToString } from "../../tools/string-formatting";
 
 const DEFAULT_ZOOM = 11; // Used for map in header of the page
 
@@ -44,12 +45,12 @@ const GEOSERVER_PARCEL_KEYS = {
   "HarvestedWeightInKg(dry)": "Trọng lượng của gạo sấy được thu hoạch (kg)?",
   MoistureContent: "Độ ẩm",
   PestRisk: "Nguy cơ sâu bệnh",
-  BrownPlantHopperPresent: "Rầy nâu",
-  LeaffolderPresent: "Sâu cuốn lá",
-  BlastPresent: "Đạo ôn lá",
-  BlastRisk: "Đạo ôn lá rủi ro",
-  BrownPlantHopperRisk: "Rầy nâu rủi ro",
   LeaffolderRisk: "Sâu cuốn lá rủi ro",
+  LeaffolderPresent: "Sâu cuốn lá",
+  BlastRisk: "Đạo ôn lá rủi ro",
+  BlastPresent: "Đạo ôn lá",
+  BrownPlantHopperRisk: "Rầy nâu rủi ro",
+  BrownPlantHopperPresent: "Rầy nâu",
   FloodRisk: "Nguy cơ lũ lụt",
   PlantHeightInCm: "Chiều cao cây lúa (cm)",
   "NumberOfStemsPerM²": "Trường hợp SẠ - Số nhánh lúa trên mét vuông",
@@ -112,7 +113,7 @@ class DetailViewComponent extends Component {
     super();
     this.handleViewOnMapClick = this.handleViewOnMapClick.bind(this);
   }
-  formatTabularData(parcel) {
+  formatTabularDataVN(parcel) {
     let result = [],
       vnKey,
       enValue,
@@ -133,6 +134,15 @@ class DetailViewComponent extends Component {
     });
     return result;
   }
+  formatTabularDataEN(parcel) {
+    let enValue,
+      result = [];
+    Object.keys(GEOSERVER_PARCEL_KEYS).forEach(enKey => {
+      enValue = parcel[enKey] || NO_DATA;
+      result.push({ key: enKey, value: enValue });
+    });
+    return result;
+  }
   getLatLonZoom(coords) {
     let latSum = 0,
       lonSum = 0;
@@ -149,15 +159,31 @@ class DetailViewComponent extends Component {
       const boundingBox = bbox(feature(parcel.geometry));
       this.props.updateMapLocationBbox({
         _northEast: {
-          lat: boundingBox[0],
-          lng: boundingBox[1]
+          lat: boundingBox[1],
+          lng: boundingBox[0]
         },
         _southWest: {
-          lat: boundingBox[2],
-          lng: boundingBox[3]
+          lat: boundingBox[3],
+          lng: boundingBox[2]
         }
       });
       this.props.changeToMapSearchView();
+    }
+  }
+  getHumanReadablePestRisk(parcel) {
+    const riskLevel = parcel.PestRisk.toUpperCase();
+    if (riskLevel === "HIGH") {
+      let riskReason;
+      if (parcel.BlastRisk === "High") {
+        riskReason = "there is a high chance of 'blast' presence.";
+      } else if (parcel.BrownPlantHopperRisk === "High") {
+        riskReason = "there is a high chance of 'brown planthopper' presence.";
+      } else {
+        riskReason = "there is a high chance of 'leaffolder' presence.";
+      }
+      return `${riskLevel}: ${riskReason}`;
+    } else {
+      return "LOW: there is a low isk for pest presence.";
     }
   }
   render() {
@@ -169,14 +195,15 @@ class DetailViewComponent extends Component {
       changeView, // via: mapDispatchToProps
       parcel, // via: mapStateToProps
       photo, // via: parent
-      searchView, // via: mapStateToProps
+      searchView, // via: mapStateToProps,
+      riceGrowthLayer, // via: mapStateToProps
       t
     } = this.props;
 
     let tabularData, latlonzoom;
     if (parcel && parcel.hasGeoserverData) {
       latlonzoom = this.getLatLonZoom(parcel.geometry.coordinates[0]);
-      tabularData = this.formatTabularData(parcel);
+      tabularData = this.formatTabularDataEN(parcel);
     } else {
       return null;
     }
@@ -187,8 +214,8 @@ class DetailViewComponent extends Component {
       >
         <div id="DetailView" className={styles.DetailView}>
           <DetailViewHeader
-            title={parcel.Farmer}
-            subTitle={parcel.FieldAdr}
+            title={`Farmer ${parcel.FarmID}`}
+            subTitle={parcel.FieldOfficer}
             halfMode={false}
             latlonzoom={latlonzoom}
             handleBackButtonClick={() => changeToSearchView(searchView)}
@@ -196,9 +223,6 @@ class DetailViewComponent extends Component {
           {parcel.isFetchingGeoserver
             ? <DetailViewSpinner />
             : <div>
-                <p style={{ padding: "20px" }}>
-                  {LOREM}
-                </p>
                 <div className={styles.MapZoomToParcel}>
                   <FlatButton
                     buttonText="View on map"
@@ -210,21 +234,73 @@ class DetailViewComponent extends Component {
                 <DetailViewSection
                   isOpen
                   title={t("Rice Growth")}
-                  subTitle={t("ving bhin data")}
                   colorCode={"#ff0000"}
                 >
-                  <p style={{ padding: "20px" }}>
-                    {LOREM}
-                  </p>
+                  <div className={styles.ColoredSquaresContainer}>
+                    <div className={styles.ColoredSquaresHeader}>
+                      {parcel.GrowthStage.toUpperCase()}
+                    </div>
+                    {riceGrowthLayer.colormap.map((kv, i) => {
+                      const label = Object.keys(kv)[0];
+                      const color = Object.values(kv)[0];
+                      const opacity = label === parcel.GrowthStage ? 1 : 0.2;
+                      return (
+                        <div
+                          key={i}
+                          className={styles.ColoredSquare}
+                          title={`Growth stage: ${label}`}
+                          style={{
+                            backgroundColor: rgbaListToString(color),
+                            opacity: opacity
+                          }}
+                        />
+                      );
+                    })}
+                  </div>
                 </DetailViewSection>
-                <DetailViewSection
-                  isOpen={false}
-                  title={t("Flood Risk")}
-                  subTitle={t("ving bhin data")}
-                >
-                  <p style={{ padding: "20px" }}>
-                    {LOREM}
-                  </p>
+                <DetailViewSection isOpen={false} title={t("Pest Risk")}>
+                  <div className={styles.ColoredSquaresContainer}>
+                    <div className={styles.ColoredSquaresHeader}>
+                      {parcel.PestRisk.toUpperCase()}
+                    </div>
+                    <ColoredSquare
+                      title="High blast risk"
+                      backgroundColor="#FFFFFF"
+                      active={parcel.BlastRisk === "High"}
+                    />
+                    <ColoredSquare
+                      title="High leaffolder risk"
+                      backgroundColor="#D7BA34"
+                      active={parcel.LeaffolderRisk === "High"}
+                    />
+                    <ColoredSquare
+                      title="High brown planthopper risk"
+                      backgroundColor="#703F1D"
+                      active={parcel.BrownPlantHopperRisk === "High"}
+                    />
+                  </div>
+                </DetailViewSection>
+                <DetailViewSection isOpen={false} title={t("Flood Risk")}>
+                  <div className={styles.ColoredSquaresContainer}>
+                    <div className={styles.ColoredSquaresHeader}>
+                      {parcel.FloodRisk.toUpperCase()}
+                    </div>
+                    <ColoredSquare
+                      title="Low flood risk"
+                      backgroundColor="#FFFFFF"
+                      active={parcel.FloodRisk === "Low"}
+                    />
+                    <ColoredSquare
+                      title="Medium flood risk"
+                      backgroundColor="#697DB0"
+                      active={parcel.FloodRisk === "Medium"}
+                    />
+                    <ColoredSquare
+                      title="High flood risk"
+                      backgroundColor="#122476"
+                      active={parcel.FloodRisk === "High"}
+                    />
+                  </div>
                 </DetailViewSection>
                 <DetailViewPhotoSection
                   isOpen={false}
@@ -242,6 +318,17 @@ class DetailViewComponent extends Component {
 ///////////////////////////////////////////////////////////////////////////////
 // local sub-components ///////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
+
+function ColoredSquare({ title, backgroundColor, active }) {
+  const opacity = active ? 1 : 0.2;
+  return (
+    <div
+      className={styles.ColoredSquare}
+      title={title}
+      style={{ backgroundColor, opacity }}
+    />
+  );
+}
 
 class DetailViewSpinner extends Component {
   render() {
@@ -268,7 +355,8 @@ function mapStateToProps(state) {
   return {
     currentView: state.ui.currentView,
     searchView: state.ui.searchView,
-    parcel: state.parcels && state.parcels[state.ui.selectedParcel]
+    parcel: state.parcels && state.parcels[state.ui.selectedParcel],
+    riceGrowthLayer: state.foregroundlayer.layers[1]
   };
 }
 

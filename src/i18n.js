@@ -5,7 +5,6 @@ i18n.use(LngDetector).init({
   detection: {
     order: ["navigator"]
   },
-
   fallbackLng: "en",
   resources: {
     en: {
