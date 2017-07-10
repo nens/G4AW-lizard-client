@@ -325,12 +325,9 @@ function ColoredSquare({
   active,
   key = Math.round(Math.random() * 10000)
 }) {
-  // const opacity = active ? 1 : 0.1;
   const rgba = hexColorToRGB(backgroundColorHex);
   rgba.push(active ? 1 : 0.3);
-  console.log("*** rgba =", rgba);
   const backgroundColor = rgbaListToRgbaString(rgba);
-  console.log("*** backgroundColor =", backgroundColor);
   const border = `${active ? "3" : "1"}px solid ${active ? "#555" : "#D8D8D8"}`;
   return (
     <div
