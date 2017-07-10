@@ -243,7 +243,7 @@ class DetailViewComponent extends Component {
                     {riceGrowthLayer.colormap.map((kv, i) => {
                       const label = Object.keys(kv)[0];
                       const color = Object.values(kv)[0];
-                      const opacity = label === parcel.GrowthStage ? 1 : 0.2;
+                      const opacity = label === parcel.GrowthStage ? 1 : 0.1;
                       return (
                         <div
                           key={i}
@@ -320,7 +320,7 @@ class DetailViewComponent extends Component {
 ///////////////////////////////////////////////////////////////////////////////
 
 function ColoredSquare({ title, backgroundColor, active }) {
-  const opacity = active ? 1 : 0.2;
+  const opacity = active ? 1 : 0.1;
   return (
     <div
       className={styles.ColoredSquare}
