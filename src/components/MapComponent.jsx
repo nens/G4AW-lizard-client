@@ -57,7 +57,8 @@ class MapComponent extends Component {
       foregroundlayerUrl,
       getActiveForegroundlayer,
       currentBoundingBox,
-      geolocation
+      geolocation,
+      selectedParcel
     } = this.props;
 
     const searchResultsAsPolygons = searchResults
@@ -86,7 +87,15 @@ class MapComponent extends Component {
 
     let bounds;
 
-    if (parcels.length > 0) {
+    if (selectedParcel && selectedParcel.bbox) {
+      // If a a parcel is selected, set the map bbox to the bbox of the
+      // selected parcel:
+      const selectedBbox = selectedParcel.bbox;
+      bounds = L.latLngBounds(
+        L.latLng(selectedBbox[1], selectedBbox[0]),
+        L.latLng(selectedBbox[3], selectedBbox[2])
+      );
+    } else if (parcels.length > 0) {
       // If there are parcels to be shown, set the bounds of the Map to the
       // bounding box of resultset
       const boundingBox = bbox(featureCollection(parcels));
@@ -152,6 +161,7 @@ class MapComponent extends Component {
 
 function mapStateToProps(state) {
   return {
+    selectedParcel: state.parcels && state.parcels[state.ui.selectedParcel],
     getParcel: idx => state.parcels[idx],
     visibleRasters: Object.values(state.rasters)
       .filter(raster => !!raster.data)

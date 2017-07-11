@@ -36,6 +36,8 @@ export default function(state = initialUiState, action) {
       };
     case ActionTypes.CHANGE_SETTINGS_TAB:
       return { ...state, currentSettingsTabIdx: action.newSettingsTabIdx };
+    case ActionTypes.CLEAR_SEARCH_RESULTS:
+      return { ...state, selectedParcel: null };
     default:
       return state;
   }
