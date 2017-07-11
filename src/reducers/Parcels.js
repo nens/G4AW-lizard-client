@@ -29,7 +29,8 @@ const GEOSERVER_ATTRIBUTES = [
   "PlantHeightInCm",
   "NumberOfStemsPerM²",
   "FieldSizeInHa",
-  "Variety"
+  "Variety",
+  "bbox"
 ];
 
 const initialParcel = {
