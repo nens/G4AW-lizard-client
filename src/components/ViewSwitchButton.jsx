@@ -13,12 +13,14 @@ import { changeView } from "../actions";
 
 class ViewSwitchButtonComponent extends Component {
   render() {
-    const { t, viewIsMap, changeView } = this.props;
+    const { t, viewIsMap, changeView, searchResultCount } = this.props;
     const handleClick = () =>
       changeView((viewIsMap ? "List" : "Map") + "SearchView");
     return (
       <div className={styles.ViewSwitchButton} onClick={handleClick}>
-        {viewIsMap ? <SwitchToListButton t={t} /> : <SwitchToMapButton t={t} />}
+        {viewIsMap
+          ? <SwitchToListButton t={t} count={searchResultCount} />
+          : <SwitchToMapButton t={t} count={searchResultCount} />}
         <Ink />
       </div>
     );
@@ -31,7 +33,7 @@ ViewSwitchButtonComponent.propTypes = {
 
 class SwitchToMapButton extends Component {
   render() {
-    const { t } = this.props;
+    const { t, count } = this.props;
     return (
       <div>
         <i className={`material-icons ${styles.Icon}`}>track_changes</i>
@@ -44,13 +46,24 @@ class SwitchToMapButton extends Component {
 }
 
 class SwitchToListButton extends Component {
+  getMessage(t, count) {
+    switch (count) {
+      case 0:
+        return t("Click here to view new search results as list");
+      case 1:
+        return t("Click here to view a single search results as list");
+      default:
+        return `${t("Click here to view")} ${count} ${t(
+          "search results as list"
+        )}`;
+    }
+  }
   render() {
-    const { t } = this.props;
     return (
       <div>
         <i className={`material-icons ${styles.Icon}`}>apps</i>
         <span className={styles.Message}>
-          {t("Click here to view the search results")}
+          {this.getMessage(this.props.t, this.props.count)}
         </span>
       </div>
     );
@@ -59,13 +72,19 @@ class SwitchToListButton extends Component {
 
 /* react-redux bindings */
 
+function mapStateToProps(state) {
+  return {
+    searchResultCount: state.search.results ? state.search.results.length : 0
+  };
+}
+
 function mapDispatchToProps(dispatch) {
   return {
     changeView: newView => changeView(dispatch, newView)
   };
 }
 
-const ViewSwitchButton = connect(null, mapDispatchToProps)(
+const ViewSwitchButton = connect(mapStateToProps, mapDispatchToProps)(
   ViewSwitchButtonComponent
 );
 

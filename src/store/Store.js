@@ -4,6 +4,8 @@ import { createLogger } from "redux-logger";
 import thunkMiddleware from "redux-thunk";
 import reducers from "../reducers/index";
 
+import { DEFAULT_BBOX } from "../constants/defaults";
+
 let createStoreWithMiddleware;
 const logger = createLogger({});
 
@@ -29,12 +31,7 @@ export const initialUiState = {
 };
 
 export const initialMapState = {
-  settings: {
-    bbox: null,
-    lat: null,
-    lng: null,
-    zoom: null
-  }
+  bbox: DEFAULT_BBOX
 };
 
 export const initialSessionState = {
