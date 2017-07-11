@@ -139,13 +139,12 @@ class DetailViewComponent extends Component {
     return result;
   }
   formatTabularDataEN(parcel) {
-    let enValue,
-      result = [];
-    Object.keys(GEOSERVER_PARCEL_KEYS).forEach(enKey => {
-      enValue = parcel[enKey] || NO_DATA;
-      result.push({ key: enKey, value: enValue });
+    return Object.keys(GEOSERVER_PARCEL_KEYS).map(enKey => {
+      return {
+        key: enKey,
+        value: parcel[enKey] || NO_DATA
+      };
     });
-    return result;
   }
   getLatLonZoom(coords) {
     let latSum = 0,
