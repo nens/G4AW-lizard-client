@@ -141,7 +141,7 @@ class DetailViewComponent extends Component {
   formatTabularDataEN(parcel) {
     return Object.keys(GEOSERVER_PARCEL_KEYS).map(enKey => {
       return {
-        key: GEOSERVER_PARCEL_KEYS[enKey],
+        key: enKey,
         value: parcel[enKey] || NO_DATA
       };
     });
