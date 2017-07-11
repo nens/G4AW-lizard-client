@@ -20,8 +20,8 @@ class PulsatingMarker extends PureComponent {
 }
 
 PulsatingMarker.propTypes = {
-  lat: PropTypes.number.required,
-  lng: PropTypes.number.required
+  lat: PropTypes.number.isRequired,
+  lng: PropTypes.number.isRequired
 };
 
 export default PulsatingMarker;
