@@ -234,11 +234,7 @@ class DetailViewComponent extends Component {
                 </div>
                 <DetailViewTable data={tabularData} />
                 <br />
-                <DetailViewSection
-                  isOpen
-                  title={t("Rice Growth")}
-                  colorCode={"#ff0000"}
-                >
+                <DetailViewSection isOpen title={t("Rice Growth")}>
                   <div className={styles.ColoredSquaresContainer}>
                     <div className={styles.ColoredSquaresHeader}>
                       {parcel.GrowthStage.toUpperCase()}
