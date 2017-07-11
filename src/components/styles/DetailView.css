@@ -40,3 +40,10 @@
   border: 1px solid #555;
 }
 
+.SubMessage {
+  color: #A0A0A0;
+  font-style: italic;
+  padding-bottom: 10px;
+}
+
+

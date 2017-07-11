@@ -27,7 +27,7 @@ import {
   rgbaListToRgbaString,
   hexColorToRGB,
   rgbaListToHexColor
-} from "../../tools/string-formatting";
+} from "../../tools/color-conversion";
 
 const DEFAULT_ZOOM = 11; // Used for map in header of the page
 
@@ -117,7 +117,7 @@ class DetailViewComponent extends Component {
     super();
     this.handleViewOnMapClick = this.handleViewOnMapClick.bind(this);
   }
-  formatTabularDataVN(parcel) {
+  formatTabularDataVI(parcel) {
     let result = [],
       vnKey,
       enValue,
@@ -174,20 +174,19 @@ class DetailViewComponent extends Component {
       this.props.changeToMapSearchView();
     }
   }
-  getHumanReadablePestRisk(parcel) {
-    const riskLevel = parcel.PestRisk.toUpperCase();
-    if (riskLevel === "HIGH") {
-      let riskReason;
-      if (parcel.BlastRisk === "High") {
-        riskReason = "there is a high chance of 'blast' presence.";
-      } else if (parcel.BrownPlantHopperRisk === "High") {
-        riskReason = "there is a high chance of 'brown planthopper' presence.";
-      } else {
-        riskReason = "there is a high chance of 'leaffolder' presence.";
-      }
-      return `${riskLevel}: ${riskReason}`;
+  getHumanReadableRiceGrowth(parcel, t) {
+    // TODO: think of solution that will return the message in vietnamese.
+    const stage = parcel.GrowthStage.toUpperCase();
+    const height = parcel.PlantHeightInCm;
+    return `${t("The current growth stage is")} ${stage}
+      ${t("and the plant height is")} ${height} cm.`;
+  }
+  getHumanReadablePestRisk(parcel, t) {
+    let riskLevel = parcel.PestRisk;
+    if (riskLevel === "High") {
+      return t("There is increased risk on one or more pests.");
     } else {
-      return "LOW: there is a low isk for pest presence.";
+      return t("There is a little risk on pest presence.");
     }
   }
   render() {
@@ -207,7 +206,7 @@ class DetailViewComponent extends Component {
     let tabularData, latlonzoom;
     if (parcel && parcel.hasGeoserverData) {
       latlonzoom = this.getLatLonZoom(parcel.geometry.coordinates[0]);
-      tabularData = this.formatTabularDataEN(parcel);
+      tabularData = this.formatTabularDataEN(parcel); //TODO: choose language at runtime.
     } else {
       return null;
     }
@@ -218,7 +217,7 @@ class DetailViewComponent extends Component {
       >
         <div id="DetailView" className={styles.DetailView}>
           <DetailViewHeader
-            title={`Farmer ${parcel.FarmID}`}
+            title={`${t("Farmer")} ${parcel.FarmID}`}
             subTitle={parcel.FieldOfficer}
             halfMode={false}
             latlonzoom={latlonzoom}
@@ -229,7 +228,7 @@ class DetailViewComponent extends Component {
             : <div>
                 <div className={styles.MapZoomToParcel}>
                   <FlatButton
-                    buttonText="View on map"
+                    buttonText={t("View on map")}
                     handleOnClick={() => this.handleViewOnMapClick(parcel)}
                   />
                 </div>
@@ -250,12 +249,16 @@ class DetailViewComponent extends Component {
                       return (
                         <ColoredSquare
                           key={i}
-                          title={`Growth stage: ${label}`}
+                          key_={i}
+                          title={`${t("Growth stage")}: ${label}`}
                           backgroundColorHex={rgbaListToHexColor(color)}
                           active={label === parcel.GrowthStage}
                         />
                       );
                     })}
+                    <div className={styles.SubMessage}>
+                      {this.getHumanReadableRiceGrowth(parcel, t)}
+                    </div>
                   </div>
                 </DetailViewSection>
                 <DetailViewSection isOpen={false} title={t("Flood Risk")}>
@@ -264,20 +267,23 @@ class DetailViewComponent extends Component {
                       {parcel.FloodRisk.toUpperCase()}
                     </div>
                     <ColoredSquare
-                      title="Low flood risk"
+                      title={t("Low flood risk")}
                       backgroundColorHex="#FFFFFF"
                       active={parcel.FloodRisk === "Low"}
                     />
                     <ColoredSquare
-                      title="Medium flood risk"
+                      title={t("Medium flood risk")}
                       backgroundColorHex="#697DB0"
                       active={parcel.FloodRisk === "Medium"}
                     />
                     <ColoredSquare
-                      title="High flood risk"
+                      title={t("High flood risk")}
                       backgroundColorHex="#122476"
                       active={parcel.FloodRisk === "High"}
                     />
+                    <div className={styles.SubMessage}>
+                      {`The current flood risk is ${parcel.FloodRisk.toUpperCase()}`}
+                    </div>
                   </div>
                 </DetailViewSection>
                 <DetailViewSection isOpen={false} title={t("Pest Risk")}>
@@ -286,20 +292,23 @@ class DetailViewComponent extends Component {
                       {parcel.PestRisk.toUpperCase()}
                     </div>
                     <ColoredSquare
-                      title="High blast risk"
+                      title={t("High blast risk")}
                       backgroundColorHex="#FFFFFF"
                       active={parcel.BlastRisk === "High"}
                     />
                     <ColoredSquare
-                      title="High leaffolder risk"
+                      title={t("High leaffolder risk")}
                       backgroundColorHex="#D7BA34"
                       active={parcel.LeaffolderRisk === "High"}
                     />
                     <ColoredSquare
-                      title="High brown planthopper risk"
+                      title={t("High brown planthopper risk")}
                       backgroundColorHex="#703F1D"
                       active={parcel.BrownPlantHopperRisk === "High"}
                     />
+                    <div className={styles.SubMessage}>
+                      {this.getHumanReadablePestRisk(parcel, t)}
+                    </div>
                   </div>
                 </DetailViewSection>
                 <DetailViewPhotoSection
@@ -322,8 +331,8 @@ class DetailViewComponent extends Component {
 function ColoredSquare({
   title,
   backgroundColorHex,
-  active,
-  key = Math.round(Math.random() * 10000)
+  active //,
+  // key_ = Math.round(Math.random() * 10000)
 }) {
   const rgba = hexColorToRGB(backgroundColorHex);
   rgba.push(active ? 1 : 0.3);
@@ -331,7 +340,6 @@ function ColoredSquare({
   const border = `${active ? "3" : "1"}px solid ${active ? "#555" : "#D8D8D8"}`;
   return (
     <div
-      key={key}
       className={styles.ColoredSquare}
       title={title}
       style={{ backgroundColor, border }}

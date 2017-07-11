@@ -110,7 +110,7 @@ export const initialForegroundlayerState = {
   url: "https://maps1.project.lizard.net/geoserver/Q0007_sat4rice_2018/wms",
   layers: [
     {
-      title: i18next.t("Rice fields") || "Rice fields", // Trick because i18n doesn't work here..
+      title: i18next.t("Rice fields"),
       uuid: "01d932b",
       active: true,
       slug: "latest_weekly_LT",
@@ -119,7 +119,7 @@ export const initialForegroundlayerState = {
       colormap: []
     },
     {
-      title: i18next.t("Growth stages") || "Growth stages", // Trick because i18n doesn't work here..
+      title: i18next.t("Growth stages"),
       uuid: "aaa1b7c",
       active: false,
       slug: "latest_weekly_growth_stages",
@@ -138,7 +138,7 @@ export const initialForegroundlayerState = {
       ]
     },
     {
-      title: i18next.t("Pest presence") || "Pest presence", // Trick because i18n doesn't work here..
+      title: i18next.t("Pest presence"),
       uuid: "15d1155",
       active: false,
       slug: "latest_weekly_pest_presence",
@@ -157,8 +157,6 @@ export const initialForegroundlayerState = {
     }
   ]
 };
-
-console.log("[dbg] initialForegroundlayerState =", initialForegroundlayerState);
 
 export const initialSettingsState = {};
 
