@@ -20,7 +20,7 @@ import {
 } from "..";
 
 import { changeView } from "../../actions/UiActions";
-import { updateMapLocationBbox } from "../../actions/MapActions";
+import { updateMapBbox } from "../../actions/MapActions";
 import { THUMBNAIL_LIST, LOREM } from "../../../stories/helpers";
 import { WIDTH } from "../../tools/dimensions";
 import {
@@ -160,16 +160,12 @@ class DetailViewComponent extends Component {
   handleViewOnMapClick(parcel) {
     if (parcel && parcel.geometry) {
       const boundingBox = bbox(feature(parcel.geometry));
-      this.props.updateMapLocationBbox({
-        _northEast: {
-          lat: boundingBox[1],
-          lng: boundingBox[0]
-        },
-        _southWest: {
-          lat: boundingBox[3],
-          lng: boundingBox[2]
-        }
-      });
+      this.props.updateMapBbox([
+        boundingBox[1],
+        boundingBox[0],
+        boundingBox[3],
+        boundingBox[2]
+      ]);
       this.props.changeToMapSearchView();
     }
   }
@@ -378,7 +374,7 @@ function mapDispatchToProps(dispatch) {
     changeToMapSearchView: () => changeView(dispatch, "MapSearchView"),
     changeToPhotoView: () => changeView(dispatch, "PhotoView"),
     changeToSearchView: searchView => changeView(dispatch, searchView),
-    updateMapLocationBbox: bbox => updateMapLocationBbox(dispatch, bbox)
+    updateMapBbox: bbox => updateMapBbox(dispatch, bbox)
   };
 }
 

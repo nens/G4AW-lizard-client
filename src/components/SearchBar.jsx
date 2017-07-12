@@ -7,14 +7,16 @@ import ReactDOM from "react-dom";
 import styles from "./styles/SearchBar.css";
 
 import GeolocateButtonSmall from "./GeolocateButtonSmall";
+import { changeView, updateMapBbox } from "../actions";
 
-import { changeView } from "../actions";
+import { DEFAULT_BBOX } from "../constants/defaults";
 
 import {
   doSearch,
   clearResults,
   setSearchInputText,
-  performGeolocation
+  performGeolocation,
+  showSnackBar
 } from "../actions";
 
 /* the main omponent -- a search bar for MapSearchView/ListSearchView ********/
@@ -120,7 +122,15 @@ function mapDispatchToProps(dispatch) {
   return {
     changeToSettingsView: () => changeView(dispatch, "SettingsView"),
     setSearchInput: q => dispatch(setSearchInputText(q)),
-    clear: () => dispatch(clearResults()),
+    clear: () => {
+      dispatch(clearResults());
+      updateMapBbox(dispatch, DEFAULT_BBOX);
+      showSnackBar(dispatch, {
+        autoHideDuration: 3000,
+        message: "You have cleared your search results.",
+        subMessage: "Please search again."
+      });
+    },
     search: q => {
       if (q) {
         doSearch(dispatch, q);

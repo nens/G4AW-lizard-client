@@ -1,4 +1,7 @@
 import i18next from "i18next";
+import flip from "@turf/flip";
+import bbox from "@turf/bbox";
+import { feature, featureCollection } from "@turf/helpers";
 import {
   CLEAR_SEARCH_RESULTS,
   RECEIVE_SEARCH_RESULTS_SUCCESS,
@@ -11,6 +14,7 @@ import { theStore } from "../store/Store";
 import { search } from "lizard-api-client";
 import { getParcelsByName } from "lizard-api-client";
 import { showSnackBar } from "./UiActions";
+import { updateMapBbox } from "./MapActions";
 
 export const startSearch = () => ({
   type: START_SEARCH
@@ -45,7 +49,12 @@ function doSearch(dispatch, q, types = null, exclude = []) {
 
   dispatch(startSearch());
   getParcelsByName(q).then(
-    results => dispatch(receiveResultsSuccess(results)),
+    results => {
+      dispatch(receiveResultsSuccess(results));
+      const parcels = results.map(r => feature(r.geometry));
+      const boundingBox = bbox(flip(featureCollection(parcels)));
+      updateMapBbox(dispatch, boundingBox);
+    },
     error => {
       const msg = "Search error: " + error;
       const message = i18next.t("There was an error while searching for");

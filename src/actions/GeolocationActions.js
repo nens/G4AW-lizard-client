@@ -1,5 +1,6 @@
 import i18next from "i18next";
 import config from "../config";
+import { DEFAULT_BBOX } from "../constants/defaults";
 import {
   SET_GEOLOCATION_SUPPORT,
   START_GEOLOCATION,
@@ -9,6 +10,7 @@ import {
 } from "../constants/ActionTypes";
 
 import { showSnackBar } from "./UiActions";
+import { updateMapBbox } from "./MapActions";
 
 function getGeocoderUrl(coords) {
   return `https://api.mapbox.com/geocoding/v5/mapbox.places/${coords.longitude},${coords.latitude}.json?access_token=${config.mapboxAccessToken}`;
@@ -57,8 +59,11 @@ export function setGeolocationSupport(dispatch) {
 
 export function clearGeolocation(dispatch) {
   dispatch({ type: CLEAR_GEOLOCATION });
+  updateMapBbox(dispatch, DEFAULT_BBOX);
   showSnackBarGeolocationTurnedOff(dispatch);
 }
+
+const GRAD_OFFSET = 0.01;
 
 export function performGeolocation(dispatch) {
   dispatch({ type: START_GEOLOCATION });
@@ -75,6 +80,13 @@ export function performGeolocation(dispatch) {
               const lng = data.query[1];
               const result = { lat, lng, placeName };
               dispatch({ type: RECEIVE_GEOLOCATION_SUCCESS, result });
+              const newBbox = [
+                lng - GRAD_OFFSET,
+                lat - GRAD_OFFSET,
+                lng + GRAD_OFFSET,
+                lat + GRAD_OFFSET
+              ];
+              updateMapBbox(dispatch, newBbox);
             } else {
               showSnackBarGeolocationError(dispatch);
               dispatch({

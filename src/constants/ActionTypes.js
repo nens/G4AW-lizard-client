@@ -97,8 +97,7 @@ export const TOGGLE_SEARCHRESULTS_LIST_CARD_MODE =
 export const TOGGLE_LEGEND = "TOGGLE_LEGEND";
 
 // Map actions
-export const UPDATE_MAP_LOCATION = "UPDATE_MAP_LOCATION";
-export const UPDATE_MAP_LOCATION_BBOX = "UPDATE_MAP_LOCATION_BBOX";
+export const UPDATE_MAP_BBOX = "UPDATE_MAP_BBOX";
 
 // Baselayer actions
 export const CHANGE_BASELAYER = "CHANGE_BASELAYER";
