@@ -7,7 +7,7 @@ export function updateMapLocation(dispatch, settings) {
 
 function isValidBbox(bbox) {
   const arrayCheck = Object.prototype.toString.call(bbox) === "[object Array]";
-  return arrayCheck && bbox.length == 4;
+  return arrayCheck && bbox.length === 4;
 }
 
 export function updateMapBbox(dispatch, bbox) {
