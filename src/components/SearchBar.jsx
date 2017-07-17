@@ -4,10 +4,14 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import ReactDOM from "react-dom";
 
+import flip from "@turf/flip";
+import bbox from "@turf/bbox";
+import { feature, featureCollection } from "@turf/helpers";
+
 import styles from "./styles/SearchBar.css";
 
 import GeolocateButtonSmall from "./GeolocateButtonSmall";
-import { changeView, updateMapBbox } from "../actions";
+import { changeView, updateMapBbox, deselectParcel } from "../actions";
 
 import { DEFAULT_BBOX } from "../constants/defaults";
 
@@ -32,7 +36,7 @@ class SearchBarComponent extends Component {
     const { setSearchInput, search } = this.props;
     setSearchInput(e.target.value);
     if (e.target.value.length === 0) {
-      this.props.clear();
+      this.props.clear(this.props.selectedParcelId, this.props.parcels);
     }
     if (e.target.value.length > 0 && e.key === "Enter") {
       search(e.target.value);
@@ -41,7 +45,7 @@ class SearchBarComponent extends Component {
   handleClearInput() {
     this.setState({ q: null });
     document.getElementById("searchInputField").value = null;
-    this.props.clear();
+    this.props.clear(this.props.selectedParcelId, this.props.parcels);
   }
   render() {
     const { searchInput, searchIsFetching, changeToSettingsView } = this.props;
@@ -112,6 +116,8 @@ class ClearInputButton extends Component {
 
 function mapStateToProps(state) {
   return {
+    parcels: Object.values(state.parcels),
+    selectedParcelId: state.ui.selectedParcel,
     searchIsFetching: !!state.search.isFetching,
     searchInput: state.search.inputText,
     searchResults: state.search.isFetching ? null : state.search.results
@@ -122,14 +128,26 @@ function mapDispatchToProps(dispatch) {
   return {
     changeToSettingsView: () => changeView(dispatch, "SettingsView"),
     setSearchInput: q => dispatch(setSearchInputText(q)),
-    clear: () => {
-      dispatch(clearResults());
-      updateMapBbox(dispatch, DEFAULT_BBOX);
-      showSnackBar(dispatch, {
-        autoHideDuration: 3000,
-        message: "You have cleared your search results.",
-        subMessage: "Please search again."
-      });
+    clear: (selectedParcelId, allParcels) => {
+      if (selectedParcelId) {
+        // De-select currently selected parcel (go back to search-result selection)
+        deselectParcel(dispatch);
+        const parcels = allParcels.map(r => feature(r.geometry));
+        const boundingBox = bbox(flip(featureCollection(parcels)));
+        updateMapBbox(dispatch, boundingBox);
+        showSnackBar(dispatch, {
+          autoHideDuration: 4000,
+          message: "You have no longer selected a single parcel."
+        });
+      } else {
+        // Clear search-result selection (go back to init)
+        dispatch(clearResults());
+        updateMapBbox(dispatch, DEFAULT_BBOX);
+        showSnackBar(dispatch, {
+          autoHideDuration: 4000,
+          message: "You have cleared your search results."
+        });
+      }
     },
     search: q => {
       if (q) {
