@@ -142,14 +142,9 @@ export const initialForegroundlayerState = {
       mapThumb:
         "https://maps1.project.lizard.net/geoserver/Q0007_sat4rice_2018/wms?service=WMS&request=GetMap&layers=latest_weekly_pest_presence&styles=&format=image%2Fpng&transparent=True&version=1.1.1&height=256&width=256&srs=EPSG%3A3857&bbox=11709388.36300615,1164288.814839805,11709541.23706272,1164441.6888963755",
       colormap: [
-        { "0%": [110, 240, 132, 100] },
-        { "10%": [228, 106, 108, 125] },
-        { "20%": [55, 126, 184, 125] },
-        { "30%": [77, 175, 74, 125] },
-        { "40%": [152, 78, 163, 125] },
-        { "50%": [255, 127, 0, 125] },
-        { "60%": [255, 255, 51, 125] },
-        { "70%": [166, 86, 40, 125] }
+        { "Blast risk": [255, 255, 255, 255] },
+        { "Leaffolder risk": [215, 186, 52, 255] },
+        { "Brown plant hopper risk": [112, 63, 29, 255] }
       ]
     }
   ]

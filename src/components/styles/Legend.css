@@ -44,6 +44,7 @@
 .LegendTable {
   border-collapse: collapse;
   width: 90%;
+  margin-bottom: 12px
 }
 .LegendTable td {
   padding: 10px 0 10px 0;
@@ -53,6 +54,9 @@
 }
 .LegendTable tr {
   border-bottom: 1px solid #d7d7d7;
+}
+.LegendTable tr:last-child {
+  border-bottom: none;
 }
 .LegendColor {
   border: 1px solid #d7d7d7;
