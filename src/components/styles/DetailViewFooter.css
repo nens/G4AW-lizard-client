@@ -1,0 +1,25 @@
+.Wrapper {
+  position: fixed;
+
+  bottom: 0;
+  left: 0;
+  width: 100%;
+
+  color: #ffffff;
+  background-color: #00a899;
+  height: 50px;
+  /*box-shadow: 0 -5px 5px #ffffff;*/
+  box-shadow: 0 -2px 2px 0 rgba(0, 0, 0, .33)
+}
+.PrevParcelButton {
+  float: left;
+  margin-left: 10px;
+  cursor: pointer;
+  margin-top: 14px;
+}
+.NextParcelButton {
+  float: right;
+  margin-right: 10px;
+  cursor: pointer;
+  margin-top: 14px;
+}
