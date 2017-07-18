@@ -20,6 +20,7 @@ import styles from "./styles/MapComponent.css";
 import {
   getRaster,
   getAttributesFromGeoserver,
+  getAttributesFromGeoserverByLatLng,
   updateMapBbox
 } from "../actions";
 
@@ -31,6 +32,7 @@ class MapComponent extends Component {
   constructor() {
     super();
     this.handlePanOrZoomEnd = this.handlePanOrZoomEnd.bind(this);
+    this.handleMapClick = this.handleMapClick.bind(this);
   }
   handlePanOrZoomEnd(e) {
     const leaflet = this.refs.mapElement.leafletElement;
@@ -46,6 +48,12 @@ class MapComponent extends Component {
     const leaflet = this.refs.mapElement.leafletElement;
     leaflet.on("zoomend", e => this.handlePanOrZoomEnd(e));
     leaflet.on("dragend", e => this.handlePanOrZoomEnd(e));
+  }
+  handleMapClick(e) {
+    L.DomEvent.stopPropagation(e);
+    const { lat, lng } = e.latlng;
+    const map = this.refs.mapElement.leafletElement;
+    this.props.getDetailsByLatLng(map, lat, lng);
   }
   render() {
     const {
@@ -72,7 +80,10 @@ class MapComponent extends Component {
               dashArray="5, 5"
               key={i}
               positions={flip(parcel.geometry).coordinates}
-              onClick={() => getDetails(r)}
+              onClick={e => {
+                L.DomEvent.stopPropagation(e);
+                getDetails(r);
+              }}
             />
           );
         })
@@ -91,6 +102,7 @@ class MapComponent extends Component {
           bounds={bounds}
           zoomControl={false}
           className={styles.MapElement}
+          onClick={this.handleMapClick}
         >
           <TileLayer
             url={getBaselayerUrl()}
@@ -134,8 +146,11 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    getRaster: uuid => getRaster(uuid, dispatch),
     getDetails: id => getAttributesFromGeoserver(dispatch, id),
+    getDetailsByLatLng: (map, lat, lng) => {
+      getAttributesFromGeoserverByLatLng(dispatch, map, lat, lng);
+    },
+    getRaster: uuid => getRaster(uuid, dispatch),
     updateMapBbox: bbox => updateMapBbox(dispatch, bbox)
   };
 }
