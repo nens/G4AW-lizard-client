@@ -9,10 +9,20 @@ import styles from "./styles/DetailViewFooter.css";
 import { selectPreviousParcel, selectNextParcel } from "../actions";
 
 class DetailViewFooterComponent extends Component {
+  getPageIndication() {
+    const currentIndex = this.props.searchResults.indexOf(
+      this.props.selectedParcel
+    );
+    const count = this.props.searchResults.length;
+    return `${currentIndex + 1}/${count}`;
+  }
   render() {
     return (
       <div className={styles.Wrapper}>
         <PrevParcelButton handleClick={this.props.showPrev} />
+        <span className={styles.PageIndicator}>
+          {this.getPageIndication()}
+        </span>
         <NextParcelButton handleClick={this.props.showNext} />
       </div>
     );
@@ -46,6 +56,13 @@ DetailViewFooterComponent.propTypes = {
   showPrev: PropTypes.func
 };
 
+function mapStateToProps(state) {
+  return {
+    searchResults: state.search.results,
+    selectedParcel: state.ui.selectedParcel
+  };
+}
+
 function mapDispatchToProps(dispatch) {
   return {
     showPrev: () => selectPreviousParcel(dispatch),
@@ -53,7 +70,7 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-const DetailViewFooter = connect(null, mapDispatchToProps)(
+const DetailViewFooter = connect(mapStateToProps, mapDispatchToProps)(
   DetailViewFooterComponent
 );
 

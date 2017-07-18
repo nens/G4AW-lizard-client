@@ -182,7 +182,7 @@ class DetailViewComponent extends Component {
     if (riskLevel === "High") {
       return t("There is increased risk on one or more pests.");
     } else {
-      return t("There is a little risk on pest presence.");
+      return t("There is very little risk on pest presence.");
     }
   }
   getFarmTitle(parcel) {
@@ -308,8 +308,8 @@ class DetailViewComponent extends Component {
                 width={WIDTH}
                 handleClick={changeToPhotoView}
               />
-              <DetailViewFooter />
             </div>}
+        <DetailViewFooter />
       </div>
     );
   }
@@ -323,7 +323,7 @@ function ColoredSquare({ title, backgroundColorHex, active }) {
   const rgba = hexColorToRGB(backgroundColorHex);
   rgba.push(active ? 1 : 0.3);
   const backgroundColor = rgbaListToRgbaString(rgba);
-  const border = `${active ? "3" : "1"}px solid ${active ? "#555" : "#D8D8D8"}`;
+  const border = `2px solid ${active ? "#555" : "#D8D8D8"}`;
   return (
     <div
       className={styles.ColoredSquare}
