@@ -73,22 +73,26 @@ function showSnackBarParcelReceiveError(dispatch, placeName) {
   showSnackBar(dispatch, options);
 }
 
-export function selectPreviousParcel(dispatch) {
+function getNextOrPreviousParcel(dispatch, next = true) {
   const state = theStore.getState();
   const oldJsId = state.search.results.indexOf(state.ui.selectedParcel);
-  const newJsId = oldJsId === 0 ? state.search.results.length - 1 : oldJsId - 1;
+  let newJsId;
+  if (next) {
+    newJsId = oldJsId === state.search.results.length - 1 ? 0 : oldJsId + 1;
+  } else {
+    newJsId = oldJsId === 0 ? state.search.results.length - 1 : oldJsId - 1;
+  }
   const newParcelId = state.search.results[newJsId];
   getAttributesFromGeoserver(dispatch, newParcelId);
   state.ui.selectedParcel = newParcelId;
 }
 
+export function selectPreviousParcel(dispatch) {
+  getNextOrPreviousParcel(dispatch, false);
+}
+
 export function selectNextParcel(dispatch) {
-  const state = theStore.getState();
-  const oldJsId = state.search.results.indexOf(state.ui.selectedParcel);
-  const newJsId = oldJsId === state.search.results.length - 1 ? 0 : oldJsId + 1;
-  const newParcelId = state.search.results[newJsId];
-  getAttributesFromGeoserver(dispatch, newParcelId);
-  state.ui.selectedParcel = newParcelId;
+  getNextOrPreviousParcel(dispatch, true);
 }
 
 export function getAttributesFromGeoserver(dispatch, parcelId) {
@@ -99,7 +103,7 @@ export function getAttributesFromGeoserver(dispatch, parcelId) {
     !currentData.parcelGeoserverId ||
     currentData.isFetchingGeoserver
   ) {
-    // We can't find the Geoserver featureID//already busy
+    // We can't find the Geoserver featureID/already busy
     return;
   }
 
