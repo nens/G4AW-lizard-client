@@ -273,7 +273,9 @@ class DetailViewComponent extends Component {
                       active={parcel.FloodRisk === "High"}
                     />
                     <div className={styles.SubMessage}>
-                      {`The current flood risk is ${parcel.FloodRisk.toUpperCase()}`}
+                      {`${t(
+                        "The current flood risk is"
+                      )} ${parcel.FloodRisk.toUpperCase()}`}
                     </div>
                   </div>
                 </DetailViewSection>

@@ -1,5 +1,6 @@
 import { connect } from "react-redux";
 import { translate } from "react-i18next";
+import i18next from "i18next";
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import ReactDOM from "react-dom";
@@ -127,8 +128,8 @@ function mapDispatchToProps(dispatch) {
       updateMapBbox(dispatch, DEFAULT_BBOX);
       showSnackBar(dispatch, {
         autoHideDuration: 3000,
-        message: "You have cleared your search results.",
-        subMessage: "Please search again."
+        message: i18next.t("You have cleared your search results."),
+        subMessage: i18next.t("Please search again.")
       });
     },
     search: q => {
