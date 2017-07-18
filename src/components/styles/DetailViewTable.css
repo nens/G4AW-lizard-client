@@ -20,6 +20,9 @@
 .Row td {
   padding: 10px 0 10px 0;
 }
+.Row:last-child {
+  border-bottom: none;
+}
 .ColKey {
   width: 40%;
 }

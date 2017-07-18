@@ -18,8 +18,6 @@ class SettingsViewGeneralComponent extends Component {
       <div>
         <HeaderBar title={t("Select map layers")} />
         <BaselayerChooser {...this.props} />
-        <br />
-        <ForegroundlayerChooser {...this.props} />
       </div>
     );
   }
@@ -38,23 +36,6 @@ class BaselayerChooser extends Component {
           </h3>
         </div>
         <LayerSelection layers={baselayers} mode="baselayer" />
-        <br />
-      </div>
-    );
-  }
-}
-
-class ForegroundlayerChooser extends Component {
-  render() {
-    const { foregroundlayers, t } = this.props;
-    return (
-      <div>
-        <div className={styles.SubHeaderContainer}>
-          <h3 className={styles.SubHeaderText}>
-            {t("Foreground Layers")}
-          </h3>
-        </div>
-        <LayerSelection layers={foregroundlayers} mode="foregroundlayer" />
         <br />
       </div>
     );

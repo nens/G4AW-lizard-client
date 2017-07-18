@@ -1,4 +1,5 @@
 import CollapsibleBar from "./CollapsibleBar";
+import DetailViewFooter from "./DetailViewFooter";
 import DetailViewHeader from "./DetailViewHeader";
 import DetailViewPhoto from "./DetailViewPhoto";
 import DetailViewPhotoSection from "./DetailViewPhotoSection";
@@ -38,6 +39,7 @@ import ViewSwitchButton from "./ViewSwitchButton";
 
 export {
   CollapsibleBar,
+  DetailViewFooter,
   DetailViewHeader,
   DetailViewPhoto,
   DetailViewPhotoSection,
