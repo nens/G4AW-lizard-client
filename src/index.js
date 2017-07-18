@@ -8,12 +8,15 @@ import App from "./components/App";
 import React from "react";
 import ReactDOM from "react-dom";
 import valuesES2017 from "object.values";
+import * as OfflinePluginRuntime from "offline-plugin/runtime";
 
 // Make the classic Object.values() work on Chrome (needed for some
 // NPM dependencies). If we omit this, our G4AW app will not work on Chrome.
 if (typeof Object.values !== "function") {
   Object.values = valuesES2017;
 }
+
+OfflinePluginRuntime.install();
 
 ReactDOM.render(
   <AppContainer>
