@@ -62,17 +62,22 @@ export default function(state = initialParcelsState, action) {
     case ActionTypes.RECEIVE_ATTRIBUTES_FROM_GEOSERVER_SUCCESS:
       // parcelId must already exist, otherwise the request to geoserver
       // couldn't have been made.
+
       newParcel = {
         ...newParcels[action.parcelId],
         isFetchingGeoserver: false,
         hasGeoserverData: true
       };
 
+      console.log("wel/niet geometrie1", newParcel);
+
       GEOSERVER_ATTRIBUTES.forEach(attribute => {
         newParcel[attribute] = action.data[attribute] || null;
       });
 
+      console.log("wel/niet geometrie2", newParcel);
       newParcels[action.parcelId] = newParcel;
+
       return newParcels;
 
     case ActionTypes.RECEIVE_ATTRIBUTES_FROM_GEOSERVER_ERROR:

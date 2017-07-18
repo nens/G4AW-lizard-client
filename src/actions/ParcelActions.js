@@ -2,6 +2,7 @@ import i18next from "i18next";
 import {
   SHOW_SNACKBAR,
   GET_ATTRIBUTES_FROM_GEOSERVER,
+  GET_ATTRIBUTES_FROM_GEOSERVER_BY_LAT_LNG,
   RECEIVE_ATTRIBUTES_FROM_GEOSERVER_SUCCESS,
   RECEIVE_ATTRIBUTES_FROM_GEOSERVER_ERROR,
   DESELECT_PARCEL
@@ -9,13 +10,22 @@ import {
 import { theStore } from "../store/Store";
 
 import { getParcelAttributes } from "../tools/wfs";
+import { getParcelAttributesByLatLng } from "../tools/wms";
 
+import { clearResults } from "./SearchActions";
 import { changeView, showSnackBar } from "./UiActions";
 
 export const getAttributesFromGeoserverAction = parcelId => ({
   type: GET_ATTRIBUTES_FROM_GEOSERVER,
   parcelId: parcelId
 });
+
+// export const getAttributesFromGeoserverByLatLngAction = (map, lat, lng) => ({
+//   type: GET_ATTRIBUTES_FROM_GEOSERVER_BY_LAT_LNG,
+//   map,
+//   lat,
+//   lng,
+// });
 
 export const receiveAttributesFromGeoserverSuccessAction = (
   parcelId,
@@ -93,6 +103,82 @@ export function selectPreviousParcel(dispatch) {
 
 export function selectNextParcel(dispatch) {
   getNextOrPreviousParcel(dispatch, true);
+}
+
+export function getAttributesFromGeoserverByLatLng(dispatch, map, lat, lng) {
+  const state = theStore.getState();
+  const RANDOM_ID = Math.round(Math.random() * 1000000);
+
+  // clear search results?
+  dispatch(clearResults());
+
+  dispatch(getAttributesFromGeoserverAction(RANDOM_ID));
+
+  getParcelAttributesByLatLng(map, lat, lng).then(
+    data => {
+      if (
+        data &&
+        data.features &&
+        data.features.length &&
+        data.features[0].properties
+      ) {
+        // 1 searchresult faken
+        state.search.results = [RANDOM_ID];
+
+        console.log(
+          "-data.features[0].geometry--->",
+          data.features[0].geometry
+        );
+        console.log("-data.features[0].id--->", data.features[0].id);
+
+        // fake 1 incomplete parcel
+        state.parcels = {};
+        state.parcels[RANDOM_ID] = {
+          errorsGeoserver: null,
+          errorsLizard: null,
+          geometry: data.features[0].geometry,
+          hasGeoserverData: false,
+          hasLizardData: true,
+          isFetchingGeoserver: false,
+          isFetchingLizard: false,
+          name: "dit heb ik net bedacht gek", //todo
+          parcelGeoserverId: data.features[0].id //todo
+        };
+
+        console.log("-----state.parcels--> ", state.parcels);
+
+        // state.ui.selectedParcel updaten
+        state.ui.selectedParcel = RANDOM_ID;
+
+        dispatch(
+          receiveAttributesFromGeoserverSuccessAction(
+            RANDOM_ID,
+            data.features[0].properties
+          )
+        );
+
+        if (state.ui.currentView !== "DetailView") {
+          changeView(dispatch, "DetailView");
+        }
+      } else {
+        handleInvalidDataFormatError(
+          dispatch,
+          currentData.name,
+          RANDOM_ID,
+          data.features[0].id
+        );
+      }
+    },
+    error => {
+      handleGeoserverError(
+        dispatch,
+        currentData.name,
+        RANDOM_ID,
+        data.features[0].id,
+        error
+      );
+    }
+  );
 }
 
 export function getAttributesFromGeoserver(dispatch, parcelId) {
