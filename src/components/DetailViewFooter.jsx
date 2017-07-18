@@ -3,7 +3,6 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { translate, t } from "react-i18next";
 
-// import styles from "./styles/Legend.css";
 import styles from "./styles/DetailViewFooter.css";
 
 import { selectPreviousParcel, selectNextParcel } from "../actions";
