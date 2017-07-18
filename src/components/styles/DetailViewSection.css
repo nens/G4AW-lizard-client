@@ -1,3 +1,17 @@
 .DetailViewSection {
   background-color: #fff;
 }
+
+.CollapsibleContent {
+  -webkit-transition: max-height 0.8s;
+  -moz-transition: max-height 0.8s;
+  transition: max-height 0.8s;
+}
+
+.ContentVisible {
+  max-height: auto;
+}
+
+.ContentHidden {
+  max-height: 0;
+}

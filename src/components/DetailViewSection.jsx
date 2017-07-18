@@ -41,6 +41,24 @@ export default class DetailViewSection extends Component {
 
     const content = this.state.isOpen ? children : null;
 
+    // return (
+    //   <div className={styles.DetailViewSection}>
+    //     <CollapsibleBar
+    //       isOpen={this.state.isOpen}
+    //       title={title}
+    //       subTitle={subTitle}
+    //       colorCode={colorCode}
+    //       handleClick={this.toggleSection}
+    //     />
+    //     <VelocityComponent
+    //       duration={250}
+    //       animation={{ translateY: content ? "-10px" : "10px" }}
+    //     >
+    //       {content || <div />}
+    //     </VelocityComponent>
+    //   </div>
+    // );
+
     return (
       <div className={styles.DetailViewSection}>
         <CollapsibleBar
@@ -50,12 +68,13 @@ export default class DetailViewSection extends Component {
           colorCode={colorCode}
           handleClick={this.toggleSection}
         />
-        <VelocityComponent
-          duration={250}
-          animation={{ translateY: content ? "-10px" : "10px" }}
+        <div
+          className={`${styles.CollapsibleContent} ${isOpen
+            ? styles.ContentVisible
+            : styles.ContentHidden}`}
         >
           {content || <div />}
-        </VelocityComponent>
+        </div>
       </div>
     );
   }
