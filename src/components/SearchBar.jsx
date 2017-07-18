@@ -1,5 +1,6 @@
 import { connect } from "react-redux";
 import { translate } from "react-i18next";
+import i18next from "i18next";
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import ReactDOM from "react-dom";
