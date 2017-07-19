@@ -1,4 +1,5 @@
 import { connect } from "react-redux";
+import L from "leaflet";
 import PropTypes from "prop-types";
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
@@ -17,9 +18,12 @@ import {
 
 import styles from "./styles/MapComponent.css";
 
+import { getParcels } from "lizard-api-client";
+
 import {
-  getRaster,
   getAttributesFromGeoserver,
+  getRaster,
+  receiveResultsSuccess,
   updateMapBbox
 } from "../actions";
 
@@ -28,9 +32,15 @@ import find from "lodash/find";
 const hoogteUuid = "e9ed5725-d94a-4bcb-9dde-5d655da0070e";
 
 class MapComponent extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.handlePanOrZoomEnd = this.handlePanOrZoomEnd.bind(this);
+    this.handleMapClick = this.handleMapClick.bind(this);
+  }
+  componentDidMount() {
+    const leaflet = this.refs.mapElement.leafletElement;
+    leaflet.on("zoomend", e => this.handlePanOrZoomEnd(e));
+    leaflet.on("dragend", e => this.handlePanOrZoomEnd(e));
   }
   handlePanOrZoomEnd(e) {
     const leaflet = this.refs.mapElement.leafletElement;
@@ -42,10 +52,20 @@ class MapComponent extends Component {
       _southWest.lng
     ]);
   }
-  componentDidMount() {
-    const leaflet = this.refs.mapElement.leafletElement;
-    leaflet.on("zoomend", e => this.handlePanOrZoomEnd(e));
-    leaflet.on("dragend", e => this.handlePanOrZoomEnd(e));
+  handleMapClick(e) {
+    const { getDetails, receiveResults } = this.props;
+    L.DomEvent.stopPropagation(e);
+    const { lat, lng } = e.latlng;
+
+    getParcels({
+      dist: 10,
+      point: `${lng},${lat}`
+    }).then(results => {
+      if (results.length > 0) {
+        receiveResults(results);
+        getDetails(results[0].id);
+      }
+    });
   }
   render() {
     const {
@@ -72,7 +92,10 @@ class MapComponent extends Component {
               dashArray="5, 5"
               key={i}
               positions={flip(parcel.geometry).coordinates}
-              onClick={() => getDetails(r)}
+              onClick={e => {
+                L.DomEvent.stopPropagation(e);
+                getDetails(r);
+              }}
             />
           );
         })
@@ -91,6 +114,7 @@ class MapComponent extends Component {
           bounds={bounds}
           zoomControl={false}
           className={styles.MapElement}
+          onClick={this.handleMapClick}
         >
           <TileLayer
             url={getBaselayerUrl()}
@@ -135,7 +159,10 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     getRaster: uuid => getRaster(uuid, dispatch),
-    getDetails: id => getAttributesFromGeoserver(dispatch, id),
+    getDetails: id => {
+      getAttributesFromGeoserver(dispatch, id);
+    },
+    receiveResults: results => dispatch(receiveResultsSuccess(results)),
     updateMapBbox: bbox => updateMapBbox(dispatch, bbox)
   };
 }
