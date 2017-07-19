@@ -18,13 +18,12 @@ import {
 
 import styles from "./styles/MapComponent.css";
 
-import { getParcels } from "lizard-api-client";
-
 import {
   getAttributesFromGeoserver,
   getRaster,
   receiveResultsSuccess,
-  updateMapBbox
+  updateMapBbox,
+  getParcelByLatLng
 } from "../actions";
 
 import find from "lodash/find";
@@ -53,19 +52,10 @@ class MapComponent extends Component {
     ]);
   }
   handleMapClick(e) {
-    const { getDetails, receiveResults } = this.props;
+    const { getParcelByLatLng } = this.props;
     L.DomEvent.stopPropagation(e);
     const { lat, lng } = e.latlng;
-
-    getParcels({
-      dist: 10,
-      point: `${lng},${lat}`
-    }).then(results => {
-      if (results.length > 0) {
-        receiveResults(results);
-        getDetails(results[0].id);
-      }
-    });
+    getParcelByLatLng(lng, lat);
   }
   render() {
     const {
@@ -163,7 +153,10 @@ function mapDispatchToProps(dispatch) {
       getAttributesFromGeoserver(dispatch, id);
     },
     receiveResults: results => dispatch(receiveResultsSuccess(results)),
-    updateMapBbox: bbox => updateMapBbox(dispatch, bbox)
+    updateMapBbox: bbox => updateMapBbox(dispatch, bbox),
+    getParcelByLatLng: (lat, lng) => {
+      getParcelByLatLng(dispatch, lng, lat);
+    }
   };
 }
 
