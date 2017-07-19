@@ -67,7 +67,7 @@ class MapComponent extends Component {
           return (
             <Polygon
               color="#3DB249"
-              stroke={true}
+              stroke={false}
               weight={2}
               dashArray="5, 5"
               key={i}
