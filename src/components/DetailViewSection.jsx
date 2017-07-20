@@ -25,10 +25,12 @@ export default class DetailViewSection extends Component {
     };
     this.toggleSection = this.toggleSection.bind(this);
   }
+  componentDidMount() {
+    this.setState({ isOpen: this.props.isOpen });
+  }
   toggleSection() {
     this.setState({ isOpen: !this.state.isOpen });
   }
-  componentDidMount() {}
   render() {
     const {
       children,
@@ -38,26 +40,6 @@ export default class DetailViewSection extends Component {
       subTitle,
       isOpen
     } = this.props;
-
-    const content = this.state.isOpen ? children : null;
-
-    // return (
-    //   <div className={styles.DetailViewSection}>
-    //     <CollapsibleBar
-    //       isOpen={this.state.isOpen}
-    //       title={title}
-    //       subTitle={subTitle}
-    //       colorCode={colorCode}
-    //       handleClick={this.toggleSection}
-    //     />
-    //     <VelocityComponent
-    //       duration={250}
-    //       animation={{ translateY: content ? "-10px" : "10px" }}
-    //     >
-    //       {content || <div />}
-    //     </VelocityComponent>
-    //   </div>
-    // );
 
     return (
       <div className={styles.DetailViewSection}>
@@ -69,11 +51,11 @@ export default class DetailViewSection extends Component {
           handleClick={this.toggleSection}
         />
         <div
-          className={`${styles.CollapsibleContent} ${isOpen
+          className={`${styles.CollapsibleContent} ${this.state.isOpen
             ? styles.ContentVisible
-            : styles.ContentHidden}`}
+            : null}`}
         >
-          {content || <div />}
+          {children || null}
         </div>
       </div>
     );

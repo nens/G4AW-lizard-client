@@ -3,15 +3,12 @@
 }
 
 .CollapsibleContent {
-  -webkit-transition: max-height 0.8s;
-  -moz-transition: max-height 0.8s;
-  transition: max-height 0.8s;
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 0.4s linear;
+  -webkit-transition: max-height 0.4s linear;
 }
 
 .ContentVisible {
-  max-height: auto;
-}
-
-.ContentHidden {
-  max-height: 0;
+  max-height: 500px;
 }
