@@ -170,9 +170,12 @@ class DetailViewComponent extends Component {
     }
   }
   getHumanReadableRiceGrowth(parcel, t) {
-    // TODO: think of solution that will return the message in vietnamese.
-    const stage = parcel.GrowthStage.toUpperCase();
-    const height = parcel.PlantHeightInCm;
+    const stage = parcel.GrowthStage
+      ? parcel.GrowthStage.toUpperCase()
+      : t("UNKNOWN");
+    const height = parcel.PlantHeightInCm
+      ? parcel.PlantHeightInCm
+      : t("UNKNOWN");
     return `${t("The current growth stage is")} ${stage}
       ${t("and the plant height is")} ${height} cm.`;
   }
@@ -183,6 +186,13 @@ class DetailViewComponent extends Component {
     } else {
       return t("There is a little risk on pest presence.");
     }
+  }
+  getHumanReadableFloodRisk(parcel, t) {
+    const prefix = t("The current flood risk is ");
+    const suffix = parcel.FloodRisk
+      ? parcel.FloodRisk.toUpperCase()
+      : t("UNKNOWN");
+    return `${prefix} ${suffix}`;
   }
   render() {
     const {
@@ -198,10 +208,9 @@ class DetailViewComponent extends Component {
       t
     } = this.props;
 
-    let tabularData, latlonzoom;
-    if (parcel && parcel.hasGeoserverData) {
+    let latlonzoom;
+    if (parcel && parcel.geometry) {
       latlonzoom = this.getLatLonZoom(parcel.geometry.coordinates[0]);
-      tabularData = this.formatTabularDataEN(parcel); //TODO: choose language at runtime.
     } else {
       return null;
     }
@@ -212,7 +221,7 @@ class DetailViewComponent extends Component {
       >
         <div id="DetailView" className={styles.DetailView}>
           <DetailViewHeader
-            title={`${t("Farmer")} ${parcel.FarmID}`}
+            title={`${t("Farmer")} ${parcel.FarmID || t("UNKNOWN")}`}
             subTitle={parcel.FieldOfficer}
             halfMode={false}
             latlonzoom={latlonzoom}
@@ -227,12 +236,14 @@ class DetailViewComponent extends Component {
                     handleOnClick={() => this.handleViewOnMapClick(parcel)}
                   />
                 </div>
-                <DetailViewTable data={tabularData} />
+                <DetailViewTable data={this.formatTabularDataEN(parcel)} />
                 <br />
                 <DetailViewSection isInitiallyOpen title={t("Rice Growth")}>
                   <div className={styles.ColoredSquaresContainer}>
                     <div className={styles.ColoredSquaresHeader}>
-                      {parcel.GrowthStage.toUpperCase()}
+                      {parcel.GrowthStage
+                        ? parcel.GrowthStage.toUpperCase()
+                        : t("UNKNOWN")}
                     </div>
                     {riceGrowthLayer.colormap.map((kv, i) => {
                       const label = Object.keys(kv)[0];
@@ -258,7 +269,9 @@ class DetailViewComponent extends Component {
                 >
                   <div className={styles.ColoredSquaresContainer}>
                     <div className={styles.ColoredSquaresHeader}>
-                      {parcel.FloodRisk.toUpperCase()}
+                      {parcel.FloodRisk
+                        ? parcel.FloodRisk.toUpperCase()
+                        : t("UKNOWN")}
                     </div>
                     <ColoredSquare
                       title={t("Low flood risk")}
@@ -276,7 +289,7 @@ class DetailViewComponent extends Component {
                       active={parcel.FloodRisk === "High"}
                     />
                     <div className={styles.SubMessage}>
-                      {`The current flood risk is ${parcel.FloodRisk.toUpperCase()}`}
+                      {this.getHumanReadableFloodRisk(parcel, t)}
                     </div>
                   </div>
                 </DetailViewSection>
@@ -286,7 +299,9 @@ class DetailViewComponent extends Component {
                 >
                   <div className={styles.ColoredSquaresContainer}>
                     <div className={styles.ColoredSquaresHeader}>
-                      {parcel.PestRisk.toUpperCase()}
+                      {parcel.PestRisk
+                        ? parcel.PestRisk.toUpperCase()
+                        : t("UNKNOWN")}
                     </div>
                     <ColoredSquare
                       title={t("High blast risk")}
