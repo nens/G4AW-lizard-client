@@ -1,4 +1,5 @@
 import i18next from "i18next";
+import { getParcels } from "lizard-api-client";
 import {
   SHOW_SNACKBAR,
   GET_ATTRIBUTES_FROM_GEOSERVER,
@@ -9,7 +10,7 @@ import {
 import { theStore } from "../store/Store";
 
 import { getParcelAttributes } from "../tools/wfs";
-
+import { receiveResultsSuccess } from "./SearchActions";
 import { changeView, showSnackBar } from "./UiActions";
 
 export const getAttributesFromGeoserverAction = parcelId => ({
@@ -147,4 +148,16 @@ export function getAttributesFromGeoserver(dispatch, parcelId) {
       );
     }
   );
+}
+
+export function getParcelByLatLng(dispatch, lat, lng) {
+  getParcels({
+    dist: 5, // 5 meter search radius
+    point: `${lng},${lat}`
+  }).then(results => {
+    if (results.length > 0) {
+      dispatch(receiveResultsSuccess(results));
+      getAttributesFromGeoserver(dispatch, results[0].id);
+    }
+  });
 }
