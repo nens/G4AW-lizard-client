@@ -7,6 +7,7 @@ import PropTypes from "prop-types";
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import { connect } from "react-redux";
+import LogoLocTroi from "../images/logo-loctroi-large-greyscale.png";
 import styles from "../styles/ListSearchView.css";
 
 import {
@@ -85,6 +86,7 @@ function ListSearchLanding({ t, username }) {
       <h1 className={styles.Welcome}>
         {msg}
       </h1>
+      <img src={LogoLocTroi} />
       <GeolocateButtonBig t={t} />
       <LoginLogoutButton />
     </div>
