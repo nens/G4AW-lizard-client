@@ -11,6 +11,7 @@ import {
 
 import { showSnackBar } from "./UiActions";
 import { updateMapBbox } from "./MapActions";
+import { changeView } from "./UiActions";
 
 function getGeocoderUrl(coords) {
   return `https://api.mapbox.com/geocoding/v5/mapbox.places/${coords.longitude},${coords.latitude}.json?access_token=${config.mapboxAccessToken}`;
@@ -87,6 +88,7 @@ export function performGeolocation(dispatch) {
                 lat + GRAD_OFFSET
               ];
               updateMapBbox(dispatch, newBbox);
+              changeView(dispatch, "MapSearchView");
             } else {
               showSnackBarGeolocationError(dispatch);
               dispatch({
