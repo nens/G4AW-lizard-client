@@ -21,7 +21,7 @@ export default class DetailViewSection extends Component {
   constructor() {
     super();
     this.state = {
-      isOpen: this.props && this.props.isOpen
+      isOpen: this.props && this.props.isInitiallyOpen
     };
     this.toggleSection = this.toggleSection.bind(this);
   }
@@ -30,14 +30,7 @@ export default class DetailViewSection extends Component {
   }
   componentDidMount() {}
   render() {
-    const {
-      children,
-      colorCode,
-      handleClick,
-      title,
-      subTitle,
-      isOpen
-    } = this.props;
+    const { children, colorCode, handleClick, title, subTitle } = this.props;
 
     const content = this.state.isOpen ? children : null;
 
@@ -64,7 +57,7 @@ export default class DetailViewSection extends Component {
 DetailViewSection.propTypes = {
   handleClick: PropTypes.func,
   children: PropTypes.object,
-  open: PropTypes.bool,
+  isInitiallyOpen: PropTypes.bool,
   title: PropTypes.string,
   subtitle: PropTypes.string
 };
