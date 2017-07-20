@@ -209,22 +209,32 @@ class DetailViewComponent extends Component {
       t
     } = this.props;
 
-    let latlonzoom;
-    if (parcel && parcel.geometry) {
-      latlonzoom = this.getLatLonZoom(parcel.geometry.coordinates[0]);
+    // let latlonzoom;
+    let detailViewHeader;
+    if (parcel && parcel.geometry && parcel.geometry.coordinates) {
+      detailViewHeader = (
+        <DetailViewHeader
+          title={`${t("Farmer")} ${parcel.FarmID}`}
+          subTitle={parcel.FieldOfficer}
+          halfMode={false}
+          latlonzoom={this.getLatLonZoom(parcel.geometry.coordinates[0])}
+          handleBackButtonClick={() => changeToSearchView(searchView)}
+        />
+      );
     } else {
-      return null;
+      detailViewHeader = (
+        <DetailViewHeader
+          title={t("Farmer ...")}
+          halfMode={false}
+          latlonzoom={{ lat: 15, lon: 105, zoom: DEFAULT_ZOOM }}
+          handleBackButtonClick={() => changeToSearchView(searchView)}
+        />
+      );
     }
     return (
       <div id="DetailView" className={styles.DetailView}>
-        <DetailViewHeader
-          title={`${t("Farmer")} ${parcel.FarmID || t("UNKNOWN")}`}
-          subTitle={parcel.FieldOfficer}
-          halfMode={false}
-          latlonzoom={latlonzoom}
-          handleBackButtonClick={() => changeToSearchView(searchView)}
-        />
-        {parcel.isFetchingGeoserver
+        {detailViewHeader}
+        {!parcel || parcel.isFetchingGeoserver
           ? <DetailViewSpinner />
           : <div>
               <div className={styles.MapZoomToParcel}>
@@ -361,8 +371,8 @@ class DetailViewSpinner extends Component {
           singleColor="#03a9f4"
           style={{
             position: "absolute",
-            top: "50%",
-            left: "50%"
+            top: "160px",
+            left: "45%"
           }}
         />
       </div>

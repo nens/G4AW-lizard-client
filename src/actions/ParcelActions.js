@@ -74,7 +74,7 @@ function showSnackBarParcelReceiveError(dispatch, placeName) {
   const options = {
     isError: true,
     message: i18next.t("There was an error while fetching the parcel details."),
-    subMessage: `${subMessage} placeName`
+    subMessage: `${subMessage} ${placeName}`
   };
   showSnackBar(dispatch, options);
 }
@@ -153,10 +153,6 @@ export function getAttributesFromGeoserver(dispatch, parcelId) {
             data.features[0].properties
           )
         );
-        // selectParcel(dispatch, parcelId);
-        // if (state.ui.currentView !== "DetailView") {
-        //   changeView(dispatch, "DetailView");
-        // }
       } else {
         handleInvalidDataFormatError(
           dispatch,
@@ -178,21 +174,23 @@ export function getAttributesFromGeoserver(dispatch, parcelId) {
   );
 }
 
-// export function getParcelByLatLng(dispatch, lat, lng) {
-//   getParcels({
-//     dist: 5, // 5 meter search radius
-//     point: `${lng},${lat}`
-//   }).then(
-//     results => {
-//       if (results.length > 0) {
-//         dispatch(receiveResultsSuccess(results));
-//         (dispatch, parcelId)
-//         getAttributesFromGeoserver(dispatch, results[0].id);
-//       }
-//     },
-//     error => {
-//       const place = t("parcel at ") + `${lat},${lng}`;
-//       showSnackBarParcelReceiveError(dispatch, place);
-//     }
-//   );
-// }
+export function getParcelByLatLng(dispatch, lat, lng) {
+  const handleError = () => {
+    changeView(dispatch, theStore.getState().ui.searchView);
+    showSnackBarParcelReceiveError(dispatch, `parcel at: ${lat}, ${lng}`);
+  };
+  selectParcelAndGoToDetailView(dispatch, 9999);
+  getParcels({
+    dist: 5, // 5 meter search radius
+    point: `${lng},${lat}`
+  }).then(results => {
+    if (results.length > 0) {
+      dispatch(receiveResultsSuccess(results));
+      getAttributesFromGeoserver(dispatch, results[0].id);
+    } else {
+      handleError();
+      // const place = "Parcel at " + `${lat},${lng}`;
+      // showSnackBarParcelReceiveError(dispatch, place);
+    }
+  }, handleError);
+}
