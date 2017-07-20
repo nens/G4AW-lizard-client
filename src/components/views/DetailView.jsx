@@ -229,7 +229,7 @@ class DetailViewComponent extends Component {
                 </div>
                 <DetailViewTable data={tabularData} />
                 <br />
-                <DetailViewSection isOpen title={t("Rice Growth")}>
+                <DetailViewSection isInitiallyOpen title={t("Rice Growth")}>
                   <div className={styles.ColoredSquaresContainer}>
                     <div className={styles.ColoredSquaresHeader}>
                       {parcel.GrowthStage.toUpperCase()}
@@ -252,7 +252,10 @@ class DetailViewComponent extends Component {
                     </div>
                   </div>
                 </DetailViewSection>
-                <DetailViewSection isOpen={false} title={t("Flood Risk")}>
+                <DetailViewSection
+                  isInitiallyOpen={false}
+                  title={t("Flood Risk")}
+                >
                   <div className={styles.ColoredSquaresContainer}>
                     <div className={styles.ColoredSquaresHeader}>
                       {parcel.FloodRisk.toUpperCase()}
@@ -277,7 +280,10 @@ class DetailViewComponent extends Component {
                     </div>
                   </div>
                 </DetailViewSection>
-                <DetailViewSection isOpen={false} title={t("Pest Risk")}>
+                <DetailViewSection
+                  isInitiallyOpen={false}
+                  title={t("Pest Risk")}
+                >
                   <div className={styles.ColoredSquaresContainer}>
                     <div className={styles.ColoredSquaresHeader}>
                       {parcel.PestRisk.toUpperCase()}
@@ -303,7 +309,7 @@ class DetailViewComponent extends Component {
                   </div>
                 </DetailViewSection>
                 <DetailViewPhotoSection
-                  isOpen={false}
+                  isInitiallyOpen={false}
                   photo={photo}
                   width={WIDTH}
                   handleClick={changeToPhotoView}

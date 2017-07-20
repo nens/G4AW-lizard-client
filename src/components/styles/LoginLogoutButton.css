@@ -7,6 +7,8 @@
   position: relative;
   text-align: center;
   width: 100px;
+  position: absolute;
+  margin-top: 550px;
 }
 .Icon {
   transform: translateY(5px);

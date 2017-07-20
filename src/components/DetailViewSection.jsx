@@ -21,25 +21,18 @@ export default class DetailViewSection extends Component {
   constructor() {
     super();
     this.state = {
-      isOpen: this.props && this.props.isOpen
+      isOpen: this.props && this.props.isInitiallyOpen
     };
     this.toggleSection = this.toggleSection.bind(this);
+  }
+  componentDidMount() {
+    this.setState({ isOpen: this.props.isOpen });
   }
   toggleSection() {
     this.setState({ isOpen: !this.state.isOpen });
   }
-  componentDidMount() {}
   render() {
-    const {
-      children,
-      colorCode,
-      handleClick,
-      title,
-      subTitle,
-      isOpen
-    } = this.props;
-
-    const content = this.state.isOpen ? children : null;
+    const { children, colorCode, handleClick, title, subTitle } = this.props;
 
     return (
       <div className={styles.DetailViewSection}>
@@ -50,12 +43,13 @@ export default class DetailViewSection extends Component {
           colorCode={colorCode}
           handleClick={this.toggleSection}
         />
-        <VelocityComponent
-          duration={250}
-          animation={{ translateY: content ? "-10px" : "10px" }}
+        <div
+          className={`${styles.CollapsibleContent} ${this.state.isOpen
+            ? styles.ContentVisible
+            : null}`}
         >
-          {content || <div />}
-        </VelocityComponent>
+          {children || null}
+        </div>
       </div>
     );
   }
@@ -64,7 +58,7 @@ export default class DetailViewSection extends Component {
 DetailViewSection.propTypes = {
   handleClick: PropTypes.func,
   children: PropTypes.object,
-  open: PropTypes.bool,
+  isInitiallyOpen: PropTypes.bool,
   title: PropTypes.string,
   subtitle: PropTypes.string
 };

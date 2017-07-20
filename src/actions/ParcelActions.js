@@ -1,14 +1,16 @@
 import i18next from "i18next";
+import { getParcels } from "lizard-api-client";
 import {
   SHOW_SNACKBAR,
   GET_ATTRIBUTES_FROM_GEOSERVER,
   RECEIVE_ATTRIBUTES_FROM_GEOSERVER_SUCCESS,
-  RECEIVE_ATTRIBUTES_FROM_GEOSERVER_ERROR
+  RECEIVE_ATTRIBUTES_FROM_GEOSERVER_ERROR,
+  DESELECT_PARCEL
 } from "../constants/ActionTypes";
 import { theStore } from "../store/Store";
 
 import { getParcelAttributes } from "../tools/wfs";
-
+import { receiveResultsSuccess } from "./SearchActions";
 import { changeView, showSnackBar } from "./UiActions";
 
 export const getAttributesFromGeoserverAction = parcelId => ({
@@ -30,6 +32,10 @@ export const receiveAttributesFromGeoserverErrorAction = (parcelId, error) => ({
   parcelId,
   error
 });
+
+export function deselectParcel(dispatch) {
+  dispatch({ type: DESELECT_PARCEL });
+}
 
 function handleInvalidDataFormatError(
   dispatch,
@@ -68,15 +74,37 @@ function showSnackBarParcelReceiveError(dispatch, placeName) {
   showSnackBar(dispatch, options);
 }
 
-export function getAttributesFromGeoserver(dispatch, parcelId) {
-  const currentData = theStore.getState().parcels[parcelId];
-  if (!currentData || !currentData.parcelGeoserverId) {
-    // We can't find the Geoserver featureID
-    return;
+function getNextOrPreviousParcel(dispatch, next = true) {
+  const state = theStore.getState();
+  const oldJsId = state.search.results.indexOf(state.ui.selectedParcel);
+  let newJsId;
+  if (next) {
+    newJsId = oldJsId === state.search.results.length - 1 ? 0 : oldJsId + 1;
+  } else {
+    newJsId = oldJsId === 0 ? state.search.results.length - 1 : oldJsId - 1;
   }
+  const newParcelId = state.search.results[newJsId];
+  getAttributesFromGeoserver(dispatch, newParcelId);
+  state.ui.selectedParcel = newParcelId;
+}
 
-  if (currentData.isFetchingGeoserver) {
-    // Already busy
+export function selectPreviousParcel(dispatch) {
+  getNextOrPreviousParcel(dispatch, false);
+}
+
+export function selectNextParcel(dispatch) {
+  getNextOrPreviousParcel(dispatch, true);
+}
+
+export function getAttributesFromGeoserver(dispatch, parcelId) {
+  const state = theStore.getState();
+  const currentData = state.parcels[parcelId];
+  if (
+    !currentData ||
+    !currentData.parcelGeoserverId ||
+    currentData.isFetchingGeoserver
+  ) {
+    // We can't find the Geoserver featureID/already busy
     return;
   }
 
@@ -98,7 +126,9 @@ export function getAttributesFromGeoserver(dispatch, parcelId) {
             data.features[0].properties
           )
         );
-        changeView(dispatch, "DetailView");
+        if (state.ui.currentView !== "DetailView") {
+          changeView(dispatch, "DetailView");
+        }
       } else {
         handleInvalidDataFormatError(
           dispatch,
@@ -118,4 +148,16 @@ export function getAttributesFromGeoserver(dispatch, parcelId) {
       );
     }
   );
+}
+
+export function getParcelByLatLng(dispatch, lat, lng) {
+  getParcels({
+    dist: 5, // 5 meter search radius
+    point: `${lng},${lat}`
+  }).then(results => {
+    if (results.length > 0) {
+      dispatch(receiveResultsSuccess(results));
+      getAttributesFromGeoserver(dispatch, results[0].id);
+    }
+  });
 }

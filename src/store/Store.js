@@ -20,6 +20,7 @@ createStoreWithMiddleware = applyMiddleware(thunkMiddleware, logger)(
 export const initialUiState = {
   currentView: "ListSearchView",
   searchView: "ListSearchView",
+  selectedParcel: null,
   currentSettingsTabIdx: 0,
   searchResultsAsList: false,
   showSnackBar: false,
@@ -131,7 +132,7 @@ export const initialForegroundlayerState = {
         { Flowering: [37, 58, 32, 255] },
         { Milking: [255, 175, 6, 255] },
         { Ripening: [255, 120, 19, 255] },
-        { Harvest: [232, 69, 6, 255] }
+        { Harvesting: [232, 69, 6, 255] }
       ]
     },
     {
