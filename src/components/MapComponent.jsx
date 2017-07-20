@@ -96,6 +96,10 @@ class MapComponent extends Component {
       L.latLng(currentBbox[2], currentBbox[3])
     );
 
+    console.log("[dbg] selectedParcel =", selectedParcel);
+
+    // const isFetchingParcel = selectedParcel && selectedParcel
+
     return (
       <div className={styles.MapComponent} id="MapComponent">
         <Map
