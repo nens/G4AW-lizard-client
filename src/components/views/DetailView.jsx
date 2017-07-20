@@ -16,6 +16,7 @@ import {
   DetailViewTable,
   DetailViewTableSection,
   DetailViewPhotoSection,
+  DetailViewFooter,
   FlatButton
 } from "..";
 
@@ -215,123 +216,116 @@ class DetailViewComponent extends Component {
       return null;
     }
     return (
-      <VelocityTransitionGroup
-        runOnMount={true}
-        enter={{ animation: "transition.slideUpBigIn" }}
-      >
-        <div id="DetailView" className={styles.DetailView}>
-          <DetailViewHeader
-            title={`${t("Farmer")} ${parcel.FarmID || t("UNKNOWN")}`}
-            subTitle={parcel.FieldOfficer}
-            halfMode={false}
-            latlonzoom={latlonzoom}
-            handleBackButtonClick={() => changeToSearchView(searchView)}
-          />
-          {parcel.isFetchingGeoserver
-            ? <DetailViewSpinner />
-            : <div>
-                <div className={styles.MapZoomToParcel}>
-                  <FlatButton
-                    buttonText={t("View on map")}
-                    handleOnClick={() => this.handleViewOnMapClick(parcel)}
-                  />
-                </div>
-                <DetailViewTable data={this.formatTabularDataEN(parcel)} />
-                <br />
-                <DetailViewSection isInitiallyOpen title={t("Rice Growth")}>
-                  <div className={styles.ColoredSquaresContainer}>
-                    <div className={styles.ColoredSquaresHeader}>
-                      {parcel.GrowthStage
-                        ? parcel.GrowthStage.toUpperCase()
-                        : t("UNKNOWN")}
-                    </div>
-                    {riceGrowthLayer.colormap.map((kv, i) => {
-                      const label = Object.keys(kv)[0];
-                      const color = Object.values(kv)[0];
-                      return (
-                        <ColoredSquare
-                          key={i}
-                          key_={i}
-                          title={`${t("Growth stage")}: ${label}`}
-                          backgroundColorHex={rgbaListToHexColor(color)}
-                          active={label === parcel.GrowthStage}
-                        />
-                      );
-                    })}
-                    <div className={styles.SubMessage}>
-                      {this.getHumanReadableRiceGrowth(parcel, t)}
-                    </div>
-                  </div>
-                </DetailViewSection>
-                <DetailViewSection
-                  isInitiallyOpen={false}
-                  title={t("Flood Risk")}
-                >
-                  <div className={styles.ColoredSquaresContainer}>
-                    <div className={styles.ColoredSquaresHeader}>
-                      {parcel.FloodRisk
-                        ? parcel.FloodRisk.toUpperCase()
-                        : t("UKNOWN")}
-                    </div>
-                    <ColoredSquare
-                      title={t("Low flood risk")}
-                      backgroundColorHex="#FFFFFF"
-                      active={parcel.FloodRisk === "Low"}
-                    />
-                    <ColoredSquare
-                      title={t("Medium flood risk")}
-                      backgroundColorHex="#697DB0"
-                      active={parcel.FloodRisk === "Medium"}
-                    />
-                    <ColoredSquare
-                      title={t("High flood risk")}
-                      backgroundColorHex="#122476"
-                      active={parcel.FloodRisk === "High"}
-                    />
-                    <div className={styles.SubMessage}>
-                      {this.getHumanReadableFloodRisk(parcel, t)}
-                    </div>
-                  </div>
-                </DetailViewSection>
-                <DetailViewSection
-                  isInitiallyOpen={false}
-                  title={t("Pest Risk")}
-                >
-                  <div className={styles.ColoredSquaresContainer}>
-                    <div className={styles.ColoredSquaresHeader}>
-                      {parcel.PestRisk
-                        ? parcel.PestRisk.toUpperCase()
-                        : t("UNKNOWN")}
-                    </div>
-                    <ColoredSquare
-                      title={t("High blast risk")}
-                      backgroundColorHex="#FFFFFF"
-                      active={parcel.BlastRisk === "High"}
-                    />
-                    <ColoredSquare
-                      title={t("High leaffolder risk")}
-                      backgroundColorHex="#D7BA34"
-                      active={parcel.LeaffolderRisk === "High"}
-                    />
-                    <ColoredSquare
-                      title={t("High brown planthopper risk")}
-                      backgroundColorHex="#703F1D"
-                      active={parcel.BrownPlantHopperRisk === "High"}
-                    />
-                    <div className={styles.SubMessage}>
-                      {this.getHumanReadablePestRisk(parcel, t)}
-                    </div>
-                  </div>
-                </DetailViewSection>
-                <DetailViewPhotoSection
-                  isInitiallyOpen={false}
-                  photo={photo}
-                  width={WIDTH}
-                  handleClick={changeToPhotoView}
+      <div id="DetailView" className={styles.DetailView}>
+        <DetailViewHeader
+          title={`${t("Farmer")} ${parcel.FarmID || t("UNKNOWN")}`}
+          subTitle={parcel.FieldOfficer}
+          halfMode={false}
+          latlonzoom={latlonzoom}
+          handleBackButtonClick={() => changeToSearchView(searchView)}
+        />
+        {parcel.isFetchingGeoserver
+          ? <DetailViewSpinner />
+          : <div>
+              <div className={styles.MapZoomToParcel}>
+                <FlatButton
+                  buttonText={t("View on map")}
+                  handleOnClick={() => this.handleViewOnMapClick(parcel)}
                 />
-              </div>}
-        </div>
-      </VelocityTransitionGroup>
+              </div>
+              <DetailViewTable data={this.formatTabularDataEN(parcel)} />
+              <br />
+              <DetailViewSection isInitiallyOpen title={t("Rice Growth")}>
+                <div className={styles.ColoredSquaresContainer}>
+                  <div className={styles.ColoredSquaresHeader}>
+                    {parcel.GrowthStage
+                      ? parcel.GrowthStage.toUpperCase()
+                      : t("UNKNOWN")}
+                  </div>
+                  {riceGrowthLayer.colormap.map((kv, i) => {
+                    const label = Object.keys(kv)[0];
+                    const color = Object.values(kv)[0];
+                    return (
+                      <ColoredSquare
+                        key={i}
+                        key_={i}
+                        title={`${t("Growth stage")}: ${label}`}
+                        backgroundColorHex={rgbaListToHexColor(color)}
+                        active={label === parcel.GrowthStage}
+                      />
+                    );
+                  })}
+                  <div className={styles.SubMessage}>
+                    {this.getHumanReadableRiceGrowth(parcel, t)}
+                  </div>
+                </div>
+              </DetailViewSection>
+              <DetailViewSection
+                isInitiallyOpen={false}
+                title={t("Flood Risk")}
+              >
+                <div className={styles.ColoredSquaresContainer}>
+                  <div className={styles.ColoredSquaresHeader}>
+                    {parcel.FloodRisk
+                      ? parcel.FloodRisk.toUpperCase()
+                      : t("UKNOWN")}
+                  </div>
+                  <ColoredSquare
+                    title={t("Low flood risk")}
+                    backgroundColorHex="#FFFFFF"
+                    active={parcel.FloodRisk === "Low"}
+                  />
+                  <ColoredSquare
+                    title={t("Medium flood risk")}
+                    backgroundColorHex="#697DB0"
+                    active={parcel.FloodRisk === "Medium"}
+                  />
+                  <ColoredSquare
+                    title={t("High flood risk")}
+                    backgroundColorHex="#122476"
+                    active={parcel.FloodRisk === "High"}
+                  />
+                  <div className={styles.SubMessage}>
+                    {this.getHumanReadableFloodRisk(parcel, t)}
+                  </div>
+                </div>
+              </DetailViewSection>
+              <DetailViewSection isInitiallyOpen={false} title={t("Pest Risk")}>
+                <div className={styles.ColoredSquaresContainer}>
+                  <div className={styles.ColoredSquaresHeader}>
+                    {parcel.PestRisk
+                      ? parcel.PestRisk.toUpperCase()
+                      : t("UNKNOWN")}
+                  </div>
+                  <ColoredSquare
+                    title={t("High blast risk")}
+                    backgroundColorHex="#FFFFFF"
+                    active={parcel.BlastRisk === "High"}
+                  />
+                  <ColoredSquare
+                    title={t("High leaffolder risk")}
+                    backgroundColorHex="#D7BA34"
+                    active={parcel.LeaffolderRisk === "High"}
+                  />
+                  <ColoredSquare
+                    title={t("High brown planthopper risk")}
+                    backgroundColorHex="#703F1D"
+                    active={parcel.BrownPlantHopperRisk === "High"}
+                  />
+                  <div className={styles.SubMessage}>
+                    {this.getHumanReadablePestRisk(parcel, t)}
+                  </div>
+                </div>
+              </DetailViewSection>
+              <DetailViewPhotoSection
+                isInitiallyOpen={false}
+                photo={photo}
+                width={WIDTH}
+                handleClick={changeToPhotoView}
+              />
+            </div>}
+        <DetailViewFooter />
+      </div>
     );
   }
 }
