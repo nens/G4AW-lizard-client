@@ -9,11 +9,15 @@ import { selectPreviousParcel, selectNextParcel } from "../actions";
 
 class DetailViewFooterComponent extends Component {
   getPageIndication() {
-    const currentIndex = this.props.searchResults.indexOf(
-      this.props.selectedParcel
-    );
-    const count = this.props.searchResults.length;
-    return `${currentIndex + 1}/${count}`;
+    if (this.props.searchResults) {
+      const currentIndex = this.props.searchResults.indexOf(
+        this.props.selectedParcel
+      );
+      const count = this.props.searchResults.length;
+      return `${currentIndex + 1}/${count}`;
+    } else {
+      return "1/1";
+    }
   }
   render() {
     return (
