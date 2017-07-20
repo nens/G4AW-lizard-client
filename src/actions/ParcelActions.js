@@ -5,6 +5,7 @@ import {
   GET_ATTRIBUTES_FROM_GEOSERVER,
   RECEIVE_ATTRIBUTES_FROM_GEOSERVER_SUCCESS,
   RECEIVE_ATTRIBUTES_FROM_GEOSERVER_ERROR,
+  SELECT_PARCEL,
   DESELECT_PARCEL
 } from "../constants/ActionTypes";
 import { theStore } from "../store/Store";
@@ -32,6 +33,10 @@ export const receiveAttributesFromGeoserverErrorAction = (parcelId, error) => ({
   parcelId,
   error
 });
+
+function selectParcel(dispatch, selectedParcel) {
+  dispatch({ type: SELECT_PARCEL, selectedParcel });
+}
 
 export function deselectParcel(dispatch) {
   dispatch({ type: DESELECT_PARCEL });
@@ -85,7 +90,6 @@ function getNextOrPreviousParcel(dispatch, next = true) {
   }
   const newParcelId = state.search.results[newJsId];
   getAttributesFromGeoserver(dispatch, newParcelId);
-  state.ui.selectedParcel = newParcelId;
 }
 
 export function selectPreviousParcel(dispatch) {
@@ -126,6 +130,7 @@ export function getAttributesFromGeoserver(dispatch, parcelId) {
             data.features[0].properties
           )
         );
+        selectParcel(dispatch, parcelId);
         if (state.ui.currentView !== "DetailView") {
           changeView(dispatch, "DetailView");
         }
@@ -151,12 +156,14 @@ export function getAttributesFromGeoserver(dispatch, parcelId) {
 }
 
 export function getParcelByLatLng(dispatch, lat, lng) {
+  console.log("[F] getParcelByLatLng");
   getParcels({
     dist: 5, // 5 meter search radius
     point: `${lng},${lat}`
   }).then(results => {
     if (results.length > 0) {
       dispatch(receiveResultsSuccess(results));
+
       getAttributesFromGeoserver(dispatch, results[0].id);
     }
   });

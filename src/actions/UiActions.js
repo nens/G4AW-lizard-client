@@ -15,7 +15,6 @@ export function changeView(dispatch, newView) {
 }
 
 export function changeSettingsTab(dispatch, newSettingsTabIdx) {
-  console.log("action", newSettingsTabIdx);
   dispatch({ type: CHANGE_SETTINGS_TAB, newSettingsTabIdx });
 }
 
