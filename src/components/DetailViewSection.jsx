@@ -8,7 +8,7 @@ import { VelocityComponent } from "velocity-react";
 /*
 DetailViewSection
 -----------------
-The final form of these components will be rely heavy on the value of
+The final form of these components will rely heavy on the value of
 'this.props.children' property, as declared in the wrapping Component.
 
 Currently, the following non-generic instantiations are possible:
