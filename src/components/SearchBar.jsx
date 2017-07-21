@@ -49,12 +49,19 @@ class SearchBarComponent extends Component {
     this.props.clear(this.props.selectedParcelId, this.props.parcels);
   }
   render() {
-    const { searchInput, searchIsFetching, changeToSettingsView } = this.props;
+    const {
+      searchInput,
+      searchIsFetching,
+      changeToSettingsView,
+      searchResults,
+      selectedParcelId
+    } = this.props;
     return (
       <div className={styles.SearchBar}>
         <SettingsButton handleClick={changeToSettingsView} />
         <SearchField
-          selectedParcelId={this.props.selectedParcelId}
+          selectedParcelId={selectedParcelId}
+          searchResults={searchResults}
           searchInput={searchInput}
           searchIsFetching={searchIsFetching}
           handleSearch={this.handleSearch}
@@ -83,7 +90,8 @@ class SearchField extends Component {
       searchIsFetching,
       handleSearch,
       handleClearInput,
-      selectedParcelId
+      selectedParcelId,
+      searchResults
     } = this.props;
 
     return (
@@ -97,7 +105,9 @@ class SearchField extends Component {
           onKeyUp={handleSearch}
           className={styles.SearchbarInput}
         />
-        {(searchInput && searchInput.length > 0) || selectedParcelId
+        {(searchInput && searchInput.length > 0) ||
+        (searchResults && searchResults.length > 0) ||
+        selectedParcelId
           ? <ClearInputButton onClick={handleClearInput} />
           : null}
       </div>
