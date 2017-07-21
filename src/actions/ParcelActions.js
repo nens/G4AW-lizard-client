@@ -134,6 +134,10 @@ export function getAttributesFromGeoserver(dispatch, parcelId) {
         if (state.ui.currentView !== "DetailView") {
           changeView(dispatch, "DetailView");
         }
+        showSnackBar(dispatch, {
+          autoHideDuration: 2000,
+          message: i18next.t("Succesfully retrieved parcel.")
+        });
       } else {
         handleInvalidDataFormatError(
           dispatch,
@@ -157,7 +161,7 @@ export function getAttributesFromGeoserver(dispatch, parcelId) {
 
 export function getParcelByLatLng(dispatch, lat, lng) {
   showSnackBar(dispatch, {
-    autoHideDuration: 4000,
+    autoHideDuration: 2000,
     message: i18next.t("Looking for a parcel...")
   });
   getParcels({
