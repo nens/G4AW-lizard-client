@@ -26,7 +26,7 @@ export default class DetailViewSection extends Component {
     this.toggleSection = this.toggleSection.bind(this);
   }
   componentDidMount() {
-    this.setState({ isOpen: this.props.isOpen });
+    this.setState({ isOpen: this.props.isInitiallyOpen });
   }
   toggleSection() {
     this.setState({ isOpen: !this.state.isOpen });

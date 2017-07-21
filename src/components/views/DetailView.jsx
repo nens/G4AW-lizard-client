@@ -22,6 +22,7 @@ import {
 
 import { changeView } from "../../actions/UiActions";
 import { updateMapBbox } from "../../actions/MapActions";
+import { getActiveForegroundlayerIdx } from "../../actions/ForegroundlayerActions";
 import { THUMBNAIL_LIST, LOREM } from "../../../stories/helpers";
 import { WIDTH } from "../../tools/dimensions";
 import {
@@ -33,6 +34,38 @@ import {
 const DEFAULT_ZOOM = 11; // Used for map in header of the page
 
 const NO_DATA = "...";
+
+const CATEGORIES = {
+  General: [
+    "FarmID",
+    "FieldOfficer",
+    "Visit",
+    "SpecialSituation",
+    "FieldSizeInHa",
+    "Variety"
+  ],
+  RiceGrowth: [
+    "GrowthStage",
+    "CropCondition",
+    "SowDate",
+    "HarvestDate",
+    "Yield(Kg/Ha)",
+    "Price(₫/Kg)",
+    "HarvestedWeightInKg(Wet)",
+    "HarvestedWeightInKg(Dry)",
+    "MoistureContent",
+    "PlantHeightInCm",
+    "NumberOfStemsPerM²"
+  ],
+  PestRisk: [
+    "LeaffolderRisk",
+    "LeaffolderPresent",
+    "BlastPresent",
+    "BlastRisk",
+    "BrownPlantHopperPresent",
+    "BrownPlantHopperRisk"
+  ]
+};
 
 const GEOSERVER_PARCEL_KEYS = {
   FarmID: "Mã số ruộng",
@@ -118,7 +151,7 @@ class DetailViewComponent extends Component {
     super();
     this.handleViewOnMapClick = this.handleViewOnMapClick.bind(this);
   }
-  formatTabularDataVI(parcel) {
+  formatTabularDataVI(parcel, keyssss) {
     let result = [],
       vnKey,
       enValue,
@@ -139,8 +172,8 @@ class DetailViewComponent extends Component {
     });
     return result;
   }
-  formatTabularDataEN(parcel) {
-    return Object.keys(GEOSERVER_PARCEL_KEYS).map(enKey => {
+  formatTabularDataEN(parcel, tableKeys) {
+    return tableKeys.map(enKey => {
       return {
         key: enKey,
         value: parcel[enKey] || NO_DATA
@@ -175,14 +208,15 @@ class DetailViewComponent extends Component {
     const stage = parcel.GrowthStage ? parcel.GrowthStage.toUpperCase() : "...";
     const height = parcel.PlantHeightInCm;
     return `${t("The current growth stage is")} ${stage}
-      ${t("and the plant height is")} ${height} cm`;
+      ${t("and the plant height is")}
+      ${height || height === 0 ? height : "an unknown amount of"} cm`;
   }
   getHumanReadablePestRisk(parcel, t) {
     let riskLevel = parcel.PestRisk;
     if (riskLevel === "High") {
       return t("There is increased risk on one or more pests");
     } else if (riskLevel === "Low") {
-      return t("There is a little risk on pest presence");
+      return t("There is only little risk on pest presence");
     } else {
       return t("The risk on pest presence is unknown");
     }
@@ -194,6 +228,7 @@ class DetailViewComponent extends Component {
       changeToPhotoView, // via: mapDispatchToProps
       changeToSearchView, // via: mapDispatchToProps,
       changeView, // via: mapDispatchToProps
+      getActiveForegroundlayerIdx,
       parcel, // via: mapStateToProps
       photo, // via: parent
       searchView, // via: mapStateToProps,
@@ -207,6 +242,16 @@ class DetailViewComponent extends Component {
     } else {
       return null;
     }
+
+    let openSection;
+    switch (getActiveForegroundlayerIdx()) {
+      case 1:
+        openSection = "RiceGrowth";
+        break;
+      case 2:
+        openSection = "PestRisk";
+    }
+
     return (
       <div id="DetailView" className={styles.DetailView}>
         <DetailViewHeader
@@ -225,9 +270,14 @@ class DetailViewComponent extends Component {
                   handleOnClick={() => this.handleViewOnMapClick(parcel)}
                 />
               </div>
-              <DetailViewTable data={this.formatTabularDataEN(parcel)} />
+              <DetailViewTable
+                data={this.formatTabularDataEN(parcel, CATEGORIES.General)}
+              />
               <br />
-              <DetailViewSection isInitiallyOpen title={t("Rice Growth")}>
+              <DetailViewSection
+                isInitiallyOpen={openSection === "RiceGrowth"}
+                title={t("Rice Growth")}
+              >
                 <div className={styles.SectionWrapper}>
                   <div className={styles.ColoredSquaresHeader}>
                     {parcel.GrowthStage
@@ -252,6 +302,46 @@ class DetailViewComponent extends Component {
                       );
                     })}
                   </div>
+                  <DetailViewTable
+                    data={this.formatTabularDataEN(
+                      parcel,
+                      CATEGORIES.RiceGrowth
+                    )}
+                  />
+                </div>
+              </DetailViewSection>
+
+              <DetailViewSection
+                isInitiallyOpen={openSection === "PestRisk"}
+                title={t("Pest Risk")}
+              >
+                <div className={styles.SectionWrapper}>
+                  <div className={styles.ColoredSquaresHeader}>
+                    {parcel.PestRisk ? parcel.PestRisk.toUpperCase() : "..."}
+                  </div>
+                  <div className={styles.SubMessage}>
+                    {this.getHumanReadablePestRisk(parcel, t)}
+                  </div>
+                  <div className={styles.ColoredSquaresContainer}>
+                    <ColoredSquare
+                      title={t("High blast risk")}
+                      backgroundColorHex="#FFFFFF"
+                      active={parcel.BlastRisk === "High"}
+                    />
+                    <ColoredSquare
+                      title={t("High leaffolder risk")}
+                      backgroundColorHex="#D7BA34"
+                      active={parcel.LeaffolderRisk === "High"}
+                    />
+                    <ColoredSquare
+                      title={t("High brown planthopper risk")}
+                      backgroundColorHex="#703F1D"
+                      active={parcel.BrownPlantHopperRisk === "High"}
+                    />
+                  </div>
+                  <DetailViewTable
+                    data={this.formatTabularDataEN(parcel, CATEGORIES.PestRisk)}
+                  />
                 </div>
               </DetailViewSection>
 
@@ -288,33 +378,6 @@ class DetailViewComponent extends Component {
                 </div>
               </DetailViewSection>
 
-              <DetailViewSection isInitiallyOpen={false} title={t("Pest Risk")}>
-                <div className={styles.SectionWrapper}>
-                  <div className={styles.ColoredSquaresHeader}>
-                    {parcel.PestRisk ? parcel.PestRisk.toUpperCase() : "..."}
-                  </div>
-                  <div className={styles.SubMessage}>
-                    {this.getHumanReadablePestRisk(parcel, t)}
-                  </div>
-                  <div className={styles.ColoredSquaresContainer}>
-                    <ColoredSquare
-                      title={t("High blast risk")}
-                      backgroundColorHex="#FFFFFF"
-                      active={parcel.BlastRisk === "High"}
-                    />
-                    <ColoredSquare
-                      title={t("High leaffolder risk")}
-                      backgroundColorHex="#D7BA34"
-                      active={parcel.LeaffolderRisk === "High"}
-                    />
-                    <ColoredSquare
-                      title={t("High brown planthopper risk")}
-                      backgroundColorHex="#703F1D"
-                      active={parcel.BrownPlantHopperRisk === "High"}
-                    />
-                  </div>
-                </div>
-              </DetailViewSection>
               <DetailViewPhotoSection
                 isInitiallyOpen={false}
                 photo={photo}
@@ -381,7 +444,8 @@ function mapDispatchToProps(dispatch) {
     changeToMapSearchView: () => changeView(dispatch, "MapSearchView"),
     changeToPhotoView: () => changeView(dispatch, "PhotoView"),
     changeToSearchView: searchView => changeView(dispatch, searchView),
-    updateMapBbox: bbox => updateMapBbox(dispatch, bbox)
+    updateMapBbox: bbox => updateMapBbox(dispatch, bbox),
+    getActiveForegroundlayerIdx
   };
 }
 
