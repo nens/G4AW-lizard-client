@@ -5,6 +5,7 @@ import {
   GET_ATTRIBUTES_FROM_GEOSERVER,
   RECEIVE_ATTRIBUTES_FROM_GEOSERVER_SUCCESS,
   RECEIVE_ATTRIBUTES_FROM_GEOSERVER_ERROR,
+  SELECT_PARCEL,
   DESELECT_PARCEL
 } from "../constants/ActionTypes";
 import { theStore } from "../store/Store";
@@ -32,6 +33,10 @@ export const receiveAttributesFromGeoserverErrorAction = (parcelId, error) => ({
   parcelId,
   error
 });
+
+export function selectParcel(dispatch, selectedParcel) {
+  dispatch({ type: SELECT_PARCEL, selectedParcel });
+}
 
 export function deselectParcel(dispatch) {
   dispatch({ type: DESELECT_PARCEL });
@@ -69,7 +74,7 @@ function showSnackBarParcelReceiveError(dispatch, placeName) {
   const options = {
     isError: true,
     message: i18next.t("There was an error while fetching the parcel details."),
-    subMessage: `${subMessage} placeName`
+    subMessage: `${subMessage} ${placeName}`
   };
   showSnackBar(dispatch, options);
 }
@@ -85,7 +90,7 @@ function getNextOrPreviousParcel(dispatch, next = true) {
   }
   const newParcelId = state.search.results[newJsId];
   getAttributesFromGeoserver(dispatch, newParcelId);
-  state.ui.selectedParcel = newParcelId;
+  selectParcel(dispatch, newParcelId);
 }
 
 export function selectPreviousParcel(dispatch) {
@@ -94,6 +99,15 @@ export function selectPreviousParcel(dispatch) {
 
 export function selectNextParcel(dispatch) {
   getNextOrPreviousParcel(dispatch, true);
+}
+
+export function isParcelAlreadyPresent(parcelId) {
+  const state = theStore.getState();
+  return (
+    parcelId &&
+    state.parcels[parcelId] &&
+    state.parcels[parcelId].hasGeoserverData
+  );
 }
 
 export function getAttributesFromGeoserver(dispatch, parcelId) {
@@ -105,6 +119,15 @@ export function getAttributesFromGeoserver(dispatch, parcelId) {
     currentData.isFetchingGeoserver
   ) {
     // We can't find the Geoserver featureID/already busy
+    return;
+  }
+
+  if (isParcelAlreadyPresent(parcelId)) {
+    // No need to retrieve data that is already present in client.
+    selectParcel(dispatch, parcelId);
+    if (state.ui.currentView !== "DetailView") {
+      changeView(dispatch, "DetailView");
+    }
     return;
   }
 
@@ -126,6 +149,7 @@ export function getAttributesFromGeoserver(dispatch, parcelId) {
             data.features[0].properties
           )
         );
+        selectParcel(dispatch, parcelId);
         if (state.ui.currentView !== "DetailView") {
           changeView(dispatch, "DetailView");
         }
@@ -151,6 +175,10 @@ export function getAttributesFromGeoserver(dispatch, parcelId) {
 }
 
 export function getParcelByLatLng(dispatch, lat, lng) {
+  showSnackBar(dispatch, {
+    autoHideDuration: 2000,
+    message: i18next.t("Looking for a parcel...")
+  });
   getParcels({
     dist: 5, // 5 meter search radius
     point: `${lng},${lat}`
