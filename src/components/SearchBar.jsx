@@ -54,6 +54,7 @@ class SearchBarComponent extends Component {
       <div className={styles.SearchBar}>
         <SettingsButton handleClick={changeToSettingsView} />
         <SearchField
+          selectedParcelId={this.props.selectedParcelId}
           searchInput={searchInput}
           searchIsFetching={searchIsFetching}
           handleSearch={this.handleSearch}
@@ -81,7 +82,8 @@ class SearchField extends Component {
       searchInput,
       searchIsFetching,
       handleSearch,
-      handleClearInput
+      handleClearInput,
+      selectedParcelId
     } = this.props;
 
     return (
@@ -95,7 +97,7 @@ class SearchField extends Component {
           onKeyUp={handleSearch}
           className={styles.SearchbarInput}
         />
-        {searchInput && searchInput.length > 0
+        {(searchInput && searchInput.length > 0) || selectedParcelId
           ? <ClearInputButton onClick={handleClearInput} />
           : null}
       </div>

@@ -181,8 +181,10 @@ class DetailViewComponent extends Component {
     let riskLevel = parcel.PestRisk;
     if (riskLevel === "High") {
       return t("There is increased risk on one or more pests");
-    } else {
+    } else if (riskLevel === "Low") {
       return t("There is a little risk on pest presence");
+    } else {
+      return t("The risk on pest presence is unknown");
     }
   }
   render() {
