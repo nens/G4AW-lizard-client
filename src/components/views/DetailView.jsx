@@ -172,17 +172,17 @@ class DetailViewComponent extends Component {
   }
   getHumanReadableRiceGrowth(parcel, t) {
     // TODO: think of solution that will return the message in vietnamese.
-    const stage = parcel.GrowthStage.toUpperCase();
+    const stage = parcel.GrowthStage ? parcel.GrowthStage.toUpperCase() : "...";
     const height = parcel.PlantHeightInCm;
     return `${t("The current growth stage is")} ${stage}
-      ${t("and the plant height is")} ${height} cm.`;
+      ${t("and the plant height is")} ${height} cm`;
   }
   getHumanReadablePestRisk(parcel, t) {
     let riskLevel = parcel.PestRisk;
     if (riskLevel === "High") {
-      return t("There is increased risk on one or more pests.");
+      return t("There is increased risk on one or more pests");
     } else {
-      return t("There is a little risk on pest presence.");
+      return t("There is a little risk on pest presence");
     }
   }
   render() {
@@ -226,82 +226,90 @@ class DetailViewComponent extends Component {
               <DetailViewTable data={this.formatTabularDataEN(parcel)} />
               <br />
               <DetailViewSection isInitiallyOpen title={t("Rice Growth")}>
-                <div className={styles.ColoredSquaresContainer}>
+                <div className={styles.SectionWrapper}>
                   <div className={styles.ColoredSquaresHeader}>
                     {parcel.GrowthStage
                       ? parcel.GrowthStage.toUpperCase()
                       : "..."}
                   </div>
-                  {riceGrowthLayer.colormap.map((kv, i) => {
-                    const label = Object.keys(kv)[0];
-                    const color = Object.values(kv)[0];
-                    return (
-                      <ColoredSquare
-                        key={i}
-                        key_={i}
-                        title={`${t("Growth stage")}: ${label}`}
-                        backgroundColorHex={rgbaListToHexColor(color)}
-                        active={label === parcel.GrowthStage}
-                      />
-                    );
-                  })}
                   <div className={styles.SubMessage}>
                     {this.getHumanReadableRiceGrowth(parcel, t)}
                   </div>
+                  <div className={styles.ColoredSquaresContainer}>
+                    {riceGrowthLayer.colormap.map((kv, i) => {
+                      const label = Object.keys(kv)[0];
+                      const color = Object.values(kv)[0];
+                      return (
+                        <ColoredSquare
+                          key={i}
+                          key_={i}
+                          title={`${t("Growth stage")}: ${label}`}
+                          backgroundColorHex={rgbaListToHexColor(color)}
+                          active={label === parcel.GrowthStage}
+                        />
+                      );
+                    })}
+                  </div>
                 </div>
               </DetailViewSection>
+
               <DetailViewSection
                 isInitiallyOpen={false}
                 title={t("Flood Risk")}
               >
-                <div className={styles.ColoredSquaresContainer}>
+                <div className={styles.SectionWrapper}>
                   <div className={styles.ColoredSquaresHeader}>
                     {parcel.FloodRisk ? parcel.FloodRisk.toUpperCase() : "..."}
                   </div>
-                  <ColoredSquare
-                    title={t("Low flood risk")}
-                    backgroundColorHex="#FFFFFF"
-                    active={parcel.FloodRisk === "Low"}
-                  />
-                  <ColoredSquare
-                    title={t("Medium flood risk")}
-                    backgroundColorHex="#697DB0"
-                    active={parcel.FloodRisk === "Medium"}
-                  />
-                  <ColoredSquare
-                    title={t("High flood risk")}
-                    backgroundColorHex="#122476"
-                    active={parcel.FloodRisk === "High"}
-                  />
                   <div className={styles.SubMessage}>
                     {`The current flood risk is ${parcel.FloodRisk
                       ? parcel.FloodRisk.toUpperCase()
-                      : "..."}`}
+                      : t("unknown")}`}
+                  </div>
+                  <div className={styles.ColoredSquaresContainer}>
+                    <ColoredSquare
+                      title={t("Low flood risk")}
+                      backgroundColorHex="#FFFFFF"
+                      active={parcel.FloodRisk === "Low"}
+                    />
+                    <ColoredSquare
+                      title={t("Medium flood risk")}
+                      backgroundColorHex="#697DB0"
+                      active={parcel.FloodRisk === "Medium"}
+                    />
+                    <ColoredSquare
+                      title={t("High flood risk")}
+                      backgroundColorHex="#122476"
+                      active={parcel.FloodRisk === "High"}
+                    />
                   </div>
                 </div>
               </DetailViewSection>
+
               <DetailViewSection isInitiallyOpen={false} title={t("Pest Risk")}>
-                <div className={styles.ColoredSquaresContainer}>
+                <div className={styles.SectionWrapper}>
                   <div className={styles.ColoredSquaresHeader}>
                     {parcel.PestRisk ? parcel.PestRisk.toUpperCase() : "..."}
                   </div>
-                  <ColoredSquare
-                    title={t("High blast risk")}
-                    backgroundColorHex="#FFFFFF"
-                    active={parcel.BlastRisk === "High"}
-                  />
-                  <ColoredSquare
-                    title={t("High leaffolder risk")}
-                    backgroundColorHex="#D7BA34"
-                    active={parcel.LeaffolderRisk === "High"}
-                  />
-                  <ColoredSquare
-                    title={t("High brown planthopper risk")}
-                    backgroundColorHex="#703F1D"
-                    active={parcel.BrownPlantHopperRisk === "High"}
-                  />
                   <div className={styles.SubMessage}>
                     {this.getHumanReadablePestRisk(parcel, t)}
+                  </div>
+                  <div className={styles.ColoredSquaresContainer}>
+                    <ColoredSquare
+                      title={t("High blast risk")}
+                      backgroundColorHex="#FFFFFF"
+                      active={parcel.BlastRisk === "High"}
+                    />
+                    <ColoredSquare
+                      title={t("High leaffolder risk")}
+                      backgroundColorHex="#D7BA34"
+                      active={parcel.LeaffolderRisk === "High"}
+                    />
+                    <ColoredSquare
+                      title={t("High brown planthopper risk")}
+                      backgroundColorHex="#703F1D"
+                      active={parcel.BrownPlantHopperRisk === "High"}
+                    />
                   </div>
                 </div>
               </DetailViewSection>
@@ -322,16 +330,11 @@ class DetailViewComponent extends Component {
 // local sub-components ///////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
 
-function ColoredSquare({
-  title,
-  backgroundColorHex,
-  active //,
-  // key_ = Math.round(Math.random() * 10000)
-}) {
+function ColoredSquare({ title, backgroundColorHex, active }) {
   const rgba = hexColorToRGB(backgroundColorHex);
   rgba.push(active ? 1 : 0.3);
   const backgroundColor = rgbaListToRgbaString(rgba);
-  const border = `${active ? "3" : "1"}px solid ${active ? "#555" : "#D8D8D8"}`;
+  const border = `2px solid ${active ? "#555" : "#CECECE"}`;
   return (
     <div
       className={styles.ColoredSquare}
