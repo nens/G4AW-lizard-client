@@ -344,13 +344,12 @@ function ColoredSquare({
 class DetailViewSpinner extends Component {
   render() {
     return (
-      <div>
+      <div className={styles.DetailViewSpinner}>
         <MDSpinner
           singleColor="#03a9f4"
           style={{
             position: "absolute",
-            top: "165px",
-            left: "45%"
+            top: "300px"
           }}
         />
       </div>
