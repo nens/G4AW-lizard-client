@@ -74,7 +74,7 @@ function showSnackBarParcelReceiveError(dispatch, placeName) {
   const options = {
     isError: true,
     message: i18next.t("There was an error while fetching the parcel details."),
-    subMessage: `${subMessage} placeName`
+    subMessage: `${subMessage} ${placeName}`
   };
   showSnackBar(dispatch, options);
 }
@@ -101,6 +101,15 @@ export function selectNextParcel(dispatch) {
   getNextOrPreviousParcel(dispatch, true);
 }
 
+export function isParcelAlreadyPresent(parcelId) {
+  const state = theStore.getState();
+  return (
+    parcelId &&
+    state.parcels[parcelId] &&
+    state.parcels[parcelId].hasGeoserverData
+  );
+}
+
 export function getAttributesFromGeoserver(dispatch, parcelId) {
   const state = theStore.getState();
   const currentData = state.parcels[parcelId];
@@ -110,6 +119,15 @@ export function getAttributesFromGeoserver(dispatch, parcelId) {
     currentData.isFetchingGeoserver
   ) {
     // We can't find the Geoserver featureID/already busy
+    return;
+  }
+
+  if (isParcelAlreadyPresent(parcelId)) {
+    // No need to retrieve data that is already present in client.
+    selectParcel(dispatch, parcelId);
+    if (state.ui.currentView !== "DetailView") {
+      changeView(dispatch, "DetailView");
+    }
     return;
   }
 
@@ -131,13 +149,10 @@ export function getAttributesFromGeoserver(dispatch, parcelId) {
             data.features[0].properties
           )
         );
+        selectParcel(dispatch, parcelId);
         if (state.ui.currentView !== "DetailView") {
           changeView(dispatch, "DetailView");
         }
-        showSnackBar(dispatch, {
-          autoHideDuration: 2000,
-          message: i18next.t("Succesfully retrieved parcel.")
-        });
       } else {
         handleInvalidDataFormatError(
           dispatch,
