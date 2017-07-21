@@ -1,9 +1,10 @@
 const path = require("path");
-var webpack = require("webpack");
+const webpack = require("webpack");
+const OfflinePlugin = require("offline-plugin");
 
-var libraryName = "G4AWLizardClient";
+const libraryName = "G4AWLizardClient";
 
-var config = {
+const config = {
   context: path.join(__dirname, "src"),
   entry: [
     "react-hot-loader/patch",
@@ -56,6 +57,26 @@ var config = {
     ]
   },
   plugins: [
+    new OfflinePlugin({
+      events: true,
+      externals: [
+        "/",
+        "../leaflet/leaflet.css",
+        "../iconfont/material-icons.css",
+        "../iconfont/MaterialIcons-Regular.eot",
+        "../iconfont/MaterialIcons-Regular.ijmap",
+        "../iconfont/MaterialIcons-Regular.svg",
+        "../iconfont/MaterialIcons-Regular.ttf",
+        "../iconfont/MaterialIcons-Regular.woff",
+        "../iconfont/MaterialIcons-Regular.woff2",
+        "../iconfont/codepoints",
+        "../iconfont/material-icons.css"
+      ],
+      ServiceWorker: {
+        navigateFallbackURL: "/"
+      }
+    }),
+
     new webpack.HotModuleReplacementPlugin(),
     // enable HMR globally
 
