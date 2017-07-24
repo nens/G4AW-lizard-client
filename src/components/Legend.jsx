@@ -103,9 +103,6 @@ class ToggleLegendButton extends Component {
 }
 
 class LegendBody extends Component {
-  // getColorString(ls) {
-  //   return `rgba(${ls[0]}, ${ls[1]}, ${ls[2]}, ${ls[3]})`;
-  // }
   getTbody(colormap) {
     return (
       <table className={styles.LegendTable} id="LegendTable">
