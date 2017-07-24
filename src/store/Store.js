@@ -125,15 +125,15 @@ export const initialForegroundlayerState = {
       mapThumb:
         "https://maps1.project.lizard.net/geoserver/Q0007_sat4rice_2018/wms?service=WMS&request=GetMap&layers=latest_weekly_growth_stages&styles=&format=image%2Fpng&transparent=True&version=1.1.1&height=256&width=256&srs=EPSG%3A3857&bbox=11709388.36300615,1164288.814839805,11709541.23706272,1164441.6888963755",
       colormap: [
-        { Fallow: [170, 179, 182, 255] },
-        { "Bare field": [110, 116, 118, 255] },
-        { Seedling: [0, 147, 211, 255] },
-        { Tillering: [69, 155, 0, 255] },
-        { Booting: [52, 195, 0, 255] },
-        { Flowering: [37, 58, 32, 255] },
-        { Milking: [255, 175, 6, 255] },
-        { Ripening: [255, 120, 19, 255] },
-        { Harvesting: [232, 69, 6, 255] }
+        { Fallow: "#aab3b6" },
+        { Baresoil: "#6e7476" },
+        { Seeding: "#0093d3" },
+        { Tillering: "#459b00" },
+        { Booting: "#34c300" },
+        { Flowering: "#253a20" },
+        { Milking: "#ffc306" },
+        { Ripening: "#ff7813" },
+        { Harvesting: "#e84506" }
       ]
     },
     {
@@ -144,20 +144,15 @@ export const initialForegroundlayerState = {
       mapThumb:
         "https://maps1.project.lizard.net/geoserver/Q0007_sat4rice_2018/wms?service=WMS&request=GetMap&layers=latest_weekly_pest_presence&styles=&format=image%2Fpng&transparent=True&version=1.1.1&height=256&width=256&srs=EPSG%3A3857&bbox=11709388.36300615,1164288.814839805,11709541.23706272,1164441.6888963755",
       colormap: [
-        { "Blast risk": [255, 255, 255, 255] },
-        { "Leaffolder risk": [215, 186, 52, 255] },
-        { "Brown plant hopper risk": [112, 63, 29, 255] }
+        { Blast: "#95786f" },
+        { "Leaf folder": "#e5907d" },
+        { "Brown planthopper": "#bfc2bb" }
       ]
     }
   ]
 };
 
-export const initialSettingsState = {};
-
 const initialState = {
-  //photosForParcel: initialPhotosForParcelState, //TODO
-  //settings: initialSettingsState, // TODO
-
   baselayer: initialBaselayerState,
   geolocation: initialGeolocationState,
   map: initialMapState,

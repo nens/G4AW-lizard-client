@@ -13,6 +13,9 @@ import styles from "../styles/DetailView.css";
 import {
   DetailViewHeader,
   DetailViewSection,
+  DetailViewSectionGrowthStage,
+  DetailViewSectionPestRisk,
+  DetailViewSectionFloodRisk,
   DetailViewTable,
   DetailViewTableSection,
   DetailViewPhotoSection,
@@ -26,121 +29,14 @@ import { getActiveForegroundlayerIdx } from "../../actions/ForegroundlayerAction
 import { THUMBNAIL_LIST, LOREM } from "../../../stories/helpers";
 import { WIDTH } from "../../tools/dimensions";
 import {
-  rgbaListToRgbaString,
-  hexColorToRGB,
-  rgbaListToHexColor
-} from "../../tools/color-conversion";
+  NO_DATA,
+  CATEGORIES,
+  GEOSERVER_PARCEL_KEYS,
+  GEOSERVER_PARCEL_VALUES
+} from "../../constants/detailview-attributes";
+import { getRGBAstring } from "../../tools/color-conversion";
 
 const DEFAULT_ZOOM = 11; // Used for map in header of the page
-
-const NO_DATA = "...";
-
-const CATEGORIES = {
-  General: [
-    "FarmID",
-    "FieldOfficer",
-    "Visit",
-    "SpecialSituation",
-    "FieldSizeInHa",
-    "Variety"
-  ],
-  RiceGrowth: [
-    "GrowthStage",
-    "CropCondition",
-    "SowDate",
-    "HarvestDate",
-    "Yield(Kg/Ha)",
-    "Price(₫/Kg)",
-    "HarvestedWeightInKg(Wet)",
-    "HarvestedWeightInKg(Dry)",
-    "MoistureContent",
-    "PlantHeightInCm",
-    "NumberOfStemsPerM²"
-  ],
-  PestRisk: [
-    "LeaffolderRisk",
-    "LeaffolderPresent",
-    "BlastPresent",
-    "BlastRisk",
-    "BrownPlantHopperPresent",
-    "BrownPlantHopperRisk"
-  ]
-};
-
-const GEOSERVER_PARCEL_KEYS = {
-  FarmID: "Mã số ruộng",
-  FieldOfficer: "Tên người thu thập",
-  Visit: "Ngày thăm ruộng",
-  SpecialSituation: "Vui lòng ghi ra những tình huống đặc biệt",
-  GrowthStage: "Giai đoạn",
-  CropCondition: "Tình trạng cây lúa",
-  SowDate: "Ngày gieo sạ (nếu sạ)",
-  HarvestDate: "Nếu đã thu hoạch, ngày thu hoạch",
-  "Yield(Kg/Ha)": "Năng suất (kg / ha)",
-  "Price(₫/Kg)": "Giá / kg gạo (VND)",
-  "HarvestedWeightInKg(wet)":
-    "Trọng lượng của lúa tươi được thu hoạch (kg) là bao nhiêu?",
-  "HarvestedWeightInKg(dry)": "Trọng lượng của gạo sấy được thu hoạch (kg)?",
-  MoistureContent: "Độ ẩm",
-  PestRisk: "Nguy cơ sâu bệnh",
-  LeaffolderRisk: "Sâu cuốn lá rủi ro",
-  LeaffolderPresent: "Sâu cuốn lá",
-  BlastRisk: "Đạo ôn lá rủi ro",
-  BlastPresent: "Đạo ôn lá",
-  BrownPlantHopperRisk: "Rầy nâu rủi ro",
-  BrownPlantHopperPresent: "Rầy nâu",
-  FloodRisk: "Nguy cơ lũ lụt",
-  PlantHeightInCm: "Chiều cao cây lúa (cm)",
-  "NumberOfStemsPerM²": "Trường hợp SẠ - Số nhánh lúa trên mét vuông",
-  FieldSizeInHa: "Kích thước đồng ruộng trong ha",
-  Variety: "Giống lúa"
-};
-
-const GEOSERVER_PARCEL_VALUES = {
-  Flowering: "Trổ",
-  "Rove beetle (Paederus fuscipes)": "Kiến 3 khoang",
-  Inundated: "Ngập nước",
-  No: "Không",
-  "Self-pumping": "Tự bơm",
-  "Irrigation system": "Hệ thống thủy lợi",
-  Tillering: "Đẻ nhánh",
-  Yes: "Vâng",
-  "Drough damage": "Thiệt hại do khô hạn",
-  "Less then 1 % of thefield": "< 1%",
-  "More than 50% of the field": "> 50%",
-  Age2: "tuổi 2",
-  "Between 1% and 5% of field": "> 1 - 5%",
-  "Pest/disease damage": "Thiệt hại do sâu bệnh",
-  "Green mirrid bug (Cyrtorhinus Lividipennis)": "Bọ xít mù xanh",
-  Age1: "tuổi 1",
-  Harvesting: "Thu hoạch",
-  Adult: "trưởng thành",
-  Booting: "Làm đòng",
-  Ripening: "Chín",
-  "Flood damage": "Thiệt hại do lũ",
-  "Salinity damage": "Thiệt hại do nhiễm mặn",
-  Milking: "Ngậm sữa",
-  Age5: "tuổi 5",
-  Age4: "tuổi 4",
-  "Between 25% and 50% of the field": "> 25 - 50%",
-  Dry: "Khô",
-  Age3: "tuổi 3",
-  "Acid soil damage": "Thiệt hại do nhiễm phèn",
-  Other: "Khác",
-  Seedling: "Sạ",
-  "River water": "Nước sông",
-  "Between 5% and 25% of the field": "> 5 - 25%",
-  Wet: "Ướt",
-  "Rain water": "Nước mưa",
-  Good: "Bình thường",
-  Spider: "Nhện",
-  High: "Cao",
-  Medium: " Trung bình",
-  Low: "Thấp",
-  True: "Thật",
-  False: "Sai",
-  "Needs attention": "Cần sự chú ý"
-};
 
 ///////////////////////////////////////////////////////////////////////////////
 // The main Component; the View for displaying the details of a single parcel /
@@ -151,13 +47,13 @@ class DetailViewComponent extends Component {
     super();
     this.handleViewOnMapClick = this.handleViewOnMapClick.bind(this);
   }
-  formatTabularDataVI(parcel, keyssss) {
+  formatTabularDataVI(parcel, tableKeysEN) {
     let result = [],
       vnKey,
       enValue,
       vnValue;
-    Object.keys(GEOSERVER_PARCEL_KEYS).forEach(enKey => {
-      vnKey = GEOSERVER_PARCEL_KEYS[enKey];
+    tableKeysEN.forEach(enKey => {
+      vnKey = GEOSERVER_PARCEL_KEYS[enKey] || enKey;
       enValue = parcel[enKey];
       if (enValue) {
         if (GEOSERVER_PARCEL_VALUES.hasOwnProperty(enValue)) {
@@ -203,24 +99,6 @@ class DetailViewComponent extends Component {
       this.props.changeToMapSearchView();
     }
   }
-  getHumanReadableRiceGrowth(parcel, t) {
-    // TODO: think of solution that will return the message in vietnamese.
-    const stage = parcel.GrowthStage ? parcel.GrowthStage.toUpperCase() : "...";
-    const height = parcel.PlantHeightInCm;
-    return `${t("The current growth stage is")} ${stage}
-      ${t("and the plant height is")}
-      ${height || height === 0 ? height : "an unknown amount of"} cm`;
-  }
-  getHumanReadablePestRisk(parcel, t) {
-    let riskLevel = parcel.PestRisk;
-    if (riskLevel === "High") {
-      return t("There is increased risk on one or more pests");
-    } else if (riskLevel === "Low") {
-      return t("There is only little risk on pest presence");
-    } else {
-      return t("The risk on pest presence is unknown");
-    }
-  }
   render() {
     const {
       changeToListSearchView, // via: mapDispatchToProps
@@ -255,7 +133,7 @@ class DetailViewComponent extends Component {
     return (
       <div id="DetailView" className={styles.DetailView}>
         <DetailViewHeader
-          title={`${t("Farmer")} ${parcel.FarmID || "..."}`}
+          title={`${t("Farmer")} ${parcel.FarmID || NO_DATA}`}
           subTitle={parcel.FieldOfficer}
           halfMode={false}
           latlonzoom={latlonzoom}
@@ -274,109 +152,23 @@ class DetailViewComponent extends Component {
                 data={this.formatTabularDataEN(parcel, CATEGORIES.General)}
               />
               <br />
-              <DetailViewSection
+              <DetailViewSectionGrowthStage
+                formatTabularData={this.formatTabularDataEN}
                 isInitiallyOpen={openSection === "RiceGrowth"}
-                title={t("Rice Growth")}
-              >
-                <div className={styles.SectionWrapper}>
-                  <div className={styles.ColoredSquaresHeader}>
-                    {parcel.GrowthStage
-                      ? parcel.GrowthStage.toUpperCase()
-                      : "..."}
-                  </div>
-                  <div className={styles.SubMessage}>
-                    {this.getHumanReadableRiceGrowth(parcel, t)}
-                  </div>
-                  <div className={styles.ColoredSquaresContainer}>
-                    {riceGrowthLayer.colormap.map((kv, i) => {
-                      const label = Object.keys(kv)[0];
-                      const color = Object.values(kv)[0];
-                      return (
-                        <ColoredSquare
-                          key={i}
-                          key_={i}
-                          title={`${t("Growth stage")}: ${label}`}
-                          backgroundColorHex={rgbaListToHexColor(color)}
-                          active={label === parcel.GrowthStage}
-                        />
-                      );
-                    })}
-                  </div>
-                  <DetailViewTable
-                    data={this.formatTabularDataEN(
-                      parcel,
-                      CATEGORIES.RiceGrowth
-                    )}
-                  />
-                </div>
-              </DetailViewSection>
-
-              <DetailViewSection
+                ColoredSquare={ColoredSquare}
+                {...this.props}
+              />
+              <DetailViewSectionPestRisk
+                formatTabularData={this.formatTabularDataEN}
                 isInitiallyOpen={openSection === "PestRisk"}
-                title={t("Pest Risk")}
-              >
-                <div className={styles.SectionWrapper}>
-                  <div className={styles.ColoredSquaresHeader}>
-                    {parcel.PestRisk ? parcel.PestRisk.toUpperCase() : "..."}
-                  </div>
-                  <div className={styles.SubMessage}>
-                    {this.getHumanReadablePestRisk(parcel, t)}
-                  </div>
-                  <div className={styles.ColoredSquaresContainer}>
-                    <ColoredSquare
-                      title={t("High blast risk")}
-                      backgroundColorHex="#FFFFFF"
-                      active={parcel.BlastRisk === "High"}
-                    />
-                    <ColoredSquare
-                      title={t("High leaffolder risk")}
-                      backgroundColorHex="#D7BA34"
-                      active={parcel.LeaffolderRisk === "High"}
-                    />
-                    <ColoredSquare
-                      title={t("High brown planthopper risk")}
-                      backgroundColorHex="#703F1D"
-                      active={parcel.BrownPlantHopperRisk === "High"}
-                    />
-                  </div>
-                  <DetailViewTable
-                    data={this.formatTabularDataEN(parcel, CATEGORIES.PestRisk)}
-                  />
-                </div>
-              </DetailViewSection>
-
-              <DetailViewSection
-                isInitiallyOpen={false}
-                title={t("Flood Risk")}
-              >
-                <div className={styles.SectionWrapper}>
-                  <div className={styles.ColoredSquaresHeader}>
-                    {parcel.FloodRisk ? parcel.FloodRisk.toUpperCase() : "..."}
-                  </div>
-                  <div className={styles.SubMessage}>
-                    {`The current flood risk is ${parcel.FloodRisk
-                      ? parcel.FloodRisk.toUpperCase()
-                      : t("unknown")}`}
-                  </div>
-                  <div className={styles.ColoredSquaresContainer}>
-                    <ColoredSquare
-                      title={t("Low flood risk")}
-                      backgroundColorHex="#FFFFFF"
-                      active={parcel.FloodRisk === "Low"}
-                    />
-                    <ColoredSquare
-                      title={t("Medium flood risk")}
-                      backgroundColorHex="#697DB0"
-                      active={parcel.FloodRisk === "Medium"}
-                    />
-                    <ColoredSquare
-                      title={t("High flood risk")}
-                      backgroundColorHex="#122476"
-                      active={parcel.FloodRisk === "High"}
-                    />
-                  </div>
-                </div>
-              </DetailViewSection>
+                ColoredSquare={ColoredSquare}
+                {...this.props}
+              />
+              <DetailViewSectionFloodRisk
+                formatTabularData={this.formatTabularDataEN}
+                ColoredSquare={ColoredSquare}
+                {...this.props}
+              />
               <DetailViewPhotoSection
                 isInitiallyOpen={false}
                 photo={photo}
@@ -394,16 +186,15 @@ class DetailViewComponent extends Component {
 // local sub-components ///////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
 
-function ColoredSquare({ title, backgroundColorHex, active }) {
-  const rgba = hexColorToRGB(backgroundColorHex);
-  rgba.push(active ? 1 : 0.3);
-  const backgroundColor = rgbaListToRgbaString(rgba);
+function ColoredSquare({ title, backgroundColor, active }) {
+  const opacity = active ? 1 : 0.3;
+  backgroundColor = getRGBAstring(backgroundColor, opacity);
   const border = `2px solid ${active ? "#555" : "#CECECE"}`;
   return (
     <div
       className={styles.ColoredSquare}
       title={title}
-      style={{ backgroundColor, border }}
+      style={{ backgroundColor, border, opacity }}
     />
   );
 }
