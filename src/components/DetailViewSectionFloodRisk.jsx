@@ -3,7 +3,7 @@ import styles from "./styles/DetailView.css";
 import { NO_DATA } from "../constants/detailview-attributes";
 import { DetailViewSection } from ".";
 
-export default class DetailViewSectionPestRisk extends Component {
+export default class DetailViewSectionFloodRisk extends Component {
   render() {
     const { t, parcel, formatTabularData, ColoredSquare } = this.props;
     return (
