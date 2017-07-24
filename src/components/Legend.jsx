@@ -140,7 +140,6 @@ class LegendBody extends Component {
 
 class LegendColorLabel extends Component {
   render() {
-    console.log("[dbg] this.props.color:", this.props.color);
     return (
       <div
         className={styles.LegendColor}
