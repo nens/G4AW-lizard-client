@@ -144,28 +144,15 @@ export const initialForegroundlayerState = {
       mapThumb:
         "https://maps1.project.lizard.net/geoserver/Q0007_sat4rice_2018/wms?service=WMS&request=GetMap&layers=latest_weekly_pest_presence&styles=&format=image%2Fpng&transparent=True&version=1.1.1&height=256&width=256&srs=EPSG%3A3857&bbox=11709388.36300615,1164288.814839805,11709541.23706272,1164441.6888963755",
       colormap: [
-        // Jelle's colors?:
-        ////////////////////
         { Blast: "#95786f" },
         { "Leaf folder": "#e5907d" },
         { "Brown planthopper": "#bfc2bb" }
-
-        // sat4rice colors (correspond with WMS layer colors):
-        //////////////////////////////////////////////////////
-        // { "Blast risk": "#000000" },
-        // { "Leaffolder risk": "#d7ba34" },
-        // { "Brown plant hopper risk": "#703f1d" }
       ]
     }
   ]
 };
 
-export const initialSettingsState = {};
-
 const initialState = {
-  //photosForParcel: initialPhotosForParcelState, //TODO
-  //settings: initialSettingsState, // TODO
-
   baselayer: initialBaselayerState,
   geolocation: initialGeolocationState,
   map: initialMapState,
