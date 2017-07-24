@@ -49,13 +49,11 @@ class SwitchToListButton extends Component {
   getMessage(t, count) {
     switch (count) {
       case 0:
-        return t("Click here to view new search results as list");
+        return t("View new search results as list");
       case 1:
-        return t("Click here to view a single search results as list");
+        return t("View one search result as list");
       default:
-        return `${t("Click here to view")} ${count} ${t(
-          "search results as list"
-        )}`;
+        return `${t("View")} ${count} ${t("search results as list")}`;
     }
   }
   render() {

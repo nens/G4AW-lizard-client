@@ -11,6 +11,8 @@ export default function(state = initialGeolocationState, action) {
       return { ...state, isFetching: false, data: action.result, error: null };
     case ActionTypes.RECEIVE_GEOLOCATION_ERROR:
       return { ...state, isFetching: false, data: null, error: action.error };
+    case ActionTypes.SET_INTERNET_AVAILABILITY:
+      return { ...state, isGeolocationSupported: action.isOnline };
     case ActionTypes.CLEAR_GEOLOCATION:
       return {
         ...initialGeolocationState,

@@ -8,22 +8,27 @@ export default function(state = initialSessionState, action) {
         isFetching: true,
         hasBootstrap: state.hasBootstrap,
         bootstrap: state.bootstrap,
-        error: null
+        error: null,
+        isOnline: state.isOnline
       };
     case ActionTypes.RECEIVE_BOOTSTRAP_SUCCESS:
       return {
         isFetching: false,
         hasBootstrap: true,
         bootstrap: action.bootstrap,
-        error: null
+        error: null,
+        isOnline: state.isOnline
       };
     case ActionTypes.RECEIVE_BOOTSTRAP_ERROR:
       return {
         isFetching: false,
         hasBootstrap: false,
         bootstrap: null,
-        error: action.error
+        error: action.error,
+        isOnline: state.isOnline
       };
+    case ActionTypes.SET_INTERNET_AVAILABILITY:
+      return { ...state, isOnline: action.isOnline };
     default:
       return state;
   }

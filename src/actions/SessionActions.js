@@ -2,11 +2,17 @@ import i18next from "i18next";
 import {
   FETCH_BOOTSTRAP,
   RECEIVE_BOOTSTRAP_SUCCESS,
-  RECEIVE_BOOTSTRAP_ERROR
+  RECEIVE_BOOTSTRAP_ERROR,
+  SET_INTERNET_AVAILABILITY
 } from "../constants/ActionTypes";
 import { showSnackBar } from "./UiActions";
+
 import { getBootstrap } from "lizard-api-client";
 import { theStore } from "../store/Store";
+
+export function setInternetAvailability(dispatch, isOnline) {
+  dispatch({ type: SET_INTERNET_AVAILABILITY, isOnline });
+}
 
 export function fetchBootstrapAction() {
   return { type: FETCH_BOOTSTRAP };

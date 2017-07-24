@@ -67,18 +67,6 @@
   padding-left: 5px;
 }
 .GeoLocateIcon {
-  margin: 0;
+  margin-left: 5px;
   font-size: 18px;
 }
-/*.searchbar {
-  z-index: 999;
-  position: absolute;
-  top: 20px;
-
-  padding: 5px;
-  -webkit-box-shadow: 0 0 0 0 #f00;
-  height: 30px;
-
-  color: #444;
-  background-color: white;
-}*/

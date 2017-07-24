@@ -22,6 +22,7 @@ import {
 
 import { changeView } from "../../actions/UiActions";
 import { updateMapBbox } from "../../actions/MapActions";
+import { getActiveForegroundlayerIdx } from "../../actions/ForegroundlayerActions";
 import { THUMBNAIL_LIST, LOREM } from "../../../stories/helpers";
 import { WIDTH } from "../../tools/dimensions";
 import {
@@ -33,6 +34,38 @@ import {
 const DEFAULT_ZOOM = 11; // Used for map in header of the page
 
 const NO_DATA = "...";
+
+const CATEGORIES = {
+  General: [
+    "FarmID",
+    "FieldOfficer",
+    "Visit",
+    "SpecialSituation",
+    "FieldSizeInHa",
+    "Variety"
+  ],
+  RiceGrowth: [
+    "GrowthStage",
+    "CropCondition",
+    "SowDate",
+    "HarvestDate",
+    "Yield(Kg/Ha)",
+    "Price(₫/Kg)",
+    "HarvestedWeightInKg(Wet)",
+    "HarvestedWeightInKg(Dry)",
+    "MoistureContent",
+    "PlantHeightInCm",
+    "NumberOfStemsPerM²"
+  ],
+  PestRisk: [
+    "LeaffolderRisk",
+    "LeaffolderPresent",
+    "BlastPresent",
+    "BlastRisk",
+    "BrownPlantHopperPresent",
+    "BrownPlantHopperRisk"
+  ]
+};
 
 const GEOSERVER_PARCEL_KEYS = {
   FarmID: "Mã số ruộng",
@@ -118,7 +151,7 @@ class DetailViewComponent extends Component {
     super();
     this.handleViewOnMapClick = this.handleViewOnMapClick.bind(this);
   }
-  formatTabularDataVI(parcel) {
+  formatTabularDataVI(parcel, keyssss) {
     let result = [],
       vnKey,
       enValue,
@@ -139,8 +172,8 @@ class DetailViewComponent extends Component {
     });
     return result;
   }
-  formatTabularDataEN(parcel) {
-    return Object.keys(GEOSERVER_PARCEL_KEYS).map(enKey => {
+  formatTabularDataEN(parcel, tableKeys) {
+    return tableKeys.map(enKey => {
       return {
         key: enKey,
         value: parcel[enKey] || NO_DATA
@@ -172,17 +205,20 @@ class DetailViewComponent extends Component {
   }
   getHumanReadableRiceGrowth(parcel, t) {
     // TODO: think of solution that will return the message in vietnamese.
-    const stage = parcel.GrowthStage.toUpperCase();
+    const stage = parcel.GrowthStage ? parcel.GrowthStage.toUpperCase() : "...";
     const height = parcel.PlantHeightInCm;
     return `${t("The current growth stage is")} ${stage}
-      ${t("and the plant height is")} ${height} cm.`;
+      ${t("and the plant height is")}
+      ${height || height === 0 ? height : "an unknown amount of"} cm`;
   }
   getHumanReadablePestRisk(parcel, t) {
     let riskLevel = parcel.PestRisk;
     if (riskLevel === "High") {
-      return t("There is increased risk on one or more pests.");
+      return t("There is increased risk on one or more pests");
+    } else if (riskLevel === "Low") {
+      return t("There is only little risk on pest presence");
     } else {
-      return t("There is a little risk on pest presence.");
+      return t("The risk on pest presence is unknown");
     }
   }
   render() {
@@ -192,6 +228,7 @@ class DetailViewComponent extends Component {
       changeToPhotoView, // via: mapDispatchToProps
       changeToSearchView, // via: mapDispatchToProps,
       changeView, // via: mapDispatchToProps
+      getActiveForegroundlayerIdx,
       parcel, // via: mapStateToProps
       photo, // via: parent
       searchView, // via: mapStateToProps,
@@ -205,6 +242,16 @@ class DetailViewComponent extends Component {
     } else {
       return null;
     }
+
+    let openSection;
+    switch (getActiveForegroundlayerIdx()) {
+      case 1:
+        openSection = "RiceGrowth";
+        break;
+      case 2:
+        openSection = "PestRisk";
+    }
+
     return (
       <div id="DetailView" className={styles.DetailView}>
         <DetailViewHeader
@@ -223,85 +270,110 @@ class DetailViewComponent extends Component {
                   handleOnClick={() => this.handleViewOnMapClick(parcel)}
                 />
               </div>
-              <DetailViewTable data={this.formatTabularDataEN(parcel)} />
+              <DetailViewTable
+                data={this.formatTabularDataEN(parcel, CATEGORIES.General)}
+              />
               <br />
-              <DetailViewSection isInitiallyOpen title={t("Rice Growth")}>
-                <div className={styles.ColoredSquaresContainer}>
+              <DetailViewSection
+                isInitiallyOpen={openSection === "RiceGrowth"}
+                title={t("Rice Growth")}
+              >
+                <div className={styles.SectionWrapper}>
                   <div className={styles.ColoredSquaresHeader}>
                     {parcel.GrowthStage
                       ? parcel.GrowthStage.toUpperCase()
                       : "..."}
                   </div>
-                  {riceGrowthLayer.colormap.map((kv, i) => {
-                    const label = Object.keys(kv)[0];
-                    const color = Object.values(kv)[0];
-                    return (
-                      <ColoredSquare
-                        key={i}
-                        key_={i}
-                        title={`${t("Growth stage")}: ${label}`}
-                        backgroundColorHex={rgbaListToHexColor(color)}
-                        active={label === parcel.GrowthStage}
-                      />
-                    );
-                  })}
                   <div className={styles.SubMessage}>
                     {this.getHumanReadableRiceGrowth(parcel, t)}
                   </div>
+                  <div className={styles.ColoredSquaresContainer}>
+                    {riceGrowthLayer.colormap.map((kv, i) => {
+                      const label = Object.keys(kv)[0];
+                      const color = Object.values(kv)[0];
+                      return (
+                        <ColoredSquare
+                          key={i}
+                          key_={i}
+                          title={`${t("Growth stage")}: ${label}`}
+                          backgroundColorHex={rgbaListToHexColor(color)}
+                          active={label === parcel.GrowthStage}
+                        />
+                      );
+                    })}
+                  </div>
+                  <DetailViewTable
+                    data={this.formatTabularDataEN(
+                      parcel,
+                      CATEGORIES.RiceGrowth
+                    )}
+                  />
                 </div>
               </DetailViewSection>
+
+              <DetailViewSection
+                isInitiallyOpen={openSection === "PestRisk"}
+                title={t("Pest Risk")}
+              >
+                <div className={styles.SectionWrapper}>
+                  <div className={styles.ColoredSquaresHeader}>
+                    {parcel.PestRisk ? parcel.PestRisk.toUpperCase() : "..."}
+                  </div>
+                  <div className={styles.SubMessage}>
+                    {this.getHumanReadablePestRisk(parcel, t)}
+                  </div>
+                  <div className={styles.ColoredSquaresContainer}>
+                    <ColoredSquare
+                      title={t("High blast risk")}
+                      backgroundColorHex="#FFFFFF"
+                      active={parcel.BlastRisk === "High"}
+                    />
+                    <ColoredSquare
+                      title={t("High leaffolder risk")}
+                      backgroundColorHex="#D7BA34"
+                      active={parcel.LeaffolderRisk === "High"}
+                    />
+                    <ColoredSquare
+                      title={t("High brown planthopper risk")}
+                      backgroundColorHex="#703F1D"
+                      active={parcel.BrownPlantHopperRisk === "High"}
+                    />
+                  </div>
+                  <DetailViewTable
+                    data={this.formatTabularDataEN(parcel, CATEGORIES.PestRisk)}
+                  />
+                </div>
+              </DetailViewSection>
+
               <DetailViewSection
                 isInitiallyOpen={false}
                 title={t("Flood Risk")}
               >
-                <div className={styles.ColoredSquaresContainer}>
+                <div className={styles.SectionWrapper}>
                   <div className={styles.ColoredSquaresHeader}>
                     {parcel.FloodRisk ? parcel.FloodRisk.toUpperCase() : "..."}
                   </div>
-                  <ColoredSquare
-                    title={t("Low flood risk")}
-                    backgroundColorHex="#FFFFFF"
-                    active={parcel.FloodRisk === "Low"}
-                  />
-                  <ColoredSquare
-                    title={t("Medium flood risk")}
-                    backgroundColorHex="#697DB0"
-                    active={parcel.FloodRisk === "Medium"}
-                  />
-                  <ColoredSquare
-                    title={t("High flood risk")}
-                    backgroundColorHex="#122476"
-                    active={parcel.FloodRisk === "High"}
-                  />
                   <div className={styles.SubMessage}>
                     {`The current flood risk is ${parcel.FloodRisk
                       ? parcel.FloodRisk.toUpperCase()
-                      : "..."}`}
+                      : t("unknown")}`}
                   </div>
-                </div>
-              </DetailViewSection>
-              <DetailViewSection isInitiallyOpen={false} title={t("Pest Risk")}>
-                <div className={styles.ColoredSquaresContainer}>
-                  <div className={styles.ColoredSquaresHeader}>
-                    {parcel.PestRisk ? parcel.PestRisk.toUpperCase() : "..."}
-                  </div>
-                  <ColoredSquare
-                    title={t("High blast risk")}
-                    backgroundColorHex="#FFFFFF"
-                    active={parcel.BlastRisk === "High"}
-                  />
-                  <ColoredSquare
-                    title={t("High leaffolder risk")}
-                    backgroundColorHex="#D7BA34"
-                    active={parcel.LeaffolderRisk === "High"}
-                  />
-                  <ColoredSquare
-                    title={t("High brown planthopper risk")}
-                    backgroundColorHex="#703F1D"
-                    active={parcel.BrownPlantHopperRisk === "High"}
-                  />
-                  <div className={styles.SubMessage}>
-                    {this.getHumanReadablePestRisk(parcel, t)}
+                  <div className={styles.ColoredSquaresContainer}>
+                    <ColoredSquare
+                      title={t("Low flood risk")}
+                      backgroundColorHex="#FFFFFF"
+                      active={parcel.FloodRisk === "Low"}
+                    />
+                    <ColoredSquare
+                      title={t("Medium flood risk")}
+                      backgroundColorHex="#697DB0"
+                      active={parcel.FloodRisk === "Medium"}
+                    />
+                    <ColoredSquare
+                      title={t("High flood risk")}
+                      backgroundColorHex="#122476"
+                      active={parcel.FloodRisk === "High"}
+                    />
                   </div>
                 </div>
               </DetailViewSection>
@@ -322,16 +394,11 @@ class DetailViewComponent extends Component {
 // local sub-components ///////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
 
-function ColoredSquare({
-  title,
-  backgroundColorHex,
-  active //,
-  // key_ = Math.round(Math.random() * 10000)
-}) {
+function ColoredSquare({ title, backgroundColorHex, active }) {
   const rgba = hexColorToRGB(backgroundColorHex);
   rgba.push(active ? 1 : 0.3);
   const backgroundColor = rgbaListToRgbaString(rgba);
-  const border = `${active ? "3" : "1"}px solid ${active ? "#555" : "#D8D8D8"}`;
+  const border = `2px solid ${active ? "#555" : "#CECECE"}`;
   return (
     <div
       className={styles.ColoredSquare}
@@ -344,7 +411,7 @@ function ColoredSquare({
 class DetailViewSpinner extends Component {
   render() {
     return (
-      <div>
+      <div className={styles.DetailViewSpinner}>
         <MDSpinner
           singleColor="#03a9f4"
           style={{
@@ -377,7 +444,8 @@ function mapDispatchToProps(dispatch) {
     changeToMapSearchView: () => changeView(dispatch, "MapSearchView"),
     changeToPhotoView: () => changeView(dispatch, "PhotoView"),
     changeToSearchView: searchView => changeView(dispatch, searchView),
-    updateMapBbox: bbox => updateMapBbox(dispatch, bbox)
+    updateMapBbox: bbox => updateMapBbox(dispatch, bbox),
+    getActiveForegroundlayerIdx
   };
 }
 
