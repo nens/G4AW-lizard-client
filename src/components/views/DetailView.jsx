@@ -377,7 +377,6 @@ class DetailViewComponent extends Component {
                   </div>
                 </div>
               </DetailViewSection>
-
               <DetailViewPhotoSection
                 isInitiallyOpen={false}
                 photo={photo}
@@ -417,7 +416,8 @@ class DetailViewSpinner extends Component {
           singleColor="#03a9f4"
           style={{
             position: "absolute",
-            top: "300px"
+            top: "165px",
+            left: "45%"
           }}
         />
       </div>
