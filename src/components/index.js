@@ -4,6 +4,9 @@ import DetailViewHeader from "./DetailViewHeader";
 import DetailViewPhoto from "./DetailViewPhoto";
 import DetailViewPhotoSection from "./DetailViewPhotoSection";
 import DetailViewSection from "./DetailViewSection";
+import DetailViewSectionGrowthStage from "./DetailViewSectionGrowthStage";
+import DetailViewSectionPestRisk from "./DetailViewSectionPestRisk";
+import DetailViewSectionFloodRisk from "./DetailViewSectionFloodRisk";
 import DetailViewTable from "./DetailViewTable";
 import DetailViewTableSection from "./DetailViewTableSection";
 import DetailViewThumbnails from "./DetailViewThumbnails";
@@ -44,6 +47,9 @@ export {
   DetailViewPhoto,
   DetailViewPhotoSection,
   DetailViewSection,
+  DetailViewSectionGrowthStage,
+  DetailViewSectionPestRisk,
+  DetailViewSectionFloodRisk,
   DetailViewTable,
   DetailViewTableSection,
   DetailViewThumbnails,

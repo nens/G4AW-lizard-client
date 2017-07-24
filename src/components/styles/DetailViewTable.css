@@ -3,9 +3,10 @@
   background-color: #fff;
   line-height: 20px;
   font-size: 18px;
+  text-align: left;
 }
 .Table {
-  color: #333;
+  color: #A0A0A0;
   font-size: 12px;
   margin: 20px;
   width: calc(100% - 30px);
@@ -24,7 +25,8 @@
   border-bottom: none;
 }
 .ColKey {
-  width: 40%;
+  color: #555;
+  width: 50%;
 }
 .ColValue {
 }

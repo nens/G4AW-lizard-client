@@ -16,6 +16,8 @@ import { PHOTO_LIST } from "../../../stories/helpers";
 
 import { updateDimensions } from "../../tools/dimensions";
 
+import { setInternetAvailability } from "../../actions/SessionActions";
+
 import {
   fetchBootstrap,
   setGeolocationSupport,
@@ -42,14 +44,22 @@ class MainViewComponent extends Component {
     window.removeEventListener("offline", this.handleOnlineOffline, true);
   }
   handleOnlineOffline(e) {
-    const { showSnackBar, t } = this.props;
-    showSnackBar({
-      message: navigator.onLine ? t("App online") : t("No connection"),
-      subMessage: navigator.onLine
-        ? t("Connected to the internet")
-        : t("Please check your connection"),
-      isError: navigator.onLine ? false : true
-    });
+    const { showSnackBar, t, setInternetAvailability } = this.props;
+
+    setInternetAvailability(navigator.onLine);
+    if (navigator.onLine) {
+      showSnackBar({
+        message: t("App online"),
+        subMessage: t("Connected to the internet"),
+        isError: false
+      });
+    } else {
+      showSnackBar({
+        message: t("No connection"),
+        subMessage: t("Please check your connection"),
+        isError: true
+      });
+    }
   }
   render() {
     const { snackBarIsOpen, snackBarOptions, hideSnackBar, t } = this.props;
@@ -110,6 +120,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
+    setInternetAvailability: bool => setInternetAvailability(dispatch, bool),
     setGeolocationSupport: () => setGeolocationSupport(dispatch),
     hideSnackBar: () => hideSnackBar(dispatch),
     showSnackBar: options => showSnackBar(dispatch, options),

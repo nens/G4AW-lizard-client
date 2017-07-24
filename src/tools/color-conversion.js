@@ -1,8 +1,8 @@
-export function rgbaListToRgbaString(ls) {
+export function RGBAlistToRGBAstring(ls) {
   return `rgba(${ls[0]}, ${ls[1]}, ${ls[2]}, ${ls[3]})`;
 }
 
-export function rgbaListToHexColor(ls) {
+export function RGBAlistToHexColor(ls) {
   const r = ls[0].toString(16);
   const g = ls[1].toString(16);
   const b = ls[2].toString(16);
@@ -16,4 +16,10 @@ export function hexColorToRGB(str) {
   const g = parseInt(str_.substring(2, 4), 16);
   const b = parseInt(str_.substring(4, 6), 16);
   return [r, g, b];
+}
+
+export function getRGBAstring(hexColor, opacity) {
+  let rgba = hexColorToRGB(hexColor);
+  rgba.push(Math.floor(opacity * 255));
+  return RGBAlistToRGBAstring(rgba);
 }

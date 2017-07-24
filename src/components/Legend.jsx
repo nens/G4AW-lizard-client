@@ -103,9 +103,6 @@ class ToggleLegendButton extends Component {
 }
 
 class LegendBody extends Component {
-  getColorString(ls) {
-    return `rgba(${ls[0]}, ${ls[1]}, ${ls[2]}, ${ls[3]})`;
-  }
   getTbody(colormap) {
     return (
       <table className={styles.LegendTable} id="LegendTable">
@@ -113,9 +110,7 @@ class LegendBody extends Component {
           {colormap.map((pair, i) =>
             <tr key={i}>
               <td>
-                <LegendColorLabel
-                  color={this.getColorString(Object.values(pair)[0])}
-                />
+                <LegendColorLabel color={Object.values(pair)[0]} />
               </td>
               <td>
                 {Object.keys(pair)[0]}
