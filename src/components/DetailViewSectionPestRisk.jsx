@@ -28,6 +28,7 @@ export default class DetailViewSectionPestRisk extends Component {
       isInitiallyOpen,
       ColoredSquare
     } = this.props;
+    const title = parcel.PestRisk ? parcel.PestRisk.toUpperCase() : NO_DATA;
     return (
       <DetailViewSection
         isInitiallyOpen={isInitiallyOpen}
@@ -35,7 +36,7 @@ export default class DetailViewSectionPestRisk extends Component {
       >
         <div className={styles.SectionWrapper}>
           <div className={styles.ColoredSquaresHeader}>
-            {parcel.PestRisk ? parcel.PestRisk.toUpperCase() : NO_DATA}
+            {title}
           </div>
           <div className={styles.SubMessage}>
             {this.getHumanReadablePestRisk(parcel, t)}

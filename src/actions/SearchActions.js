@@ -11,7 +11,7 @@ import {
 } from "../constants/ActionTypes";
 import { theStore } from "../store/Store";
 
-import { search } from "lizard-api-client";
+import { searchParcels } from "lizard-api-client";
 import { getParcelsByName } from "lizard-api-client";
 import { showSnackBar } from "./UiActions";
 import { updateMapBbox } from "./MapActions";
@@ -40,7 +40,8 @@ export const setSearchInputText = inputText => ({
 });
 
 function doSearch(dispatch, q, types = null, exclude = []) {
-  const currentData = theStore.getState().search;
+  const state = theStore.getState();
+  const currentData = state.search;
 
   if (currentData && currentData.isFetching) {
     // Do nothing.
@@ -48,7 +49,15 @@ function doSearch(dispatch, q, types = null, exclude = []) {
   }
 
   dispatch(startSearch());
-  getParcelsByName(q).then(
+
+  const searchCompliantBbox = [
+    state.map.bbox[3],
+    state.map.bbox[0],
+    state.map.bbox[1],
+    state.map.bbox[2]
+  ];
+
+  searchParcels(q, searchCompliantBbox).then(
     results => {
       dispatch(receiveResultsSuccess(results));
       const parcels = results.map(r => feature(r.geometry));

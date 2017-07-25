@@ -1,4 +1,4 @@
-const NO_DATA = "...";
+export const NO_DATA = "...";
 
 export const CATEGORIES = {
   General: [
