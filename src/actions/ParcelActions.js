@@ -14,25 +14,17 @@ import { getParcelAttributes } from "../tools/wfs";
 import { receiveResultsSuccess } from "./SearchActions";
 import { changeView, showSnackBar } from "./UiActions";
 
-export const getAttributesFromGeoserverAction = parcelId => ({
-  type: GET_ATTRIBUTES_FROM_GEOSERVER,
-  parcelId: parcelId
-});
-
-export const receiveAttributesFromGeoserverSuccessAction = (
-  parcelId,
-  data
-) => ({
-  type: RECEIVE_ATTRIBUTES_FROM_GEOSERVER_SUCCESS,
-  parcelId: parcelId,
-  data: data
-});
-
-export const receiveAttributesFromGeoserverErrorAction = (parcelId, error) => ({
-  type: RECEIVE_ATTRIBUTES_FROM_GEOSERVER_ERROR,
+export function receiveAttributesFromGeoserverErrorAction(
+  dispatch,
   parcelId,
   error
-});
+) {
+  dispatch({
+    type: RECEIVE_ATTRIBUTES_FROM_GEOSERVER_ERROR,
+    parcelId,
+    error
+  });
+}
 
 export function selectParcel(dispatch, selectedParcel) {
   dispatch({ type: SELECT_PARCEL, selectedParcel });
@@ -48,11 +40,16 @@ function handleInvalidDataFormatError(
   parcelId,
   parcelGeoserverId
 ) {
+  // Inform the programmer:
   console.error(`Returned geoserver data for parcel with hydracoreID=${parcelId}
     / GeoserverID=${parcelGeoserverId} is not in correct format`);
-  dispatch(
-    receiveAttributesFromGeoserverErrorAction(parcelId, "Invalid data format")
+  // Update redux state:
+  receiveAttributesFromGeoserverErrorAction(
+    dispatch,
+    parcelId,
+    "Invalid data format"
   );
+  // Inform the user:
   showSnackBarParcelReceiveError(dispatch, placeName);
 }
 
@@ -63,9 +60,12 @@ function handleGeoserverError(
   parcelGeoserverId,
   errorMsg
 ) {
+  // Inform the programmer:
   console.error(`"Error while fetching parcel with hydracoreID="${parcelId} /
     GeoserverID=${parcelGeoserverId}: ${errorMsg}`);
-  dispatch(receiveAttributesFromGeoserverErrorAction(parcelId, errorMsg));
+  // Update redux state:
+  receiveAttributesFromGeoserverErrorAction(dispatch, parcelId, errorMsg);
+  // Inform the user:
   showSnackBarParcelReceiveError(dispatch, placeName);
 }
 
@@ -133,7 +133,7 @@ export function getAttributesFromGeoserver(dispatch, parcelId) {
 
   const parcelGeoserverId = currentData.parcelGeoserverId;
 
-  dispatch(getAttributesFromGeoserverAction(parcelId));
+  dispatch({ type: GET_ATTRIBUTES_FROM_GEOSERVER, parcelId });
 
   getParcelAttributes(parcelGeoserverId).then(
     data => {
@@ -143,12 +143,11 @@ export function getAttributesFromGeoserver(dispatch, parcelId) {
         data.features.length &&
         data.features[0].properties
       ) {
-        dispatch(
-          receiveAttributesFromGeoserverSuccessAction(
-            parcelId,
-            data.features[0].properties
-          )
-        );
+        dispatch({
+          type: RECEIVE_ATTRIBUTES_FROM_GEOSERVER_SUCCESS,
+          parcelId: parcelId,
+          data: data.features[0].properties
+        });
         selectParcel(dispatch, parcelId);
         if (state.ui.currentView !== "DetailView") {
           changeView(dispatch, "DetailView");
@@ -184,7 +183,7 @@ export function getParcelByLatLng(dispatch, lat, lng) {
     point: `${lng},${lat}`
   }).then(results => {
     if (results.length > 0) {
-      dispatch(receiveResultsSuccess(results));
+      receiveResultsSuccess(dispatch, results);
       getAttributesFromGeoserver(dispatch, results[0].id);
     }
   });

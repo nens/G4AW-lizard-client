@@ -20,7 +20,6 @@ import styles from "./styles/MapComponent.css";
 
 import {
   getAttributesFromGeoserver,
-  getRaster,
   receiveResultsSuccess,
   updateMapBbox,
   getParcelByLatLng
@@ -59,7 +58,6 @@ class MapComponent extends Component {
   }
   render() {
     const {
-      visibleRasters,
       getParcel,
       searchResults,
       getDetails,
@@ -148,11 +146,10 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    getRaster: uuid => getRaster(uuid, dispatch),
     getDetails: id => {
       getAttributesFromGeoserver(dispatch, id);
     },
-    receiveResults: results => dispatch(receiveResultsSuccess(results)),
+    receiveResults: results => receiveResultsSuccess(dispatch, results),
     updateMapBbox: bbox => updateMapBbox(dispatch, bbox),
     getParcelByLatLng: (lat, lng) => {
       getParcelByLatLng(dispatch, lng, lat);

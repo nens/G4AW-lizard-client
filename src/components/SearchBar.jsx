@@ -140,7 +140,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     changeToSettingsView: () => changeView(dispatch, "SettingsView"),
-    setSearchInput: q => dispatch(setSearchInputText(q)),
+    setSearchInput: q => setSearchInputText(dispatch, q),
     clear: (selectedParcelId, allParcels) => {
       if (selectedParcelId) {
         // De-select currently selected parcel (go back to search-result selection)
@@ -150,15 +150,15 @@ function mapDispatchToProps(dispatch) {
         updateMapBbox(dispatch, boundingBox);
         showSnackBar(dispatch, {
           autoHideDuration: 4000,
-          message: "You have no longer selected a single parcel."
+          message: i18next.t("You have no longer selected a single parcel.")
         });
       } else {
         // Clear search-result selection (go back to init)
-        dispatch(clearResults());
+        clearResults(dispatch);
         updateMapBbox(dispatch, DEFAULT_BBOX);
         showSnackBar(dispatch, {
           autoHideDuration: 4000,
-          message: "You have cleared your search results."
+          message: i18next.t("You have cleared your search results.")
         });
       }
     },
@@ -166,7 +166,7 @@ function mapDispatchToProps(dispatch) {
       if (q) {
         doSearch(dispatch, q);
       } else {
-        dispatch(clearResults());
+        clearResults(dispatch);
       }
     }
   };
