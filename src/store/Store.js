@@ -46,7 +46,8 @@ export const initialSessionState = {
 export const initialSearchState = {
   latestSearchTerm: null,
   results: null,
-  inputText: null
+  inputText: null,
+  results: null
 };
 
 export const initialGeolocationState = {
@@ -103,8 +104,6 @@ export const initialPhotosForParcelState = {};
 
 export const initialTimeseriesState = {};
 
-export const initialRastersState = {};
-
 export const initialForegroundlayerState = {
   url: "https://maps1.project.lizard.net/geoserver/Q0007_sat4rice_2018/wms",
   layers: [
@@ -157,11 +156,9 @@ const initialState = {
   geolocation: initialGeolocationState,
   map: initialMapState,
   parcels: initialParcelsState,
-  rasters: initialRastersState,
   search: initialSearchState,
   session: initialSessionState,
   timeseries: initialTimeseriesState,
-  rasters: initialRastersState,
   baselayer: initialBaselayerState,
   foregroundlayer: initialForegroundlayerState,
   ui: initialUiState

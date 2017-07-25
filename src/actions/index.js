@@ -3,7 +3,6 @@ export * from "./ForegroundlayerActions";
 export * from "./GeolocationActions";
 export * from "./MapActions";
 export * from "./ParcelActions";
-export * from "./RasterActions";
 export * from "./SearchActions";
 export * from "./SessionActions";
 export * from "./TimeseriesActions";

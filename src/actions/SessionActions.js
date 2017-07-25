@@ -14,22 +14,22 @@ export function setInternetAvailability(dispatch, isOnline) {
   dispatch({ type: SET_INTERNET_AVAILABILITY, isOnline });
 }
 
-export function fetchBootstrapAction() {
-  return { type: FETCH_BOOTSTRAP };
+export function fetchBootstrapAction(dispatch) {
+  dispatch({ type: FETCH_BOOTSTRAP });
 }
 
-export function receiveBootstrapSuccessAction(bootstrap) {
-  return {
+export function receiveBootstrapSuccessAction(dispatch, bootstrap) {
+  dispatch({
     type: RECEIVE_BOOTSTRAP_SUCCESS,
     bootstrap
-  };
+  });
 }
 
-export function receiveBootstrapErrorAction(error) {
-  return {
+export function receiveBootstrapErrorAction(dispatch, error) {
+  dispatch({
     type: RECEIVE_BOOTSTRAP_ERROR,
     error
-  };
+  });
 }
 
 export function fetchBootstrap(dispatch, sessionState) {
@@ -37,11 +37,11 @@ export function fetchBootstrap(dispatch, sessionState) {
     return;
   }
 
-  dispatch(fetchBootstrapAction());
+  fetchBootstrapAction(dispatch);
 
   getBootstrap().then(
     bootstrap => {
-      dispatch(receiveBootstrapSuccessAction(bootstrap));
+      receiveBootstrapSuccessAction(dispatch, bootstrap);
       showSnackBar(dispatch, {
         message: i18next.t("The application initialized succesfully"),
         subMessage: i18next.t(
@@ -51,7 +51,7 @@ export function fetchBootstrap(dispatch, sessionState) {
       });
     },
     error => {
-      dispatch(receiveBootstrapErrorAction(error));
+      receiveBootstrapErrorAction(dispatch, error);
       console.error(error);
       showSnackBar(dispatch, {
         isError: true,

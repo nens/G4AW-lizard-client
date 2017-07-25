@@ -2,7 +2,6 @@ import baselayer from "./Baselayer";
 import geolocation from "./Geolocation";
 import map from "./Map";
 import parcels from "./Parcels";
-import rasters from "./Rasters";
 import search from "./Search";
 import session from "./Session";
 import timeseries from "./Timeseries";
@@ -14,7 +13,6 @@ export default {
   geolocation,
   map,
   parcels,
-  rasters,
   search,
   session,
   timeseries,

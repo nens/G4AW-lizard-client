@@ -16,28 +16,34 @@ import { getParcelsByName } from "lizard-api-client";
 import { showSnackBar } from "./UiActions";
 import { updateMapBbox } from "./MapActions";
 
-export const startSearch = () => ({
-  type: START_SEARCH
-});
+export function startSearch(dispatch) {
+  dispatch({ type: START_SEARCH });
+}
 
-export const receiveResultsSuccess = results => ({
-  type: RECEIVE_SEARCH_RESULTS_SUCCESS,
-  results
-});
+export function receiveResultsSuccess(dispatch, results) {
+  dispatch({
+    type: RECEIVE_SEARCH_RESULTS_SUCCESS,
+    results
+  });
+}
 
-export const receiveResultsError = error => ({
-  type: RECEIVE_SEARCH_RESULTS_ERROR,
-  error
-});
+export function receiveResultsError(dispatch, error) {
+  dispatch({
+    type: RECEIVE_SEARCH_RESULTS_ERROR,
+    error
+  });
+}
 
-export const clearResults = () => ({
-  type: CLEAR_SEARCH_RESULTS
-});
+export function clearResults(dispatch) {
+  dispatch({ type: CLEAR_SEARCH_RESULTS });
+}
 
-export const setSearchInputText = inputText => ({
-  type: SET_SEARCH_INPUT_TEXT,
-  inputText
-});
+export function setSearchInputText(dispatch, inputText) {
+  dispatch({
+    type: SET_SEARCH_INPUT_TEXT,
+    inputText
+  });
+}
 
 function doSearch(dispatch, q, types = null, exclude = []) {
   const currentData = theStore.getState().search;
@@ -47,10 +53,10 @@ function doSearch(dispatch, q, types = null, exclude = []) {
     return;
   }
 
-  dispatch(startSearch());
+  startSearch(dispatch);
   getParcelsByName(q).then(
     results => {
-      dispatch(receiveResultsSuccess(results));
+      receiveResultsSuccess(dispatch, results);
       const parcels = results.map(r => feature(r.geometry));
       const boundingBox = bbox(flip(featureCollection(parcels)));
       updateMapBbox(dispatch, boundingBox);
@@ -58,7 +64,7 @@ function doSearch(dispatch, q, types = null, exclude = []) {
     error => {
       const msg = "Search error: " + error;
       const message = i18next.t("There was an error while searching for");
-      dispatch(receiveResultsError(msg));
+      receiveResultsError(dispatch, msg);
       showSnackBar(dispatch, {
         isError: true,
         message: `${message} '${q}'`,
