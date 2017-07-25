@@ -14,15 +14,6 @@ import { getParcelAttributes } from "../tools/wfs";
 import { receiveResultsSuccess } from "./SearchActions";
 import { changeView, showSnackBar } from "./UiActions";
 
-// export const receiveAttributesFromGeoserverSuccessAction = (
-//   parcelId,
-//   data
-// ) => ({
-//   type: RECEIVE_ATTRIBUTES_FROM_GEOSERVER_SUCCESS,
-//   parcelId: parcelId,
-//   data: data
-// });
-
 export function receiveAttributesFromGeoserverErrorAction(
   dispatch,
   parcelId,
