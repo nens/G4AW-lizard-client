@@ -5,7 +5,7 @@ Dit document dient als leidraad voor het ontwikkelen van de G4AW Lizard client.
 
 - Project `Q0007.23 G4AW Vietnam jaar 2 wp3` in TRS: https://trs.nelen-schuurmans.nl/projects/5226/
 - Trello board: https://trello.com/b/vKbkt2BS/dev?menu=filter&filter=label:G4AW
-
+- Data model: https://docs.google.com/spreadsheets/d/1XvUYcxQee-OJ4EW0oB9TpCBan20gsBDXuT2SQBIAsQ0/
 
 Projectmatige randvoorwaarden
 -----------------------------
