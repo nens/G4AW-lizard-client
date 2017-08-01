@@ -3,35 +3,17 @@ import { initialParcelsState } from "../store/Store";
 
 import omit from "lodash/omit";
 
-// These are the new fields currently returned, 2017-07-07
-const GEOSERVER_ATTRIBUTES = [
-  "FarmID",
-  "FieldOfficer",
-  "Visit",
-  "SpecialSituation",
-  "GrowthStage",
-  "CropCondition",
-  "SowDate",
-  "HarvestDate",
-  "Yield(Kg/Ha)",
-  "Price(₫/Kg)",
-  "HarvestedWeightInKg(wet)",
-  "HarvestedWeightInKg(dry)",
-  "MoistureContent",
-  "PestRisk",
-  "BrownPlantHopperPresent",
-  "LeaffolderPresent",
-  "BlastPresent",
-  "BlastRisk",
-  "BrownPlantHopperRisk",
-  "LeaffolderRisk",
-  "FloodRisk",
-  "PlantHeightInCm",
-  "NumberOfStemsPerM²",
-  "FieldSizeInHa",
-  "Variety",
-  "bbox"
-];
+import { SECTIONS } from "../constants/detailview-attributes";
+
+const allGeoserverAttributes = [];
+
+for (const key in SECTIONS) {
+  SECTIONS[key].sectionAttrs.forEach(sectionAttr => {
+    allGeoserverAttributes.push(sectionAttr.attr);
+  });
+}
+
+// console.log("allGeoserverAttributes:", allGeoserverAttributes);
 
 const initialParcel = {
   parcelGeoserverId: null,
@@ -68,7 +50,7 @@ export default function(state = initialParcelsState, action) {
         hasGeoserverData: true
       };
 
-      GEOSERVER_ATTRIBUTES.forEach(attribute => {
+      allGeoserverAttributes.forEach(attribute => {
         newParcel[attribute] = action.data[attribute] || null;
       });
 

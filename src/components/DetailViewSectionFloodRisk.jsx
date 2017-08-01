@@ -5,7 +5,7 @@ import { DetailViewSection } from ".";
 
 export default class DetailViewSectionFloodRisk extends Component {
   render() {
-    const { t, parcel, formatTabularData, ColoredSquare } = this.props;
+    const { t, parcel, data, ColoredSquare } = this.props;
     return (
       <DetailViewSection isInitiallyOpen={false} title={t("Flood Risk")}>
         <div className={styles.SectionWrapper}>

@@ -23,7 +23,7 @@ export default class DetailViewSectionGrowthStage extends Component {
     const {
       t,
       parcel,
-      formatTabularData,
+      data,
       isInitiallyOpen,
       riceGrowthLayer,
       ColoredSquare
@@ -55,9 +55,7 @@ export default class DetailViewSectionGrowthStage extends Component {
               );
             })}
           </div>
-          <DetailViewTable
-            data={formatTabularData(parcel, CATEGORIES.RiceGrowth)}
-          />
+          <DetailViewTable data={data} />
         </div>
       </DetailViewSection>
     );
