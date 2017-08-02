@@ -10,6 +10,7 @@
   max-height: 0;
   transition: max-height 0.4s linear;
   -webkit-transition: max-height 0.4s linear;
+  -moz-transition: max-height 0.4s linear;
 }
 
 .ContentVisible {
