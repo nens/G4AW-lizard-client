@@ -45,6 +45,7 @@ export const initialSessionState = {
 
 export const initialSearchState = {
   latestSearchTerm: null,
+  isFetching: false,
   results: null,
   inputText: null,
   results: null

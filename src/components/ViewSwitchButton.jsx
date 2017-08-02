@@ -13,14 +13,28 @@ import { changeView } from "../actions";
 
 class ViewSwitchButtonComponent extends Component {
   render() {
-    const { t, viewIsMap, changeView, searchResultCount } = this.props;
+    const {
+      t,
+      viewIsMap,
+      changeView,
+      searchResultCount,
+      isFetching
+    } = this.props;
     const handleClick = () =>
       changeView((viewIsMap ? "List" : "Map") + "SearchView");
     return (
       <div className={styles.ViewSwitchButton} onClick={handleClick}>
         {viewIsMap
-          ? <SwitchToListButton t={t} count={searchResultCount} />
-          : <SwitchToMapButton t={t} count={searchResultCount} />}
+          ? <SwitchToListButton
+              t={t}
+              count={searchResultCount}
+              isFetching={isFetching}
+            />
+          : <SwitchToMapButton
+              t={t}
+              count={searchResultCount}
+              isFetching={isFetching}
+            />}
         <Ink />
       </div>
     );
@@ -33,12 +47,12 @@ ViewSwitchButtonComponent.propTypes = {
 
 class SwitchToMapButton extends Component {
   render() {
-    const { t, count } = this.props;
+    const { t, count, isFetching } = this.props;
     return (
       <div>
         <i className={`material-icons ${styles.Icon}`}>track_changes</i>
         <span className={styles.Message}>
-          {t("Click here to explore the map")}
+          {isFetching ? t("Searching...") : t("Click here to explore the map")}
         </span>
       </div>
     );
@@ -57,11 +71,14 @@ class SwitchToListButton extends Component {
     }
   }
   render() {
+    const { t, count, isFetching } = this.props;
     return (
       <div>
         <i className={`material-icons ${styles.Icon}`}>apps</i>
         <span className={styles.Message}>
-          {this.getMessage(this.props.t, this.props.count)}
+          {isFetching
+            ? t("Searching...")
+            : this.getMessage(t, count, isFetching)}
         </span>
       </div>
     );
@@ -72,6 +89,7 @@ class SwitchToListButton extends Component {
 
 function mapStateToProps(state) {
   return {
+    isFetching: state.search.isFetching,
     searchResultCount: state.search.results ? state.search.results.length : 0
   };
 }
