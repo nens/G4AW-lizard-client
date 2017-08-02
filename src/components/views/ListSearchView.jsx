@@ -35,6 +35,16 @@ import { replaceUnderscores } from "../../tools/string-formatting";
 import MDSpinner from "react-md-spinner";
 
 class ListSearchViewComponent extends Component {
+  extractName(fullTitle) {
+    const startOfSuffix = fullTitle.indexOf("(");
+    return fullTitle.slice(0, startOfSuffix).replace("Farmer", "");
+  }
+  extractFarmId(fullTitle) {
+    const fullTitleParts = fullTitle.split(" ");
+    const lastPart = fullTitleParts[fullTitleParts.length - 1];
+    const RE = /[\d\-]+/;
+    return RE.exec(lastPart)[0];
+  }
   render() {
     const {
       geolocationData, // via: mapStateToProps,
@@ -55,6 +65,8 @@ class ListSearchViewComponent extends Component {
     if (isFinishedSearching) {
       component = (
         <ListSearchResults
+          extractName={this.extractName}
+          extractFarmId={this.extractFarmId}
           getDetails={getDetails}
           getParcel={getParcel}
           searchResults={searchResults}
@@ -94,6 +106,8 @@ function ListSearchLanding({ t, username }) {
 }
 
 function ListSearchResults({
+  extractName,
+  extractFarmId,
   getDetails,
   getParcel,
   parentState,
@@ -122,13 +136,16 @@ function ListSearchResults({
             >
               {searchResults.map((result, i) => {
                 const parcel = getParcel(result);
+                const formattedName = replaceUnderscores(parcel.name);
+                console.log("Parcel:", parcel);
                 return (
                   <SearchResultListItem
                     handleClick={() => getDetails(result)}
                     key={result}
-                    title={replaceUnderscores(parcel.name)}
+                    title={extractName(formattedName)}
+                    subtitle={extractFarmId(formattedName)}
                     ripple={true}
-                    indicatorColor="#FEDF56"
+                    indicatorColor={parcel.isAffiliated ? "#FEDF56" : "#D8D8D8"}
                   />
                 );
               })}
@@ -139,14 +156,15 @@ function ListSearchResults({
             >
               {searchResults.map((result, i) => {
                 const parcel = getParcel(result);
-                console.log("!!! Parcel looks like:", parcel);
+                const formattedName = replaceUnderscores(parcel.name);
                 return (
                   <SearchResultCardItem
                     handleClick={() => getDetails(result)}
                     key={result}
-                    title={replaceUnderscores(parcel.name)}
+                    title={extractName(formattedName)}
+                    subtitle={extractFarmId(formattedName)}
                     ripple={true}
-                    indicatorColor="#FEDF56"
+                    indicatorColor={parcel.isAffiliated ? "#FEDF56" : "#D8D8D8"}
                   />
                 );
               })}

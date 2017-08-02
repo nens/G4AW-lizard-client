@@ -83,6 +83,7 @@ export default function(state = initialParcelsState, action) {
         newParcel.name = result.name;
         newParcel.geometry = result.geometry;
         newParcel.hasLizardData = true;
+        newParcel.isAffiliated = result.name.indexOf("(9999)") === -1;
 
         newParcels[result.id] = newParcel;
       });

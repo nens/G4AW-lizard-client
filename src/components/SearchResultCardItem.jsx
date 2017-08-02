@@ -29,21 +29,8 @@ class SearchResultCardItem extends Component {
       });
     }
   }
-  extractName(fullTitle) {
-    const startOfSuffix = fullTitle.indexOf("(");
-    return fullTitle.slice(0, startOfSuffix).replace("Farmer", "");
-  }
-  extractFarmId(fullTitle) {
-    const fullTitleParts = fullTitle.split(" ");
-    const lastPart = fullTitleParts[fullTitleParts.length - 1];
-    const RE = /[\d\-]+/;
-    return RE.exec(lastPart)[0];
-  }
   render() {
     const { ripple, handleClick, indicatorColor, subtitle, title } = this.props;
-    const farmerName = this.extractName(title);
-    const farmId = this.extractFarmId(title);
-
     return (
       <div
         id="SearchResultCardItem"
@@ -75,10 +62,10 @@ class SearchResultCardItem extends Component {
           </svg>
         </div>
         <span className={styles.Title}>
-          {farmerName}
+          {title}
         </span>
         <div className={styles.SubTitle}>
-          {farmId}
+          {subtitle}
         </div>
         {ripple ? <Ink /> : ""}
       </div>
