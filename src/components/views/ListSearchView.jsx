@@ -139,6 +139,7 @@ function ListSearchResults({
             >
               {searchResults.map((result, i) => {
                 const parcel = getParcel(result);
+                console.log("!!! Parcel looks like:", parcel);
                 return (
                   <SearchResultCardItem
                     handleClick={() => getDetails(result)}

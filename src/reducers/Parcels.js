@@ -13,8 +13,6 @@ for (const key in SECTIONS) {
   });
 }
 
-// console.log("allGeoserverAttributes:", allGeoserverAttributes);
-
 const initialParcel = {
   parcelGeoserverId: null,
   isFetchingLizard: false,

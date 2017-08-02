@@ -29,9 +29,20 @@ class SearchResultCardItem extends Component {
       });
     }
   }
+  extractName(fullTitle) {
+    const startOfSuffix = fullTitle.indexOf("(");
+    return fullTitle.slice(0, startOfSuffix).replace("Farmer", "");
+  }
+  extractFarmId(fullTitle) {
+    const fullTitleParts = fullTitle.split(" ");
+    const lastPart = fullTitleParts[fullTitleParts.length - 1];
+    const RE = /[\d\-]+/;
+    return RE.exec(lastPart)[0];
+  }
   render() {
-    const { ripple, handleClick, indicatorColor, subtitle } = this.props;
-    const title = this.props.title.split(" ").slice(0, 2).join(" ");
+    const { ripple, handleClick, indicatorColor, subtitle, title } = this.props;
+    const farmerName = this.extractName(title);
+    const farmId = this.extractFarmId(title);
 
     return (
       <div
@@ -64,12 +75,12 @@ class SearchResultCardItem extends Component {
           </svg>
         </div>
         <span className={styles.Title}>
-          {title}
+          {farmerName}
         </span>
         <div className={styles.SubTitle}>
-          {subtitle}
+          {farmId}
         </div>
-        {ripple === false ? "" : <Ink />}
+        {ripple ? <Ink /> : ""}
       </div>
     );
   }

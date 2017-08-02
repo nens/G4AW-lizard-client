@@ -86,8 +86,7 @@ const SECTIONS = {
       {
         attr: "LastSeasonSowingDate",
         attrTranslate: i18next.t("LastSeasonSowingDate")
-      },
-      { attr: "OverviewPhoto", attrTranslate: i18next.t("OverviewPhoto") }
+      }
     ]
   },
 

@@ -43,18 +43,17 @@ class DetailViewComponent extends Component {
     this.handleViewOnMapClick = this.handleViewOnMapClick.bind(this);
   }
   formatData(parcel, sectionName) {
-    console.log("[F] formatData; sectionName = '" + sectionName + "'");
+    // console.log("[F] formatData; sectionName = '" + sectionName + "'");
     const attributes = SECTIONS[sectionName];
-    console.log("*** attributes:", attributes);
+    // console.log("*** attributes:", attributes);
     return attributes.sectionAttrs.map(sectionAttr => {
-      console.log("****** sectionAttr:", sectionAttr);
+      // console.log("****** sectionAttr:", sectionAttr);
       const result = {
         key: sectionAttr.attrTranslate,
         value: parcel[sectionAttr.attr],
         unit: sectionAttr.unit || ""
       };
-
-      console.log("****** result:", result);
+      // console.log("****** result:", result);
       return result;
     });
   }
@@ -132,22 +131,20 @@ class DetailViewComponent extends Component {
               </div>
               <DetailViewTable data={this.formatData(parcel, "FieldInfo")} />
               <br />
-
-              {/*}
               <DetailViewSectionGrowthStage
-                data={this.formatData(parcel, "Rice growth") }
+                data={this.formatData(parcel, "RiceGrowth")}
                 isInitiallyOpen={openSection === "RiceGrowth"}
                 ColoredSquare={ColoredSquare}
                 {...this.props}
               />
               <DetailViewSectionPestRisk
-                data={this.formatData(parcel, "Pest growth") }
+                data={this.formatData(parcel, "PestRisk")}
                 isInitiallyOpen={openSection === "PestRisk"}
                 ColoredSquare={ColoredSquare}
                 {...this.props}
               />
               <DetailViewSectionFloodRisk
-                data={this.formatData(parcel, "Flood risk") }
+                data={this.formatData(parcel, "FloodRisk")}
                 ColoredSquare={ColoredSquare}
                 {...this.props}
               />
@@ -157,7 +154,6 @@ class DetailViewComponent extends Component {
                 width={WIDTH}
                 handleClick={changeToPhotoView}
               />
-              */}
             </div>}
         <DetailViewFooter />
       </div>

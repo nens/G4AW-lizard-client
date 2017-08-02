@@ -25,8 +25,12 @@ export function getParcelAttributes(parcelId) {
       if (this.readyState !== 4) return;
 
       if (this.status >= 200 && this.status < 300) {
-        const json = JSON.parse(this.response);
-        resolve(json);
+        try {
+          const json = JSON.parse(this.response);
+          resolve(json);
+        } catch (err) {
+          reject(`Response is not valid JSON: "${err}"`);
+        }
       } else {
         reject(`Status ${this.status}, '${this.statusText}' for URL ${url}.`);
       }

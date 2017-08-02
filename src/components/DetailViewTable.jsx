@@ -30,13 +30,33 @@ DetailViewTable.propTypes = {
 
 class DetailViewTableRow extends Component {
   getIcon(str) {
+    console.log("[F] getIcon; arg = ", str);
+    let result;
     switch (str) {
       case "Vâng": // "Yes"
-        return <YesIcon />;
+        result = <YesIcon />;
+        break;
+      case "Yes":
+        result = <YesIcon />;
+        break;
       case "Không": // "No"
-        return <NoIcon />;
+        result = <NoIcon />;
+        break;
+      case "No":
+        result = <NoIcon />;
+        break;
       default:
-        return null;
+        result = null;
+    }
+
+    console.log("=> icon:", result);
+    return result;
+  }
+  formatValue(row) {
+    if (row.value === null) {
+      return "";
+    } else {
+      return row.value + (row.unit ? ` ${row.unit}` : "");
     }
   }
   render() {
@@ -46,12 +66,9 @@ class DetailViewTableRow extends Component {
         <td className={styles.ColKey}>
           {row.key}
         </td>
-        <td>
-          {row.value}
-        </td>
 
         <td className={styles.ColValue}>
-          {this.getIcon(row.value)}
+          {this.formatValue(row)}
         </td>
       </tr>
     );

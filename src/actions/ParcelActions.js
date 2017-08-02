@@ -38,11 +38,13 @@ function handleInvalidDataFormatError(
   dispatch,
   placeName,
   parcelId,
-  parcelGeoserverId
+  parcelGeoserverId,
+  invalidData
 ) {
   // Inform the programmer:
   console.error(`Returned geoserver data for parcel with hydracoreID=${parcelId}
-    / GeoserverID=${parcelGeoserverId} is not in correct format`);
+    / GeoserverID=${parcelGeoserverId} is not in correct format\nData looks like:
+    ${JSON.stringify(invalidData)}`);
   // Update redux state:
   receiveAttributesFromGeoserverErrorAction(
     dispatch,
@@ -157,7 +159,8 @@ export function getAttributesFromGeoserver(dispatch, parcelId) {
           dispatch,
           currentData.name,
           parcelId,
-          parcelGeoserverId
+          parcelGeoserverId,
+          data
         );
       }
     },

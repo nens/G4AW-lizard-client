@@ -13,15 +13,17 @@ export default class DetailViewSectionFloodRisk extends Component {
             {parcel.FloodRisk ? parcel.FloodRisk.toUpperCase() : NO_DATA}
           </div>
           <div className={styles.SubMessage}>
-            {`The current flood risk is ${parcel.FloodRisk
-              ? parcel.FloodRisk.toUpperCase()
-              : t("unknown")}`}
+            {`The current flood risk is
+              ${parcel.FloodRisk
+                ? parcel.FloodRisk.toUpperCase()
+                : t("unknown")}
+              and the flood level is ${data[1].value} ${data[1].unit}`}
           </div>
           <div className={styles.ColoredSquaresContainer}>
             <ColoredSquare
               title={t("Low flood risk")}
               backgroundColor="#FFFFFF"
-              active={parcel.FloodRisk === "Low"}
+              active={parcel.FloodRisk === "No Risk"}
             />
             <ColoredSquare
               title={t("Medium flood risk")}
