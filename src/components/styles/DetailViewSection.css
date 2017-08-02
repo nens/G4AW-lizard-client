@@ -1,6 +1,9 @@
 .DetailViewSection {
   background-color: #fff;
 }
+.DetailViewSection:last-child {
+  margin-bottom: 50px;
+}
 
 .CollapsibleContent {
   overflow: hidden;
