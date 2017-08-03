@@ -57,6 +57,7 @@ class ListSearchViewComponent extends Component {
       searchResultsAsList, // via: mapStateToProps
       toggleSearchResultsListOrCardMode, // via: mapDispatchToProps
       username, // via: mapStateToProps,
+      selectedParcel, // via: mapStateToProps,
       t // via: parent
     } = this.props;
 
@@ -72,6 +73,7 @@ class ListSearchViewComponent extends Component {
           searchResults={searchResults}
           searchResultsAsList={searchResultsAsList}
           toggleSearchResultsListOrCardMode={toggleSearchResultsListOrCardMode}
+          selectedParcel={selectedParcel}
           t={t}
         />
       );
@@ -113,8 +115,10 @@ function ListSearchResults({
   parentState,
   searchResults,
   searchResultsAsList,
-  toggleSearchResultsListOrCardMode
+  toggleSearchResultsListOrCardMode,
+  selectedParcel
 }) {
+  console.log("selected parcel:", selectedParcel);
   return (
     <VelocityTransitionGroup
       runOnMount={true}
@@ -137,7 +141,7 @@ function ListSearchResults({
               {searchResults.map((result, i) => {
                 const parcel = getParcel(result);
                 const formattedName = replaceUnderscores(parcel.name);
-                console.log("Parcel:", parcel);
+                console.log("current parcel:", parcel);
                 return (
                   <SearchResultListItem
                     handleClick={() => getDetails(result)}
@@ -146,6 +150,7 @@ function ListSearchResults({
                     subtitle={extractFarmId(formattedName)}
                     ripple={true}
                     indicatorColor={parcel.isAffiliated ? "#FEDF56" : "#D8D8D8"}
+                    isSelected={selectedParcel === parcel.hydracoreId}
                   />
                 );
               })}
@@ -157,6 +162,7 @@ function ListSearchResults({
               {searchResults.map((result, i) => {
                 const parcel = getParcel(result);
                 const formattedName = replaceUnderscores(parcel.name);
+                console.log("current parcel:", parcel);
                 return (
                   <SearchResultCardItem
                     handleClick={() => getDetails(result)}
@@ -165,6 +171,7 @@ function ListSearchResults({
                     subtitle={extractFarmId(formattedName)}
                     ripple={true}
                     indicatorColor={parcel.isAffiliated ? "#FEDF56" : "#D8D8D8"}
+                    isSelected={selectedParcel === parcel.hydracoreId}
                   />
                 );
               })}
@@ -193,6 +200,7 @@ class ListSearchViewSpinner extends Component {
 
 function mapStateToProps(state) {
   return {
+    selectedParcel: state.ui.selectedParcel,
     getParcel: idx => state.parcels[idx],
     searchResultsAsList: state.ui.searchResultsAsList,
     isFetching: state.search.isFetching,

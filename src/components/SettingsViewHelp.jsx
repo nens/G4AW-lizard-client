@@ -20,12 +20,20 @@ class SettingsViewHelpComponent extends Component {
           </div>
           <ul>
             <li>
-              <a href="https://ee.kobotoolbox.org/x/#YZnR" target="_blank">
+              <a
+                href="https://ee.kobotoolbox.org/x/#YZnR"
+                target="_blank"
+                className={styles.KoboLink}
+              >
                 {t("Weekly form")}
               </a>
             </li>
             <li>
-              <a href="https://ee.kobotoolbox.org/x/#YZnu" target="_blank">
+              <a
+                href="https://ee.kobotoolbox.org/x/#YZnu"
+                target="_blank"
+                className={styles.KoboLink}
+              >
                 {t("Once form")}
               </a>
             </li>

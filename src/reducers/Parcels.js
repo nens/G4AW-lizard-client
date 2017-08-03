@@ -69,7 +69,7 @@ export default function(state = initialParcelsState, action) {
       return newParcels;
 
     case ActionTypes.RECEIVE_SEARCH_RESULTS_SUCCESS:
-      // For each search recult, if it's not in parcels yet, also
+      // For each search result, if it's not in parcels yet, also
       // create a parcel.
 
       action.results.forEach(result => {
@@ -79,6 +79,7 @@ export default function(state = initialParcelsState, action) {
           newParcel = { ...newParcels[result.id] };
         }
 
+        newParcel.hydracoreId = result.id;
         newParcel.parcelGeoserverId = result.external_id;
         newParcel.name = result.name;
         newParcel.geometry = result.geometry;
