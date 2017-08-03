@@ -23,6 +23,18 @@ const initialParcel = {
   hasGeoserverData: false
 };
 
+function extractFarmerName(fullTitle) {
+  const startOfSuffix = fullTitle.indexOf("(");
+  return fullTitle.slice(0, startOfSuffix).replace("Farmer", "");
+}
+
+function extractFarmId(fullTitle) {
+  const fullTitleParts = fullTitle.split(" ");
+  const lastPart = fullTitleParts[fullTitleParts.length - 1];
+  const RE = /[\d\-]+/;
+  return RE.exec(lastPart)[0];
+}
+
 export default function(state = initialParcelsState, action) {
   const newParcels = { ...state };
   let newParcel;
@@ -81,7 +93,8 @@ export default function(state = initialParcelsState, action) {
 
         newParcel.hydracoreId = result.id;
         newParcel.parcelGeoserverId = result.external_id;
-        newParcel.name = result.name;
+        newParcel.farmerName = extractFarmerName(result.name);
+        newParcel.farmId = extractFarmId(result.name);
         newParcel.geometry = result.geometry;
         newParcel.hasLizardData = true;
         newParcel.isAffiliated = result.name.indexOf("(9999)") === -1;

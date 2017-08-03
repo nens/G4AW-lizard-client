@@ -8,21 +8,25 @@ import styles from "./styles/DetailViewFooter.css";
 import { selectPreviousParcel, selectNextParcel } from "../actions";
 
 class DetailViewFooterComponent extends Component {
-  getPageIndication() {
+  getPageIndication(count) {
     const currentIndex = this.props.searchResults.indexOf(
       this.props.selectedParcel
     );
-    const count = this.props.searchResults.length;
     return `${currentIndex + 1}/${count}`;
   }
   render() {
+    const count = this.props.searchResults.length;
     return (
       <div className={styles.Wrapper}>
-        <PrevParcelButton handleClick={this.props.showPrev} />
+        {count === 1
+          ? null
+          : <PrevParcelButton handleClick={this.props.showPrev} />}
         <span className={styles.PageIndicator}>
-          {this.getPageIndication()}
+          {this.getPageIndication(count)}
         </span>
-        <NextParcelButton handleClick={this.props.showNext} />
+        {count === 1
+          ? null
+          : <NextParcelButton handleClick={this.props.showNext} />}
       </div>
     );
   }

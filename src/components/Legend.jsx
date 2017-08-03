@@ -6,6 +6,7 @@ import { VelocityComponent, VelocityTransitionGroup } from "velocity-react";
 import "velocity-animate/velocity.ui";
 import { Scrollbars } from "react-custom-scrollbars";
 import styles from "./styles/Legend.css";
+import Ink from "react-ink";
 
 import { translate } from "react-i18next";
 
@@ -52,13 +53,14 @@ class LegendTopBar extends Component {
       layerTitle,
       isOpen,
       showPreviousForegroundlayer,
-      showNextForegroundlayer
+      showNextForegroundlayer,
+      toggleLegend
     } = this.props;
 
     return (
       <div className={styles.LegendTopBar}>
         <PrevLayerButton handleClick={showPreviousForegroundlayer} />
-        <div>
+        <div onClick={toggleLegend}>
           {layerTitle}
         </div>
         <NextLayerButton handleClick={showNextForegroundlayer} />
@@ -84,19 +86,6 @@ class NextLayerButton extends Component {
     return (
       <div onClick={handleClick} className={styles.LayerSwitchButton}>
         <i className="material-icons">keyboard_arrow_right</i>
-      </div>
-    );
-  }
-}
-
-class ToggleLegendButton extends Component {
-  render() {
-    const { isOpen, handleClick } = this.props;
-    return (
-      <div onClick={handleClick} className={styles.OpenCloseButton}>
-        <i className="material-icons">
-          {isOpen ? "keyboard_arrow_down" : "keyboard_arrow_up"}
-        </i>
       </div>
     );
   }

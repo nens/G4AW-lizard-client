@@ -114,8 +114,8 @@ class DetailViewComponent extends Component {
     return (
       <div id="DetailView" className={styles.DetailView}>
         <DetailViewHeader
-          title={`${t("Farmer")} ${parcel.FarmID || NO_DATA}`}
-          subTitle={parcel.FieldOfficer}
+          title={`${parcel.farmerName || t("Unknown farmer")}`}
+          subTitle={parcel.farmId}
           halfMode={false}
           latlonzoom={latlonzoom}
           handleBackButtonClick={() => changeToSearchView(searchView)}

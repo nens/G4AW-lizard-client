@@ -35,16 +35,6 @@ import { replaceUnderscores } from "../../tools/string-formatting";
 import MDSpinner from "react-md-spinner";
 
 class ListSearchViewComponent extends Component {
-  extractName(fullTitle) {
-    const startOfSuffix = fullTitle.indexOf("(");
-    return fullTitle.slice(0, startOfSuffix).replace("Farmer", "");
-  }
-  extractFarmId(fullTitle) {
-    const fullTitleParts = fullTitle.split(" ");
-    const lastPart = fullTitleParts[fullTitleParts.length - 1];
-    const RE = /[\d\-]+/;
-    return RE.exec(lastPart)[0];
-  }
   render() {
     const {
       geolocationData, // via: mapStateToProps,
@@ -66,8 +56,6 @@ class ListSearchViewComponent extends Component {
     if (isFinishedSearching) {
       component = (
         <ListSearchResults
-          extractName={this.extractName}
-          extractFarmId={this.extractFarmId}
           getDetails={getDetails}
           getParcel={getParcel}
           searchResults={searchResults}
@@ -140,14 +128,12 @@ function ListSearchResults({
             >
               {searchResults.map((result, i) => {
                 const parcel = getParcel(result);
-                const formattedName = replaceUnderscores(parcel.name);
-                console.log("current parcel:", parcel);
                 return (
                   <SearchResultListItem
                     handleClick={() => getDetails(result)}
                     key={result}
-                    title={extractName(formattedName)}
-                    subtitle={extractFarmId(formattedName)}
+                    title={parcel.farmerName}
+                    subtitle={parcel.farmId}
                     ripple={true}
                     indicatorColor={parcel.isAffiliated ? "#FEDF56" : "#D8D8D8"}
                     isSelected={selectedParcel === parcel.hydracoreId}
@@ -161,14 +147,12 @@ function ListSearchResults({
             >
               {searchResults.map((result, i) => {
                 const parcel = getParcel(result);
-                const formattedName = replaceUnderscores(parcel.name);
-                console.log("current parcel:", parcel);
                 return (
                   <SearchResultCardItem
                     handleClick={() => getDetails(result)}
                     key={result}
-                    title={extractName(formattedName)}
-                    subtitle={extractFarmId(formattedName)}
+                    title={parcel.farmerName}
+                    subtitle={parcel.farmId}
                     ripple={true}
                     indicatorColor={parcel.isAffiliated ? "#FEDF56" : "#D8D8D8"}
                     isSelected={selectedParcel === parcel.hydracoreId}
@@ -187,10 +171,11 @@ class ListSearchViewSpinner extends Component {
       <div>
         <MDSpinner
           singleColor="#03a9f4"
+          size="30"
           style={{
             position: "absolute",
             top: "200px",
-            left: "50%"
+            left: "calc(50% - 15px)"
           }}
         />
       </div>

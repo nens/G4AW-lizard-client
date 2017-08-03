@@ -57,11 +57,12 @@ function GeolocateSpinner() {
   return (
     <div>
       <MDSpinner
-        singleColor="#CECECE"
+        size="20"
+        singleColor="#03a9f4"
         style={{
           position: "relative",
-          top: -4,
-          left: 1
+          top: -2,
+          left: 4
         }}
       />
     </div>
@@ -74,9 +75,11 @@ function mapStateToProps(state) {
   return {
     isGeolocationSupported: state.geolocation.isGeolocationSupported,
     isFetchingGeolocation: state.geolocation.isFetching,
-    isNotStartedFetchingGeolocation: !(state.geolocation.isFetching ||
+    isNotStartedFetchingGeolocation: !(
+      state.geolocation.isFetching ||
       state.geolocation.data ||
-      state.geolocation.error),
+      state.geolocation.error
+    ),
     hasGeolocationData: !state.geolocation.isFetching && state.geolocation.data
   };
 }
