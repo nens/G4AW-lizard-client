@@ -2,6 +2,35 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.4.0"></a>
+# [0.4.0](https://github.com/nens/G4AW-lizard-client/compare/v0.3.5...v0.4.0) (2017-08-04)
+
+
+### Bug Fixes
+
+* **Click on map:** Moved getParcels into redux action. ([723403c](https://github.com/nens/G4AW-lizard-client/commit/723403c))
+* **DetailView:** Removes red dot ([#116](https://github.com/nens/G4AW-lizard-client/issues/116)) ([9b85bcd](https://github.com/nens/G4AW-lizard-client/commit/9b85bcd))
+* **gitignore:** Adds deploy folder to gitignore. ([35766a1](https://github.com/nens/G4AW-lizard-client/commit/35766a1))
+* **graphics:** Adds loctroi graphics files. ([53148a5](https://github.com/nens/G4AW-lizard-client/commit/53148a5))
+* **i18n:** i18n must come before anything else (fixes bug with untranslated Redux store) ([3d441fc](https://github.com/nens/G4AW-lizard-client/commit/3d441fc))
+* **i18n:** translation strings added. ([56f0843](https://github.com/nens/G4AW-lizard-client/commit/56f0843))
+* **index.js:** Initialize offline API. ([46c0965](https://github.com/nens/G4AW-lizard-client/commit/46c0965))
+* **MapComponent:** Adds click handler to map, fires getParcels with distance and point options, then fires getDetails(). ([5799e97](https://github.com/nens/G4AW-lizard-client/commit/5799e97))
+* **MapComponent:** Disables stroke on parcel results on the map. ([#129](https://github.com/nens/G4AW-lizard-client/issues/129)) ([4282057](https://github.com/nens/G4AW-lizard-client/commit/4282057))
+* **offline:** Change path to local leaflet css, add css for Material Icons localized. ([c6fcdf1](https://github.com/nens/G4AW-lizard-client/commit/c6fcdf1))
+* **offline:** Copy leaflet and iconfont into dist/ on production build. ([a36c116](https://github.com/nens/G4AW-lizard-client/commit/a36c116))
+* **offline:** iconfont and leaflet have to be installed locally to be able to cache them using offline-plugin for webpack. ([225138a](https://github.com/nens/G4AW-lizard-client/commit/225138a))
+* **offline:** Webpack config for offline-plugin. ([5c3a601](https://github.com/nens/G4AW-lizard-client/commit/5c3a601))
+* **package.json:** Adds offline-plugin for webpack. ([3738bfd](https://github.com/nens/G4AW-lizard-client/commit/3738bfd))
+* **webpack:** Trying out offline plugin strategies. ([bbcb75e](https://github.com/nens/G4AW-lizard-client/commit/bbcb75e))
+
+
+### Features
+
+* **Logo:** Adds loc troi logo to home view. ([482750e](https://github.com/nens/G4AW-lizard-client/commit/482750e))
+
+
+
 <a name="0.3.5"></a>
 ## [0.3.5](https://github.com/nens/G4AW-lizard-client/compare/v0.3.4...v0.3.5) (2017-07-07)
 
