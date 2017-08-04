@@ -74,9 +74,11 @@ function GeolocateSpinner() {
   return (
     <div>
       <MDSpinner
-        singleColor="#CECECE"
+        size="30"
+        singleColor="#03a9f4"
         style={{
-          position: "relative"
+          position: "relative",
+          top: "40px"
         }}
       />
     </div>

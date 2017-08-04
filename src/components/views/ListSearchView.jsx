@@ -47,6 +47,7 @@ class ListSearchViewComponent extends Component {
       searchResultsAsList, // via: mapStateToProps
       toggleSearchResultsListOrCardMode, // via: mapDispatchToProps
       username, // via: mapStateToProps,
+      selectedParcel, // via: mapStateToProps,
       t // via: parent
     } = this.props;
 
@@ -60,6 +61,7 @@ class ListSearchViewComponent extends Component {
           searchResults={searchResults}
           searchResultsAsList={searchResultsAsList}
           toggleSearchResultsListOrCardMode={toggleSearchResultsListOrCardMode}
+          selectedParcel={selectedParcel}
           t={t}
         />
       );
@@ -94,13 +96,17 @@ function ListSearchLanding({ t, username }) {
 }
 
 function ListSearchResults({
+  extractName,
+  extractFarmId,
   getDetails,
   getParcel,
   parentState,
   searchResults,
   searchResultsAsList,
-  toggleSearchResultsListOrCardMode
+  toggleSearchResultsListOrCardMode,
+  selectedParcel
 }) {
+  console.log("selected parcel:", selectedParcel);
   return (
     <VelocityTransitionGroup
       runOnMount={true}
@@ -126,9 +132,11 @@ function ListSearchResults({
                   <SearchResultListItem
                     handleClick={() => getDetails(result)}
                     key={result}
-                    title={replaceUnderscores(parcel.name)}
+                    title={parcel.farmerName}
+                    subtitle={parcel.farmId}
                     ripple={true}
-                    indicatorColor="#FEDF56"
+                    indicatorColor={parcel.isAffiliated ? "#FEDF56" : "#D8D8D8"}
+                    isSelected={selectedParcel === parcel.hydracoreId}
                   />
                 );
               })}
@@ -143,9 +151,11 @@ function ListSearchResults({
                   <SearchResultCardItem
                     handleClick={() => getDetails(result)}
                     key={result}
-                    title={replaceUnderscores(parcel.name)}
+                    title={parcel.farmerName}
+                    subtitle={parcel.farmId}
                     ripple={true}
-                    indicatorColor="#FEDF56"
+                    indicatorColor={parcel.isAffiliated ? "#FEDF56" : "#D8D8D8"}
+                    isSelected={selectedParcel === parcel.hydracoreId}
                   />
                 );
               })}
@@ -161,10 +171,11 @@ class ListSearchViewSpinner extends Component {
       <div>
         <MDSpinner
           singleColor="#03a9f4"
+          size="30"
           style={{
             position: "absolute",
             top: "200px",
-            left: "50%"
+            left: "calc(50% - 15px)"
           }}
         />
       </div>
@@ -174,6 +185,7 @@ class ListSearchViewSpinner extends Component {
 
 function mapStateToProps(state) {
   return {
+    selectedParcel: state.ui.selectedParcel,
     getParcel: idx => state.parcels[idx],
     searchResultsAsList: state.ui.searchResultsAsList,
     isFetching: state.search.isFetching,

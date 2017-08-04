@@ -28,12 +28,7 @@ import { updateMapBbox } from "../../actions/MapActions";
 import { getActiveForegroundlayerIdx } from "../../actions/ForegroundlayerActions";
 import { THUMBNAIL_LIST, LOREM } from "../../../stories/helpers";
 import { WIDTH } from "../../tools/dimensions";
-import {
-  NO_DATA,
-  CATEGORIES,
-  GEOSERVER_PARCEL_KEYS,
-  GEOSERVER_PARCEL_VALUES
-} from "../../constants/detailview-attributes";
+import { SECTIONS, NO_DATA } from "../../constants/detailview-attributes";
 import { getRGBAstring } from "../../tools/color-conversion";
 
 const DEFAULT_ZOOM = 11; // Used for map in header of the page
@@ -47,33 +42,19 @@ class DetailViewComponent extends Component {
     super();
     this.handleViewOnMapClick = this.handleViewOnMapClick.bind(this);
   }
-  formatTabularDataVI(parcel, tableKeysEN) {
-    let result = [],
-      vnKey,
-      enValue,
-      vnValue;
-    tableKeysEN.forEach(enKey => {
-      vnKey = GEOSERVER_PARCEL_KEYS[enKey] || enKey;
-      enValue = parcel[enKey];
-      if (enValue) {
-        if (GEOSERVER_PARCEL_VALUES.hasOwnProperty(enValue)) {
-          vnValue = GEOSERVER_PARCEL_VALUES[enValue];
-        } else {
-          vnValue = enValue;
-        }
-      } else {
-        vnValue = NO_DATA;
-      }
-      result.push({ key: vnKey, value: vnValue });
-    });
-    return result;
-  }
-  formatTabularDataEN(parcel, tableKeys) {
-    return tableKeys.map(enKey => {
-      return {
-        key: enKey,
-        value: parcel[enKey] || NO_DATA
+  formatData(parcel, sectionName) {
+    // console.log("[F] formatData; sectionName = '" + sectionName + "'");
+    const attributes = SECTIONS[sectionName];
+    // console.log("*** attributes:", attributes);
+    return attributes.sectionAttrs.map(sectionAttr => {
+      // console.log("****** sectionAttr:", sectionAttr);
+      const result = {
+        key: sectionAttr.attrTranslate,
+        value: parcel[sectionAttr.attr],
+        unit: sectionAttr.unit || ""
       };
+      // console.log("****** result:", result);
+      return result;
     });
   }
   getLatLonZoom(coords) {
@@ -133,8 +114,8 @@ class DetailViewComponent extends Component {
     return (
       <div id="DetailView" className={styles.DetailView}>
         <DetailViewHeader
-          title={`${t("Farmer")} ${parcel.FarmID || NO_DATA}`}
-          subTitle={parcel.FieldOfficer}
+          title={`${parcel.farmerName || t("Unknown farmer")}`}
+          subTitle={parcel.farmId}
           halfMode={false}
           latlonzoom={latlonzoom}
           handleBackButtonClick={() => changeToSearchView(searchView)}
@@ -148,24 +129,22 @@ class DetailViewComponent extends Component {
                   handleOnClick={() => this.handleViewOnMapClick(parcel)}
                 />
               </div>
-              <DetailViewTable
-                data={this.formatTabularDataEN(parcel, CATEGORIES.General)}
-              />
+              <DetailViewTable data={this.formatData(parcel, "FieldInfo")} />
               <br />
               <DetailViewSectionGrowthStage
-                formatTabularData={this.formatTabularDataEN}
+                data={this.formatData(parcel, "RiceGrowth")}
                 isInitiallyOpen={openSection === "RiceGrowth"}
                 ColoredSquare={ColoredSquare}
                 {...this.props}
               />
               <DetailViewSectionPestRisk
-                formatTabularData={this.formatTabularDataEN}
+                data={this.formatData(parcel, "PestRisk")}
                 isInitiallyOpen={openSection === "PestRisk"}
                 ColoredSquare={ColoredSquare}
                 {...this.props}
               />
               <DetailViewSectionFloodRisk
-                formatTabularData={this.formatTabularDataEN}
+                data={this.formatData(parcel, "FloodRisk")}
                 ColoredSquare={ColoredSquare}
                 {...this.props}
               />

@@ -40,7 +40,7 @@ class SearchBarComponent extends Component {
       this.props.clear(this.props.selectedParcelId, this.props.parcels);
     }
     if (e.target.value.length > 0 && e.key === "Enter") {
-      search(e.target.value);
+      search(e.target.value, this.props.searchView);
     }
   }
   handleClearInput() {
@@ -129,6 +129,7 @@ class ClearInputButton extends Component {
 
 function mapStateToProps(state) {
   return {
+    searchView: state.ui.searchView,
     parcels: Object.values(state.parcels),
     selectedParcelId: state.ui.selectedParcel,
     searchIsFetching: !!state.search.isFetching,
@@ -162,9 +163,10 @@ function mapDispatchToProps(dispatch) {
         });
       }
     },
-    search: q => {
+    search: (q, searchView) => {
       if (q) {
-        doSearch(dispatch, q);
+        const spatializeSearch = searchView === "MapSearchView";
+        doSearch(dispatch, q, spatializeSearch);
       } else {
         clearResults(dispatch);
       }

@@ -21,20 +21,18 @@ export function changeSettingsTab(dispatch, newSettingsTabIdx) {
 
 export function showSnackBar(dispatch, options) {
   const state = theStore.getState();
+  clearTimeout(timerAutoHideId);
 
-  if (state.ui.showSnackBar === true && options.autoHideDuration) {
+  if (state.ui.showSnackBar) {
     dispatch({ type: HIDE_SNACKBAR });
     setTimeout(() => {
-      dispatch({ type: SHOW_SNACKBAR, options });
+      showSnackBar(dispatch, options);
     }, 250);
   } else {
     if (options.autoHideDuration) {
-      clearTimeout(timerAutoHideId);
       timerAutoHideId = setTimeout(() => {
         hideSnackBar(dispatch);
       }, options.autoHideDuration);
-    } else {
-      clearTimeout(timerAutoHideId);
     }
     dispatch({ type: SHOW_SNACKBAR, options });
   }

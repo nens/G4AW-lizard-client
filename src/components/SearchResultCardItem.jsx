@@ -30,14 +30,20 @@ class SearchResultCardItem extends Component {
     }
   }
   render() {
-    const { ripple, handleClick, indicatorColor, subtitle } = this.props;
-    const title = this.props.title.split(" ").slice(0, 2).join(" ");
-
+    const {
+      ripple,
+      handleClick,
+      indicatorColor,
+      subtitle,
+      title,
+      isSelected
+    } = this.props;
     return (
       <div
         id="SearchResultCardItem"
         onClick={handleClick}
-        className={`${styles.SearchResultCardItem} ${this.state.mouseover
+        className={`${styles.SearchResultCardItem} ${this.state.mouseover ||
+        isSelected
           ? styles.Mouseover
           : styles.Mouseout}`}
         onMouseOver={this.handleMouseOver}
@@ -69,7 +75,7 @@ class SearchResultCardItem extends Component {
         <div className={styles.SubTitle}>
           {subtitle}
         </div>
-        {ripple === false ? "" : <Ink />}
+        {ripple ? <Ink /> : ""}
       </div>
     );
   }

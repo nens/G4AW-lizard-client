@@ -3,35 +3,15 @@ import { initialParcelsState } from "../store/Store";
 
 import omit from "lodash/omit";
 
-// These are the new fields currently returned, 2017-07-07
-const GEOSERVER_ATTRIBUTES = [
-  "FarmID",
-  "FieldOfficer",
-  "Visit",
-  "SpecialSituation",
-  "GrowthStage",
-  "CropCondition",
-  "SowDate",
-  "HarvestDate",
-  "Yield(Kg/Ha)",
-  "Price(₫/Kg)",
-  "HarvestedWeightInKg(wet)",
-  "HarvestedWeightInKg(dry)",
-  "MoistureContent",
-  "PestRisk",
-  "BrownPlantHopperPresent",
-  "LeaffolderPresent",
-  "BlastPresent",
-  "BlastRisk",
-  "BrownPlantHopperRisk",
-  "LeaffolderRisk",
-  "FloodRisk",
-  "PlantHeightInCm",
-  "NumberOfStemsPerM²",
-  "FieldSizeInHa",
-  "Variety",
-  "bbox"
-];
+import { SECTIONS } from "../constants/detailview-attributes";
+
+const allGeoserverAttributes = [];
+
+for (const key in SECTIONS) {
+  SECTIONS[key].sectionAttrs.forEach(sectionAttr => {
+    allGeoserverAttributes.push(sectionAttr.attr);
+  });
+}
 
 const initialParcel = {
   parcelGeoserverId: null,
@@ -42,6 +22,18 @@ const initialParcel = {
   hasLizardData: false,
   hasGeoserverData: false
 };
+
+function extractFarmerName(fullTitle) {
+  const startOfSuffix = fullTitle.indexOf("(");
+  return fullTitle.slice(0, startOfSuffix).replace("Farmer", "");
+}
+
+function extractFarmId(fullTitle) {
+  const fullTitleParts = fullTitle.split(" ");
+  const lastPart = fullTitleParts[fullTitleParts.length - 1];
+  const RE = /[\d\-]+/;
+  return RE.exec(lastPart)[0];
+}
 
 export default function(state = initialParcelsState, action) {
   const newParcels = { ...state };
@@ -68,7 +60,7 @@ export default function(state = initialParcelsState, action) {
         hasGeoserverData: true
       };
 
-      GEOSERVER_ATTRIBUTES.forEach(attribute => {
+      allGeoserverAttributes.forEach(attribute => {
         newParcel[attribute] = action.data[attribute] || null;
       });
 
@@ -89,7 +81,7 @@ export default function(state = initialParcelsState, action) {
       return newParcels;
 
     case ActionTypes.RECEIVE_SEARCH_RESULTS_SUCCESS:
-      // For each search recult, if it's not in parcels yet, also
+      // For each search result, if it's not in parcels yet, also
       // create a parcel.
 
       action.results.forEach(result => {
@@ -99,10 +91,13 @@ export default function(state = initialParcelsState, action) {
           newParcel = { ...newParcels[result.id] };
         }
 
+        newParcel.hydracoreId = result.id;
         newParcel.parcelGeoserverId = result.external_id;
-        newParcel.name = result.name;
+        newParcel.farmerName = extractFarmerName(result.name);
+        newParcel.farmId = extractFarmId(result.name);
         newParcel.geometry = result.geometry;
         newParcel.hasLizardData = true;
+        newParcel.isAffiliated = result.name.indexOf("(9999)") === -1;
 
         newParcels[result.id] = newParcel;
       });

@@ -22,7 +22,7 @@ export const initialUiState = {
   searchView: "ListSearchView",
   selectedParcel: null,
   currentSettingsTabIdx: 0,
-  searchResultsAsList: false,
+  searchResultsAsList: true,
   showSnackBar: false,
   showLegend: false,
   snackBarOptions: {
@@ -45,6 +45,7 @@ export const initialSessionState = {
 
 export const initialSearchState = {
   latestSearchTerm: null,
+  isFetching: false,
   results: null,
   inputText: null,
   results: null

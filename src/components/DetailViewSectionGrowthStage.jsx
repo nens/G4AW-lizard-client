@@ -1,12 +1,6 @@
 import React, { Component } from "react";
 import styles from "./styles/DetailView.css";
-import {
-  NO_DATA,
-  CATEGORIES,
-  GEOSERVER_PARCEL_KEYS,
-  GEOSERVER_PARCEL_VALUES
-} from "../constants/detailview-attributes";
-
+import { NO_DATA } from "../constants/detailview-attributes";
 import { DetailViewSection, DetailViewTable } from ".";
 
 export default class DetailViewSectionGrowthStage extends Component {
@@ -14,7 +8,7 @@ export default class DetailViewSectionGrowthStage extends Component {
     const stage = parcel.GrowthStage
       ? parcel.GrowthStage.toUpperCase()
       : t("unknown");
-    const height = parcel.PlantHeightInCm;
+    const height = parcel.PlantHeight;
     return `${t("The current growth stage is")} ${stage}
       ${t("and the plant height is")}
       ${height || height === 0 ? height : t("an unknown amount of")} cm`;
@@ -23,7 +17,7 @@ export default class DetailViewSectionGrowthStage extends Component {
     const {
       t,
       parcel,
-      formatTabularData,
+      data,
       isInitiallyOpen,
       riceGrowthLayer,
       ColoredSquare
@@ -55,9 +49,7 @@ export default class DetailViewSectionGrowthStage extends Component {
               );
             })}
           </div>
-          <DetailViewTable
-            data={formatTabularData(parcel, CATEGORIES.RiceGrowth)}
-          />
+          <DetailViewTable data={data} />
         </div>
       </DetailViewSection>
     );

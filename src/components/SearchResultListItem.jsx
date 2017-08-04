@@ -30,12 +30,22 @@ class SearchResultListItem extends Component {
     }
   }
   render() {
-    const { title, subtitle, ripple, handleClick, indicatorColor } = this.props;
+    const {
+      title,
+      subtitle,
+      ripple,
+      handleClick,
+      indicatorColor,
+      isSelected
+    } = this.props;
     return (
       <div
         id="SearchResultListItem"
         onClick={handleClick}
-        className={`${styles.SearchResultListItem} ${this.state.mouseover ? styles.Mouseover : styles.Mouseout}`}
+        className={`${styles.SearchResultListItem}
+          ${this.state.mouseover || isSelected
+            ? styles.Mouseover
+            : styles.Mouseout}`}
         onMouseOver={this.handleMouseOver}
         onMouseOut={this.handleMouseOut}
       >
@@ -59,8 +69,12 @@ class SearchResultListItem extends Component {
             </g>
           </svg>
         </div>
-        <span className={styles.Title}>{title}</span>
-        <div className={styles.SubTitle}>{subtitle}</div>
+        <span className={styles.Title}>
+          {title}
+        </span>
+        <div className={styles.SubTitle}>
+          {subtitle}
+        </div>
         {ripple === false ? "" : <Ink />}
       </div>
     );

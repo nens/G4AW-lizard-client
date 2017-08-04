@@ -11,10 +11,16 @@ class PulsatingMarker extends PureComponent {
   render() {
     const { lat, lng } = this.props;
     return (
-      <Marker
-        position={[lng, lat]}
-        icon={L.divIcon({ className: styles.PulsatingMarker })}
-      />
+      <div>
+        <Marker
+          position={[lng, lat]}
+          icon={L.divIcon({ className: styles.PulsatingMarker })}
+        />
+        <Marker
+          position={[lng, lat]}
+          icon={L.divIcon({ className: styles.PulsatingMarkerInner })}
+        />
+      </div>
     );
   }
 }

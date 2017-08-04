@@ -32,11 +32,12 @@ class MapSearchViewComponent extends Component {
         <SearchBar />
         <ViewSwitchButton viewIsMap />
 
-        <Legend isOpen={showLegend} />
+        <Legend isOpen={showLegend} toggleLegend={toggleLegend} />
 
         <FooterBar>
           <div />
           <div onClick={toggleLegend}>
+            <Ink />
             <i className="material-icons">list</i>
           </div>
         </FooterBar>

@@ -23,3 +23,14 @@
   animation-delay: 0;
   animation-direction: forward;
 }
+
+.PulsatingMarkerInner {
+  width: 20px !important;
+  height: 20px !important;
+  left: -11px;
+  top: -11px;
+  border: 2px solid #fff;
+  border-radius: 100%;
+  background-color: #5BB7E5;
+}
+

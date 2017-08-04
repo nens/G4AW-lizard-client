@@ -1,108 +1,128 @@
-export const NO_DATA = "...";
+import i18next from "i18next";
 
-export const CATEGORIES = {
-  General: [
-    "FarmID",
-    "FieldOfficer",
-    "Visit",
-    "SpecialSituation",
-    "FieldSizeInHa",
-    "Variety"
-  ],
-  RiceGrowth: [
-    "GrowthStage",
-    "CropCondition",
-    "SowDate",
-    "HarvestDate",
-    "Yield(Kg/Ha)",
-    "Price(₫/Kg)",
-    "HarvestedWeightInKg(Wet)",
-    "HarvestedWeightInKg(Dry)",
-    "MoistureContent",
-    "PlantHeightInCm",
-    "NumberOfStemsPerM²"
-  ],
-  PestRisk: [
-    "LeaffolderRisk",
-    "LeaffolderPresent",
-    "BlastPresent",
-    "BlastRisk",
-    "BrownPlantHopperPresent",
-    "BrownPlantHopperRisk"
-  ]
+const NO_DATA = "...";
+
+const SECTIONS = {
+  FieldInfo: {
+    sectionName: i18next.t("Field info"),
+    sectionAttrs: [
+      {
+        attr: "FarmID",
+        attrTranslate: i18next.t("FarmID")
+      },
+      {
+        attr: "Cooporation",
+        attrTranslate: i18next.t("Cooperation")
+      },
+      {
+        attr: "FarmerName",
+        attrTranslate: i18next.t("FarmerName")
+      },
+      {
+        attr: "FieldSize",
+        attrTranslate: i18next.t("FieldSize"),
+        unit: i18next.t("ha")
+      },
+      {
+        attr: "FarmerFriend",
+        attrTranslate: i18next.t("FarmerFriend")
+      },
+      {
+        attr: "Visit",
+        attrTranslate: i18next.t("Visit")
+      },
+      {
+        attr: "SpecialSituation",
+        attrTranslate: i18next.t("SpecialSituation")
+      }
+    ]
+  },
+
+  RiceGrowth: {
+    sectionName: i18next.t("Rice growth"),
+    sectionAttrs: [
+      {
+        attr: "ExpectedHarvestDate",
+        attrTranslate: i18next.t("ExpectedHarvestDate")
+      },
+      { attr: "DaysAfterSowing", attrTranslate: i18next.t("DaysAfterSowing") },
+      { attr: "SowDate", attrTranslate: i18next.t("SowDate") },
+      { attr: "GrowthStage", attrTranslate: i18next.t("GrowthStage") },
+      {
+        attr: "PlantHeight",
+        attrTranslate: i18next.t("PlantHeight"),
+        unit: i18next.t("cm")
+      },
+      { attr: "CropCondition", attrTranslate: i18next.t("CropCondition") },
+      {
+        attr: "NumberOfStems",
+        attrTranslate: i18next.t("NumberOfStems"),
+        unit: i18next.t("/m2")
+      },
+      { attr: "Variety", attrTranslate: i18next.t("Variety") },
+      {
+        attr: "LastSeasonYield",
+        attrTranslate: i18next.t("LastSeasonYield"),
+        unit: i18next.t("ton/ha")
+      },
+      {
+        attr: "LastSeasonNumberStems",
+        attrTranslate: i18next.t("LastSeasonNumberStems"),
+        unit: i18next.t("/m2")
+      },
+      {
+        attr: "LastSeasonPricePaddy",
+        attrTranslate: i18next.t("LastSeasonPricePaddy"),
+        unit: i18next.t("VND/ton")
+      },
+      {
+        attr: "LastSeasonVariety",
+        attrTranslate: i18next.t("LastSeasonVariety")
+      },
+      {
+        attr: "LastSeasonHarvestDate",
+        attrTranslate: i18next.t("LastSeasonHarvestDate")
+      },
+      {
+        attr: "LastSeasonSowingDate",
+        attrTranslate: i18next.t("LastSeasonSowingDate")
+      }
+    ]
+  },
+
+  PestRisk: {
+    sectionName: i18next.t("Pest risk"),
+    sectionAttrs: [
+      { attr: "PestRisk", attrTranslate: i18next.t("PestRisk") },
+      {
+        attr: "BrownPlantHopperPresent",
+        attrTranslate: i18next.t("BrownPlantHopperPresent")
+      },
+      {
+        attr: "LeaffolderPresent",
+        attrTranslate: i18next.t("LeaffolderPresent")
+      },
+      { attr: "BlastRisk", attrTranslate: i18next.t("BlastRisk") },
+      {
+        attr: "BrownPlantHopperRisk",
+        attrTranslate: i18next.t("BrownPlantHopperRisk")
+      },
+      { attr: "LeaffolderRisk", attrTranslate: i18next.t("LeaffolderRisk") },
+      { attr: "BlastRisk", attrTranslate: i18next.t("BlastRisk") }
+    ]
+  },
+
+  FloodRisk: {
+    sectionName: i18next.t("Flood risk"),
+    sectionAttrs: [
+      { attr: "FloodRisk", attrTranslate: i18next.t("FloodRisk") },
+      {
+        attr: "FloodLevel",
+        attrTranslate: i18next.t("FloodLevel"),
+        unit: i18next.t("mNAP")
+      }
+    ]
+  }
 };
 
-export const GEOSERVER_PARCEL_KEYS = {
-  FarmID: "Mã số ruộng",
-  FieldOfficer: "Tên người thu thập",
-  Visit: "Ngày thăm ruộng",
-  SpecialSituation: "Vui lòng ghi ra những tình huống đặc biệt",
-  GrowthStage: "Giai đoạn",
-  CropCondition: "Tình trạng cây lúa",
-  SowDate: "Ngày gieo sạ (nếu sạ)",
-  HarvestDate: "Nếu đã thu hoạch, ngày thu hoạch",
-  "Yield(Kg/Ha)": "Năng suất (kg / ha)",
-  "Price(₫/Kg)": "Giá / kg gạo (VND)",
-  "HarvestedWeightInKg(Wet)":
-    "Trọng lượng của lúa tươi được thu hoạch (kg) là bao nhiêu?",
-  "HarvestedWeightInKg(Dry)": "Trọng lượng của gạo sấy được thu hoạch (kg)?",
-  MoistureContent: "Độ ẩm",
-  PestRisk: "Nguy cơ sâu bệnh",
-  LeaffolderRisk: "Sâu cuốn lá rủi ro",
-  LeaffolderPresent: "Sâu cuốn lá",
-  BlastRisk: "Đạo ôn lá rủi ro",
-  BlastPresent: "Đạo ôn lá",
-  BrownPlantHopperRisk: "Rầy nâu rủi ro",
-  BrownPlantHopperPresent: "Rầy nâu",
-  FloodRisk: "Nguy cơ lũ lụt",
-  PlantHeightInCm: "Chiều cao cây lúa (cm)",
-  "NumberOfStemsPerM²": "Trường hợp SẠ - Số nhánh lúa trên mét vuông",
-  FieldSizeInHa: "Kích thước đồng ruộng trong ha",
-  Variety: "Giống lúa"
-};
-
-export const GEOSERVER_PARCEL_VALUES = {
-  Flowering: "Trổ",
-  "Rove beetle (Paederus fuscipes)": "Kiến 3 khoang",
-  Inundated: "Ngập nước",
-  No: "Không",
-  "Self-pumping": "Tự bơm",
-  "Irrigation system": "Hệ thống thủy lợi",
-  Tillering: "Đẻ nhánh",
-  Yes: "Vâng",
-  "Drough damage": "Thiệt hại do khô hạn",
-  "Less then 1 % of thefield": "< 1%",
-  "More than 50% of the field": "> 50%",
-  Age2: "tuổi 2",
-  "Between 1% and 5% of field": "> 1 - 5%",
-  "Pest/disease damage": "Thiệt hại do sâu bệnh",
-  "Green mirrid bug (Cyrtorhinus Lividipennis)": "Bọ xít mù xanh",
-  Age1: "tuổi 1",
-  Harvesting: "Thu hoạch",
-  Adult: "trưởng thành",
-  Booting: "Làm đòng",
-  Ripening: "Chín",
-  "Flood damage": "Thiệt hại do lũ",
-  "Salinity damage": "Thiệt hại do nhiễm mặn",
-  Milking: "Ngậm sữa",
-  Age5: "tuổi 5",
-  Age4: "tuổi 4",
-  "Between 25% and 50% of the field": "> 25 - 50%",
-  Dry: "Khô",
-  Age3: "tuổi 3",
-  "Acid soil damage": "Thiệt hại do nhiễm phèn",
-  Other: "Khác",
-  Seedling: "Sạ",
-  "River water": "Nước sông",
-  "Between 5% and 25% of the field": "> 5 - 25%",
-  Wet: "Ướt",
-  "Rain water": "Nước mưa",
-  Good: "Bình thường",
-  Spider: "Nhện",
-  High: "Cao",
-  Medium: " Trung bình",
-  Low: "Thấp",
-  True: "Thật",
-  False: "Sai",
-  "Needs attention": "Cần sự chú ý"
-};
+export { NO_DATA, SECTIONS };

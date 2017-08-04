@@ -21,13 +21,7 @@ export default class DetailViewSectionPestRisk extends Component {
     }
   }
   render() {
-    const {
-      t,
-      parcel,
-      formatTabularData,
-      isInitiallyOpen,
-      ColoredSquare
-    } = this.props;
+    const { t, parcel, data, isInitiallyOpen, ColoredSquare } = this.props;
     const title = parcel.PestRisk ? parcel.PestRisk.toUpperCase() : NO_DATA;
     return (
       <DetailViewSection
@@ -58,9 +52,7 @@ export default class DetailViewSectionPestRisk extends Component {
               active={parcel.BrownPlantHopperRisk === "High"}
             />
           </div>
-          <DetailViewTable
-            data={formatTabularData(parcel, CATEGORIES.PestRisk)}
-          />
+          <DetailViewTable data={data} />
         </div>
       </DetailViewSection>
     );
