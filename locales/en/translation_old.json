@@ -14,5 +14,14 @@
   "name": "name",
   "Click here to view the search results": "Click here to view the search results",
   "Foreground Layers": "Foreground Layers",
-  "ving bhin data": "ving bhin data"
+  "ving bhin data": "ving bhin data",
+  "Looking for a parcel": {
+    "": {}
+  },
+  "OverviewPhoto": "Overview photo",
+  "The required data was retrieved from the server": "The required data was retrieved from the server",
+  "User": "User",
+  "Your search-results can not be based on your location": "Your search-results can not be based on your location",
+  "Your search-results will be based on your current location": "Your search-results will be based on your current location",
+  "Your search-results will no longer be based on your location": "Your search-results will no longer be based on your location"
 }

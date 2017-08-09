@@ -7,12 +7,21 @@
     "": {}
   },
   "3CForce": "3CForce",
-  "Farmer": "Boer",
+  "Farmer": "Farmer",
   "FieldAdr": "Veld adres",
   "Hectare": "Hectare",
   "LocTroi": "LocTroi",
   "name": "naam",
   "Click here to view the search results": "Klik hier om de zoekresultaten te bekijken",
   "Foreground Layers": "Voorgrondlagen",
-  "ving bhin data": "ving bhin data"
+  "ving bhin data": "ving bhin data",
+  "Looking for a parcel": {
+    "": {}
+  },
+  "OverviewPhoto": "Overzichtsfoto",
+  "The required data was retrieved from the server": "De benodigde data is binnengehaald",
+  "User": "Gebruiker",
+  "Your search-results can not be based on your location": "Je zoekresultaten worden niet gebaseerd op je locatie",
+  "Your search-results will be based on your current location": "Je zoekresultaten worden gebaseerd op je locatie",
+  "Your search-results will no longer be based on your location": "Je zoekresultaten worden niet langer op je locatie gebaseerd"
 }
