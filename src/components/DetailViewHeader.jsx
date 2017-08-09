@@ -23,6 +23,7 @@ class DetailViewHeader extends Component {
       halfMode,
       subTitle,
       handleBackButtonClick,
+      handleHeaderClick,
       latlonzoom,
       headerImage
     } = this.props;
@@ -31,6 +32,7 @@ class DetailViewHeader extends Component {
       <div
         className={this.getComponentClassName(halfMode)}
         id="DetailViewHeader"
+        onClick={handleHeaderClick}
       >
         <DetailViewHeaderTitle
           halfMode={halfMode}
