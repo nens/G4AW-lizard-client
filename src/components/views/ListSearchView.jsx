@@ -106,7 +106,6 @@ function ListSearchResults({
   toggleSearchResultsListOrCardMode,
   selectedParcel
 }) {
-  console.log("selected parcel:", selectedParcel);
   return (
     <VelocityTransitionGroup
       runOnMount={true}
