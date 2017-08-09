@@ -111,7 +111,12 @@ class DetailViewHeaderMapComponent extends Component {
     this.refs.mapElement.leafletElement.invalidateSize();
   }
   render() {
-    const { latlonzoom, getBaselayerUrl } = this.props;
+    const {
+      latlonzoom,
+      getBaselayerUrl,
+      foregroundlayerUrl,
+      getActiveForegroundlayer
+    } = this.props;
     const { lat, lon, zoom } = latlonzoom;
     return (
       <Map
@@ -122,6 +127,12 @@ class DetailViewHeaderMapComponent extends Component {
         style={{ height: "100%", zIndex: -1 }}
       >
         <TileLayer url={getBaselayerUrl()} />
+        <WMSTileLayer
+          url={foregroundlayerUrl}
+          layers={getActiveForegroundlayer().slug}
+          transparent="True"
+          format="image/png"
+        />
       </Map>
     );
   }
@@ -131,9 +142,13 @@ class DetailViewHeaderMapComponent extends Component {
 
 function mapStateToProps(state) {
   return {
+    foregroundlayerUrl: state.foregroundlayer.url,
     getBaselayerUrl: () => {
       const activeBaselayer = find(state.baselayer.layers, { active: true });
       return activeBaselayer.url;
+    },
+    getActiveForegroundlayer: () => {
+      return find(state.foregroundlayer.layers, { active: true });
     }
   };
 }
