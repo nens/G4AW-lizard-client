@@ -77,9 +77,7 @@ function doSearch(dispatch, q, spatializeSearch) {
           autoHideDuration: 4000,
           isError: true,
           message: `${i18next.t("No search results found for")} '${q}'
-            ${spatializeSearch
-              ? i18next.t("in your current spatial extent")
-              : ""}`,
+            ${spatializeSearch ? i18next.t("in your current area") : ""}`,
           subMessage: i18next.t(
             "Please try searching elsewhere/using a different query"
           )
