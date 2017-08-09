@@ -32,7 +32,7 @@ import SearchResultCardItem from "./SearchResultCardItem";
 import SearchResultListItem from "./SearchResultListItem";
 import SettingsViewGeneral from "./SettingsViewGeneral";
 import SettingsViewHelp from "./SettingsViewHelp";
-import SettingsViewUser from "./SettingsViewUser";
+import SettingsViewDatacollection from "./SettingsViewDatacollection";
 import SimpleLineChart from "./SimpleLineChart";
 import SnackBar from "./SnackBar";
 import TabBar from "./TabBar";
@@ -74,7 +74,7 @@ export {
   SearchResultCardItem,
   SearchResultListItem,
   SettingsViewGeneral,
-  SettingsViewUser,
+  SettingsViewDatacollection,
   SettingsViewHelp,
   SimpleLineChart,
   SnackBar,
