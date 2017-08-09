@@ -114,7 +114,7 @@ class LegendBody extends Component {
     const { colormap, t } = this.props;
     const msg = t("No legend to show for this layer");
     return (
-      <Scrollbars style={{ width: "100%", height: 260 }}>
+      <Scrollbars style={{ width: "100%", height: 145 }}>
         <div className={styles.LegendBody} id="LegendBody">
           {colormap.length > 0
             ? this.getTbody(colormap)
