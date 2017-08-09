@@ -122,7 +122,7 @@ class DetailViewHeaderMapComponent extends Component {
       <Map
         ref="mapElement"
         center={[lat, lon]}
-        zoom={zoom}
+        zoom={15}
         zoomControl={false}
         style={{ height: "100%", zIndex: -1 }}
       >
