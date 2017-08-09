@@ -30,7 +30,6 @@ DetailViewTable.propTypes = {
 
 class DetailViewTableRow extends Component {
   getIcon(str) {
-    console.log("[F] getIcon; arg = ", str);
     let result;
     switch (str) {
       case "Vâng": // "Yes"
@@ -48,8 +47,6 @@ class DetailViewTableRow extends Component {
       default:
         result = null;
     }
-
-    console.log("=> icon:", result);
     return result;
   }
   formatValue(row) {
