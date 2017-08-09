@@ -75,8 +75,8 @@ function showSnackBarParcelReceiveError(dispatch, placeName) {
   const subMessage = i18next.t("No details found for");
   const options = {
     isError: true,
-    message: i18next.t("There was an error while fetching the parcel details."),
-    subMessage: `${subMessage} ${placeName}`
+    message: i18next.t("There was an error while fetching the parcel details.")
+    // subMessage: `${subMessage} ${placeName}`
   };
   showSnackBar(dispatch, options);
 }
@@ -178,7 +178,7 @@ export function getAttributesFromGeoserver(dispatch, parcelId) {
 
 export function getParcelByLatLng(dispatch, lat, lng) {
   showSnackBar(dispatch, {
-    autoHideDuration: 2000,
+    autoHideDuration: 3000,
     message: i18next.t("Looking for a parcel...")
   });
   getParcels({

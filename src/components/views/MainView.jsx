@@ -50,13 +50,13 @@ class MainViewComponent extends Component {
     if (navigator.onLine) {
       showSnackBar({
         message: t("App online"),
-        subMessage: t("Connected to the internet"),
+        // subMessage: t("Connected to the internet"),
         isError: false
       });
     } else {
       showSnackBar({
         message: t("No connection"),
-        subMessage: t("Please check your connection"),
+        // subMessage: t("Please check your connection"),
         isError: true
       });
     }

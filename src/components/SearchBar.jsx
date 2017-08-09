@@ -157,10 +157,10 @@ function mapDispatchToProps(dispatch) {
         // Clear search-result selection (go back to init)
         clearResults(dispatch);
         updateMapBbox(dispatch, DEFAULT_BBOX);
-        showSnackBar(dispatch, {
-          autoHideDuration: 4000,
-          message: i18next.t("You have cleared your search results.")
-        });
+        // showSnackBar(dispatch, {
+        //   autoHideDuration: 4000,
+        //   message: i18next.t("You have cleared your search results.")
+        // });
       }
     },
     search: (q, searchView) => {
