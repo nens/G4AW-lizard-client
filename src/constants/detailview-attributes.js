@@ -102,7 +102,7 @@ const SECTIONS = {
         attr: "LeaffolderPresent",
         attrTranslate: i18next.t("LeaffolderPresent")
       },
-      { attr: "BlastRisk", attrTranslate: i18next.t("BlastRisk") },
+      { attr: "BlastPresent", attrTranslate: i18next.t("BlastPresent") },
       {
         attr: "BrownPlantHopperRisk",
         attrTranslate: i18next.t("BrownPlantHopperRisk")
