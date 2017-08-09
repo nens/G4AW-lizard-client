@@ -126,7 +126,7 @@ export const initialForegroundlayerState = {
         "https://maps1.project.lizard.net/geoserver/Q0007_sat4rice_2018/wms?service=WMS&request=GetMap&layers=latest_weekly_growth_stages&styles=&format=image%2Fpng&transparent=True&version=1.1.1&height=256&width=256&srs=EPSG%3A3857&bbox=11709388.36300615,1164288.814839805,11709541.23706272,1164441.6888963755",
       colormap: [
         { Fallow: "#aab3b6" },
-        { Baresoil: "#6e7476" },
+        { "Bare field": "#6e7476" },
         { Seeding: "#0093d3" },
         { Tillering: "#459b00" },
         { Booting: "#34c300" },
