@@ -18,14 +18,10 @@ class SettingsViewHelpComponent extends Component {
             {t("Introduction")}
           </h4>
           <p>
-            {t(
-              "This app is provided by Loc Troi Group to support rice farmers and Farmer Friends in the Mekong Delta. The application contains more than 30 characteristics for each connected farm field. It includes field size, growth status, pest risk and many others. Users can also submit field observations and share this with other users. This way, the app makes sustainable rice production more efficient and easier."
-            )}
+            {t("This app is provided")}
           </p>
           <p>
-            {t(
-              "For any issues regarding this application, please refer to the contact section below."
-            )}
+            {t("For any issues regarding")}
           </p>
 
           <hr />
@@ -33,14 +29,10 @@ class SettingsViewHelpComponent extends Component {
             {t("Welcome screen")}
           </h4>
           <p>
-            {t(
-              "When you first open the app, you’ll start at the welcome screen. Please be aware that you need to login to view any content."
-            )}
+            {t("When you first open the app")}
           </p>
           <p>
-            {t(
-              "After you have logged in, there are three ways to find your farm field:"
-            )}
+            {t("After you have logged in")}
           </p>
           <ul>
             <li>
@@ -54,59 +46,45 @@ class SettingsViewHelpComponent extends Component {
             </li>
           </ul>
           <p>
-            {t(
-              "The three ways of finding a field are described in the following sections."
-            )}
+            {t("The three ways of finding")}
           </p>
 
           <h5>
-            {t("1) Search bar")}
+            1) {t("Search bar")}
           </h5>
           <p>
-            {t(
-              "The search bar is positioned at the top of the screen. You can use this to search for:"
-            )}
+            {t("The search bar is positioned")}
           </p>
           <ul>
             <li>
-              {t("Field code (example: 350518647-16-1)")}
+              {t("Field code")} ({t("example")}: 350518647-16-1)
             </li>
             <li>
-              {t("Farmer name (example: Nguyen)")}
+              {t("Farmer name")} ({t("example")}: Nguyen)
             </li>
           </ul>
           <p>
-            {t(
-              "The search results are presented in a list, with a maximum of ten results. Farmers connected to Loc Troi Group are marked with a green dot, other farmers are marked with a grey dot. Selecting a card opens the detailed information of that field."
-            )}
+            {t("The search results are presented in a list")}
           </p>
 
           <h5>
-            {t("2) Zoom to your location")}
+            2) {t("Zoom to your location")}
           </h5>
           <p>
-            {t(
-              "By tapping on the big arrow in the middle of the welcome screen, you can zoom directly to your current location. A map view opens that shows your current location, and any nearby fields. Tapping on a specific field opens the detailed information of that field."
-            )}
+            {t("By tapping on the big arrow")}
           </p>
           <p>
-            {t(
-              "When the GPS of your device it active, any search result is automatically based on your current location. Location-based search can be switch of by tapping the arrow icon next to the search bar."
-            )}
+            {t("When the GPS of your device it active")}
           </p>
 
           <h5>
-            {t("3) Navigate on map")}
+            3) {t("Navigate on map")}
           </h5>
           <p>
-            {t(
-              "In the welcome screen, you can tap on 'Explore location by map' to manually navigate to the desired location. The default map displays all included farms."
-            )}
+            {t("In the welcome screen")}
           </p>
           <p>
-            {t(
-              "Tapping the button in the bottom-right of the screen opens the legend for that map. The legend header can be tapped to switch to other maps, like growth stage and pest risk. Tapping on a specific field opens the detailed information of that field."
-            )}
+            {t("Tapping the button in the bottom-right")}
           </p>
 
           <hr />
@@ -114,9 +92,7 @@ class SettingsViewHelpComponent extends Component {
             {t("Farm field information")}
           </h4>
           <p>
-            {t(
-              "Once you have selected one of the farm fields, the detailed information pane is opened. On top is shows the name of the farmer and the code of the field at Loc Troi Group. The app contains information in four tabs:"
-            )}
+            {t("Once you have selected one of the farm fields")}
           </p>
           <ul>
             <li>
@@ -134,19 +110,13 @@ class SettingsViewHelpComponent extends Component {
           </ul>
 
           <p>
-            {t(
-              "By tapping, a tab can be opened or closed to display or hide the extra information details."
-            )}
+            {t("By tapping, a tab can be opened or closed")}
           </p>
           <p>
-            {t(
-              "Tapping the arrow on top of the screen returns you to the previous screen. Tapping on the map returns you to the map view."
-            )}
+            {t("Tapping the arrow on top of the screen")}
           </p>
           <p>
-            {t(
-              "The following items are available for the farm fields. Please notice, that some details are only available for farmers connected to Loc Troi Group."
-            )}
+            {t("The following items are available for ")}
           </p>
 
           <table>
@@ -161,17 +131,16 @@ class SettingsViewHelpComponent extends Component {
                   {t("Farm ID")}
                 </td>
                 <td>
-                  {t(
-                    "A unique code for the field, for example: 352404946-16-1 (HTX)"
-                  )}
+                  {t("A unique code for the field, for example")}:
+                  352404946-16-1 (HTX)
                   <br />
-                  {t("First part: code of farmer")}
+                  {t("First part")}: {t("code of farmer")}
                   <br />
-                  {t(
-                    "Second part: number of seasons affiliated to Loc Troi Group"
-                  )}
+                  {t("Second part")}:
+                  {t("number of seasons affiliated to Loc Troi Group")}
                   <br />
-                  {t("Third part: HTX means farmer is part of the cooperation")}
+                  {t("Third part")}:
+                  {t("HTX means farmer is part of the cooperation")}
                 </td>
               </tr>
               <tr>
@@ -245,9 +214,7 @@ class SettingsViewHelpComponent extends Component {
                   {t("Expected harvest date")}
                 </td>
                 <td>
-                  {t(
-                    "The estimated date on which the rice can be harvested, based on calculations by the app"
-                  )}
+                  {t("The estimated date on which the rice can be harvested")}
                 </td>
               </tr>
               <tr>
@@ -266,44 +233,31 @@ class SettingsViewHelpComponent extends Component {
                   {t("Date of the last known sowing")}
                 </td>
               </tr>
+
               <tr>
                 <td>
                   {t("Growth stage")}
                 </td>
                 <td>
-                  {t(
-                    "Indicates the last known growth stage. There are eight different growth stages: Bare soil, Seedling, Tillering, Booting, Flowering, Milking, Ripening, Harvesting."
-                  )}
+                  {t("Indicates the last known growth stage")}
                 </td>
               </tr>
+
               <tr>
                 <td>
                   {t("Plant height")}
                 </td>
                 <td>
-                  {t(
-                    "The last known height of the plant, based on field measurements or data analysis."
-                  )}
+                  {t("The last known height of the plant")}
                 </td>
               </tr>
+
               <tr>
                 <td>
                   {t("Crop condition")}
                 </td>
                 <td>
-                  {t(
-                    "The last known condition of the rice field. If the condition is not indicated as good, the cause is indicated (drought damage, pest and disease damage, flood damage, salinity damage, or damage because of soil acidity"
-                  )}
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  {t("Number of stems")}
-                </td>
-                <td>
-                  {t(
-                    "The number of rice stems per square meter, important for estimating potential yield and pest risks"
-                  )}
+                  {t("The last known condition of the crop")}
                 </td>
               </tr>
 
@@ -332,9 +286,7 @@ class SettingsViewHelpComponent extends Component {
                   {t("Last season yield")}
                 </td>
                 <td>
-                  {t(
-                    "The average dry rice yield (ton/ha) of the rice field of the previous season"
-                  )}
+                  {t("The average dry rice yield (ton/ha) of")}
                 </td>
               </tr>
 
@@ -361,7 +313,7 @@ class SettingsViewHelpComponent extends Component {
                   {t("Last season variety")}
                 </td>
                 <td>
-                  {t("Rice variety that was cultivated the previous season.")}
+                  {t("Rice variety that was cultivated the previous season")}
                 </td>
               </tr>
 
@@ -370,7 +322,7 @@ class SettingsViewHelpComponent extends Component {
                   {t("Last season harvest date")}
                 </td>
                 <td>
-                  {t("The harvest date of the previous season.")}
+                  {t("The harvest date of the previous season")}
                 </td>
               </tr>
 
@@ -397,9 +349,7 @@ class SettingsViewHelpComponent extends Component {
                   {t("Pest risk")}
                 </td>
                 <td>
-                  {t(
-                    "The pest risk is calculated based on an algorithm, included pest and disease  observations and risk factors such as growth stage"
-                  )}
+                  {t("The pest risk is calculated based on an algorithm")}
                 </td>
               </tr>
               <tr>
@@ -437,9 +387,7 @@ class SettingsViewHelpComponent extends Component {
                   {t("Brown plant hopper risk")}
                 </td>
                 <td>
-                  {t(
-                    "The brown plant hopper risk is calculated based on an algorithm, including pest observations and risk factors such as growth stage"
-                  )}
+                  {t("The brown plant hopper risk is calculated based on ")}
                 </td>
               </tr>
               <tr>
@@ -447,9 +395,7 @@ class SettingsViewHelpComponent extends Component {
                   {t("Leaffolder risk")}
                 </td>
                 <td>
-                  {t(
-                    "The leaffolder risk is calculated based on an algorithm, including pest observations and risk factors such as growth stage"
-                  )}
+                  {t("The leaffolder risk is calculated based on an")}
                 </td>
               </tr>
               <tr>
@@ -457,9 +403,7 @@ class SettingsViewHelpComponent extends Component {
                   {t("Blast risk")}
                 </td>
                 <td>
-                  {t(
-                    "The blast risk is calculated based on an algorithm, including disease observations and risk factors such as growth stage"
-                  )}
+                  {t("The blast risk is calculated based on an algorithm")}
                 </td>
               </tr>
             </tbody>
@@ -500,9 +444,7 @@ class SettingsViewHelpComponent extends Component {
             {t("Settings menu")}
           </h4>
           <p>
-            {t(
-              "In the setting menu, you can switch between the background layer. The options street view, satellite, and natural are available."
-            )}
+            {t("In the setting menu, you can switch")}
           </p>
 
           <hr />
@@ -510,19 +452,17 @@ class SettingsViewHelpComponent extends Component {
             {t("Data collection")}
           </h4>
           <p>
-            {t(
-              "Through the data collection tab, you can directly start with collecting data. Two forms are available:"
-            )}
+            {t("Through the data collection tab")}:
           </p>
           <ul>
             <li>
-              {t(
-                "Once: Fill in one-time information at the start of the season."
-              )}
+              {t("Once")}:
+              {t("Fill in one-time information at the start of the season.")}
             </li>
             <li>
+              {t("Weekly")}:
               {t(
-                "Weekly: A form that allows to send weekly updates on the current status of the rice growth."
+                "A form that allows to send weekly updates on the current status of the rice growth."
               )}
             </li>
           </ul>
@@ -532,9 +472,7 @@ class SettingsViewHelpComponent extends Component {
             {t("Contact")}
           </h4>
           <p>
-            {t(
-              "For any questions regarding the app, registration or data collection, please contact one of the contacts below."
-            )}
+            {t("For any questions regarding the app")}
           </p>
           <p>
             Cuong Vu Truong (Loc Troi Group)<br />
@@ -552,9 +490,7 @@ class SettingsViewHelpComponent extends Component {
             {t("About")}
           </h4>
           <p>
-            {t(
-              "This app is part of the Sat4Rice project, supported by the Geodate for Agriculture and Water (G4AW) program of the Netherland Space Office (NSO) and the Ministry of Foreign Affairs of the Netherlands. The partnership consists of VinaNed, Loc Troi Group, Can Tho University, DARD An Giang and Soc Trang, Nelen & Schuurmans and Sarvision."
-            )}
+            {t("This app is part of the Sat4Rice project")}
           </p>
         </div>
       </div>

@@ -40,7 +40,7 @@ class GeolocateButtonBigComponent extends Component {
       child = <img src={GeolocationSupportedSVG} />;
       onClick = getGeolocation;
     } else if (isFetching) {
-      welcomeText = t("Location data is being fetched...");
+      welcomeText = `${t("Location data is being fetched")}...`;
       child = <GeolocateSpinner />;
     } else if (hasData) {
       welcomeText = this.props.geolocationData.placeName;

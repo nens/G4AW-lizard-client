@@ -52,7 +52,9 @@ class SwitchToMapButton extends Component {
       <div>
         <i className={`material-icons ${styles.Icon}`}>track_changes</i>
         <span className={styles.Message}>
-          {isFetching ? t("Searching...") : t("Click here to explore the map")}
+          {isFetching
+            ? `${t("Searching")}...`
+            : t("Click here to explore the map")}
         </span>
       </div>
     );
@@ -77,7 +79,7 @@ class SwitchToListButton extends Component {
         <i className={`material-icons ${styles.Icon}`}>apps</i>
         <span className={styles.Message}>
           {isFetching
-            ? t("Searching...")
+            ? `t${"Searching"}...`
             : this.getMessage(t, count, isFetching)}
         </span>
       </div>

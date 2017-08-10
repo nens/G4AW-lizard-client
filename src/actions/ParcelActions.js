@@ -179,7 +179,7 @@ export function getAttributesFromGeoserver(dispatch, parcelId) {
 export function getParcelByLatLng(dispatch, lat, lng) {
   showSnackBar(dispatch, {
     autoHideDuration: 3000,
-    message: i18next.t("Looking for a parcel...")
+    message: i18next.t("Looking for a parcel")
   });
   getParcels({
     dist: 5, // 5 meter search radius
