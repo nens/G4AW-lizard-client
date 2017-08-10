@@ -79,7 +79,7 @@ class SwitchToListButton extends Component {
         <i className={`material-icons ${styles.Icon}`}>apps</i>
         <span className={styles.Message}>
           {isFetching
-            ? `t${"Searching"}...`
+            ? `${t("Searching")}...`
             : this.getMessage(t, count, isFetching)}
         </span>
       </div>
