@@ -23,6 +23,7 @@ class DetailViewHeader extends Component {
       halfMode,
       subTitle,
       handleBackButtonClick,
+      handleHeaderClick,
       latlonzoom,
       headerImage
     } = this.props;
@@ -31,6 +32,7 @@ class DetailViewHeader extends Component {
       <div
         className={this.getComponentClassName(halfMode)}
         id="DetailViewHeader"
+        onClick={handleHeaderClick}
       >
         <DetailViewHeaderTitle
           halfMode={halfMode}
@@ -109,17 +111,28 @@ class DetailViewHeaderMapComponent extends Component {
     this.refs.mapElement.leafletElement.invalidateSize();
   }
   render() {
-    const { latlonzoom, getBaselayerUrl } = this.props;
+    const {
+      latlonzoom,
+      getBaselayerUrl,
+      foregroundlayerUrl,
+      getActiveForegroundlayer
+    } = this.props;
     const { lat, lon, zoom } = latlonzoom;
     return (
       <Map
         ref="mapElement"
         center={[lat, lon]}
-        zoom={zoom}
+        zoom={15}
         zoomControl={false}
         style={{ height: "100%", zIndex: -1 }}
       >
         <TileLayer url={getBaselayerUrl()} />
+        <WMSTileLayer
+          url={foregroundlayerUrl}
+          layers={getActiveForegroundlayer().slug}
+          transparent="True"
+          format="image/png"
+        />
       </Map>
     );
   }
@@ -129,9 +142,13 @@ class DetailViewHeaderMapComponent extends Component {
 
 function mapStateToProps(state) {
   return {
+    foregroundlayerUrl: state.foregroundlayer.url,
     getBaselayerUrl: () => {
       const activeBaselayer = find(state.baselayer.layers, { active: true });
       return activeBaselayer.url;
+    },
+    getActiveForegroundlayer: () => {
+      return find(state.foregroundlayer.layers, { active: true });
     }
   };
 }

@@ -118,6 +118,7 @@ class DetailViewComponent extends Component {
           subTitle={parcel.farmId}
           halfMode={false}
           latlonzoom={latlonzoom}
+          handleHeaderClick={() => this.handleViewOnMapClick(parcel)}
           handleBackButtonClick={() => changeToSearchView(searchView)}
         />
         {parcel.isFetchingGeoserver

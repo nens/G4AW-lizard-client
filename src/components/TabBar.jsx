@@ -36,7 +36,7 @@ class TabBarComponent extends Component {
             handleClick={() => changeToSearchView(searchView)}
           />
           <Tab idx={0} title={t("Settings")} {...this.props} />
-          <Tab idx={1} title={t("User")} {...this.props} />
+          <Tab idx={1} title={t("Data forms")} {...this.props} />
           <Tab idx={2} title={t("Help")} {...this.props} />
         </div>
       </div>

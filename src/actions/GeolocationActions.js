@@ -20,9 +20,9 @@ function getGeocoderUrl(coords) {
 function showSnackBarGeolocationSuccess(dispatch) {
   const options = {
     message: i18next.t("Successfully retrieved your location"),
-    subMessage: i18next.t(
-      "Your search-results will be based on your current location"
-    ),
+    // subMessage: i18next.t(
+    //   "Your search-results will be based on your current location"
+    // ),
     autoHideDuration: 3000
   };
   showSnackBar(dispatch, options);
@@ -31,9 +31,9 @@ function showSnackBarGeolocationSuccess(dispatch) {
 function showSnackBarGeolocationError(dispatch) {
   const options = {
     message: i18next.t("There was an error while retrieving your location"),
-    subMessage: i18next.t(
-      "Your search-results can not be based on your location"
-    ),
+    // subMessage: i18next.t(
+    //   "Your search-results can not be based on your location"
+    // ),
     autoHideDuration: 3000,
     isError: true
   };
@@ -43,9 +43,9 @@ function showSnackBarGeolocationError(dispatch) {
 function showSnackBarGeolocationTurnedOff(dispatch) {
   const options = {
     message: i18next.t("Turned off geolocation awareness"),
-    subMessage: i18next.t(
-      "Your search-results will no longer be based on your location"
-    ),
+    // subMessage: i18next.t(
+    //   "Your search-results will no longer be based on your location"
+    // ),
     autoHideDuration: 3000
   };
   showSnackBar(dispatch, options);

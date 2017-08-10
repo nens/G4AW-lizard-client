@@ -42,21 +42,21 @@ export function fetchBootstrap(dispatch, sessionState) {
   getBootstrap().then(
     bootstrap => {
       receiveBootstrapSuccessAction(dispatch, bootstrap);
-      showSnackBar(dispatch, {
-        message: i18next.t("The application initialized succesfully"),
-        subMessage: i18next.t(
-          "The required data was retrieved from the server"
-        ),
-        autoHideDuration: 3000
-      });
+      // showSnackBar(dispatch, {
+      //   message: i18next.t("The application initialized succesfully"),
+      //   subMessage: i18next.t(
+      //     "The required data was retrieved from the server"
+      //   ),
+      //   autoHideDuration: 3000
+      // });
     },
     error => {
       receiveBootstrapErrorAction(dispatch, error);
       console.error(error);
       showSnackBar(dispatch, {
         isError: true,
-        message: i18next.t("There was an error initializing the application"),
-        subMessage: i18next.t("The application may not work as expected")
+        message: i18next.t("There was an error initializing the application")
+        // subMessage: i18next.t("The application may not work as expected")
       });
     }
   );

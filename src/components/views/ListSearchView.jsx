@@ -106,7 +106,6 @@ function ListSearchResults({
   toggleSearchResultsListOrCardMode,
   selectedParcel
 }) {
-  console.log("selected parcel:", selectedParcel);
   return (
     <VelocityTransitionGroup
       runOnMount={true}
@@ -135,7 +134,7 @@ function ListSearchResults({
                     title={parcel.farmerName}
                     subtitle={parcel.farmId}
                     ripple={true}
-                    indicatorColor={parcel.isAffiliated ? "#FEDF56" : "#D8D8D8"}
+                    indicatorColor={parcel.isAffiliated ? "#00AA99" : "#D8D8D8"}
                     isSelected={selectedParcel === parcel.hydracoreId}
                   />
                 );
@@ -154,7 +153,7 @@ function ListSearchResults({
                     title={parcel.farmerName}
                     subtitle={parcel.farmId}
                     ripple={true}
-                    indicatorColor={parcel.isAffiliated ? "#FEDF56" : "#D8D8D8"}
+                    indicatorColor={parcel.isAffiliated ? "#00AA99" : "#D8D8D8"}
                     isSelected={selectedParcel === parcel.hydracoreId}
                   />
                 );

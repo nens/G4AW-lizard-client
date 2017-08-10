@@ -68,14 +68,18 @@ class MapComponent extends Component {
       geolocation,
       selectedParcel
     } = this.props;
-
     const searchResultsAsPolygons = searchResults
       ? searchResults.map((r, i) => {
           const parcel = getParcel(r);
           return (
             <Polygon
               color="#3DB249"
-              stroke={false}
+              stroke={
+                selectedParcel &&
+                selectedParcel.hydracoreId === parcel.hydracoreId
+                  ? true
+                  : false
+              }
               weight={2}
               dashArray="5, 5"
               key={i}

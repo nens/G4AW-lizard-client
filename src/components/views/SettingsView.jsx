@@ -9,7 +9,7 @@ import {
   TabBar,
   SettingsViewGeneral,
   SettingsViewHelp,
-  SettingsViewUser
+  SettingsViewDatacollection
 } from "..";
 
 class SettingsViewComponent extends Component {
@@ -18,7 +18,7 @@ class SettingsViewComponent extends Component {
       case 0:
         return <SettingsViewGeneral />;
       case 1:
-        return <SettingsViewUser />;
+        return <SettingsViewDatacollection />;
       case 2:
         return <SettingsViewHelp />;
       default:

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import styles from "./styles/DetailView.css";
 import { NO_DATA } from "../constants/detailview-attributes";
-import { DetailViewSection } from ".";
+import { DetailViewSection, DetailViewTable } from ".";
 
 export default class DetailViewSectionFloodRisk extends Component {
   render() {
@@ -36,6 +36,7 @@ export default class DetailViewSectionFloodRisk extends Component {
               active={parcel.FloodRisk === "High"}
             />
           </div>
+          <DetailViewTable data={data} />
         </div>
       </DetailViewSection>
     );

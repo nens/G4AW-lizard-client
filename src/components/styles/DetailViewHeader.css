@@ -4,7 +4,8 @@
   padding: 0;
   color: white;
   position: relative;
-  background-color: rgba(0,0,0,0.5);
+  background-color: rgba(0,0,0,0.4);
+  cursor: pointer;
 }
 .DetailViewHeaderImg {
   width: 100%;
