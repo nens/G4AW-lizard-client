@@ -1,12 +1,25 @@
-.SettingsViewHelpComponent {
+.SettingsViewHelpComponent {}
+.SettingsViewHelpComponent table {
+  width: 100%;
+}
+.SettingsViewHelpComponent table > tbody > tr:first-child > td {
+  background-color: #00AA99;
+  color: #fff;
+}
+.SettingsViewHelpComponent table > tbody > tr > td {
+  border-bottom: 1px solid #fff;
+  padding: 5px;
+}
+.SettingsViewHelpComponent table > tbody > tr > td:first-child {
+  vertical-align: top;
+  font-weight: bold;
+}
+.SettingsViewHelpComponentWrapper {
   width: 100%;
   padding: 20px;
   font-size: .9em;
 }
-.SettingsViewHelpComponent a {
+.SettingsViewHelpComponentWrapper a {
   color: #333;
   text-decoration: underline;
-}
-.KoboLink {
-  line-height: 20px;
 }
