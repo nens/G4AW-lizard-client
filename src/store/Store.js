@@ -18,6 +18,7 @@ createStoreWithMiddleware = applyMiddleware(thunkMiddleware, logger)(
 // See G4AW-state-plan.md.
 
 export const initialUiState = {
+  selectedLanguage: i18next.language,
   currentView: "ListSearchView",
   searchView: "ListSearchView",
   selectedParcel: null,

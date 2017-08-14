@@ -17,6 +17,7 @@ import GeolocateButtonBig from "./GeolocateButtonBig";
 import GeolocateButtonSmall from "./GeolocateButtonSmall";
 import HeaderBar from "./HeaderBar";
 import InputField from "./InputField";
+import LanguageChooser from "./LanguageChooser";
 import LayerSelection from "./LayerSelection";
 import Legend from "./Legend";
 import LoginLogoutButton from "./LoginLogoutButton";
@@ -60,6 +61,7 @@ export {
   GeolocateButtonSmall,
   HeaderBar,
   InputField,
+  LanguageChooser,
   LayerSelection,
   Legend,
   LoginLogoutButton,
