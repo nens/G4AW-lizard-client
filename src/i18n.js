@@ -11,9 +11,6 @@ i18n.use(LngDetector).init({
     en: {
       translation: require("../locales/en/translation.json")
     },
-    nl: {
-      translation: require("../locales/nl/translation.json")
-    },
     vi: {
       translation: require("../locales/vi/translation.json")
     }
