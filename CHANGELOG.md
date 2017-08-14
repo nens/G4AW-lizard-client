@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.5.0"></a>
+# [0.5.0](https://github.com/nens/G4AW-lizard-client/compare/v0.4.2...v0.5.0) (2017-08-14)
+
+
+### Bug Fixes
+
+* **i18n:** Disabling i18n debug setting. ([fcbb8c5](https://github.com/nens/G4AW-lizard-client/commit/fcbb8c5))
+* **i18n:** Remove dutch from language catalogs and i18n settings. It's just English and Vietnamese now. ([ed57f8d](https://github.com/nens/G4AW-lizard-client/commit/ed57f8d))
+
+
+### Features
+
+* **i18n:** Adds Vietnamese translations :) ([5b09818](https://github.com/nens/G4AW-lizard-client/commit/5b09818))
+
+
+
 <a name="0.4.2"></a>
 ## [0.4.2](https://github.com/nens/G4AW-lizard-client/compare/v0.4.1...v0.4.2) (2017-08-10)
 
