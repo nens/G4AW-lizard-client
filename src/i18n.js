@@ -15,7 +15,7 @@ i18n.use(LngDetector).init({
       translation: require("../locales/vi/translation.json")
     }
   },
-  debug: true,
+  debug: false,
   interpolation: {
     escapeValue: false, // not needed for react!!
     formatSeparator: ",",
