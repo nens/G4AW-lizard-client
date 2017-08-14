@@ -42,7 +42,7 @@
 .Acronym {
   font-size: 28px;
   text-align: center;
-  margin-top: 12px;
+  margin-top: 11px;
   color: #F1F1F1;
 }
 
@@ -59,4 +59,8 @@
   font-size: 0.6em;
   text-transform: uppercase;
   position: relative;
+}
+
+.Active {
+  border: 2px solid #00C4FA;
 }

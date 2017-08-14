@@ -6,6 +6,8 @@ import { translate } from "react-i18next";
 import { connect } from "react-redux";
 import styles from "./styles/LanguageChooser.css";
 
+import { selectLanguage } from "../actions";
+
 class LanguageChooserComponent extends Component {
   render() {
     const { t, selectedLanguage, selectLanguage } = this.props;
@@ -20,21 +22,22 @@ class LanguageChooserComponent extends Component {
         <div className={styles.LanguageSelection}>
           <div className={styles.Wrapper}>
             <LanguageButton
-              selectedlanguage={selectedLanguage}
+              active={selectedLanguage === "vi"}
               acronym="VI"
-              language="Vietnamese"
+              language={t("Vietnamese")}
               handleClick={selectLanguage}
             />
             <LanguageButton
-              selectedlanguage={selectedLanguage}
+              active={selectedLanguage !== "nl" && selectedLanguage !== "vi"}
               acronym="EN"
-              language="English"
+              language={t("English")}
               handleClick={selectLanguage}
             />
             <LanguageButton
+              active={selectedLanguage === "nl"}
               selectedlanguage={selectedLanguage}
               acronym="NL"
-              language="Dutch"
+              language={t("Dutch")}
               handleClick={selectLanguage}
             />
           </div>
@@ -44,9 +47,12 @@ class LanguageChooserComponent extends Component {
   }
 }
 
-function LanguageButton({ language, handleClick, acronym }) {
+function LanguageButton({ language, handleClick, acronym, active }) {
   return (
-    <div onClick={handleClick} className={styles.LanguageButton}>
+    <div
+      onClick={() => handleClick(language)}
+      className={`${active ? styles.Active : ""} ${styles.LanguageButton}`}
+    >
       <div className={styles.Acronym}>
         {acronym}
       </div>
@@ -62,13 +68,13 @@ function LanguageButton({ language, handleClick, acronym }) {
 
 function mapStateToProps(state) {
   return {
-    selectedLanguage: state.ui.selectedlanguage
+    selectedLanguage: state.ui.selectedLanguage
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    selectLanguage: () => false
+    selectLanguage: language => selectLanguage(dispatch, language)
   };
 }
 

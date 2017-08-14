@@ -41,48 +41,6 @@ class BaselayerChooser extends Component {
   }
 }
 
-// class LanguageChooser extends Component {
-//   render() {
-//     const { t, handleLanguageSelect } = this.props;
-//     return (
-//       <div>
-//         <div className={styles.SubHeaderContainer}>
-//           <h3 className={styles.SubHeaderText}>
-//             {t("Language")}
-//           </h3>
-//         </div>
-//         <div className={styles.LanguageChooser}>
-
-//           <div
-//             onClick={handleLanguageSelect}
-//             className={lsStyles.Layer}
-//           >
-//             <div className={lsStyles.TitleWrapper}>
-//               <span className={lsStyles.Title}>
-//                 Vietnamese
-//               </span>
-//             </div>
-//             <Ink />
-//           </div>
-
-//           <div
-//             onClick={handleLanguageSelect}
-//             className={lsStyles.Layer}
-//           >
-//             <div className={lsStyles.TitleWrapper}>
-//               <span className={lsStyles.Title}>
-//                 English
-//               </span>
-//             </div>
-//             <Ink />
-//           </div>
-
-//         </div>
-//       </div>
-//     );
-//   }
-// }
-
 /* react-redux coupling ******************************************************/
 
 function mapStateToProps(state) {

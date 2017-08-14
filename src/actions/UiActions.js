@@ -5,8 +5,11 @@ import {
   HIDE_SNACKBAR,
   SHOW_SNACKBAR,
   TOGGLE_LEGEND,
-  TOGGLE_SEARCHRESULTS_LIST_CARD_MODE
+  TOGGLE_SEARCHRESULTS_LIST_CARD_MODE,
+  SELECT_LANGUAGE
 } from "../constants/ActionTypes";
+
+import i18next from "i18next";
 
 let timerAutoHideId;
 
@@ -48,4 +51,26 @@ export function toggleSearchResultsListOrCardMode(dispatch) {
 
 export function toggleLegend(dispatch) {
   dispatch({ type: TOGGLE_LEGEND });
+}
+
+export function selectLanguage(dispatch, language) {
+  console.log("Dispatching 'SELECT_LANGUAGE'... WIP!");
+
+  let languageAcronym;
+  switch (language) {
+    case "Vietnamese":
+      languageAcronym = "vi";
+      break;
+    case "Dutch":
+      languageAcronym = "nl";
+      break;
+    default:
+      languageAcronym = "en";
+  }
+
+  i18next.changeLanguage(languageAcronym);
+  dispatch({
+    type: SELECT_LANGUAGE,
+    languageAcronym
+  });
 }
