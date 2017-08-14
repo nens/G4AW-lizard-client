@@ -5,20 +5,16 @@ i18n.use(LngDetector).init({
   detection: {
     order: ["navigator"]
   },
-  // returnObjects: true,
   fallbackLng: "en",
   resources: {
     en: {
       translation: require("../locales/en/translation.json")
     },
-    nl: {
-      translation: require("../locales/nl/translation.json")
-    },
     vi: {
       translation: require("../locales/vi/translation.json")
     }
   },
-  debug: true,
+  debug: false,
   interpolation: {
     escapeValue: false, // not needed for react!!
     formatSeparator: ",",
