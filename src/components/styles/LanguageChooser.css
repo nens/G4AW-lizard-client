@@ -1,0 +1,66 @@
+.LanguageSelection {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.Wrapper {
+  width: 80%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.SubHeaderContainer {
+  margin: 20px 0 0 20px;
+  height: 50px;
+  width: calc(100% - 40px);
+}
+
+.SubHeaderText {
+  font-weight: 300;
+  color: #a0a0a0;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #cecece;
+  font-size: 0.95em;
+  line-height: 30px;
+}
+
+.LanguageButton {
+  width: 76px;
+  height: 76px;
+  box-sizing: border-box;
+  background-color: #fff;
+  box-shadow: 0 2px 4px 0 rgba(0,0,0,0.07);
+  cursor: pointer;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  position: relative;
+  background-color: #D8D8D8;
+}
+
+.Acronym {
+  font-size: 28px;
+  text-align: center;
+  margin-top: 11px;
+  color: #F1F1F1;
+}
+
+.TitleWrapper {
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  background-color: #fff;
+  padding-left: 4px;
+  padding-bottom: 2px;
+}
+.Title {
+  color: #333;
+  font-size: 0.6em;
+  text-transform: uppercase;
+  position: relative;
+}
+
+.Active {
+  border: 2px solid #00C4FA;
+}

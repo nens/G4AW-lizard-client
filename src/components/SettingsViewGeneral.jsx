@@ -5,7 +5,7 @@ import ReactDOM from "react-dom";
 import { translate } from "react-i18next";
 import { connect } from "react-redux";
 
-import { HeaderBar, LayerSelection } from ".";
+import { HeaderBar, LayerSelection, LanguageChooser } from ".";
 
 import { DEMO_LAYERS } from "../../stories/helpers";
 
@@ -13,11 +13,11 @@ import styles from "./styles/SettingsView.css";
 
 class SettingsViewGeneralComponent extends Component {
   render() {
-    const { t } = this.props;
     return (
       <div>
-        <HeaderBar title={t("Select map layers")} />
+        <HeaderBar title={this.props.t("Select map layers/language")} />
         <BaselayerChooser {...this.props} />
+        <LanguageChooser {...this.props} />
       </div>
     );
   }
@@ -36,7 +36,6 @@ class BaselayerChooser extends Component {
           </h3>
         </div>
         <LayerSelection layers={baselayers} mode="baselayer" />
-        <br />
       </div>
     );
   }
@@ -58,4 +57,5 @@ function mapDispatchToProps(dispatch) {
 const SettingsViewGeneral = connect(mapStateToProps, mapDispatchToProps)(
   SettingsViewGeneralComponent
 );
+
 export default translate()(SettingsViewGeneral);

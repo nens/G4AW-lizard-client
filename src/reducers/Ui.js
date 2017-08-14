@@ -42,6 +42,8 @@ export default function(state = initialUiState, action) {
       return { ...state, selectedParcel: null };
     case ActionTypes.CLEAR_SEARCH_RESULTS:
       return { ...state, selectedParcel: null };
+    case ActionTypes.SELECT_LANGUAGE:
+      return { ...state, selectedLanguage: action.languageAcronym };
     default:
       return state;
   }
