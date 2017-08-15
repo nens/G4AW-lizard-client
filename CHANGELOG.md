@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.5.1"></a>
+## [0.5.1](https://github.com/nens/G4AW-lizard-client/compare/v0.5.0...v0.5.1) (2017-08-15)
+
+
+### Bug Fixes
+
+* **Kobo buttons:** Links to Kobo data collection forms now appear as buttons similar to the layer/language switcher. ([50a37a7](https://github.com/nens/G4AW-lizard-client/commit/50a37a7))
+* **Language:** Remove button for dutch language. ([566c38d](https://github.com/nens/G4AW-lizard-client/commit/566c38d))
+* **LanguageChooser:** LanguageChooser alignment to match data forms buttons. ([f66e0e9](https://github.com/nens/G4AW-lizard-client/commit/f66e0e9))
+
+
+
 <a name="0.5.0"></a>
 # [0.5.0](https://github.com/nens/G4AW-lizard-client/compare/v0.4.2...v0.5.0) (2017-08-14)
 
