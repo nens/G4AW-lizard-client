@@ -5,9 +5,9 @@
 }
 
 .Wrapper {
-  width: 80%;
+  width: 100%;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
 }
 
 .SubHeaderContainer {
@@ -26,6 +26,7 @@
 }
 
 .LanguageButton {
+  margin: 0 20px 0 20px;
   width: 76px;
   height: 76px;
   box-sizing: border-box;
