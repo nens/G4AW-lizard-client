@@ -33,13 +33,6 @@ class LanguageChooserComponent extends Component {
               language={t("English")}
               handleClick={selectLanguage}
             />
-            <LanguageButton
-              active={selectedLanguage === "nl"}
-              selectedlanguage={selectedLanguage}
-              acronym="NL"
-              language={t("Dutch")}
-              handleClick={selectLanguage}
-            />
           </div>
         </div>
       </div>

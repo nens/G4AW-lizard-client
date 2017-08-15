@@ -1,0 +1,68 @@
+.SettingsViewDatacollectionComponent {}
+.SettingsViewDatacollectionpComponent table {
+  width: 100%;
+}
+.SettingsViewDatacollectionComponent table > tbody > tr:first-child > td {
+  background-color: #00AA99;
+  color: #fff;
+}
+.SettingsViewDatacollectionComponent table > tbody > tr > td {
+  border-bottom: 1px solid #fff;
+  padding: 5px;
+}
+.SettingsViewDatacollectionComponent table > tbody > tr > td:first-child {
+  vertical-align: top;
+  font-weight: bold;
+}
+.SettingsViewDatacollectionComponentWrapper {
+  width: 100%;
+  padding: 20px;
+  font-size: .9em;
+}
+.SettingsViewDatacollectionComponentWrapper a {
+  color: #333;
+  text-decoration: underline;
+}
+
+
+.DatacollectionFormButton {
+  margin: 20px;
+  width: 76px;
+  height: 76px;
+  box-sizing: border-box;
+  background-color: #fff;
+  box-shadow: 0 2px 4px 0 rgba(0,0,0,0.07);
+  cursor: pointer;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  position: relative;
+  background-color: #D8D8D8;
+}
+
+.Acronym {
+  font-size: 28px;
+  text-align: center;
+  margin-top: 11px;
+  color: #F1F1F1;
+}
+
+.TitleWrapper {
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  background-color: #fff;
+  padding-left: 4px;
+  padding-bottom: 2px;
+}
+.Title {
+  color: #333;
+  font-size: 0.6em;
+  text-transform: uppercase;
+  position: relative;
+}
+.Wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
