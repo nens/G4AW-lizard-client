@@ -18,7 +18,6 @@ export function changeView(dispatch, newView) {
 }
 
 export function changeSettingsTab(dispatch, newSettingsTabIdx) {
-  console.log("action", newSettingsTabIdx);
   dispatch({ type: CHANGE_SETTINGS_TAB, newSettingsTabIdx });
 }
 
@@ -54,8 +53,6 @@ export function toggleLegend(dispatch) {
 }
 
 export function selectLanguage(dispatch, language) {
-  console.log("Dispatching 'SELECT_LANGUAGE'... WIP!");
-
   let languageAcronym;
   switch (language) {
     case "Vietnamese":
