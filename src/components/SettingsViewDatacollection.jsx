@@ -5,7 +5,7 @@ import ReactDOM from "react-dom";
 import { translate } from "react-i18next";
 import { connect } from "react-redux";
 import { HeaderBar, FlatButton } from ".";
-import styles from "./styles/SettingsViewHelp.css";
+import styles from "./styles/SettingsViewDatacollection.css";
 
 class SettingsViewDatacollectionComponent extends Component {
   render() {
@@ -13,27 +13,35 @@ class SettingsViewDatacollectionComponent extends Component {
     return (
       <div>
         <HeaderBar title={t("Data Collection Forms")} />
-        <div className={styles.SettingsViewDatacollection}>
-          <ul>
-            <li>
-              <a
-                href="https://ee.kobotoolbox.org/x/#YZnR"
-                target="_blank"
-                className={styles.KoboLink}
-              >
+
+        <div className={styles.Wrapper}>
+          <div
+            onClick={() =>
+              window.open("https://ee.kobotoolbox.org/x/#YZnR", "_newtab")}
+            className={styles.DatacollectionFormButton}
+          >
+            <div className={styles.Acronym}>W</div>
+            <div className={styles.TitleWrapper}>
+              <span className={styles.Title}>
                 {t("Weekly form")}
-              </a>
-            </li>
-            <li>
-              <a
-                href="https://ee.kobotoolbox.org/x/#YZnu"
-                target="_blank"
-                className={styles.KoboLink}
-              >
+              </span>
+            </div>
+            <Ink />
+          </div>
+
+          <div
+            onClick={() =>
+              window.open("https://ee.kobotoolbox.org/x/#YZnu", "_newtab")}
+            className={styles.DatacollectionFormButton}
+          >
+            <div className={styles.Acronym}>O</div>
+            <div className={styles.TitleWrapper}>
+              <span className={styles.Title}>
                 {t("Once form")}
-              </a>
-            </li>
-          </ul>
+              </span>
+            </div>
+            <Ink />
+          </div>
         </div>
       </div>
     );
