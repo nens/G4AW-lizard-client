@@ -47,14 +47,13 @@ class DetailViewComponent extends Component {
   }
   formatData(parcel, sectionName) {
     return SECTIONS[sectionName].sectionAttrs.map(sectionAttr => {
-      const result = {
+      return {
         key: sectionAttr.getTranslatedAttr(),
         value: parcel[sectionAttr.attr],
         unit: sectionAttr.getTranslatedUnit
           ? sectionAttr.getTranslatedUnit()
           : ""
       };
-      return result;
     });
   }
   getLatLonZoom(coords) {
