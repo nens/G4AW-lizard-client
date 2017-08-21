@@ -7,7 +7,9 @@
   text-align: center;
   width: 100px;
   position: absolute;
-  margin-top: 550px;
+  bottom: 0px;
+  left: 50%;
+  margin-left: -65px;
 }
 .Icon {
   transform: translateY(5px);
