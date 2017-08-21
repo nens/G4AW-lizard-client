@@ -11,8 +11,8 @@ const SECTIONS = {
         getTranslatedAttr: () => i18next.t("FarmID")
       },
       {
-        attr: "Cooporation",
-        getTranslatedAttr: () => i18next.t("Cooporation")
+        attr: "Cooperation",
+        getTranslatedAttr: () => i18next.t("Cooperation")
       },
       {
         attr: "FarmerName",
@@ -110,37 +110,30 @@ const SECTIONS = {
     sectionAttrs: [
       {
         attr: "PestRisk",
-        // attrTranslate: i18next.t("PestRisk"),
         getTranslatedAttr: () => i18next.t("PestRisk")
       },
       {
         attr: "BrownPlantHopperPresent",
-        // attrTranslate: i18next.t("BrownPlantHopperPresent"),
         getTranslatedAttr: () => i18next.t("BrownPlantHopperPresent")
       },
       {
         attr: "LeaffolderPresent",
-        // attrTranslate: i18next.t("LeaffolderPresent")
         getTranslatedAttr: () => i18next.t("LeaffolderPresent")
       },
       {
         attr: "BlastPresent",
-        // attrTranslate: i18next.t("BlastPresent")
         getTranslatedAttr: () => i18next.t("BlastPresent")
       },
       {
         attr: "BrownPlantHopperRisk",
-        // attrTranslate: i18next.t("BrownPlantHopperRisk")
         getTranslatedAttr: () => i18next.t("BrownPlantHopperRisk")
       },
       {
         attr: "LeaffolderRisk",
-        // attrTranslate: i18next.t("LeaffolderRisk")
         getTranslatedAttr: () => i18next.t("LeaffolderRisk")
       },
       {
         attr: "BlastRisk",
-        // attrTranslate: i18next.t("BlastRisk")
         getTranslatedAttr: () => i18next.t("BlastRisk")
       }
     ]
@@ -151,20 +144,16 @@ const SECTIONS = {
     sectionAttrs: [
       {
         attr: "FloodRisk",
-        // attrTranslate: i18next.t("FloodRisk")
         getTranslatedAttr: () => i18next.t("FloodRisk")
       },
       {
         attr: "FloodLevel",
-        // attrTranslate: i18next.t("FloodLevel"),
         getTranslatedAttr: () => i18next.t("FloodLevel"),
-        // unit: i18next.t("mNAP")
+        // unit: i18next.t("mNAP") // NB! mNAP vs mMSL... is it set correct at geoserver??
         getTranslatedUnit: () => i18next.t("mMSL")
       }
     ]
   }
 };
-
-console.log("EXPORT 'SECTIONS' ... only once?");
 
 export { NO_DATA, SECTIONS };
