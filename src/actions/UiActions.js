@@ -65,7 +65,10 @@ export function selectLanguage(dispatch, language) {
       languageAcronym = "en";
   }
 
+  console.log("[PRE] i18next.language = " + i18next.language);
   i18next.changeLanguage(languageAcronym);
+  console.log("[POST] i18next.language = " + i18next.language);
+
   dispatch({
     type: SELECT_LANGUAGE,
     languageAcronym

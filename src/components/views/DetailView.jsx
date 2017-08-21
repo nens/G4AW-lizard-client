@@ -1,7 +1,10 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import { connect } from "react-redux";
+
 import { translate, t } from "react-i18next";
+import i18next from "i18next";
+
 import bbox from "@turf/bbox";
 import flip from "@turf/flip";
 import { feature, featureCollection } from "@turf/helpers";
@@ -43,17 +46,14 @@ class DetailViewComponent extends Component {
     this.handleViewOnMapClick = this.handleViewOnMapClick.bind(this);
   }
   formatData(parcel, sectionName) {
-    // console.log("[F] formatData; sectionName = '" + sectionName + "'");
-    const attributes = SECTIONS[sectionName];
-    // console.log("*** attributes:", attributes);
-    return attributes.sectionAttrs.map(sectionAttr => {
-      // console.log("****** sectionAttr:", sectionAttr);
+    return SECTIONS[sectionName].sectionAttrs.map(sectionAttr => {
       const result = {
-        key: sectionAttr.attrTranslate,
+        key: sectionAttr.getTranslatedAttr(),
         value: parcel[sectionAttr.attr],
-        unit: sectionAttr.unit || ""
+        unit: sectionAttr.getTranslatedUnit
+          ? sectionAttr.getTranslatedUnit()
+          : ""
       };
-      // console.log("****** result:", result);
       return result;
     });
   }
@@ -202,6 +202,7 @@ class DetailViewSpinner extends Component {
 
 function mapStateToProps(state) {
   return {
+    selectedLanguage: state.ui.selectedLanguage,
     currentView: state.ui.currentView,
     searchView: state.ui.searchView,
     parcel: state.parcels && state.parcels[state.ui.selectedParcel],
