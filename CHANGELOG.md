@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.5.2"></a>
+## [0.5.2](https://github.com/nens/G4AW-lizard-client/compare/v0.5.1...v0.5.2) (2017-08-28)
+
+
+### Bug Fixes
+
+* **CSS:** LoginLogoutButton now retains position on iOS10. ([cdc92d6](https://github.com/nens/G4AW-lizard-client/commit/cdc92d6))
+
+
+
 <a name="0.5.1"></a>
 ## [0.5.1](https://github.com/nens/G4AW-lizard-client/compare/v0.5.0...v0.5.1) (2017-08-15)
 
