@@ -35,6 +35,8 @@ export default class DetailViewSectionPestRisk extends Component {
           <div className={styles.SubMessage}>
             {this.getHumanReadablePestRisk(parcel, t)}
           </div>
+
+          {/*
           <div className={styles.ColoredSquaresContainer}>
             <ColoredSquare
               title={t("High blast risk")}
@@ -52,6 +54,8 @@ export default class DetailViewSectionPestRisk extends Component {
               active={parcel.BrownPlantHopperRisk === "High"}
             />
           </div>
+          */}
+
           <DetailViewTable data={data} />
         </div>
       </DetailViewSection>

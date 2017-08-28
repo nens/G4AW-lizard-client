@@ -52,6 +52,8 @@ export default class DetailViewSectionGrowthStage extends Component {
       riceGrowthLayer,
       ColoredSquare
     } = this.props;
+
+    console.log("[dbg] parcel.GrowthStage =", parcel.GrowthStage);
     return (
       <DetailViewSection
         isInitiallyOpen={isInitiallyOpen}
@@ -64,10 +66,13 @@ export default class DetailViewSectionGrowthStage extends Component {
           <div className={styles.SubMessage}>
             {this.getHumanReadableRiceGrowth(parcel, t)}
           </div>
+
+          {/*
           <div className={styles.ColoredSquaresContainer}>
             {riceGrowthLayer.getColorMap().map((kv, i) => {
               const label = Object.keys(kv)[0];
               const color = Object.values(kv)[0];
+              console.log("[dbg] label =", label);
               return (
                 <ColoredSquare
                   key={i}
@@ -79,6 +84,8 @@ export default class DetailViewSectionGrowthStage extends Component {
               );
             })}
           </div>
+          */}
+
           <DetailViewTable data={data} />
         </div>
       </DetailViewSection>

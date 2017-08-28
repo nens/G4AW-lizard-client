@@ -49,6 +49,8 @@ export default class DetailViewSectionFloodRisk extends Component {
                 : t("unknown")}
               and the flood level is ${data[1].value} ${data[1].unit}`*/}
           </div>
+
+          {/*
           <div className={styles.ColoredSquaresContainer}>
             <ColoredSquare
               title={t("Low flood risk")}
@@ -66,6 +68,7 @@ export default class DetailViewSectionFloodRisk extends Component {
               active={parcel.FloodRisk === "High"}
             />
           </div>
+          */}
           <DetailViewTable data={data} />
         </div>
       </DetailViewSection>

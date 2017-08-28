@@ -17,7 +17,7 @@ class SettingsViewGeneralComponent extends Component {
       <div>
         <HeaderBar title={this.props.t("Select map layers/language")} />
         <BaselayerChooser {...this.props} />
-        <LanguageChooser {...this.props} />
+        {/* <LanguageChooser {...this.props} /> */}
       </div>
     );
   }
