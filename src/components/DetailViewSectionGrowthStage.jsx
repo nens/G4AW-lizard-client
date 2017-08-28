@@ -3,6 +3,36 @@ import styles from "./styles/DetailView.css";
 import { NO_DATA } from "../constants/detailview-attributes";
 import { DetailViewSection, DetailViewTable } from ".";
 
+import i18next from "i18next";
+
+function getTranslatedGrowthStage(enName_) {
+  let enName = enName_.toUpperCase();
+  if (i18next.language === "en") {
+    return enName;
+  } else {
+    switch (enName) {
+      case "FALLOW":
+        return "Bỏ hoang";
+      case "BARE FIELD":
+        return "blala";
+      case "SEEDING":
+        return "hohoho";
+      case "TILLERING":
+        return "lasasals";
+      case "BOOTING":
+        return "boohooo";
+      case "FLOWERING":
+        return "flofloflo";
+      case "MILKING":
+        return "mihihihimilk";
+      case "RIPENING":
+        return "ririrpre";
+      case "HARVESTING":
+        return "harharjar";
+    }
+  }
+}
+
 export default class DetailViewSectionGrowthStage extends Component {
   getHumanReadableRiceGrowth(parcel, t) {
     const stage = parcel.GrowthStage
@@ -35,7 +65,7 @@ export default class DetailViewSectionGrowthStage extends Component {
             {this.getHumanReadableRiceGrowth(parcel, t)}
           </div>
           <div className={styles.ColoredSquaresContainer}>
-            {riceGrowthLayer.colormap.map((kv, i) => {
+            {riceGrowthLayer.getColorMap().map((kv, i) => {
               const label = Object.keys(kv)[0];
               const color = Object.values(kv)[0];
               return (

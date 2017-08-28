@@ -1,9 +1,9 @@
 import * as ActionTypes from "../constants/ActionTypes";
-import { initialUiState } from "../store/Store";
+import { getInitialUiState } from "../store/Store";
 
 import includes from "lodash/includes";
 
-export default function(state = initialUiState, action) {
+export default function(state = getInitialUiState(), action) {
   switch (action.type) {
     case ActionTypes.TOGGLE_LEGEND:
       return { ...state, showLegend: !state.showLegend };
