@@ -27,7 +27,8 @@ class LegendComponent extends Component {
     } = this.props;
     const activeLegendIdx = getActiveForegroundlayerIdx();
     const currentLayer = getActiveForegroundlayer();
-    const layerTitle = currentLayer.title;
+    const layerTitle = currentLayer.getTitle();
+    const colorMap = currentLayer.getColorMap();
 
     return isOpen
       ? <VelocityTransitionGroup
@@ -37,7 +38,7 @@ class LegendComponent extends Component {
           <div className={styles.LegendWrapper} id="Legend">
             <div className={styles.Legend}>
               <LegendTopBar layerTitle={layerTitle} {...this.props} />
-              <LegendBody colormap={currentLayer.colormap} t={t} />
+              <LegendBody colormap={colorMap} t={t} />
             </div>
           </div>
         </VelocityTransitionGroup>

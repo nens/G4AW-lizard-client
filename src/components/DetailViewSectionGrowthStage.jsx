@@ -3,6 +3,8 @@ import styles from "./styles/DetailView.css";
 import { NO_DATA } from "../constants/detailview-attributes";
 import { DetailViewSection, DetailViewTable } from ".";
 
+import i18next from "i18next";
+
 export default class DetailViewSectionGrowthStage extends Component {
   getHumanReadableRiceGrowth(parcel, t) {
     const stage = parcel.GrowthStage
@@ -34,10 +36,13 @@ export default class DetailViewSectionGrowthStage extends Component {
           <div className={styles.SubMessage}>
             {this.getHumanReadableRiceGrowth(parcel, t)}
           </div>
+
+          {/*
           <div className={styles.ColoredSquaresContainer}>
-            {riceGrowthLayer.colormap.map((kv, i) => {
+            {riceGrowthLayer.getColorMap().map((kv, i) => {
               const label = Object.keys(kv)[0];
               const color = Object.values(kv)[0];
+              console.log("[dbg] label =", label);
               return (
                 <ColoredSquare
                   key={i}
@@ -49,6 +54,8 @@ export default class DetailViewSectionGrowthStage extends Component {
               );
             })}
           </div>
+          */}
+
           <DetailViewTable data={data} />
         </div>
       </DetailViewSection>

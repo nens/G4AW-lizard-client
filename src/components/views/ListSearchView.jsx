@@ -104,8 +104,10 @@ function ListSearchResults({
   searchResults,
   searchResultsAsList,
   toggleSearchResultsListOrCardMode,
-  selectedParcel
+  selectedParcel,
+  t
 }) {
+  const headerTitle = t("Search results") + "(" + searchResults.length + ")";
   return (
     <VelocityTransitionGroup
       runOnMount={true}
@@ -118,7 +120,7 @@ function ListSearchResults({
         <HeaderBar
           icon={searchResultsAsList ? "view_module" : "list"}
           handleClick={toggleSearchResultsListOrCardMode}
-          title={`Search results (${searchResults.length})`}
+          title={headerTitle}
         />
         {searchResultsAsList
           ? <div
