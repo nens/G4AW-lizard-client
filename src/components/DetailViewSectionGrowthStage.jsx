@@ -5,34 +5,6 @@ import { DetailViewSection, DetailViewTable } from ".";
 
 import i18next from "i18next";
 
-function getTranslatedGrowthStage(enName_) {
-  let enName = enName_.toUpperCase();
-  if (i18next.language === "en") {
-    return enName;
-  } else {
-    switch (enName) {
-      case "FALLOW":
-        return "Bỏ hoang";
-      case "BARE FIELD":
-        return "blala";
-      case "SEEDING":
-        return "hohoho";
-      case "TILLERING":
-        return "lasasals";
-      case "BOOTING":
-        return "boohooo";
-      case "FLOWERING":
-        return "flofloflo";
-      case "MILKING":
-        return "mihihihimilk";
-      case "RIPENING":
-        return "ririrpre";
-      case "HARVESTING":
-        return "harharjar";
-    }
-  }
-}
-
 export default class DetailViewSectionGrowthStage extends Component {
   getHumanReadableRiceGrowth(parcel, t) {
     const stage = parcel.GrowthStage
@@ -52,8 +24,6 @@ export default class DetailViewSectionGrowthStage extends Component {
       riceGrowthLayer,
       ColoredSquare
     } = this.props;
-
-    console.log("[dbg] parcel.GrowthStage =", parcel.GrowthStage);
     return (
       <DetailViewSection
         isInitiallyOpen={isInitiallyOpen}
