@@ -5,19 +5,10 @@ import { DetailViewSection, DetailViewTable } from ".";
 
 export default class DetailViewSectionFloodRisk extends Component {
   getTranslatedRisk(t, parcel) {
-    console.log("*** parcel =", parcel);
-    if (parcel.floodRisk === undefined) {
+    if (parcel.FloodRisk === undefined) {
       return t("unknown");
-    }
-    switch (parcel.floodRisk.toUpperCase()) {
-      case "NO RISK":
-        return t("NO RISK");
-      case "MEDIUM RISK":
-        return t("MEDIUM RISK");
-      case "HIGH RISK":
-        return t("HIGH RISK");
-      default:
-        return t("unknown");
+    } else {
+      return parcel.FloodRisk.toUpperCase();
     }
   }
   getSubTitleText(t, parcel, translatedRisk) {
