@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.5.3"></a>
+## [0.5.3](https://github.com/nens/G4AW-lizard-client/compare/v0.5.2...v0.5.3) (2017-08-29)
+
+
+### Bug Fixes
+
+* **CSS:** Fixes text overflow on LoginLogoutButton ([fe572ca](https://github.com/nens/G4AW-lizard-client/commit/fe572ca))
+* **CSS:** Overflowing fix. ([b304c82](https://github.com/nens/G4AW-lizard-client/commit/b304c82))
+
+
+
 <a name="0.5.2"></a>
 ## [0.5.2](https://github.com/nens/G4AW-lizard-client/compare/v0.5.1...v0.5.2) (2017-08-28)
 
