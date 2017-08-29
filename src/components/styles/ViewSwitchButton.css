@@ -12,6 +12,9 @@
   left: 15px;
   width: calc(100% - 50px);
   z-index: 1000;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;  
 }
 .Icon {
   transform: translateY(5px);
