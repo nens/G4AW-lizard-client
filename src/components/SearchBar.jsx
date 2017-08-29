@@ -151,7 +151,8 @@ function mapDispatchToProps(dispatch) {
         updateMapBbox(dispatch, boundingBox);
         showSnackBar(dispatch, {
           autoHideDuration: 4000,
-          message: i18next.t("You have no longer selected a single parcel.")
+          message: (() =>
+            i18next.t("You have no longer selected a single parcel"))()
         });
       } else {
         // Clear search-result selection (go back to init)
