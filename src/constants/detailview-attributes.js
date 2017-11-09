@@ -37,7 +37,6 @@ const SECTIONS = {
       }
     ]
   },
-
   RiceGrowth: {
     sectionName: i18next.t("Rice growth"),
     sectionAttrs: [
@@ -103,12 +102,56 @@ const SECTIONS = {
         getTranslatedAttr: () => i18next.t("BrownPlantHopperPresent")
       },
       {
+        attr: "BrownPlantHopperDensity",
+        getTranslatedAttr: () => i18next.t("BrownPlantHopperDensity")
+      },
+      {
+        attr: "BrownPlantHopperAge",
+        getTranslatedAttr: () => i18next.t("BrownPlantHopperAge")
+      },
+      {
+        attr: "BrownPlantHopperNearby",
+        getTranslatedAttr: () => i18next.t("BrownPlantHopperNearby")
+      },
+      {
         attr: "LeaffolderPresent",
         getTranslatedAttr: () => i18next.t("LeaffolderPresent")
       },
       {
+        attr: "LeaffolderDensity",
+        getTranslatedAttr: () => i18next.t("LeaffolderDensity")
+      },
+      {
+        attr: "LeaffolderAge",
+        getTranslatedAttr: () => i18next.t("LeaffolderAge")
+      },
+      {
+        attr: "LeaffolderNearby",
+        getTranslatedAttr: () => i18next.t("LeaffolderNearby")
+      },
+      {
         attr: "BlastPresent",
         getTranslatedAttr: () => i18next.t("BlastPresent")
+      },
+      {
+        attr: "BlastDensity",
+        getTranslatedAttr: () => i18next.t("BlastDensity")
+      },
+      {
+        attr: "BlastNearby",
+        getTranslatedAttr: () => i18next.t("BlastNearby")
+      },
+      {
+        attr: "NaturalEnemies",
+        getTranslatedAttr: () => i18next.t("NaturalEnemies")
+      },
+      {
+        attr: "PesticideUsed",
+        getTranslatedAttr: () => i18next.t("PesticideUsed")
+      },
+      {
+        attr: "PesticideType",
+        getTranslatedAttr: () => i18next.t("PesticideType")
       },
       {
         attr: "BrownPlantHopperRisk",
@@ -124,10 +167,30 @@ const SECTIONS = {
       }
     ]
   },
-
+  DroughtSalinityDamage: {
+    sectionName: i18next.t("DroughtAndSalinityDamage"),
+    sectionAttrs: [
+      {
+        attr: "DroughtDamage",
+        getTranslatedAttr: () => i18next.t("DroughtDamage")
+      },
+      {
+        attr: "SalinityDamage",
+        getTranslatedAttr: () => i18next.t("SalinityDamage")
+      }
+    ]
+  },
   FloodRisk: {
     sectionName: i18next.t("Flood risk"),
     sectionAttrs: [
+      {
+        attr: "FieldFlooded",
+        getTranslatedAttr: () => i18next.t("FieldFlooded")
+      },
+      {
+        attr: "RicePlanted",
+        getTranslatedAttr: () => i18next.t("RicePlanted")
+      },
       {
         attr: "FloodRisk",
         getTranslatedAttr: () => i18next.t("FloodRisk")
