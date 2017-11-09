@@ -23,5 +23,17 @@
   "Searching": {},
   "The last known condition of the rice field": {},
   "The average dry rice yield (ton/ha) of ": "",
-  "Select map layers": "Select map layers"
+  "Select map layers": "Select map layers",
+  "/m2": "/m2",
+  "HIGH RISK": "HIGH RISK",
+  "High blast risk": "High blast risk",
+  "High brown planthopper risk": "High brown planthopper risk",
+  "High leaffolder risk": "High leaffolder risk",
+  "LastSeasonNumberStems": "Last season number stems",
+  "MEDIUM RISK": "MEDIUM RISK",
+  "NO RISK": "NO RISK",
+  "PestRisk": "Pest risk",
+  "The risk on pest presence is unknown": "The risk on pest presence is unknown",
+  "There is increased risk on one or more pests": "There is increased risk on one or more pests",
+  "There is little risk on pest presence": "There is little risk on pest presence"
 }
