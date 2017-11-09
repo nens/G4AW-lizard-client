@@ -19,6 +19,7 @@ import {
   DetailViewSectionGrowthStage,
   DetailViewSectionPestRisk,
   DetailViewSectionFloodRisk,
+  DetailViewSectionDroughtSalinityDamage,
   DetailViewTable,
   DetailViewTableSection,
   DetailViewPhotoSection,
@@ -146,6 +147,10 @@ class DetailViewComponent extends Component {
               <DetailViewSectionFloodRisk
                 data={this.formatData(parcel, "FloodRisk")}
                 ColoredSquare={ColoredSquare}
+                {...this.props}
+              />
+              <DetailViewSectionDroughtSalinityDamage
+                data={this.formatData(parcel, "DroughtSalinityDamage")}
                 {...this.props}
               />
               <DetailViewPhotoSection

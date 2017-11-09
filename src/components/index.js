@@ -4,9 +4,10 @@ import DetailViewHeader from "./DetailViewHeader";
 import DetailViewPhoto from "./DetailViewPhoto";
 import DetailViewPhotoSection from "./DetailViewPhotoSection";
 import DetailViewSection from "./DetailViewSection";
+import DetailViewSectionDroughtSalinityDamage from "./DetailViewSectionDroughtSalinityDamage";
+import DetailViewSectionFloodRisk from "./DetailViewSectionFloodRisk";
 import DetailViewSectionGrowthStage from "./DetailViewSectionGrowthStage";
 import DetailViewSectionPestRisk from "./DetailViewSectionPestRisk";
-import DetailViewSectionFloodRisk from "./DetailViewSectionFloodRisk";
 import DetailViewTable from "./DetailViewTable";
 import DetailViewTableSection from "./DetailViewTableSection";
 import DetailViewThumbnails from "./DetailViewThumbnails";
@@ -21,9 +22,9 @@ import LanguageChooser from "./LanguageChooser";
 import LayerSelection from "./LayerSelection";
 import Legend from "./Legend";
 import LoginLogoutButton from "./LoginLogoutButton";
+import LoginModal from "./LoginModal";
 import LoginModalButtons from "./LoginModalButtons";
 import LoginModalContent from "./LoginModalContent";
-import LoginModal from "./LoginModal";
 import MapComponent from "./MapComponent";
 import Modal from "./Modal";
 import PulsatingMarker from "./PulsatingMarker";
@@ -31,9 +32,9 @@ import RaisedButton from "./RaisedButton";
 import SearchBar from "./SearchBar";
 import SearchResultCardItem from "./SearchResultCardItem";
 import SearchResultListItem from "./SearchResultListItem";
+import SettingsViewDatacollection from "./SettingsViewDatacollection";
 import SettingsViewGeneral from "./SettingsViewGeneral";
 import SettingsViewHelp from "./SettingsViewHelp";
-import SettingsViewDatacollection from "./SettingsViewDatacollection";
 import SimpleLineChart from "./SimpleLineChart";
 import SnackBar from "./SnackBar";
 import TabBar from "./TabBar";
@@ -48,9 +49,10 @@ export {
   DetailViewPhoto,
   DetailViewPhotoSection,
   DetailViewSection,
+  DetailViewSectionDroughtSalinityDamage,
+  DetailViewSectionFloodRisk,
   DetailViewSectionGrowthStage,
   DetailViewSectionPestRisk,
-  DetailViewSectionFloodRisk,
   DetailViewTable,
   DetailViewTableSection,
   DetailViewThumbnails,
@@ -65,9 +67,9 @@ export {
   LayerSelection,
   Legend,
   LoginLogoutButton,
+  LoginModal,
   LoginModalButtons,
   LoginModalContent,
-  LoginModal,
   MapComponent,
   Modal,
   PulsatingMarker,
@@ -75,8 +77,8 @@ export {
   SearchBar,
   SearchResultCardItem,
   SearchResultListItem,
-  SettingsViewGeneral,
   SettingsViewDatacollection,
+  SettingsViewGeneral,
   SettingsViewHelp,
   SimpleLineChart,
   SnackBar,

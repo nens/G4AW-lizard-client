@@ -37,7 +37,6 @@ const SECTIONS = {
       }
     ]
   },
-
   RiceGrowth: {
     sectionName: i18next.t("Rice growth"),
     sectionAttrs: [
@@ -67,11 +66,6 @@ const SECTIONS = {
         getTranslatedAttr: () => i18next.t("CropCondition")
       },
       {
-        attr: "NumberOfStems",
-        getTranslatedAttr: () => i18next.t("NumberOfStems"),
-        getTranslatedUnit: () => i18next.t("/m2")
-      },
-      {
         attr: "Variety",
         getTranslatedAttr: () => i18next.t("Variety")
       },
@@ -79,11 +73,6 @@ const SECTIONS = {
         attr: "LastSeasonYield",
         getTranslatedAttr: () => i18next.t("LastSeasonYield"),
         getTranslatedUnit: () => i18next.t("ton/ha")
-      },
-      {
-        attr: "LastSeasonNumberStems",
-        getTranslatedAttr: () => i18next.t("LastSeasonNumberStems"),
-        getTranslatedUnit: () => i18next.t("/m2")
       },
       {
         attr: "LastSeasonPricePaddy",
@@ -109,20 +98,60 @@ const SECTIONS = {
     sectionName: i18next.t("Pest risk"),
     sectionAttrs: [
       {
-        attr: "PestRisk",
-        getTranslatedAttr: () => i18next.t("PestRisk")
-      },
-      {
         attr: "BrownPlantHopperPresent",
         getTranslatedAttr: () => i18next.t("BrownPlantHopperPresent")
+      },
+      {
+        attr: "BrownPlantHopperDensity",
+        getTranslatedAttr: () => i18next.t("BrownPlantHopperDensity")
+      },
+      {
+        attr: "BrownPlantHopperAge",
+        getTranslatedAttr: () => i18next.t("BrownPlantHopperAge")
+      },
+      {
+        attr: "BrownPlantHopperNearby",
+        getTranslatedAttr: () => i18next.t("BrownPlantHopperNearby")
       },
       {
         attr: "LeaffolderPresent",
         getTranslatedAttr: () => i18next.t("LeaffolderPresent")
       },
       {
+        attr: "LeaffolderDensity",
+        getTranslatedAttr: () => i18next.t("LeaffolderDensity")
+      },
+      {
+        attr: "LeaffolderAge",
+        getTranslatedAttr: () => i18next.t("LeaffolderAge")
+      },
+      {
+        attr: "LeaffolderNearby",
+        getTranslatedAttr: () => i18next.t("LeaffolderNearby")
+      },
+      {
         attr: "BlastPresent",
         getTranslatedAttr: () => i18next.t("BlastPresent")
+      },
+      {
+        attr: "BlastDensity",
+        getTranslatedAttr: () => i18next.t("BlastDensity")
+      },
+      {
+        attr: "BlastNearby",
+        getTranslatedAttr: () => i18next.t("BlastNearby")
+      },
+      {
+        attr: "NaturalEnemies",
+        getTranslatedAttr: () => i18next.t("NaturalEnemies")
+      },
+      {
+        attr: "PesticideUsed",
+        getTranslatedAttr: () => i18next.t("PesticideUsed")
+      },
+      {
+        attr: "PesticideType",
+        getTranslatedAttr: () => i18next.t("PesticideType")
       },
       {
         attr: "BrownPlantHopperRisk",
@@ -138,7 +167,19 @@ const SECTIONS = {
       }
     ]
   },
-
+  DroughtSalinityDamage: {
+    sectionName: i18next.t("DroughtAndSalinityDamage"),
+    sectionAttrs: [
+      {
+        attr: "DroughtDamage",
+        getTranslatedAttr: () => i18next.t("DroughtDamage")
+      },
+      {
+        attr: "SalinityDamage",
+        getTranslatedAttr: () => i18next.t("SalinityDamage")
+      }
+    ]
+  },
   FloodRisk: {
     sectionName: i18next.t("Flood risk"),
     sectionAttrs: [
@@ -151,6 +192,14 @@ const SECTIONS = {
         getTranslatedAttr: () => i18next.t("FloodLevel"),
         // unit: i18next.t("mNAP") // NB! mNAP vs mMSL... is it set correct at geoserver??
         getTranslatedUnit: () => i18next.t("mMSL")
+      },
+      {
+        attr: "FieldFlooded",
+        getTranslatedAttr: () => i18next.t("FieldFlooded")
+      },
+      {
+        attr: "RicePlanted",
+        getTranslatedAttr: () => i18next.t("RicePlanted")
       }
     ]
   }
