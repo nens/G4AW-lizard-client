@@ -184,14 +184,6 @@ const SECTIONS = {
     sectionName: i18next.t("Flood risk"),
     sectionAttrs: [
       {
-        attr: "FieldFlooded",
-        getTranslatedAttr: () => i18next.t("FieldFlooded")
-      },
-      {
-        attr: "RicePlanted",
-        getTranslatedAttr: () => i18next.t("RicePlanted")
-      },
-      {
         attr: "FloodRisk",
         getTranslatedAttr: () => i18next.t("FloodRisk")
       },
@@ -200,6 +192,14 @@ const SECTIONS = {
         getTranslatedAttr: () => i18next.t("FloodLevel"),
         // unit: i18next.t("mNAP") // NB! mNAP vs mMSL... is it set correct at geoserver??
         getTranslatedUnit: () => i18next.t("mMSL")
+      },
+      {
+        attr: "FieldFlooded",
+        getTranslatedAttr: () => i18next.t("FieldFlooded")
+      },
+      {
+        attr: "RicePlanted",
+        getTranslatedAttr: () => i18next.t("RicePlanted")
       }
     ]
   }
