@@ -13,7 +13,7 @@ export default class DetailViewSectionPestRisk extends Component {
   render() {
     const { t, parcel, data, isInitiallyOpen, ColoredSquare } = this.props;
     const title = parcel.PestRisk ? parcel.PestRisk.toUpperCase() : NO_DATA;
-    console.log(data);
+
     return (
       <DetailViewSection
         isInitiallyOpen={isInitiallyOpen}
