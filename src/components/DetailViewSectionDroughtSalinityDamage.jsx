@@ -28,7 +28,7 @@ export default class DetailViewSectionDroughtSalinityDamage extends Component {
     return (
       <DetailViewSection
         isInitiallyOpen={false}
-        title={"DroughtAndSalinityDamage"}
+        title={t("DroughtAndSalinityDamage")}
       >
         <div className={styles.SectionWrapper}>
           <DetailViewTable data={data} />
