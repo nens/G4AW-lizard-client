@@ -67,11 +67,6 @@ const SECTIONS = {
         getTranslatedAttr: () => i18next.t("CropCondition")
       },
       {
-        attr: "NumberOfStems",
-        getTranslatedAttr: () => i18next.t("NumberOfStems"),
-        getTranslatedUnit: () => i18next.t("/m2")
-      },
-      {
         attr: "Variety",
         getTranslatedAttr: () => i18next.t("Variety")
       },
@@ -79,11 +74,6 @@ const SECTIONS = {
         attr: "LastSeasonYield",
         getTranslatedAttr: () => i18next.t("LastSeasonYield"),
         getTranslatedUnit: () => i18next.t("ton/ha")
-      },
-      {
-        attr: "LastSeasonNumberStems",
-        getTranslatedAttr: () => i18next.t("LastSeasonNumberStems"),
-        getTranslatedUnit: () => i18next.t("/m2")
       },
       {
         attr: "LastSeasonPricePaddy",
