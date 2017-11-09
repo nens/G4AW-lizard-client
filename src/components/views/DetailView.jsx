@@ -19,6 +19,7 @@ import {
   DetailViewSectionGrowthStage,
   DetailViewSectionPestRisk,
   DetailViewSectionFloodRisk,
+  DetailViewSectionDroughtSalinityDamage,
   DetailViewTable,
   DetailViewTableSection,
   DetailViewPhotoSection,
