@@ -99,10 +99,6 @@ const SECTIONS = {
     sectionName: i18next.t("Pest risk"),
     sectionAttrs: [
       {
-        attr: "PestRisk",
-        getTranslatedAttr: () => i18next.t("PestRisk")
-      },
-      {
         attr: "BrownPlantHopperPresent",
         getTranslatedAttr: () => i18next.t("BrownPlantHopperPresent")
       },
