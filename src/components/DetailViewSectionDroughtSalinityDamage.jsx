@@ -23,12 +23,12 @@ export default class DetailViewSectionDroughtSalinityDamage extends Component {
   //   ].join(" ");
   // }
   render() {
-    const { t, parcel, data, ColoredSquare } = this.props;
-    const translatedRisk = this.getTranslatedRisk(t, parcel);
+    const { t, parcel, data } = this.props;
+    // const translatedRisk = this.getTranslatedRisk(t, parcel);
     return (
       <DetailViewSection
         isInitiallyOpen={false}
-        title={t("DroughtAndSalinityDamage")}
+        title={"DroughtAndSalinityDamage"}
       >
         <div className={styles.SectionWrapper}>
           <DetailViewTable data={data} />

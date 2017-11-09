@@ -149,6 +149,10 @@ class DetailViewComponent extends Component {
                 ColoredSquare={ColoredSquare}
                 {...this.props}
               />
+              <DetailViewSectionDroughtSalinityDamage
+                data={this.formatData(parcel, "DroughtSalinityDamage")}
+                {...this.props}
+              />
               <DetailViewPhotoSection
                 isInitiallyOpen={false}
                 photo={photo}
