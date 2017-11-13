@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.5.5"></a>
+## [0.5.5](https://github.com/nens/G4AW-lizard-client/compare/v0.5.4...v0.5.5) (2017-11-13)
+
+
+### Bug Fixes
+
+* **Staging:** Changed all WMS/WFS urls to point to staging (temp, testing) ([#179](https://github.com/nens/G4AW-lizard-client/issues/179)) ([a10f4c3](https://github.com/nens/G4AW-lizard-client/commit/a10f4c3))
+
+
+
 <a name="0.5.4"></a>
 ## [0.5.4](https://github.com/nens/G4AW-lizard-client/compare/v0.5.3...v0.5.4) (2017-11-09)
 
