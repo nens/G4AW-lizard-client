@@ -139,7 +139,7 @@ const initialForegroundlayerState = {
   layers: [
     {
       getTitle: () => i18next.t("Rice fields"),
-      uuid: "01d932b",
+      uuid: "47079cb9",
       active: true,
       slug: "latest_weekly_staging_LT",
       mapThumb:
@@ -152,7 +152,7 @@ const initialForegroundlayerState = {
     },
     {
       getTitle: () => i18next.t("Growth stages"),
-      uuid: "aaa1b7c",
+      uuid: "ad6975d3",
       active: false,
       slug: "latest_weekly_staging_growth",
       mapThumb:
@@ -185,7 +185,7 @@ const initialForegroundlayerState = {
     },
     {
       getTitle: () => i18next.t("Pest presence"),
-      uuid: "15d1155",
+      uuid: "573ae6e9",
       active: false,
       slug: "latest_weekly_staging_pest",
       mapThumb:
@@ -202,7 +202,7 @@ const initialForegroundlayerState = {
     },
     {
       getTitle: () => i18next.t("Flood Risk"),
-      uuid: "809668f3",
+      uuid: "27391775",
       active: false,
       slug: "latest_weekly_staging_flood",
       mapThumb:
