@@ -1,6 +1,6 @@
 const wfsUrl =
   "/proxy/http://maps1.project.lizard.net/geoserver/Q0007_sat4rice_2018/wfs";
-const PARCEL_LAYER = "Q0007_sat4rice_2018:latest_weekly_LT";
+const PARCEL_LAYER = "Q0007_sat4rice_2018:latest_weekly_staging_LT";
 
 const getFeatureParams = {
   service: "WFS",
