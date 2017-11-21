@@ -114,6 +114,10 @@ const SECTIONS = {
         getTranslatedAttr: () => i18next.t("BrownPlantHopperNearby")
       },
       {
+        attr: "BrownPlantHopperRisk",
+        getTranslatedAttr: () => i18next.t("BrownPlantHopperRisk")
+      },
+      {
         attr: "LeaffolderPresent",
         getTranslatedAttr: () => i18next.t("LeaffolderPresent")
       },
@@ -130,6 +134,10 @@ const SECTIONS = {
         getTranslatedAttr: () => i18next.t("LeaffolderNearby")
       },
       {
+        attr: "LeaffolderRisk",
+        getTranslatedAttr: () => i18next.t("LeaffolderRisk")
+      },
+      {
         attr: "BlastPresent",
         getTranslatedAttr: () => i18next.t("BlastPresent")
       },
@@ -142,6 +150,10 @@ const SECTIONS = {
         getTranslatedAttr: () => i18next.t("BlastNearby")
       },
       {
+        attr: "BlastRisk",
+        getTranslatedAttr: () => i18next.t("BlastRisk")
+      },
+      {
         attr: "NaturalEnemies",
         getTranslatedAttr: () => i18next.t("NaturalEnemies")
       },
@@ -152,18 +164,6 @@ const SECTIONS = {
       {
         attr: "PesticideType",
         getTranslatedAttr: () => i18next.t("PesticideType")
-      },
-      {
-        attr: "BrownPlantHopperRisk",
-        getTranslatedAttr: () => i18next.t("BrownPlantHopperRisk")
-      },
-      {
-        attr: "LeaffolderRisk",
-        getTranslatedAttr: () => i18next.t("LeaffolderRisk")
-      },
-      {
-        attr: "BlastRisk",
-        getTranslatedAttr: () => i18next.t("BlastRisk")
       }
     ]
   },

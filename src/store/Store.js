@@ -139,11 +139,11 @@ const initialForegroundlayerState = {
   layers: [
     {
       getTitle: () => i18next.t("Rice fields"),
-      uuid: "bdbd42b7",
+      uuid: "01d932be",
       active: true,
       slug: "latest_weekly_staging_LT",
       mapThumb:
-        "https://maps1.project.lizard.net/geoserver/Q0007_sat4rice_2018/wms?service=WMS&request=GetMap&layers=latest_weekly_staging_LT&styles=&format=image%2Fpng&transparent=True&version=1.1.1&height=256&width=256&srs=EPSG%3A3857&bbox=11709388.36300615,1164288.814839805,11709541.23706272,1164441.6888963755",
+        "https://maps1.project.lizard.net/geoserver/Q0007_sat4rice_2018/wms?service=WMS&request=GetMap&layers=latest_weekly_LT&styles=&format=image%2Fpng&transparent=True&version=1.1.1&height=256&width=256&srs=EPSG%3A3857&bbox=11709388.36300615,1164288.814839805,11709541.23706272,1164441.6888963755",
       getColorMap: () =>
         zipListsToDictList(
           [i18next.t("LocTroi"), i18next.t("Other")],
@@ -152,11 +152,11 @@ const initialForegroundlayerState = {
     },
     {
       getTitle: () => i18next.t("Growth stages"),
-      uuid: "6eb913f1",
+      uuid: "aaa1b7c3",
       active: false,
       slug: "latest_weekly_staging_growth",
       mapThumb:
-        "https://maps1.project.lizard.net/geoserver/Q0007_sat4rice_2018/wms?service=WMS&request=GetMap&layers=latest_weekly_staging_growth&styles=&format=image%2Fpng&transparent=True&version=1.1.1&height=256&width=256&srs=EPSG%3A3857&bbox=11709388.36300615,1164288.814839805,11709541.23706272,1164441.6888963755",
+        "https://maps1.project.lizard.net/geoserver/Q0007_sat4rice_2018/wms?service=WMS&request=GetMap&layers=latest_weekly_growth_stages&styles=&format=image%2Fpng&transparent=True&version=1.1.1&height=256&width=256&srs=EPSG%3A3857&bbox=11709388.36300615,1164288.814839805,11709541.23706272,1164441.6888963755",
       getColorMap: () =>
         zipListsToDictList(
           [
@@ -185,11 +185,11 @@ const initialForegroundlayerState = {
     },
     {
       getTitle: () => i18next.t("Pest presence"),
-      uuid: "bf0b0bb5",
+      uuid: "15d1155b",
       active: false,
       slug: "latest_weekly_staging_pest",
       mapThumb:
-        "https://maps1.project.lizard.net/geoserver/Q0007_sat4rice_2018/wms?service=WMS&request=GetMap&layers=latest_weekly_staging_pest&styles=&format=image%2Fpng&transparent=True&version=1.1.1&height=256&width=256&srs=EPSG%3A3857&bbox=11709388.36300615,1164288.814839805,11709541.23706272,1164441.6888963755",
+        "https://maps1.project.lizard.net/geoserver/Q0007_sat4rice_2018/wms?service=WMS&request=GetMap&layers=latest_weekly_pest_presence&styles=&format=image%2Fpng&transparent=True&version=1.1.1&height=256&width=256&srs=EPSG%3A3857&bbox=11709388.36300615,1164288.814839805,11709541.23706272,1164441.6888963755",
       getColorMap: () =>
         zipListsToDictList(
           [
@@ -202,11 +202,11 @@ const initialForegroundlayerState = {
     },
     {
       getTitle: () => i18next.t("Flood Risk"),
-      uuid: "c000836a",
+      uuid: "809668f3",
       active: false,
       slug: "latest_weekly_staging_flood",
       mapThumb:
-        "https://maps1.project.lizard.net/geoserver/Q0007_sat4rice_2018/wms?service=WMS&request=GetMap&layers=latest_weekly_staging_flood&styles=&format=image%2Fpng&transparent=True&version=1.1.1&height=256&width=256&srs=EPSG%3A3857&bbox=11709388.36300615,1164288.814839805,11709541.23706272,1164441.6888963755",
+        "https://maps1.project.lizard.net/geoserver/Q0007_sat4rice_2018/wms?service=WMS&request=GetMap&layers=latest_weekly_flooded&styles=&format=image%2Fpng&transparent=True&version=1.1.1&height=256&width=256&srs=EPSG%3A3857&bbox=11709388.36300615,1164288.814839805,11709541.23706272,1164441.6888963755",
       getColorMap: () => zipListsToDictList([i18next.t("Flooded")], ["#40a4df"])
     }
   ]
