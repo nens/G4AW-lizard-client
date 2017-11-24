@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.5.9"></a>
+## [0.5.9](https://github.com/nens/G4AW-lizard-client/compare/v0.5.8...v0.5.9) (2017-11-24)
+
+
+### Bug Fixes
+
+* **URLS:** RM staging slugs ([a0eb90d](https://github.com/nens/G4AW-lizard-client/commit/a0eb90d))
+
+
+
 <a name="0.5.8"></a>
 ## [0.5.8](https://github.com/nens/G4AW-lizard-client/compare/v0.5.7...v0.5.8) (2017-11-21)
 
