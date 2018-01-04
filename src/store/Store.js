@@ -197,7 +197,7 @@ const initialForegroundlayerState = {
             i18next.t("leaf folder"),
             i18next.t("Brown planthopper")
           ],
-          ["#bfc2bb", "#e5907d", "#95786f"]
+          ["#eb2fcc", "#d52300", "#532700"]
         )
     },
     {
