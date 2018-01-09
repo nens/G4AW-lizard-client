@@ -4,6 +4,8 @@ import ReactDOM from "react-dom";
 import styles from "./styles/DetailViewTable.css";
 import YesIconSvg from "./svg/YesIcon.svg";
 import NoIconSvg from "./svg/NoIcon.svg";
+import { translate, t } from "react-i18next";
+import i18next from "i18next";
 
 // DetailViewTable
 
@@ -53,7 +55,11 @@ class DetailViewTableRow extends Component {
     if (row.value === null) {
       return "";
     } else {
-      return row.value + (row.unit ? ` ${row.unit}` : "");
+      let rowValue = row.value;
+      if (rowValue !== "") {
+        rowValue = i18next.t(row.value).toString();
+      }
+      return rowValue + (row.unit ? ` ${row.unit}` : "");
     }
   }
   render() {
