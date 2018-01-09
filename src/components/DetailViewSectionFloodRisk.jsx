@@ -3,12 +3,14 @@ import styles from "./styles/DetailView.css";
 import { SECTIONS, NO_DATA } from "../constants/detailview-attributes";
 import { DetailViewSection, DetailViewTable } from ".";
 
+import i18next from "i18next";
+
 export default class DetailViewSectionFloodRisk extends Component {
   getTranslatedRisk(t, parcel) {
     if (parcel.FloodRisk === undefined) {
       return t("unknown");
     } else {
-      return parcel.FloodRisk.toUpperCase();
+      return i18next.t(parcel.FloodRisk).toUpperCase();
     }
   }
   getSubTitleText(t, parcel, translatedRisk) {

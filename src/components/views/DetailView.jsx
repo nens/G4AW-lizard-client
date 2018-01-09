@@ -153,12 +153,12 @@ class DetailViewComponent extends Component {
                 data={this.formatData(parcel, "DroughtSalinityDamage")}
                 {...this.props}
               />
-              <DetailViewPhotoSection
+              {/*<DetailViewPhotoSection
                 isInitiallyOpen={false}
                 photo={photo}
                 width={WIDTH}
                 handleClick={changeToPhotoView}
-              />
+              />*/}
             </div>}
         <DetailViewFooter />
       </div>

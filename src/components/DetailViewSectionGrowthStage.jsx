@@ -8,7 +8,7 @@ import i18next from "i18next";
 export default class DetailViewSectionGrowthStage extends Component {
   getHumanReadableRiceGrowth(parcel, t) {
     const stage = parcel.GrowthStage
-      ? parcel.GrowthStage.toUpperCase()
+      ? i18next.t(parcel.GrowthStage).toUpperCase()
       : t("unknown");
     const height = parcel.PlantHeight;
     return `${t("The current growth stage is")} ${stage}
@@ -24,6 +24,7 @@ export default class DetailViewSectionGrowthStage extends Component {
       riceGrowthLayer,
       ColoredSquare
     } = this.props;
+
     return (
       <DetailViewSection
         isInitiallyOpen={isInitiallyOpen}
@@ -31,7 +32,9 @@ export default class DetailViewSectionGrowthStage extends Component {
       >
         <div className={styles.SectionWrapper}>
           <div className={styles.ColoredSquaresHeader}>
-            {parcel.GrowthStage ? parcel.GrowthStage.toUpperCase() : NO_DATA}
+            {parcel.GrowthStage
+              ? i18next.t(parcel.GrowthStage).toUpperCase()
+              : NO_DATA}
           </div>
           <div className={styles.SubMessage}>
             {this.getHumanReadableRiceGrowth(parcel, t)}
