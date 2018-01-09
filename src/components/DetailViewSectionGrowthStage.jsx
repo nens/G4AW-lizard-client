@@ -25,8 +25,6 @@ export default class DetailViewSectionGrowthStage extends Component {
       ColoredSquare
     } = this.props;
 
-    // i18next.t(parcel.GrowthStage)
-
     return (
       <DetailViewSection
         isInitiallyOpen={isInitiallyOpen}
