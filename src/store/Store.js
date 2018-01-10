@@ -151,7 +151,7 @@ const initialForegroundlayerState = {
             i18next.t("Other"),
             i18next.t("LocTroiOutdated")
           ],
-          ["#000000", "#B6AEA8", "#FFFFFF"]
+          ["#000000", "#BFBFC6", "#4D4D50"]
         )
     },
     {
