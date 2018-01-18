@@ -148,8 +148,8 @@ const initialForegroundlayerState = {
         zipListsToDictList(
           [
             i18next.t("LocTroi"),
-            i18next.t("Other"),
-            i18next.t("LocTroiOutdated")
+            i18next.t("LocTroiOutdated"),
+            i18next.t("Other")
           ],
           ["#000000", "#BFBFC6", "#4D4D50"]
         )
