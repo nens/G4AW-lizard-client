@@ -456,13 +456,13 @@ class SettingsViewHelpComponent extends Component {
           </p>
           <ul>
             <li>
-              {t("Once")}:
-              {t("Fill in one-time information at the start of the season.")}
+              {t("Once")}:{" "}
+              {t("Fill in one-time information at the start of the season")}.
             </li>
             <li>
-              {t("Weekly")}:
+              {t("Weekly")}:{" "}
               {t(
-                "A form that allows to send weekly updates on the current status of the rice growth."
+                "A form that allows to send weekly updates on the current status of the rice growth"
               )}
             </li>
           </ul>
