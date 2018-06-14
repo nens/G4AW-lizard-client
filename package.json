@@ -1,6 +1,6 @@
 {
   "name": "G4AW-lizard-client",
-  "version": "0.5.13",
+  "version": "0.5.14",
   "description": "Library for client-side storage/exposure of Lizard assets, rasters and timeseries.",
   "main": "src/index.js",
   "scripts": {
