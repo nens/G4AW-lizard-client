@@ -16,7 +16,7 @@ const config = {
   output: {
     path: __dirname + "/dist/scripts",
     filename: libraryName + ".js",
-    publicPath: "/scripts/",
+    publicPath: "/clients/g4aw/",
     library: libraryName,
     libraryTarget: "umd",
     umdNamedDefine: true
