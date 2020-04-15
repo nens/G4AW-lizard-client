@@ -7,6 +7,7 @@ import thunkMiddleware from "redux-thunk";
 import reducers from "../reducers/index";
 
 import { DEFAULT_BBOX } from "../constants/defaults";
+import { mapBoxAccesToken} from '../mapboxConfig';
 
 let createStoreWithMiddleware;
 const logger = createLogger({});
@@ -89,9 +90,9 @@ const initialBaselayerState = {
       getTitle: () => i18next.t("Topography"),
       attribution: "",
       url:
-        "https://{s}.tiles.mapbox.com/v3/nelenschuurmans.iaa98k8k/{z}/{x}/{y}.png",
+      `https://api.mapbox.com/styles/v1/nelenschuurmans/ck8sgpk8h25ql1io2ccnueuj6/tiles/{z}/{x}/{y}?access_token=${mapBoxAccesToken}`,
       mapThumb:
-        "https://a.tiles.mapbox.com/v3/nelenschuurmans.iaa98k8k/11/1632/963.png",
+        `https://api.mapbox.com/styles/v1/nelenschuurmans/ck8sgpk8h25ql1io2ccnueuj6/tiles/11/1632/963?access_token=${mapBoxAccesToken}`,
       opacity: 1,
       layerType: "tms",
       layerOptions: {},
@@ -101,9 +102,9 @@ const initialBaselayerState = {
       getTitle: () => i18next.t("Satellite"),
       attribution: "",
       url:
-        "https://{s}.tiles.mapbox.com/v3/nelenschuurmans.iaa79205/{z}/{x}/{y}.png",
+      `https://api.mapbox.com/styles/v1/nelenschuurmans/ck8oabi090nys1imfdxgb6nv3/tiles/{z}/{x}/{y}?access_token=${mapBoxAccesToken}`,
       mapThumb:
-        "https://a.tiles.mapbox.com/v3/nelenschuurmans.iaa79205/11/1632/963.png",
+        `https://api.mapbox.com/styles/v1/nelenschuurmans/ck8oabi090nys1imfdxgb6nv3/tiles/11/1632/963?access_token=${mapBoxAccesToken}`,
       opacity: 1,
       layerType: "tms",
       layerOptions: {},
@@ -113,9 +114,9 @@ const initialBaselayerState = {
       getTitle: () => i18next.t("Neutral"),
       attribution: "",
       url:
-        "https://{s}.tiles.mapbox.com/v3/nelenschuurmans.l15e647c/{z}/{x}/{y}.png",
+      `https://api.mapbox.com/styles/v1/nelenschuurmans/ck8o9q49a3df21ipjpobadw4y/tiles/{z}/{x}/{y}?access_token=${mapBoxAccesToken}`,
       mapThumb:
-        "https://a.tiles.mapbox.com/v3/nelenschuurmans.l15e647c/11/1632/963.png",
+        `https://api.mapbox.com/styles/v1/nelenschuurmans/ck8o9q49a3df21ipjpobadw4y/tiles/11/1632/963?access_token=${mapBoxAccesToken}`,
       opacity: 1,
       layerType: "tms",
       layerOptions: {},
