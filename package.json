@@ -98,7 +98,7 @@
     "i18next-localstorage-cache": "^1.1.0",
     "i18next-xhr-backend": "^1.4.1",
     "leaflet": "",
-    "lodash": "^4.17.3",
+    "lodash": "^4.17.13",
     "moment": "^2.18.1",
     "prop-types": "^15.5.9",
     "react": "",
