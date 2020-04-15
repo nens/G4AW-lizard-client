@@ -255,7 +255,7 @@ This front-end uses React and Redux. These extensions may help:
 ## Building a production bundle
 
 ```bash
-$ npm run build
+$ yarn run build
 ```
 
 This will run webpack in production mode. The result will be a `bundle.js` file in the `dist/` directory.
