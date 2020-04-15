@@ -85,9 +85,27 @@ function ListSearchLanding({ t, username }) {
   const msg = `${t("Welcome")}, ${username || t("Guest")}`;
   return (
     <div className={styles.ListSearchLanding} id="ListSearchLanding">
-      <h1 className={styles.Welcome}>
+      {/* <h1 className={styles.Welcome}>
         {msg}
-      </h1>
+      </h1> */}
+      <div 
+      className={styles.Welcome}
+      style={{
+        fontSize: "1em",
+         margin: "0px",
+          paddingLeft: "4px",
+           paddingRight: "4px",
+            lineHeight: "10px",
+      }}
+      >
+        <p style={{margin: "0px", lineHeight: "24px"}}>Dear visitor,</p>
+        <br style={{margin: "0px", lineHeight: "16px"}}/>
+        <p style={{margin: "0px", lineHeight: "24px"}}>The Sat4Rice information service is temporarily suspended.</p>
+        <p style={{margin: "0px", lineHeight: "24px"}}>Sat4Rice Vietnam was successfully implemented in cooperation with Loc Troi Group, and the implementation project was completed on the 1st of January 2019. At this moment, Loc Troi Group is considering to continue providing the Sat4Rice information service in 2019 and after.</p>
+        <br style={{margin: "0px", lineHeight: "16px"}}/>
+        <p style={{margin: "0px", lineHeight: "24px"}}>With warm regards,</p>
+        <p style={{margin: "0px", lineHeight: "24px"}}>The Sat4Rice Team</p> 
+      </div>
       <img src={LogoLocTroi} />
       <GeolocateButtonBig t={t} />
       <LoginLogoutButton />
