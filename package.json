@@ -66,7 +66,7 @@
     "redux-mock-store": "",
     "style-loader": "",
     "url-loader": "^0.5.8",
-    "webpack": "",
+    "webpack": "2.3.3",
     "webpack-dev-middleware": "",
     "webpack-dev-server": "",
     "webpack-hot-middleware": "",

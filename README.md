@@ -33,19 +33,19 @@ executed in your browsers' development console:
 
 * Each of the following `npm` commands can be switched to `yarn` if you use that.
 
-* `$ npm install`
+* `$ yarn install`
 
-* `$ npm start` will create the files within `.../lizard-api-client/lib/` that
+* `$ yarn start` will create the files within `.../lizard-api-client/lib/` that
 we will need
 
-* `$ npm link` will make those files available in arbitrary places in your
+* `$ yarn link` will make those files available in arbitrary places in your
 filesystem (via the `/usr/local/lib/node_modules/` folder)
 
 * Go to the root directory of the cloned G4AW-lizard-client repo
 
-* `$ npm install`
+* `$ yarn install`
 
-* `$ npm link lizard-api-client` wil finish the linking step -- Javascript
+* `$ yarn link lizard-api-client` wil finish the linking step -- Javascript
 files in the actual client application (the G4AW-lizard-client repo) can now
 have the line `import { LizardApiClient } from 'lizard-api-client';` to make
 the lizard-api-client code available in their local scope
@@ -255,7 +255,7 @@ This front-end uses React and Redux. These extensions may help:
 ## Building a production bundle
 
 ```bash
-$ npm run build
+$ yarn run build
 ```
 
 This will run webpack in production mode. The result will be a `bundle.js` file in the `dist/` directory.
