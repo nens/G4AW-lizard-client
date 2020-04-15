@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.5.20"></a>
+## [0.5.20](https://github.com/nens/G4AW-lizard-client/compare/v0.5.19...v0.5.20) (2020-04-15)
+
+
+
 <a name="0.5.19"></a>
 ## [0.5.19](https://github.com/nens/G4AW-lizard-client/compare/v0.5.18...v0.5.19) (2020-04-15)
 
