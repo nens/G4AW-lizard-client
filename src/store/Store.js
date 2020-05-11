@@ -90,9 +90,9 @@ const initialBaselayerState = {
       getTitle: () => i18next.t("Topography"),
       attribution: "",
       url:
-      `https://api.mapbox.com/styles/v1/nelenschuurmans/ck8sgpk8h25ql1io2ccnueuj6/tiles/{z}/{x}/{y}?access_token=${mapBoxAccesToken}`,
+      `https://api.mapbox.com/styles/v1/nelenschuurmans/ck8sgpk8h25ql1io2ccnueuj6/tiles/256/{z}/{x}/{y}@2x?access_token=${mapBoxAccesToken}`,
       mapThumb:
-        `https://api.mapbox.com/styles/v1/nelenschuurmans/ck8sgpk8h25ql1io2ccnueuj6/tiles/11/1632/963?access_token=${mapBoxAccesToken}`,
+        `https://api.mapbox.com/styles/v1/nelenschuurmans/ck8sgpk8h25ql1io2ccnueuj6/tiles/256/11/1632/963@2x?access_token=${mapBoxAccesToken}`,
       opacity: 1,
       layerType: "tms",
       layerOptions: {},
@@ -102,9 +102,9 @@ const initialBaselayerState = {
       getTitle: () => i18next.t("Satellite"),
       attribution: "",
       url:
-      `https://api.mapbox.com/styles/v1/nelenschuurmans/ck8oabi090nys1imfdxgb6nv3/tiles/{z}/{x}/{y}?access_token=${mapBoxAccesToken}`,
+      `https://api.mapbox.com/styles/v1/nelenschuurmans/ck8oabi090nys1imfdxgb6nv3/tiles/256/{z}/{x}/{y}@2x?access_token=${mapBoxAccesToken}`,
       mapThumb:
-        `https://api.mapbox.com/styles/v1/nelenschuurmans/ck8oabi090nys1imfdxgb6nv3/tiles/11/1632/963?access_token=${mapBoxAccesToken}`,
+        `https://api.mapbox.com/styles/v1/nelenschuurmans/ck8oabi090nys1imfdxgb6nv3/tiles/256/11/1632/963@2x?access_token=${mapBoxAccesToken}`,
       opacity: 1,
       layerType: "tms",
       layerOptions: {},
@@ -114,9 +114,9 @@ const initialBaselayerState = {
       getTitle: () => i18next.t("Neutral"),
       attribution: "",
       url:
-      `https://api.mapbox.com/styles/v1/nelenschuurmans/ck8o9q49a3df21ipjpobadw4y/tiles/{z}/{x}/{y}?access_token=${mapBoxAccesToken}`,
+      `https://api.mapbox.com/styles/v1/nelenschuurmans/ck8o9q49a3df21ipjpobadw4y/tiles/256/{z}/{x}/{y}@2x?access_token=${mapBoxAccesToken}`,
       mapThumb:
-        `https://api.mapbox.com/styles/v1/nelenschuurmans/ck8o9q49a3df21ipjpobadw4y/tiles/11/1632/963?access_token=${mapBoxAccesToken}`,
+        `https://api.mapbox.com/styles/v1/nelenschuurmans/ck8o9q49a3df21ipjpobadw4y/tiles/256/11/1632/963@2x?access_token=${mapBoxAccesToken}`,
       opacity: 1,
       layerType: "tms",
       layerOptions: {},
