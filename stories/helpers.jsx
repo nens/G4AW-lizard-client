@@ -183,9 +183,9 @@ export const DEMO_LAYERS = [
     title: "Satellite",
     attribution: "",
     url:
-      `https://api.mapbox.com/styles/v1/nelenschuurmans/ck8oabi090nys1imfdxgb6nv3/tiles/{z}/{x}/{y}?access_token=${mapBoxAccesToken}`,
+      `https://api.mapbox.com/styles/v1/nelenschuurmans/ck8oabi090nys1imfdxgb6nv3/tiles/256/{z}/{x}/{y}@2x?access_token=${mapBoxAccesToken}`,
       mapThumb:
-        `https://api.mapbox.com/styles/v1/nelenschuurmans/ck8oabi090nys1imfdxgb6nv3/tiles/11/1632/963?access_token=${mapBoxAccesToken}`,
+        `https://api.mapbox.com/styles/v1/nelenschuurmans/ck8oabi090nys1imfdxgb6nv3/tiles/256/11/1632/963@2x?access_token=${mapBoxAccesToken}`,
     opacity: 1,
     layerType: "tms",
     layerOptions: {},
@@ -195,9 +195,9 @@ export const DEMO_LAYERS = [
     title: "Topo",
     attribution: "",
     url:
-      `https://api.mapbox.com/styles/v1/nelenschuurmans/ck8sgpk8h25ql1io2ccnueuj6/tiles/{z}/{x}/{y}?access_token=${mapBoxAccesToken}`,
+      `https://api.mapbox.com/styles/v1/nelenschuurmans/ck8sgpk8h25ql1io2ccnueuj6/tiles/256/{z}/{x}/{y}@2x?access_token=${mapBoxAccesToken}`,
       mapThumb:
-        `https://api.mapbox.com/styles/v1/nelenschuurmans/ck8sgpk8h25ql1io2ccnueuj6/tiles/11/1632/963?access_token=${mapBoxAccesToken}`,
+        `https://api.mapbox.com/styles/v1/nelenschuurmans/ck8sgpk8h25ql1io2ccnueuj6/tiles/256/11/1632/963@2x?access_token=${mapBoxAccesToken}`,
     opacity: 1, 
     layerType: "tms",
     layerOptions: {},
