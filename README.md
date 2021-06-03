@@ -1,5 +1,11 @@
 # G4AW-lizard-client
 
+## Archived, this repo is archived based on ticket:  
+https://github.com/nens/frontend-tasks/issues/31  
+  
+  
+## Description  
+
 _A minimal, mobile-first client for the Lizard ecosystem that will be used for
 the G4AW project._
 
